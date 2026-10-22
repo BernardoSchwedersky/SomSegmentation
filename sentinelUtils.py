@@ -11,6 +11,7 @@ O Planetary Computer não exige chave de API para leitura: o pacote
 planetary_computer apenas assina as URLs dos arquivos (tokens SAS temporários).
 """
 
+import time
 from datetime import datetime, timedelta
 
 import numpy as np
@@ -18,6 +19,7 @@ import numpy as np
 import planetary_computer
 import pystac_client
 import rasterio
+import rasterio.errors
 from rasterio.enums import Resampling
 from rasterio.warp import transform_bounds
 from rasterio.windows import from_bounds
@@ -53,13 +55,25 @@ def buscar_cena(bbox, periodo, nuvens_max):
 
 # Lê apenas a região de interesse de um asset (os arquivos são COGs, então só os
 # blocos necessários são baixados), reamostrando para a grade de 10 m
-def ler_asset(item, asset, bbox, resolucao=10, resampling=Resampling.bilinear):
+# Falhas momentâneas de rede (ex.: HTTP 403 ou conexão interrompida) são repetidas
+def ler_asset(item, asset, bbox, resolucao=10, resampling=Resampling.bilinear, tentativas=4):
+    for tentativa in range(tentativas):
+        try:
+            return _ler_asset(item, asset, bbox, resolucao, resampling)
+        except rasterio.errors.RasterioIOError:
+            if tentativa == tentativas - 1:
+                raise
+            time.sleep(5 * 2 ** tentativa)
+
+def _ler_asset(item, asset, bbox, resolucao, resampling):
     with rasterio.open(item.assets[asset].href) as src:
         bounds = transform_bounds("EPSG:4326", src.crs, *bbox)
         janela = from_bounds(*bounds, transform=src.transform)
         altura = int(round((bounds[3] - bounds[1]) / resolucao))
         largura = int(round((bounds[2] - bounds[0]) / resolucao))
-        # Se a região passa da borda da cena, os pixels de fora ficam com 0 (sem dado)
+        # Se a região passa da borda da cena, a leitura precisa ser boundless: os pixels
+        # de fora ficam com 0 (sem dado). Sem isso, a janela é cortada na borda e a parte
+        # de dentro é esticada para o tamanho pedido
         dentro = (janela.col_off >= 0 and janela.row_off >= 0 and janela.col_off + janela.width <= src.width
                   and janela.row_off + janela.height <= src.height)
         return src.read(1, window=janela, out_shape=(altura, largura), resampling=resampling,
