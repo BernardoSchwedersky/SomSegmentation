@@ -1,2 +1,4 @@
 sentinel_cache.npz
 sentinel_enchente_cache.npz
+cache_grade/
+enchente_grade.png
