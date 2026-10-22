@@ -133,14 +133,10 @@ def buscar_cenas(bbox, inicio, fim, nuvens_max=100):
 # de pixels inválidos dentro do bbox (e não pela nuvem da cena inteira).
 # - Depois: entre dias_depois[0] e dias_depois[1] dias da data do evento,
 #   penalizando a distância da data em penalidade_dia_depois por dia
-# - Antes: do mesmo tile da cena de depois (pixels alinhados), entre
-#   dias_antes[1] e dias_antes[0] dias antes do evento, penalizando cenas
-#   mais antigas em penalidade_dia_antes por dia
+# - Antes: ver selecionar_cena_antes
 # Retorna (item_antes, item_depois, fração inválida antes, fração inválida depois)
-def selecionar_cenas(bbox, data_evento, dias_depois=(-1, 5), dias_antes=(30, 180),
-                     penalidade_dia_depois=0.03, penalidade_dia_antes=0.0005, nuvens_max_cena=80):
+def selecionar_cenas(bbox, data_evento, dias_depois=(-1, 5), penalidade_dia_depois=0.03, **opcoes_antes):
     data = datetime.strptime(data_evento, "%Y-%m-%d")
-
     candidatas = buscar_cenas(bbox, data + timedelta(days=dias_depois[0]), data + timedelta(days=dias_depois[1]))
     if not candidatas:
         raise RuntimeError("Nenhuma cena perto de " + data_evento)
@@ -150,21 +146,31 @@ def selecionar_cenas(bbox, data_evento, dias_depois=(-1, 5), dias_antes=(30, 180
         dias = abs((item.datetime.replace(tzinfo=None) - data).days)
         notas.append((invalida + penalidade_dia_depois * dias, invalida, item))
     nota, invalida_depois, item_depois = min(notas, key=lambda n: n[0])
+    item_antes, invalida_antes = selecionar_cena_antes(bbox, data_evento, item_depois, **opcoes_antes)
+    return item_antes, item_depois, invalida_antes, invalida_depois
 
+# Escolhe a cena de antes do evento: a mais próxima do evento (anterior à data do
+# evento, até dias_max dias antes) com no máximo invalida_max de pixels inválidos
+# dentro do bbox. Se nenhuma atende, usa a de menor fração inválida. A cena é do
+# mesmo tile da cena de depois, para os pixels ficarem alinhados.
+# Retorna (item_antes, fração inválida)
+def selecionar_cena_antes(bbox, data_evento, item_depois, dias_max=180, invalida_max=0.10, nuvens_max_cena=80):
+    data = datetime.strptime(data_evento, "%Y-%m-%d")
     tile = item_depois.properties["s2:mgrs_tile"]
-    candidatas = [item for item in buscar_cenas(bbox, data - timedelta(days=dias_antes[1]),
-                                                data - timedelta(days=dias_antes[0]), nuvens_max_cena)
-                  if item.properties["s2:mgrs_tile"] == tile]
+    candidatas = [item for item in buscar_cenas(bbox, data - timedelta(days=dias_max), data - timedelta(days=1),
+                                                nuvens_max_cena)
+                  if item.properties["s2:mgrs_tile"] == tile and item.datetime < item_depois.datetime]
     if not candidatas:
         raise RuntimeError("Nenhuma cena anterior ao evento no tile " + tile)
-    notas = []
+    candidatas.sort(key=lambda item: item.datetime, reverse=True)  # Da mais recente para a mais antiga
+    melhor = None
     for item in candidatas:
         invalida = fracao_invalida(item, bbox)
-        dias = (data - item.datetime.replace(tzinfo=None)).days
-        notas.append((invalida + penalidade_dia_antes * dias, invalida, item))
-    nota, invalida_antes, item_antes = min(notas, key=lambda n: n[0])
-
-    return item_antes, item_depois, invalida_antes, invalida_depois
+        if invalida <= invalida_max:
+            return item, invalida
+        if melhor is None or invalida < melhor[1]:
+            melhor = (item, invalida)
+    return melhor
 
 # Busca uma cena pelo identificador (ex.: para repetir um processamento com as mesmas cenas)
 def buscar_item(id_cena):

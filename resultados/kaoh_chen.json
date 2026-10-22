@@ -10,6 +10,7 @@
  "cena_depois": "S2A_MSIL2A_20170730T031541_R118_T48PVU_20210210T163550",
  "data_antes": "2017-04-21",
  "data_depois": "2017-07-30",
+ "dias_antes_do_evento": 100,
  "pct_invalido_antes": 1.0,
  "pct_invalido_depois": 9.9,
  "areas_processadas": 8,

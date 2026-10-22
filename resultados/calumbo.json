@@ -10,6 +10,7 @@
  "cena_depois": "S2B_MSIL2A_20230510T090559_R050_T33LUK_20230510T154336",
  "data_antes": "2023-03-06",
  "data_depois": "2023-05-10",
+ "dias_antes_do_evento": 65,
  "pct_invalido_antes": 7.3,
  "pct_invalido_depois": 30.5,
  "areas_processadas": 4,

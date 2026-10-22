@@ -10,6 +10,7 @@
  "cena_depois": "S2A_MSIL2A_20160123T140902_R067_T21JUM_20210527T215259",
  "data_antes": "2015-08-26",
  "data_depois": "2016-01-23",
+ "dias_antes_do_evento": 150,
  "pct_invalido_antes": 47.4,
  "pct_invalido_depois": 11.9,
  "areas_processadas": 4,

@@ -41,11 +41,20 @@ INDICE_BASELINE = "NDWI"  # Índice do método direto usado como baseline
 AREA_PIXEL_KM2 = 10 * 10 / 1e6
 
 
+# Lê o cache se ele existir e for das mesmas cenas (o cache guarda os ids delas)
+def _ler_cache(arquivo_cache, item_antes, item_depois):
+    if arquivo_cache is None or not os.path.exists(arquivo_cache):
+        return None
+    dados = np.load(arquivo_cache)
+    if "cenas" not in dados or list(dados["cenas"]) != [item_antes.id, item_depois.id]:
+        return None
+    return dados
+
 # Lê as bandas das duas cenas e a máscara de nuvens (nuvem ou sombra em qualquer
 # uma das datas). Se arquivo_cache for informado, salva/lê os dados dele
 def ler_dados(item_antes, item_depois, bbox, arquivo_cache=None):
-    if arquivo_cache is not None and os.path.exists(arquivo_cache):
-        dados = np.load(arquivo_cache)
+    dados = _ler_cache(arquivo_cache, item_antes, item_depois)
+    if dados is not None and "refl_antes" in dados:
         return dados["refl_antes"], dados["refl_depois"], dados["nuvens"]
     refl_antes = sentinelUtils.ler_bandas(item_antes, bbox, BANDAS)
     refl_depois = sentinelUtils.ler_bandas(item_depois, bbox, BANDAS)
@@ -53,7 +62,8 @@ def ler_dados(item_antes, item_depois, bbox, arquivo_cache=None):
         raise RuntimeError("As cenas estão em grades diferentes: escolha cenas do mesmo tile")
     nuvens = sentinelUtils.ler_mascara_nuvens(item_antes, bbox) | sentinelUtils.ler_mascara_nuvens(item_depois, bbox)
     if arquivo_cache is not None:
-        np.savez_compressed(arquivo_cache, refl_antes=refl_antes, refl_depois=refl_depois, nuvens=nuvens)
+        np.savez_compressed(arquivo_cache, refl_antes=refl_antes, refl_depois=refl_depois, nuvens=nuvens,
+                            cenas=[item_antes.id, item_depois.id])
     return refl_antes, refl_depois, nuvens
 
 # Índice de água de uma data (> 0 indica água): MNDWI usa B03 e B11, NDWI usa B03 e B08
@@ -159,6 +169,7 @@ def nome_area_grade(i, j, n_linhas, n_colunas):
 # Máscara de nuvens de uma área, lida do cache se ele existir. Serve para
 # conferir as nuvens antes de baixar as bandas
 def ler_nuvens(item_antes, item_depois, bbox, arquivo_cache=None):
-    if arquivo_cache is not None and os.path.exists(arquivo_cache):
-        return np.load(arquivo_cache)["nuvens"]
+    dados = _ler_cache(arquivo_cache, item_antes, item_depois)
+    if dados is not None:
+        return dados["nuvens"]
     return sentinelUtils.ler_mascara_nuvens(item_antes, bbox) | sentinelUtils.ler_mascara_nuvens(item_depois, bbox)

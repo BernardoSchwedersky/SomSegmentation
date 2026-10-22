@@ -10,6 +10,7 @@
  "cena_depois": "S2B_MSIL2A_20240303T002659_R016_T55KDU_20240303T031331",
  "data_antes": "2024-01-03",
  "data_depois": "2024-03-03",
+ "dias_antes_do_evento": 57,
  "pct_invalido_antes": 2.9,
  "pct_invalido_depois": 5.1,
  "areas_processadas": 7,

@@ -10,6 +10,7 @@
  "cena_depois": "S2B_MSIL2A_20240526T133149_R081_T22HCK_20240526T173629",
  "data_antes": "2024-02-01",
  "data_depois": "2024-05-26",
+ "dias_antes_do_evento": 115,
  "pct_invalido_antes": 0.2,
  "pct_invalido_depois": 0.0,
  "areas_processadas": 9,

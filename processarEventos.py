@@ -9,10 +9,12 @@ de limiar direto de NDWI em cada área e salva a figura de comparação em
 
 Escolha das cenas (sentinelUtils.selecionar_cenas): a de depois é a de menor
 fração de nuvens/sem dado dentro da grade entre 1 dia antes e 5 dias depois da
-data do evento (preferindo a data exata); a de antes é do mesmo tile, entre 180
-e 30 dias antes do evento, com menos nuvens dentro da grade (preferindo as mais
-recentes). Se o evento já tem um .json com as cenas escolhidas, elas são
-reaproveitadas (use --reselecionar para escolher de novo).
+data do evento (preferindo a data exata); a de antes é a mais próxima do evento,
+anterior a ele e do mesmo tile, com no máximo 10% de nuvens/sem dado dentro da
+grade (sentinelUtils.selecionar_cena_antes). Se o evento já tem um .json com as
+cenas escolhidas, elas são reaproveitadas (use --reselecionar para escolher as
+duas de novo, ou --reselecionar-antes para manter a de depois e escolher só a
+de antes).
 
 Uso:
     python processarEventos.py                      # todos os eventos
@@ -33,6 +35,7 @@ import os
 import re
 import traceback
 import unicodedata
+from datetime import datetime
 
 import matplotlib
 matplotlib.use("Agg")
@@ -66,7 +69,7 @@ def ler_eventos(arquivo):
     with open(arquivo, encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
-def processar_evento(evento, pasta_resultados, pasta_cache, reselecionar=False):
+def processar_evento(evento, pasta_resultados, pasta_cache, reselecionar=False, reselecionar_antes=False):
     nome = nome_arquivo(evento["localidade"])
     lat, lon = float(evento["latitude"]), float(evento["longitude"])
     resumo = {"evento": nome, "localidade": evento["localidade"], "pais": evento["pais"], "tipo": evento["tipo"],
@@ -79,11 +82,14 @@ def processar_evento(evento, pasta_resultados, pasta_cache, reselecionar=False):
         if os.path.exists(arquivo_json) and not reselecionar:
             with open(arquivo_json, encoding="utf-8") as f:
                 anterior = json.load(f)
-        if "cena_antes" in anterior:
-            item_antes = sentinelUtils.buscar_item(anterior["cena_antes"])
+        if "cena_depois" in anterior:
             item_depois = sentinelUtils.buscar_item(anterior["cena_depois"])
-            invalida_antes = anterior["pct_invalido_antes"] / 100
             invalida_depois = anterior["pct_invalido_depois"] / 100
+            if reselecionar_antes or "cena_antes" not in anterior:
+                item_antes, invalida_antes = sentinelUtils.selecionar_cena_antes(bbox, evento["data"], item_depois)
+            else:
+                item_antes = sentinelUtils.buscar_item(anterior["cena_antes"])
+                invalida_antes = anterior["pct_invalido_antes"] / 100
         else:
             item_antes, item_depois, invalida_antes, invalida_depois = sentinelUtils.selecionar_cenas(bbox, evento["data"])
         print("Antes: %s (%.0f%% de nuvens/sem dado na grade)" % (item_antes.id, 100 * invalida_antes))
@@ -91,6 +97,8 @@ def processar_evento(evento, pasta_resultados, pasta_cache, reselecionar=False):
         resumo.update(cena_antes=item_antes.id, cena_depois=item_depois.id,
                       data_antes=item_antes.datetime.strftime("%Y-%m-%d"),
                       data_depois=item_depois.datetime.strftime("%Y-%m-%d"),
+                      dias_antes_do_evento=(datetime.strptime(evento["data"], "%Y-%m-%d").date()
+                                            - item_antes.datetime.date()).days,
                       pct_invalido_antes=round(100 * invalida_antes, 1),
                       pct_invalido_depois=round(100 * invalida_depois, 1))
 
@@ -144,6 +152,8 @@ if __name__ == "__main__":
     parser.add_argument("--n-workers", type=int, default=1, help="Número de processos dividindo os eventos")
     parser.add_argument("--refazer", action="store_true", help="Processa de novo eventos que já têm figura")
     parser.add_argument("--reselecionar", action="store_true", help="Escolhe as cenas de novo em vez de reaproveitar")
+    parser.add_argument("--reselecionar-antes", action="store_true",
+                        help="Mantém a cena de depois e escolhe só a de antes de novo")
     parser.add_argument("--resumo", action="store_true", help="Só refaz o resumo.csv")
     args = parser.parse_args()
 
@@ -157,5 +167,6 @@ if __name__ == "__main__":
             if os.path.exists(figura) and not args.refazer:
                 print("Já processado:", evento["localidade"])
                 continue
-            processar_evento(evento, args.pasta_resultados, args.pasta_cache, args.reselecionar)
+            processar_evento(evento, args.pasta_resultados, args.pasta_cache, args.reselecionar,
+                             args.reselecionar_antes)
     escrever_resumo(args.pasta_resultados, eventos)
