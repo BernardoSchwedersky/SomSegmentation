@@ -71,6 +71,7 @@ def processar_grade(item_antes, item_depois, centro_lon, centro_lat, meia_largur
 
             area.update(mapa_som=mapa_som, mapa_ndwi=mapa_ndwi, conc=conc, nuvens=nuvens,
                         rgb=enchenteSOM.cor_verdadeira(refl_depois),
+                        rgb_antes=enchenteSOM.cor_verdadeira(refl_antes),
                         areas_som=enchenteSOM.areas_por_classe(mapa_som, nuvens),
                         areas_ndwi=enchenteSOM.areas_por_classe(mapa_ndwi, nuvens),
                         area_valida=validos.sum() * AREA_PIXEL_KM2,
@@ -101,8 +102,8 @@ def totais(areas_grade):
             "agua_so_som_km2": so_som, "agua_so_ndwi_km2": so_ndwi,
             "iou_agua": ambos / max(ambos + so_som + so_ndwi, 1e-9)}
 
-# Figura com os mapas dos dois métodos, a concordância da água, a área de alagamento
-# por área e uma tabela resumo
+# Figura com as imagens de antes e de depois, os mapas dos dois métodos e a
+# concordância da água. Um painel reúne as legendas e os totais
 def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_agua=0, titulo=None,
                       arquivo=None, dpi=100):
     processadas = [a for a in areas_grade if "mapa_som" in a]
@@ -116,12 +117,14 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
                 if a["bbox"][0] >= limites[0] - 1e-9 and a["bbox"][2] <= limites[1] + 1e-9
                 and a["bbox"][1] >= limites[2] - 1e-9 and a["bbox"][3] <= limites[3] + 1e-9]
 
-    fig = plt.figure(figsize=(19, 21))
-    gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 0.75], hspace=0.28, wspace=0.12,
-                          left=0.06, right=0.97, top=0.95, bottom=0.04)
-    ax = [fig.add_subplot(gs[k // 2, k % 2]) for k in range(4)]
-    titulos = ["Depois: %s (antes: %s)" % (item_depois.datetime.strftime("%d/%m/%Y"),
-                                           item_antes.datetime.strftime("%d/%m/%Y")),
+    # Linha de cima: antes, depois e painel de legendas; linha de baixo: SOM, NDWI e concordância
+    fig, eixos = plt.subplots(nrows=2, ncols=3, figsize=(24, 16.5))
+    fig.subplots_adjust(left=0.04, right=0.98, top=0.92, bottom=0.04, wspace=0.15, hspace=0.12)
+    ax_antes, ax_depois, ax_info = eixos[0]
+    ax_som, ax_ndwi, ax_conc = eixos[1]
+    mapas = [ax_antes, ax_depois, ax_som, ax_ndwi, ax_conc]
+    titulos = ["Antes: " + item_antes.datetime.strftime("%d/%m/%Y"),
+               "Depois: " + item_depois.datetime.strftime("%d/%m/%Y"),
                "SOM bi-temporal (somSeg, unidades classificadas pelo MNDWI)",
                "Baseline: limiar direto de NDWI (antes e depois)",
                "Concordância da água (permanente + alagamento)"]
@@ -129,90 +132,60 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
     for a in desenhar:
         x0, y0, x1, y1 = a["bbox"]
         ext = [x0, x1, y0, y1]
-        for k in range(4):
+        for k, ax in enumerate(mapas):
             if "mapa_som" not in a:
-                ax[k].add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, facecolor="#bdbdbd", hatch="//",
-                                          edgecolor="none"))
-                ax[k].text((x0 + x1) / 2, (y0 + y1) / 2, "%.0f%% de nuvens\nou sem dado\n(não processada)"
-                           % a["pct_nuvens"], ha="center", va="center", fontsize=11)
+                ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, facecolor="#bdbdbd", hatch="//", edgecolor="none"))
+                ax.text((x0 + x1) / 2, (y0 + y1) / 2, "%.0f%% de nuvens\nou sem dado\n(não processada)"
+                        % a["pct_nuvens"], ha="center", va="center", fontsize=10)
             else:
-                ax[k].imshow(a["rgb"], extent=ext)
-                if k in [1, 2]:
-                    mapa = a["mapa_som"] if k == 1 else a["mapa_ndwi"]
-                    ax[k].imshow(np.ma.masked_where(mapa == 0, mapa), cmap=ListedColormap(CORES_CLASSES),
-                                 vmin=-0.5, vmax=len(CLASSES) - 0.5, alpha=0.85, extent=ext)
-                if k == 3:
-                    ax[k].imshow(np.ma.masked_where(a["conc"] == 0, a["conc"]), cmap=ListedColormap(CORES_CONC),
-                                 vmin=-0.5, vmax=len(NOMES_CONC) - 0.5, alpha=0.9, extent=ext)
-                if k > 0:
-                    ax[k].imshow(np.ma.masked_where(~a["nuvens"], np.ones(a["nuvens"].shape)),
-                                 cmap=ListedColormap(["white"]), alpha=0.9, extent=ext)
-            ax[k].add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, edgecolor="yellow", lw=1))
-            ax[k].text(x0 + 0.002, y1 - 0.002, a["nome"], color="yellow", fontsize=11, va="top",
-                       fontweight="bold", bbox=dict(facecolor="black", alpha=0.4, lw=0, pad=1.5))
+                ax.imshow(a["rgb_antes"] if k == 0 else a["rgb"], extent=ext)
+                if k in [2, 3]:
+                    mapa = a["mapa_som"] if k == 2 else a["mapa_ndwi"]
+                    ax.imshow(np.ma.masked_where(mapa == 0, mapa), cmap=ListedColormap(CORES_CLASSES),
+                              vmin=-0.5, vmax=len(CLASSES) - 0.5, alpha=0.85, extent=ext)
+                if k == 4:
+                    ax.imshow(np.ma.masked_where(a["conc"] == 0, a["conc"]), cmap=ListedColormap(CORES_CONC),
+                              vmin=-0.5, vmax=len(NOMES_CONC) - 0.5, alpha=0.9, extent=ext)
+                if k >= 2:
+                    ax.imshow(np.ma.masked_where(~a["nuvens"], np.ones(a["nuvens"].shape)),
+                              cmap=ListedColormap(["white"]), alpha=0.9, extent=ext)
+            ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, edgecolor="yellow", lw=1))
+            ax.text(x0 + 0.002, y1 - 0.002, a["nome"], color="yellow", fontsize=10, va="top",
+                    fontweight="bold", bbox=dict(facecolor="black", alpha=0.4, lw=0, pad=1.5))
 
-    for k in range(4):
-        ax[k].set_xlim(limites[0], limites[1])
-        ax[k].set_ylim(limites[2], limites[3])
-        ax[k].set_aspect(1 / np.cos(np.radians(centro_lat)))  # Mantém a proporção em km
-        ax[k].set_title(titulos[k], fontsize=13)
-        ax[k].tick_params(labelsize=9)
+    for ax, t in zip(mapas, titulos):
+        ax.set_xlim(limites[0], limites[1])
+        ax.set_ylim(limites[2], limites[3])
+        ax.set_aspect(1 / np.cos(np.radians(centro_lat)))  # Mantém a proporção em km
+        ax.set_title(t, fontsize=13)
+        ax.tick_params(labelsize=9)
+
+    # Painel com as legendas e os totais
+    ax_info.axis("off")
     legenda_classes = [Patch(color=CORES_CLASSES[c], label=CLASSES[c]) for c in range(1, len(CLASSES))]
     legenda_classes.append(Patch(facecolor="white", edgecolor="k", label="Nuvem ou sem dado (descartado)"))
-    for k in [1, 2]:
-        ax[k].legend(handles=legenda_classes, loc="upper center", bbox_to_anchor=(0.5, -0.05), ncol=3, fontsize=10)
-    ax[3].legend(handles=[Patch(color=CORES_CONC[c], label=NOMES_CONC[c]) for c in [1, 2, 3]],
-                 loc="upper center", bbox_to_anchor=(0.5, -0.05), ncol=3, fontsize=10)
-
-    # Área de alagamento em cada área, pelos dois métodos
-    axb = fig.add_subplot(gs[2, 0])
-    axt = fig.add_subplot(gs[2, 1])
-    axt.axis("off")
+    l1 = ax_info.legend(handles=legenda_classes, title="Classes (SOM e NDWI)", loc="upper left",
+                        bbox_to_anchor=(0.02, 0.98), fontsize=12, title_fontsize=13, frameon=False)
+    ax_info.add_artist(l1)
+    ax_info.legend(handles=[Patch(color=CORES_CONC[c], label=NOMES_CONC[c]) for c in [1, 2, 3]],
+                   title="Concordância da água", loc="upper left", bbox_to_anchor=(0.02, 0.68),
+                   fontsize=12, title_fontsize=13, frameon=False)
     if processadas:
-        n = np.arange(len(processadas))
-        w = 0.38
-        som_alagamento = np.array([a["areas_som"][2] for a in processadas])
-        ndwi_alagamento = np.array([a["areas_ndwi"][2] for a in processadas])
-        axb.barh(n - w / 2, som_alagamento, w, color=CORES_CLASSES[2], edgecolor="k", label="SOM")
-        axb.barh(n + w / 2, ndwi_alagamento, w, color="white", edgecolor=CORES_CLASSES[2], hatch="//",
-                 label="NDWI (baseline)")
-        maximo = max(max(som_alagamento), max(ndwi_alagamento), 1)
-        for k in range(len(processadas)):
-            axb.text(som_alagamento[k] + maximo * 0.01, k - w / 2, "%.1f" % som_alagamento[k], va="center", fontsize=9)
-            axb.text(ndwi_alagamento[k] + maximo * 0.01, k + w / 2, "%.1f" % ndwi_alagamento[k], va="center", fontsize=9)
-        axb.set_yticks(n)
-        axb.set_yticklabels([a["nome"] for a in processadas])
-        axb.invert_yaxis()
-        axb.set_xlim(0, maximo * 1.12)
-        axb.legend(fontsize=9, loc="best")
-
-        # Tabela resumo
         t = totais(areas_grade)
-        linhas = [[a["nome"], "%.2f" % a["iou"], "%.2f" % a["so_som"], "%.2f" % a["so_ndwi"],
-                   "%.2f / %.2f" % (a["areas_som"][1], a["areas_ndwi"][1]),
-                   "%.2f / %.2f" % (a["areas_som"][2], a["areas_ndwi"][2])] for a in processadas]
-        linhas.append(["Total", "%.2f" % t["iou_agua"], "%.2f" % t["agua_so_som_km2"], "%.2f" % t["agua_so_ndwi_km2"],
-                       "%.2f / %.2f" % (t["som_permanente_km2"], t["ndwi_permanente_km2"]),
-                       "%.2f / %.2f" % (t["som_alagamento_km2"], t["ndwi_alagamento_km2"])])
-        tabela = axt.table(cellText=linhas, cellLoc="center", loc="center",
-                           colLabels=["Área", "IoU da água\nSOM x NDWI", "Água só no\nSOM (km²)",
-                                      "Água só no\nNDWI (km²)", "Água permanente\nSOM / NDWI (km²)",
-                                      "Alagamento\nSOM / NDWI (km²)"])
-        tabela.auto_set_font_size(False)
-        tabela.set_fontsize(10)
-        tabela.scale(1, 2.3 if len(linhas) <= 7 else 1.9)
-        axt.set_title("Comparação por área (alagamento: SOM %.1f km², NDWI %.1f km²)"
-                      % (t["som_alagamento_km2"], t["ndwi_alagamento_km2"]), fontsize=11)
+        linha = "%-22s%8s%8s\n"
+        texto = ("Áreas processadas: %d de %d (%.1f km² válidos)\n\n"
+                 % (t["areas_processadas"], len(areas_grade), t["area_valida_km2"])
+                 + linha % ("", "SOM", "NDWI")
+                 + linha % ("Alagamento (km²)", "%.1f" % t["som_alagamento_km2"], "%.1f" % t["ndwi_alagamento_km2"])
+                 + linha % ("Água permanente (km²)", "%.1f" % t["som_permanente_km2"], "%.1f" % t["ndwi_permanente_km2"])
+                 + "\nIoU da água SOM x NDWI: %.2f" % t["iou_agua"])
     else:
-        axb.text(0.5, 0.5, "Nenhuma área processada", ha="center", va="center", transform=axb.transAxes)
-    axb.set_xlabel("Área (km²)")
-    axb.set_title("Área de alagamento: SOM x NDWI")
-    for s in ["top", "right"]:
-        axb.spines[s].set_visible(False)
+        texto = "Nenhuma área processada (nuvens ou sem dado)"
+    ax_info.text(0.04, 0.36, texto, fontsize=13, family="monospace", va="top", transform=ax_info.transAxes)
 
     if titulo is None:
         titulo = "Mapeamento de enchente: SOM bi-temporal x limiar direto de NDWI (NDWI > %g)" % limiar_agua
-    fig.suptitle(titulo, fontsize=15)
+    fig.suptitle(titulo, fontsize=16)
     if arquivo is not None:
         fig.savefig(arquivo, dpi=dpi)
     return fig
