@@ -2,8 +2,8 @@
 """
 Processa os eventos de inundação de eventos_inundacao.csv: para cada evento,
 monta uma grade de áreas em torno da coordenada, escolhe automaticamente as
-cenas Sentinel-2 de antes e de depois, aplica o SOM bi-temporal e o limiar
-direto de NDWI em cada área e salva a figura de comparação em
+cenas Sentinel-2 de antes e de depois, aplica o SOM bi-temporal e o baseline
+de limiar direto de NDWI em cada área e salva a figura de comparação em
 <pasta_resultados>/<evento>.png. Os totais de cada evento vão para
 <pasta_resultados>/<evento>.json e, juntos, para <pasta_resultados>/resumo.csv.
 
@@ -11,7 +11,8 @@ Escolha das cenas (sentinelUtils.selecionar_cenas): a de depois é a de menor
 fração de nuvens/sem dado dentro da grade entre 1 dia antes e 5 dias depois da
 data do evento (preferindo a data exata); a de antes é do mesmo tile, entre 180
 e 30 dias antes do evento, com menos nuvens dentro da grade (preferindo as mais
-recentes).
+recentes). Se o evento já tem um .json com as cenas escolhidas, elas são
+reaproveitadas (use --reselecionar para escolher de novo).
 
 Uso:
     python processarEventos.py                      # todos os eventos
@@ -20,6 +21,7 @@ Uso:
     python processarEventos.py --resumo             # só refaz o resumo.csv
 
 Eventos que já têm a figura são pulados (use --refazer para processar de novo).
+Os mapas têm três classes: não alagamento, água permanente e alagamento.
 O processamento e a figura estão em comparacaoGrade.py.
 """
 
@@ -64,7 +66,7 @@ def ler_eventos(arquivo):
     with open(arquivo, encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
-def processar_evento(evento, pasta_resultados, pasta_cache):
+def processar_evento(evento, pasta_resultados, pasta_cache, reselecionar=False):
     nome = nome_arquivo(evento["localidade"])
     lat, lon = float(evento["latitude"]), float(evento["longitude"])
     resumo = {"evento": nome, "localidade": evento["localidade"], "pais": evento["pais"], "tipo": evento["tipo"],
@@ -72,7 +74,18 @@ def processar_evento(evento, pasta_resultados, pasta_cache):
     print("\n######## %s, %s - %s" % (evento["localidade"], evento["pais"], evento["data"]), flush=True)
     try:
         bbox = enchenteSOM.bbox_grade(lon, lat, meia_largura_graus, n_linhas, n_colunas)
-        item_antes, item_depois, invalida_antes, invalida_depois = sentinelUtils.selecionar_cenas(bbox, evento["data"])
+        anterior = {}
+        arquivo_json = os.path.join(pasta_resultados, nome + ".json")
+        if os.path.exists(arquivo_json) and not reselecionar:
+            with open(arquivo_json, encoding="utf-8") as f:
+                anterior = json.load(f)
+        if "cena_antes" in anterior:
+            item_antes = sentinelUtils.buscar_item(anterior["cena_antes"])
+            item_depois = sentinelUtils.buscar_item(anterior["cena_depois"])
+            invalida_antes = anterior["pct_invalido_antes"] / 100
+            invalida_depois = anterior["pct_invalido_depois"] / 100
+        else:
+            item_antes, item_depois, invalida_antes, invalida_depois = sentinelUtils.selecionar_cenas(bbox, evento["data"])
         print("Antes: %s (%.0f%% de nuvens/sem dado na grade)" % (item_antes.id, 100 * invalida_antes))
         print("Depois: %s (%.0f%% de nuvens/sem dado na grade)" % (item_depois.id, 100 * invalida_depois), flush=True)
         resumo.update(cena_antes=item_antes.id, cena_depois=item_depois.id,
@@ -88,7 +101,7 @@ def processar_evento(evento, pasta_resultados, pasta_cache):
         resumo.update({k: round(v, 3) if isinstance(v, float) else v
                        for k, v in comparacaoGrade.totais(areas_grade).items()})
 
-        titulo = ("%s, %s (%s) - evento em %s: SOM bi-temporal x limiar direto de NDWI (NDWI > %g)"
+        titulo = ("%s, %s (%s) - evento em %s: SOM bi-temporal x baseline NDWI (NDWI > %g)"
                   % (evento["localidade"], evento["pais"], evento["tipo"],
                      "/".join(reversed(evento["data"].split("-"))), limiar_agua))
         fig = comparacaoGrade.figura_comparacao(areas_grade, item_antes, item_depois, lat, limiar_agua, titulo,
@@ -130,6 +143,7 @@ if __name__ == "__main__":
     parser.add_argument("--worker", type=int, default=0, help="Índice deste processo")
     parser.add_argument("--n-workers", type=int, default=1, help="Número de processos dividindo os eventos")
     parser.add_argument("--refazer", action="store_true", help="Processa de novo eventos que já têm figura")
+    parser.add_argument("--reselecionar", action="store_true", help="Escolhe as cenas de novo em vez de reaproveitar")
     parser.add_argument("--resumo", action="store_true", help="Só refaz o resumo.csv")
     args = parser.parse_args()
 
@@ -143,5 +157,5 @@ if __name__ == "__main__":
             if os.path.exists(figura) and not args.refazer:
                 print("Já processado:", evento["localidade"])
                 continue
-            processar_evento(evento, args.pasta_resultados, args.pasta_cache)
+            processar_evento(evento, args.pasta_resultados, args.pasta_cache, args.reselecionar)
     escrever_resumo(args.pasta_resultados, eventos)

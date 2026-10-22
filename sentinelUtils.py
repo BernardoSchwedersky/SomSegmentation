@@ -151,3 +151,14 @@ def selecionar_cenas(bbox, data_evento, dias_depois=(-1, 5), dias_antes=(30, 180
     nota, invalida_antes, item_antes = min(notas, key=lambda n: n[0])
 
     return item_antes, item_depois, invalida_antes, invalida_depois
+
+# Busca uma cena pelo identificador (ex.: para repetir um processamento com as mesmas cenas)
+def buscar_item(id_cena):
+    catalogo = pystac_client.Client.open(
+        "https://planetarycomputer.microsoft.com/api/stac/v1",
+        modifier=planetary_computer.sign_inplace,
+    )
+    item = next(catalogo.search(collections=["sentinel-2-l2a"], ids=[id_cena]).items(), None)
+    if item is None:
+        raise RuntimeError("Cena não encontrada: " + id_cena)
+    return item

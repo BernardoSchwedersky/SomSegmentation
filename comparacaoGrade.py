@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Processamento de uma grade de áreas com o SOM bi-temporal e com o limiar direto
-de NDWI, e a figura comparando os dois métodos. Usado em
+de NDWI (baseline), e a figura comparando os dois métodos. Usado em
 exemploComparacaoNDWI.py (um evento) e processarEventos.py (vários eventos).
 
-No método direto, um pixel é água se NDWI > limiar_agua. Água nas duas datas é
-água permanente e água só depois é área inundada. Esse método não tem
-equivalente à classe "vegetação afetada" do SOM.
+Os dois métodos usam as mesmas três classes: água nas duas datas é água
+permanente, água só depois é alagamento e o resto é não alagamento. No SOM a
+classe é atribuída a cada unidade pelo MNDWI médio dos seus pixels; no
+baseline cada pixel é água se NDWI > limiar_agua.
 """
 
 import os
@@ -20,7 +21,7 @@ import enchenteSOM
 from enchenteSOM import AREA_PIXEL_KM2, CLASSES, CORES_CLASSES
 
 
-# Concordância sobre a água (permanente + inundada) entre os dois métodos
+# Concordância sobre a água (permanente + alagamento) entre os dois métodos
 NOMES_CONC = ["Sem água nos dois", "Água nos dois métodos", "Água só no SOM", "Água só no NDWI"]
 CORES_CONC = ["#d9d9d9", "#3fa9f5", "#e7298a", "#ffd92f"]
 
@@ -57,8 +58,8 @@ def processar_grade(item_antes, item_depois, centro_lon, centro_lat, meia_largur
                                                                       som_size, limiar_agua)
             mapa_som = classe_unidade[result]
 
-            # Limiar direto de NDWI
-            mapa_ndwi = enchenteSOM.mapa_ndwi(refl_antes, refl_depois, limiar_agua)
+            # Baseline: limiar direto de NDWI
+            mapa_ndwi = enchenteSOM.mapa_indice(refl_antes, refl_depois, limiar_agua)
 
             agua_som = np.isin(mapa_som, [1, 2])
             agua_ndwi = np.isin(mapa_ndwi, [1, 2])
@@ -76,13 +77,9 @@ def processar_grade(item_antes, item_depois, centro_lon, centro_lat, meia_largur
                         # Interseção sobre união da água dos dois métodos
                         iou=(agua_som & agua_ndwi & validos).sum() / max(((agua_som | agua_ndwi) & validos).sum(), 1),
                         so_som=((conc == 2) & validos).sum() * AREA_PIXEL_KM2,
-                        so_ndwi=((conc == 3) & validos).sum() * AREA_PIXEL_KM2,
-                        # Vegetação afetada pelo SOM em que o NDWI não vê água
-                        veg_sem_agua_ndwi=((mapa_som == 3) & ~agua_ndwi & validos).sum() * AREA_PIXEL_KM2)
-            print("SOM:  permanente %.2f km², inundada %.2f km², vegetação afetada %.2f km²"
-                  % tuple(area["areas_som"][[1, 2, 3]]))
-            print("NDWI: permanente %.2f km², inundada %.2f km², água que recuou %.2f km²"
-                  % tuple(area["areas_ndwi"][[1, 2, 4]]))
+                        so_ndwi=((conc == 3) & validos).sum() * AREA_PIXEL_KM2)
+            print("SOM:  água permanente %.2f km², alagamento %.2f km²" % tuple(area["areas_som"][[1, 2]]))
+            print("NDWI: água permanente %.2f km², alagamento %.2f km²" % tuple(area["areas_ndwi"][[1, 2]]))
             print("Água SOM x NDWI: IoU %.3f, só no SOM %.2f km², só no NDWI %.2f km²"
                   % (area["iou"], area["so_som"], area["so_ndwi"]), flush=True)
     return areas_grade
@@ -98,15 +95,13 @@ def totais(areas_grade):
     return {"areas_processadas": len(proc), "areas_puladas": len(areas_grade) - len(proc),
             "area_valida_km2": soma(lambda a: a["area_valida"]),
             "som_permanente_km2": soma(lambda a: a["areas_som"][1]),
-            "som_inundada_km2": soma(lambda a: a["areas_som"][2]),
-            "som_vegetacao_afetada_km2": soma(lambda a: a["areas_som"][3]),
-            "som_atingida_km2": soma(lambda a: a["areas_som"][enchenteSOM.CLASSES_ENCHENTE].sum()),
+            "som_alagamento_km2": soma(lambda a: a["areas_som"][2]),
             "ndwi_permanente_km2": soma(lambda a: a["areas_ndwi"][1]),
-            "ndwi_inundada_km2": soma(lambda a: a["areas_ndwi"][2]),
+            "ndwi_alagamento_km2": soma(lambda a: a["areas_ndwi"][2]),
             "agua_so_som_km2": so_som, "agua_so_ndwi_km2": so_ndwi,
             "iou_agua": ambos / max(ambos + so_som + so_ndwi, 1e-9)}
 
-# Figura com os mapas dos dois métodos, a concordância da água, a área atingida
+# Figura com os mapas dos dois métodos, a concordância da água, a área de alagamento
 # por área e uma tabela resumo
 def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_agua=0, titulo=None,
                       arquivo=None, dpi=100):
@@ -127,8 +122,9 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
     ax = [fig.add_subplot(gs[k // 2, k % 2]) for k in range(4)]
     titulos = ["Depois: %s (antes: %s)" % (item_depois.datetime.strftime("%d/%m/%Y"),
                                            item_antes.datetime.strftime("%d/%m/%Y")),
-               "SOM bi-temporal (somSeg)", "Limiar direto de NDWI (antes e depois)",
-               "Concordância da água (permanente + inundada)"]
+               "SOM bi-temporal (somSeg, unidades classificadas pelo MNDWI)",
+               "Baseline: limiar direto de NDWI (antes e depois)",
+               "Concordância da água (permanente + alagamento)"]
 
     for a in desenhar:
         x0, y0, x1, y1 = a["bbox"]
@@ -168,26 +164,22 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
     ax[3].legend(handles=[Patch(color=CORES_CONC[c], label=NOMES_CONC[c]) for c in [1, 2, 3]],
                  loc="upper center", bbox_to_anchor=(0.5, -0.05), ncol=3, fontsize=10)
 
-    # Área atingida pela enchente em cada área, pelos dois métodos
+    # Área de alagamento em cada área, pelos dois métodos
     axb = fig.add_subplot(gs[2, 0])
     axt = fig.add_subplot(gs[2, 1])
     axt.axis("off")
     if processadas:
         n = np.arange(len(processadas))
         w = 0.38
-        som_inundada = np.array([a["areas_som"][2] for a in processadas])
-        som_vegetacao = np.array([a["areas_som"][3] for a in processadas])
-        ndwi_inundada = np.array([a["areas_ndwi"][2] for a in processadas])
-        axb.barh(n - w / 2, som_inundada, w, color=CORES_CLASSES[2], edgecolor="k", label="SOM: área inundada")
-        axb.barh(n - w / 2, som_vegetacao, w, left=som_inundada, color=CORES_CLASSES[3], edgecolor="k",
-                 label="SOM: vegetação afetada")
-        axb.barh(n + w / 2, ndwi_inundada, w, color=CORES_CLASSES[2], edgecolor="k", hatch="//",
-                 label="NDWI: área inundada")
-        maximo = max(max(som_inundada + som_vegetacao), max(ndwi_inundada), 1)
+        som_alagamento = np.array([a["areas_som"][2] for a in processadas])
+        ndwi_alagamento = np.array([a["areas_ndwi"][2] for a in processadas])
+        axb.barh(n - w / 2, som_alagamento, w, color=CORES_CLASSES[2], edgecolor="k", label="SOM")
+        axb.barh(n + w / 2, ndwi_alagamento, w, color="white", edgecolor=CORES_CLASSES[2], hatch="//",
+                 label="NDWI (baseline)")
+        maximo = max(max(som_alagamento), max(ndwi_alagamento), 1)
         for k in range(len(processadas)):
-            axb.text(som_inundada[k] + som_vegetacao[k] + maximo * 0.01, k - w / 2,
-                     "%.1f" % (som_inundada[k] + som_vegetacao[k]), va="center", fontsize=9)
-            axb.text(ndwi_inundada[k] + maximo * 0.01, k + w / 2, "%.1f" % ndwi_inundada[k], va="center", fontsize=9)
+            axb.text(som_alagamento[k] + maximo * 0.01, k - w / 2, "%.1f" % som_alagamento[k], va="center", fontsize=9)
+            axb.text(ndwi_alagamento[k] + maximo * 0.01, k + w / 2, "%.1f" % ndwi_alagamento[k], va="center", fontsize=9)
         axb.set_yticks(n)
         axb.set_yticklabels([a["nome"] for a in processadas])
         axb.invert_yaxis()
@@ -197,24 +189,24 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
         # Tabela resumo
         t = totais(areas_grade)
         linhas = [[a["nome"], "%.2f" % a["iou"], "%.2f" % a["so_som"], "%.2f" % a["so_ndwi"],
-                   "%.2f / %.2f" % (a["areas_som"][1], a["areas_ndwi"][1]), "%.2f" % a["veg_sem_agua_ndwi"]]
-                  for a in processadas]
+                   "%.2f / %.2f" % (a["areas_som"][1], a["areas_ndwi"][1]),
+                   "%.2f / %.2f" % (a["areas_som"][2], a["areas_ndwi"][2])] for a in processadas]
         linhas.append(["Total", "%.2f" % t["iou_agua"], "%.2f" % t["agua_so_som_km2"], "%.2f" % t["agua_so_ndwi_km2"],
                        "%.2f / %.2f" % (t["som_permanente_km2"], t["ndwi_permanente_km2"]),
-                       "%.2f" % sum(a["veg_sem_agua_ndwi"] for a in processadas)])
+                       "%.2f / %.2f" % (t["som_alagamento_km2"], t["ndwi_alagamento_km2"])])
         tabela = axt.table(cellText=linhas, cellLoc="center", loc="center",
                            colLabels=["Área", "IoU da água\nSOM x NDWI", "Água só no\nSOM (km²)",
                                       "Água só no\nNDWI (km²)", "Água permanente\nSOM / NDWI (km²)",
-                                      "Veg. afetada sem\nágua no NDWI (km²)"])
+                                      "Alagamento\nSOM / NDWI (km²)"])
         tabela.auto_set_font_size(False)
         tabela.set_fontsize(10)
-        tabela.scale(1, 2.3 if len(linhas) <= 7 else 1.6)
-        axt.set_title("Comparação por área (atingida: SOM %.1f km², NDWI %.1f km²)"
-                      % (t["som_atingida_km2"], t["ndwi_inundada_km2"]), fontsize=11)
+        tabela.scale(1, 2.3 if len(linhas) <= 7 else 1.9)
+        axt.set_title("Comparação por área (alagamento: SOM %.1f km², NDWI %.1f km²)"
+                      % (t["som_alagamento_km2"], t["ndwi_alagamento_km2"]), fontsize=11)
     else:
         axb.text(0.5, 0.5, "Nenhuma área processada", ha="center", va="center", transform=axb.transAxes)
     axb.set_xlabel("Área (km²)")
-    axb.set_title("Área atingida pela enchente: SOM x NDWI")
+    axb.set_title("Área de alagamento: SOM x NDWI")
     for s in ["top", "right"]:
         axb.spines[s].set_visible(False)
 

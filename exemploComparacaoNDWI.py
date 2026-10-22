@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Compara o mapeamento de enchente pelo SOM bi-temporal com o uso direto de um
-índice espectral: o limiar de NDWI aplicado às imagens de antes e de depois.
+Compara o mapeamento de enchente pelo SOM bi-temporal com um baseline de uso
+direto de um índice espectral: o limiar de NDWI aplicado às imagens de antes e
+de depois.
 
-No método direto, um pixel é água se NDWI > limiar_agua. Água nas duas datas é
-água permanente e água só depois é área inundada. Esse método não tem
-equivalente à classe "vegetação afetada" do SOM.
+Os dois métodos usam as mesmas três classes: água nas duas datas é água
+permanente, água só depois é alagamento e o resto é não alagamento. No
+baseline, um pixel é água se NDWI > limiar_agua; no SOM, cada unidade é
+classificada pelo MNDWI médio dos seus pixels.
 
 Usa a mesma grade, as mesmas cenas e a mesma pasta de cache de
 exemploSentinelGrade.py: se a grade já foi processada, as imagens não são
@@ -59,7 +61,7 @@ comparacaoGrade.figura_comparacao(areas_grade, item_antes, item_depois, centro_l
 print("\nFigura salva em", arquivo_figura)
 
 t = comparacaoGrade.totais(areas_grade)
-print("Área atingida nas %d áreas processadas: SOM %.2f km² (inundada + vegetação afetada), NDWI %.2f km²"
-      % (t["areas_processadas"], t["som_atingida_km2"], t["ndwi_inundada_km2"]))
+print("Alagamento nas %d áreas processadas: SOM %.2f km², NDWI %.2f km²"
+      % (t["areas_processadas"], t["som_alagamento_km2"], t["ndwi_alagamento_km2"]))
 
 plt.show()

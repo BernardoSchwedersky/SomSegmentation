@@ -95,7 +95,7 @@ for i in range(n_linhas):
         area["rgb_depois"] = enchenteSOM.cor_verdadeira(refl_depois)
         area["areas"] = enchenteSOM.areas_por_classe(area["mapa"], nuvens)
         area["area_total"] = area["mapa"].size * enchenteSOM.AREA_PIXEL_KM2
-        print("Pixels com nuvem: %.1f%% - área atingida: %.2f km²"
+        print("Pixels com nuvem: %.1f%% - alagamento: %.2f km²"
               % (pct_nuvens, area["areas"][enchenteSOM.CLASSES_ENCHENTE].sum()))
 
 processadas = [a for a in areas_grade if "mapa" in a]
@@ -159,7 +159,7 @@ if processadas:
     total_max = max(a["area_total"] for a in processadas)
     for k, a in enumerate(processadas):
         atingida = a["areas"][enchenteSOM.CLASSES_ENCHENTE].sum()
-        axb.text(base[k] + total_max * 0.01, k, "atingida: %.1f km² (%.0f%% de %.1f km²)"
+        axb.text(base[k] + total_max * 0.01, k, "alagamento: %.1f km² (%.0f%% de %.1f km²)"
                  % (atingida, 100 * atingida / a["area_total"], a["area_total"]), va="center", fontsize=9)
     axb.set_xlim(0, total_max * 1.35)
     axb.invert_yaxis()
@@ -175,6 +175,6 @@ fig.savefig(arquivo_figura, dpi=110)
 print("\nFigura salva em", arquivo_figura)
 
 total = sum(a["areas"][enchenteSOM.CLASSES_ENCHENTE].sum() for a in processadas)
-print("Área atingida nas %d áreas processadas: %.2f km²" % (len(processadas), total))
+print("Alagamento nas %d áreas processadas: %.2f km²" % (len(processadas), total))
 
 plt.show()

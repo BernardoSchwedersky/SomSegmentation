@@ -4,11 +4,12 @@ Exemplo de mapeamento de enchente comparando imagens Sentinel-2 de antes e
 depois do evento, usando o somSeg.
 
 Com uma única data, o SOM separa bem a água, mas não sabe dizer se ela é um rio
-ou lago permanente ou se é água da enchente, e a vegetação parcialmente
-submersa continua parecendo vegetação. Aqui as duas datas são empilhadas em uma
+ou lago permanente ou se é água da enchente. Aqui as duas datas são empilhadas em uma
 única imagem multicanal (bandas de antes + bandas de depois), então cada pixel
 descreve uma trajetória de mudança e cada unidade do SOM agrupa pixels que
-mudaram da mesma forma (ex.: vegetação -> água, água -> água, sem mudança).
+mudaram da mesma forma. Cada unidade é então classificada pelo índice de água
+(MNDWI) médio dos seus pixels nas duas datas em não alagamento, água permanente
+ou alagamento.
 
 Caso: enchente de maio de 2024 em Pelotas - RS. As duas cenas são da mesma
 órbita e do mesmo tile (T22HCK), então os pixels estão alinhados.
@@ -44,10 +45,8 @@ som_size = 12  # Número de unidades do SOM
 epochs = 3  # Quantidade de épocas do treinamento
 dataset_percentage = 0.2  # Porcentagem dos pixels sem nuvem usados no treinamento
 
-# Limiares da interpretação das unidades
-limiar_agua = 0  # NDWI acima disso indica água
-limiar_perda_ndvi = 0.15  # Queda de NDVI que indica vegetação afetada pela água
-ndvi_min_vegetacao = 0.5  # NDVI mínimo, antes, para considerar o pixel vegetação
+# Limiar da interpretação das unidades
+limiar_agua = 0  # MNDWI acima disso indica água
 
 
 bbox = sentinelUtils.criar_bbox(centro_lon, centro_lat, meia_largura_graus)
@@ -60,7 +59,7 @@ print("Cenas:", nomes_cenas)
 refl_antes, refl_depois, nuvens = enchenteSOM.ler_dados(item_antes, item_depois, bbox, arquivo_cache)
 print("Imagem:", refl_antes.shape, "- pixels com nuvem: %.1f%%" % (100 * nuvens.mean()))
 
-# Criando a img de entrada bi-temporal: bandas + NDWI de antes e de depois
+# Criando a img de entrada bi-temporal: bandas + MNDWI de antes e de depois
 ROI_sample_conv, nomes_canais = enchenteSOM.montar_entrada(refl_antes, refl_depois)
 numero_canais = ROI_sample_conv.shape[2]
 
@@ -89,11 +88,10 @@ somSeg.plot_result_multiclass_matplotlib(result, som_size, rgb_depois)
 
 somSeg.plot_result_multiclass_plotly(result, som_size)
 
-# Interpretação das unidades: cada unidade recebe uma classe de mudança a partir
-# dos índices médios dos seus pixels nas duas datas
+# Interpretação das unidades: cada unidade recebe uma classe a partir do MNDWI
+# médio dos seus pixels nas duas datas
 classe_unidade, tabela = enchenteSOM.classificar_unidades(
-    result, nuvens, refl_antes, refl_depois, som_size,
-    limiar_agua, limiar_perda_ndvi, ndvi_min_vegetacao)
+    result, nuvens, refl_antes, refl_depois, som_size, limiar_agua)
 print()
 enchenteSOM.imprimir_tabela(tabela)
 
@@ -114,16 +112,16 @@ ax[1].set_title('Pixels por unidade (hits), coloridos pela classe de mudança')
 fig.tight_layout()
 
 # Mapa final de mudança, comparado com a água detectada só na imagem de depois
-ndwi_depois = enchenteSOM.indices(refl_depois)[1]
+mndwi_depois = enchenteSOM.indice_agua(refl_depois)
 fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(18, 6.5), subplot_kw=dict(xticks=[], yticks=[]))
 ax[0].imshow(rgb_depois)
 ax[0].set_title("Depois (cor verdadeira)")
 
-agua_so_depois = np.ma.masked_where(ndwi_depois <= limiar_agua, np.ones(result.shape))
+agua_so_depois = np.ma.masked_where(mndwi_depois <= limiar_agua, np.ones(result.shape))
 ax[1].imshow(rgb_depois)
 ax[1].imshow(agua_so_depois, cmap=ListedColormap(["#3fa9f5"]), alpha=0.7)
-ax[1].set_title("Só a imagem de depois: água (NDWI > 0)\n%.2f km²"
-                % ((ndwi_depois > limiar_agua).sum() * enchenteSOM.AREA_PIXEL_KM2))
+ax[1].set_title("Só a imagem de depois: água (MNDWI > 0)\n%.2f km²"
+                % ((mndwi_depois > limiar_agua).sum() * enchenteSOM.AREA_PIXEL_KM2))
 
 ax[2].imshow(rgb_depois)
 ax[2].imshow(np.ma.masked_where(mapa_mudanca == 0, mapa_mudanca),
@@ -136,7 +134,7 @@ legenda.append(Patch(facecolor="white", edgecolor="k", label="Nuvem (descartado)
 ax[2].legend(handles=legenda, loc="upper right", fontsize=8, framealpha=0.9)
 fig.tight_layout()
 
-print("\nÁrea total afetada pela enchente (inundada + vegetação afetada): %.2f km²"
+print("\nÁrea de alagamento: %.2f km²"
       % areas[enchenteSOM.CLASSES_ENCHENTE].sum())
 
 plt.show()

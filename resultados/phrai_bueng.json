@@ -16,13 +16,11 @@
  "areas_puladas": 0,
  "area_valida_km2": 245.995,
  "som_permanente_km2": 0.0,
- "som_inundada_km2": 17.923,
- "som_vegetacao_afetada_km2": 0.0,
- "som_atingida_km2": 17.923,
+ "som_alagamento_km2": 34.136,
  "ndwi_permanente_km2": 0.611,
- "ndwi_inundada_km2": 18.001,
- "agua_so_som_km2": 4.903,
- "agua_so_ndwi_km2": 5.592,
- "iou_agua": 0.554,
+ "ndwi_alagamento_km2": 18.001,
+ "agua_so_som_km2": 17.224,
+ "agua_so_ndwi_km2": 1.699,
+ "iou_agua": 0.472,
  "status": "ok"
 }
