@@ -49,30 +49,18 @@ epochs = 3
 dataset_percentage = 0.2
 
 
-# Retângulo de cada área da grade, centrada em (centro_lon, centro_lat)
+# Retângulo e nome de cada área da grade
 def bbox_area(i, j):
-    lon = centro_lon + (j - (n_colunas - 1) / 2) * 2 * meia_largura_graus
-    lat = centro_lat + ((n_linhas - 1) / 2 - i) * 2 * meia_largura_graus
-    return sentinelUtils.criar_bbox(lon, lat, meia_largura_graus)
+    return enchenteSOM.bbox_area_grade(i, j, centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas)
 
-# Nome da área pela posição na grade (ex.: "Norte", "Sudeste", "Centro")
 def nome_area(i, j):
-    ns = "Norte" if i < (n_linhas - 1) / 2 else "Sul" if i > (n_linhas - 1) / 2 else ""
-    lo = "Leste" if j > (n_colunas - 1) / 2 else "Oeste" if j < (n_colunas - 1) / 2 else ""
-    combinados = {("Norte", "Leste"): "Nordeste", ("Norte", "Oeste"): "Noroeste",
-                  ("Sul", "Leste"): "Sudeste", ("Sul", "Oeste"): "Sudoeste"}
-    nome = combinados.get((ns, lo), ns or lo or "Centro")
-    # Em grades maiores que 3x3 vários nomes se repetem: inclui a posição
-    if max(n_linhas, n_colunas) > 3:
-        nome += " (%d,%d)" % (i, j)
-    return nome
+    return enchenteSOM.nome_area_grade(i, j, n_linhas, n_colunas)
 
 
 os.makedirs(pasta_cache, exist_ok=True)
 
 # As mesmas cenas são usadas em toda a grade, para os pixels ficarem alinhados
-bbox_grade = [bbox_area(n_linhas - 1, 0)[0], bbox_area(n_linhas - 1, 0)[1],
-              bbox_area(0, n_colunas - 1)[2], bbox_area(0, n_colunas - 1)[3]]
+bbox_grade = enchenteSOM.bbox_grade(centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas)
 item_antes = sentinelUtils.buscar_cena(bbox_grade, periodo_antes, cobertura_nuvens_max)
 item_depois = sentinelUtils.buscar_cena(bbox_grade, periodo_depois, cobertura_nuvens_max)
 print("Cenas:", item_antes.id, item_depois.id)
@@ -86,10 +74,7 @@ for i in range(n_linhas):
 
         # Confere as nuvens antes de baixar as bandas
         arquivo_cache = os.path.join(pasta_cache, "area_%d_%d.npz" % (i, j))
-        if os.path.exists(arquivo_cache):
-            nuvens = np.load(arquivo_cache)["nuvens"]
-        else:
-            nuvens = sentinelUtils.ler_mascara_nuvens(item_antes, bbox) | sentinelUtils.ler_mascara_nuvens(item_depois, bbox)
+        nuvens = enchenteSOM.ler_nuvens(item_antes, item_depois, bbox, arquivo_cache)
         pct_nuvens = 100 * nuvens.mean()
         area = {"nome": nome, "bbox": bbox, "linha": i, "coluna": j, "pct_nuvens": pct_nuvens}
         areas_grade.append(area)

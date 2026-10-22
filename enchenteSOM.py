@@ -116,3 +116,50 @@ def imprimir_tabela(tabela):
 # Área (km²) de cada classe no mapa de mudança, sem os pixels com nuvem
 def areas_por_classe(mapa_mudanca, nuvens):
     return np.array([((mapa_mudanca == c) & ~nuvens).sum() * AREA_PIXEL_KM2 for c in range(len(CLASSES))])
+
+# Método direto para comparação: limiar de NDWI em cada data, com os mesmos
+# códigos de classe do SOM (1 água permanente, 2 área inundada, 4 água que recuou).
+# Não tem equivalente à classe 3 (vegetação afetada)
+def mapa_ndwi(refl_antes, refl_depois, limiar_agua=0):
+    agua_antes = indices(refl_antes)[1] > limiar_agua
+    agua_depois = indices(refl_depois)[1] > limiar_agua
+    mapa = np.zeros(agua_antes.shape, dtype=int)
+    mapa[agua_antes & agua_depois] = 1
+    mapa[~agua_antes & agua_depois] = 2
+    mapa[agua_antes & ~agua_depois] = 4
+    return mapa
+
+
+# Funções da grade de áreas (exemploSentinelGrade.py e exemploComparacaoNDWI.py)
+
+# Retângulo da área (i, j) de uma grade n_linhas x n_colunas centrada em
+# (centro_lon, centro_lat). A linha 0 é a mais ao norte
+def bbox_area_grade(i, j, centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas):
+    lon = centro_lon + (j - (n_colunas - 1) / 2) * 2 * meia_largura_graus
+    lat = centro_lat + ((n_linhas - 1) / 2 - i) * 2 * meia_largura_graus
+    return sentinelUtils.criar_bbox(lon, lat, meia_largura_graus)
+
+# Retângulo que envolve a grade inteira
+def bbox_grade(centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas):
+    so = bbox_area_grade(n_linhas - 1, 0, centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas)
+    ne = bbox_area_grade(0, n_colunas - 1, centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas)
+    return [so[0], so[1], ne[2], ne[3]]
+
+# Nome da área pela posição na grade (ex.: "Norte", "Sudeste", "Centro")
+def nome_area_grade(i, j, n_linhas, n_colunas):
+    ns = "Norte" if i < (n_linhas - 1) / 2 else "Sul" if i > (n_linhas - 1) / 2 else ""
+    lo = "Leste" if j > (n_colunas - 1) / 2 else "Oeste" if j < (n_colunas - 1) / 2 else ""
+    combinados = {("Norte", "Leste"): "Nordeste", ("Norte", "Oeste"): "Noroeste",
+                  ("Sul", "Leste"): "Sudeste", ("Sul", "Oeste"): "Sudoeste"}
+    nome = combinados.get((ns, lo), ns or lo or "Centro")
+    # Em grades maiores que 3x3 vários nomes se repetem: inclui a posição
+    if max(n_linhas, n_colunas) > 3:
+        nome += " (%d,%d)" % (i, j)
+    return nome
+
+# Máscara de nuvens de uma área, lida do cache se ele existir. Serve para
+# conferir as nuvens antes de baixar as bandas
+def ler_nuvens(item_antes, item_depois, bbox, arquivo_cache=None):
+    if arquivo_cache is not None and os.path.exists(arquivo_cache):
+        return np.load(arquivo_cache)["nuvens"]
+    return sentinelUtils.ler_mascara_nuvens(item_antes, bbox) | sentinelUtils.ler_mascara_nuvens(item_depois, bbox)
