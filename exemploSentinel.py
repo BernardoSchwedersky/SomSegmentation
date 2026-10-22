@@ -167,6 +167,7 @@ ax[0].plot(nd_x, marker='o')
 ax[0].set_title('Distância entre unidades vizinhas')
 ax[1].bar(np.arange(som_size), hits)
 ax[1].set_title('Pixels por unidade (hits)')
+fig.tight_layout()
 
 # NDVI médio de cada unidade, ajuda a interpretar as classes encontradas
 ndvi_unidade = [ndvi[result == u].mean() if np.any(result == u) else np.nan for u in range(som_size)]
