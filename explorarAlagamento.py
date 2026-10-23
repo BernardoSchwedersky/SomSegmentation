@@ -28,6 +28,7 @@ As funções estão em comparacaoGrade.py, enchenteSOM.py e sentinelUtils.py.
 import argparse
 import json
 import os
+import pickle
 from datetime import datetime, timedelta
 from multiprocessing import Pool
 
@@ -70,35 +71,51 @@ def bbox_area(di, dj):
 def nome_area(di, dj):
     return "%s%d %s%d" % ("N" if di >= 0 else "S", abs(di), "L" if dj >= 0 else "O", abs(dj))
 
-# Pares (antes, depois) das duas datas, um por tile que tem as duas cenas
+# Pares (antes, depois) das duas datas, um por tile que tem as duas cenas, com o
+# retângulo coberto pelo tile (para testar em cada área só os tiles que a cobrem)
 def pares_por_tile(bbox):
     def por_tile(data):
         dia = datetime.strptime(data, "%Y-%m-%d")
-        return {item.properties["s2:mgrs_tile"]: item.id
+        return {item.properties["s2:mgrs_tile"]: item
                 for item in sentinelUtils.buscar_cenas(bbox, dia, dia + timedelta(days=1))
                 if item.datetime.date() == dia.date()}
     antes, depois = por_tile(data_antes), por_tile(data_depois)
-    return [(antes[t], depois[t]) for t in sorted(antes) if t in depois]
+    return [(antes[t].id, depois[t].id, list(depois[t].bbox)) for t in sorted(antes) if t in depois]
+
+def intersecta(a, b):
+    return a[0] < b[2] and b[0] < a[2] and a[1] < b[3] and b[1] < a[3]
 
 # Processa uma área: escolhe o tile com menos pixels inválidos nas duas datas
 # e aplica os dois métodos. As cenas são buscadas de novo aqui, para que as
-# URLs assinadas não expirem durante processamentos longos
+# URLs assinadas não expirem durante processamentos longos. O resultado de cada
+# área fica salvo na pasta de cache, e uma nova execução o reaproveita
 def processar(args):
     di, dj, pares, pasta_cache = args
+    arquivo_resultado = os.path.join(pasta_cache, "resultado_%d_%d.pkl" % (di, dj))
+    if os.path.exists(arquivo_resultado):
+        with open(arquivo_resultado, "rb") as f:
+            return pickle.load(f)
     bbox = bbox_area(di, dj)
     melhor = None
-    for id_antes, id_depois in pares:
+    for id_antes, id_depois, bbox_tile in pares:
+        if not intersecta(bbox, bbox_tile):
+            continue
         item_antes, item_depois = sentinelUtils.buscar_item(id_antes), sentinelUtils.buscar_item(id_depois)
         invalida = max(sentinelUtils.fracao_invalida(item_antes, bbox), sentinelUtils.fracao_invalida(item_depois, bbox))
         if melhor is None or invalida < melhor[0]:
             melhor = (invalida, item_antes, item_depois)
-    _, item_antes, item_depois = melhor
-    area = comparacaoGrade.processar_area(
-        item_antes, item_depois, bbox, nome_area(di, dj), os.path.join(pasta_cache, "area_%d_%d.npz" % (di, dj)),
-        nuvens_max_area, patch_size, som_size, epochs, dataset_percentage, limiar_agua)
-    area.update(di=di, dj=dj, tile=item_depois.properties["s2:mgrs_tile"])
+    if melhor is None:
+        area = {"nome": nome_area(di, dj), "bbox": bbox, "pct_nuvens": 100.0, "tile": None}
+    else:
+        _, item_antes, item_depois = melhor
+        area = comparacaoGrade.processar_area(
+            item_antes, item_depois, bbox, nome_area(di, dj), os.path.join(pasta_cache, "area_%d_%d.npz" % (di, dj)),
+            nuvens_max_area, patch_size, som_size, epochs, dataset_percentage, limiar_agua)
+        area["tile"] = item_depois.properties["s2:mgrs_tile"]
+    area.update(di=di, dj=dj)
+    with open(arquivo_resultado, "wb") as f:
+        pickle.dump(area, f)
     return area
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Explora as áreas vizinhas com alagamento")
@@ -125,7 +142,7 @@ if __name__ == "__main__":
 
     regiao = sentinelUtils.criar_bbox(centro_lon, centro_lat, (2 * raio_max + 1) * meia_largura_graus)
     pares = pares_por_tile(regiao)
-    print("Pares de cenas por tile:", pares, flush=True)
+    print("Tiles com as duas cenas:", [p[0].split("_")[4] for p in pares], flush=True)
 
     areas = {}
     fila = [(di, dj) for di in (-1, 0, 1) for dj in (-1, 0, 1)]

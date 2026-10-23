@@ -124,8 +124,10 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
                 if a["bbox"][0] >= limites[0] - 1e-9 and a["bbox"][2] <= limites[1] + 1e-9
                 and a["bbox"][1] >= limites[2] - 1e-9 and a["bbox"][3] <= limites[3] + 1e-9]
 
-    # Linha de cima: antes, depois e painel de legendas; linha de baixo: SOM, NDWI e concordância
-    fig, eixos = plt.subplots(nrows=2, ncols=3, figsize=(24, 16.5))
+    # Linha de cima: antes, depois e painel de legendas; linha de baixo: SOM, NDWI e concordância.
+    # A altura da figura acompanha a proporção da região, para regiões largas não sobrar espaço
+    proporcao = (limites[3] - limites[2]) / ((limites[1] - limites[0]) * np.cos(np.radians(centro_lat)))
+    fig, eixos = plt.subplots(nrows=2, ncols=3, figsize=(24, float(np.clip(14 * proporcao, 9, 16.5))))
     fig.subplots_adjust(left=0.04, right=0.98, top=0.92, bottom=0.04, wspace=0.15, hspace=0.12)
     ax_antes, ax_depois, ax_info = eixos[0]
     ax_som, ax_ndwi, ax_conc = eixos[1]
@@ -174,12 +176,13 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
     ax_info.axis("off")
     legenda_classes = [Patch(color=CORES_CLASSES[c], label=CLASSES[c]) for c in range(1, len(CLASSES))]
     legenda_classes.append(Patch(facecolor="white", edgecolor="k", label="Nuvem ou sem dado (descartado)"))
+    # Legendas lado a lado no topo e os totais embaixo
     l1 = ax_info.legend(handles=legenda_classes, title="Classes (SOM e NDWI)", loc="upper left",
-                        bbox_to_anchor=(0.02, 0.98), fontsize=12, title_fontsize=13, frameon=False)
+                        bbox_to_anchor=(0.0, 1.0), fontsize=11, title_fontsize=12, frameon=False)
     ax_info.add_artist(l1)
     ax_info.legend(handles=[Patch(color=CORES_CONC[c], label=NOMES_CONC[c]) for c in [1, 2, 3]],
-                   title="Concordância da água", loc="upper left", bbox_to_anchor=(0.02, 0.68),
-                   fontsize=12, title_fontsize=13, frameon=False)
+                   title="Concordância da água", loc="upper left", bbox_to_anchor=(0.56, 1.0),
+                   fontsize=11, title_fontsize=12, frameon=False)
     if processadas:
         t = totais(areas_grade)
         linha = "%-22s%8s%8s\n"
@@ -191,7 +194,7 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
                  + "\nIoU da água SOM x NDWI: %.2f" % t["iou_agua"])
     else:
         texto = "Nenhuma área processada (nuvens ou sem dado)"
-    ax_info.text(0.04, 0.36, texto, fontsize=13, family="monospace", va="top", transform=ax_info.transAxes)
+    ax_info.text(0.02, 0.5, texto, fontsize=12, family="monospace", va="top", transform=ax_info.transAxes)
 
     if titulo is None:
         titulo = "Mapeamento de enchente: SOM bi-temporal x limiar direto de NDWI (NDWI > %g)" % limiar_agua
