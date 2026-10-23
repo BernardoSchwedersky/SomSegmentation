@@ -10,6 +10,11 @@ em paralelo, até que as bordas não tenham mais alagamento ou até raio_max ár
 de distância do centro. Áreas com nuvens ou sem dado demais são puladas e não
 expandem a grade.
 
+O evento é escolhido com --evento (localidade de eventos_inundacao.csv): o
+centro vem da tabela e as datas das cenas de antes e de depois vêm do resultado
+do evento em resultados/<evento>.json (gerado por processarEventos.py). Sem
+--evento, usa Pelotas com as datas abaixo.
+
 As cenas de antes e de depois são de datas fixas. Como uma região grande pode
 cruzar a borda entre tiles do Sentinel-2, cada área usa o tile (da mesma
 aquisição) com menos pixels inválidos.
@@ -32,10 +37,11 @@ import matplotlib.pyplot as plt
 
 import comparacaoGrade
 import enchenteSOM
+import processarEventos
 import sentinelUtils
 
 
-# Evento: Pelotas - RS, cenas de antes e de depois
+# Evento padrão: Pelotas - RS, cenas de antes e de depois
 nome = "pelotas_expandido"
 titulo_evento = "Pelotas, Brasil - evento em 26/05/2024"
 centro_lon, centro_lat = -52.3265, -31.7725
@@ -44,7 +50,7 @@ data_depois = "2024-05-26"
 
 # Parâmetros da expansão
 meia_largura_graus = 0.025    # Cada área tem ~5,5 km de lado
-raio_max = 6                  # No máximo 6 áreas do centro em cada direção (grade de até 13x13)
+raio_max = 12                 # No máximo 12 áreas do centro em cada direção (grade de até 25x25)
 limiar_expansao_km2 = 0.5     # Alagamento (SOM) mínimo de uma área para expandir para as vizinhas
 nuvens_max_area = 20          # % máxima de nuvens ou sem dado para processar uma área
 
@@ -100,8 +106,19 @@ if __name__ == "__main__":
     parser.add_argument("--pasta-cache", default="cache_explorar")
     parser.add_argument("--processos", type=int, default=4)
     parser.add_argument("--raio-max", type=int, default=raio_max, help="Distância máxima, em áreas, a partir do centro")
+    parser.add_argument("--evento", help="Localidade de eventos_inundacao.csv (padrão: Pelotas)")
     args = parser.parse_args()
     raio_max = args.raio_max
+    if args.evento:
+        evento = next(e for e in processarEventos.ler_eventos("eventos_inundacao.csv") if e["localidade"] == args.evento)
+        with open(os.path.join("resultados", processarEventos.nome_arquivo(args.evento) + ".json"), encoding="utf-8") as f:
+            resultado_evento = json.load(f)
+        nome = processarEventos.nome_arquivo(args.evento) + "_expandido"
+        titulo_evento = "%s, %s - evento em %s" % (evento["localidade"], evento["pais"],
+                                                   "/".join(reversed(evento["data"].split("-"))))
+        centro_lon, centro_lat = float(evento["longitude"]), float(evento["latitude"])
+        data_antes, data_depois = resultado_evento["data_antes"], resultado_evento["data_depois"]
+    print("%s: antes %s, depois %s" % (titulo_evento, data_antes, data_depois), flush=True)
     os.makedirs(args.pasta_saida, exist_ok=True)
     pasta_cache = os.path.join(args.pasta_cache, nome)
     os.makedirs(pasta_cache, exist_ok=True)
