@@ -3,3 +3,4 @@ sentinel_enchente_cache.npz
 cache_grade/
 enchente_grade.png
 comparacao_som_ndwi.png
+dataset/**/*_bruto.tif
