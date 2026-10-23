@@ -14,7 +14,8 @@ anterior a ele e do mesmo tile, com no máximo 10% de nuvens/sem dado dentro da
 grade (sentinelUtils.selecionar_cena_antes). Se o evento já tem um .json com as
 cenas escolhidas, elas são reaproveitadas (use --reselecionar para escolher as
 duas de novo, ou --reselecionar-antes para manter a de depois e escolher só a
-de antes).
+de antes). Se a coluna data_antes da tabela estiver preenchida, a cena de antes
+é a dessa data (no mesmo tile da cena de depois), em vez da escolha automática.
 
 Uso:
     python processarEventos.py                      # todos os eventos
@@ -85,13 +86,18 @@ def processar_evento(evento, pasta_resultados, pasta_cache, reselecionar=False, 
         if "cena_depois" in anterior:
             item_depois = sentinelUtils.buscar_item(anterior["cena_depois"])
             invalida_depois = anterior["pct_invalido_depois"] / 100
-            if reselecionar_antes or "cena_antes" not in anterior:
+            if evento.get("data_antes") and (reselecionar_antes or not anterior.get("data_antes")
+                                             or anterior["data_antes"] != evento["data_antes"]):
+                item_antes, invalida_antes = sentinelUtils.buscar_cena_data(bbox, evento["data_antes"], item_depois)
+            elif reselecionar_antes or "cena_antes" not in anterior:
                 item_antes, invalida_antes = sentinelUtils.selecionar_cena_antes(bbox, evento["data"], item_depois)
             else:
                 item_antes = sentinelUtils.buscar_item(anterior["cena_antes"])
                 invalida_antes = anterior["pct_invalido_antes"] / 100
         else:
             item_antes, item_depois, invalida_antes, invalida_depois = sentinelUtils.selecionar_cenas(bbox, evento["data"])
+            if evento.get("data_antes"):
+                item_antes, invalida_antes = sentinelUtils.buscar_cena_data(bbox, evento["data_antes"], item_depois)
         print("Antes: %s (%.0f%% de nuvens/sem dado na grade)" % (item_antes.id, 100 * invalida_antes))
         print("Depois: %s (%.0f%% de nuvens/sem dado na grade)" % (item_depois.id, 100 * invalida_depois), flush=True)
         resumo.update(cena_antes=item_antes.id, cena_depois=item_depois.id,

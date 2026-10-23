@@ -1,24 +1,24 @@
-localidade,pais,latitude,longitude,tipo,data
-Governador Valadares,Brasil,-18.86950,-41.94571,Urbano,2022-01-13
-Aimorés,Brasil,-19.49125,-41.08468,Urbano,2022-01-13
-Caratinga,Brasil,-19.47031,-42.46456,Urbano,2022-01-13
-Coronel Fabriciano,Brasil,-19.529135,-42.604551,Urbano,2022-01-13
-Kaoh Chen,Camboja,11.82955,104.80288,Rural,2017-07-30
-Sakon Nakhon,Tailândia,17.16523,104.15056,Urbano,2017-08-02
-Sa Khut,Tailândia,15.41844,103.11510,Rural,2017-08-02
-Phrai Bueng,Tailândia,14.75513,104.37239,Rural,2017-08-02
-Assunção,Paraguai,-25.31087,-57.64459,Urbano,2016-01-13
-Formosa,Paraguai,-26.18194,-58.11321,Rural,2016-01-23
-Puerto Bermejo,Paraguai,-26.8486,-58.4088,Rural,2016-01-23
-Derna,Líbia,32.764,22.637,Urbano/Rural,2023-09-12
-Cardwell,Austrália,-19.26140,146.83794,Urbano,2024-02-29
-Zhengzhou,China,34.99258,114.12066,Urbano/Rural,2021-06-01
-Luwu Utara District,Indonésia,-2.85728,120.32368,Rural,2018-07-18
-Pelotas,Brasil,-31.7725,-52.3265,Urbano,2024-05-26
-Porto Alegre,Brasil,-30.0299,-51.2104,Urbano,2024-05-06
-Cachoeira do Sul,Brasil,-30.04844,-52.88449,Urbano,2024-05-06
-Restinga Sêca,Brasil,-29.6469,-53.3585,Rural,2024-05-06
-Townsville,Austrália,-19.2716,146.8311,Urbano,2024-02-29
-Calumbo,Angola,-9.1577,13.4097,Rural,2023-05-10
-Icolo E Bengo,Angola,-9.20192,13.62785,Rural,2023-04-30
-Naharlagun,Índia,27.1046,93.6955,Urbano,2022-05-17
+localidade,pais,latitude,longitude,tipo,data,data_antes
+Governador Valadares,Brasil,-18.86950,-41.94571,Urbano,2022-01-13,
+Aimorés,Brasil,-19.49125,-41.08468,Urbano,2022-01-13,
+Caratinga,Brasil,-19.47031,-42.46456,Urbano,2022-01-13,
+Coronel Fabriciano,Brasil,-19.529135,-42.604551,Urbano,2022-01-13,
+Kaoh Chen,Camboja,11.82955,104.80288,Rural,2017-07-30,
+Sakon Nakhon,Tailândia,17.16523,104.15056,Urbano,2017-08-02,2017-03-05
+Sa Khut,Tailândia,15.41844,103.11510,Rural,2017-08-02,
+Phrai Bueng,Tailândia,14.75513,104.37239,Rural,2017-08-02,2017-03-05
+Assunção,Paraguai,-25.31087,-57.64459,Urbano,2016-01-13,2015-10-22
+Formosa,Paraguai,-26.18194,-58.11321,Rural,2016-01-23,
+Puerto Bermejo,Paraguai,-26.8486,-58.4088,Rural,2016-01-23,
+Derna,Líbia,32.764,22.637,Urbano/Rural,2023-09-12,
+Cardwell,Austrália,-19.26140,146.83794,Urbano,2024-02-29,
+Zhengzhou,China,34.99258,114.12066,Urbano/Rural,2021-06-01,
+Luwu Utara District,Indonésia,-2.85728,120.32368,Rural,2018-07-18,
+Pelotas,Brasil,-31.7725,-52.3265,Urbano,2024-05-26,
+Porto Alegre,Brasil,-30.0299,-51.2104,Urbano,2024-05-06,
+Cachoeira do Sul,Brasil,-30.04844,-52.88449,Urbano,2024-05-06,2024-03-12
+Restinga Sêca,Brasil,-29.6469,-53.3585,Rural,2024-05-06,
+Townsville,Austrália,-19.2716,146.8311,Urbano,2024-02-29,
+Calumbo,Angola,-9.1577,13.4097,Rural,2023-05-10,
+Icolo E Bengo,Angola,-9.20192,13.62785,Rural,2023-04-30,
+Naharlagun,Índia,27.1046,93.6955,Urbano,2022-05-17,

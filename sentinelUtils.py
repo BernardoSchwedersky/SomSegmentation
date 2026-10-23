@@ -172,6 +172,17 @@ def selecionar_cena_antes(bbox, data_evento, item_depois, dias_max=180, invalida
             melhor = (item, invalida)
     return melhor
 
+# Busca a cena de uma data específica no mesmo tile de item_depois (ex.: para fixar
+# a cena de antes de um evento). Retorna (item, fração inválida dentro do bbox)
+def buscar_cena_data(bbox, data, item_depois):
+    dia = datetime.strptime(data, "%Y-%m-%d")
+    tile = item_depois.properties["s2:mgrs_tile"]
+    candidatas = [item for item in buscar_cenas(bbox, dia, dia + timedelta(days=1))
+                  if item.properties["s2:mgrs_tile"] == tile and item.datetime.date() == dia.date()]
+    if not candidatas:
+        raise RuntimeError("Nenhuma cena em %s no tile %s" % (data, tile))
+    return candidatas[0], fracao_invalida(candidatas[0], bbox)
+
 # Busca uma cena pelo identificador (ex.: para repetir um processamento com as mesmas cenas)
 def buscar_item(id_cena):
     catalogo = pystac_client.Client.open(
