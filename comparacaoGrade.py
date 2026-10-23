@@ -26,6 +26,54 @@ NOMES_CONC = ["Sem água nos dois", "Água nos dois métodos", "Água só no SOM
 CORES_CONC = ["#d9d9d9", "#3fa9f5", "#e7298a", "#ffd92f"]
 
 
+# Processa uma área com os dois métodos. Se a área tiver mais de nuvens_max_area %
+# de pixels inválidos, ela é pulada. Retorna um dicionário com o nome, o bbox e,
+# se processada, os mapas e as áreas por classe (as imagens em uint8 e os mapas
+# em int8, para ocupar menos memória em grades grandes)
+def processar_area(item_antes, item_depois, bbox, nome, arquivo_cache=None, nuvens_max_area=20, patch_size=1,
+                   som_size=12, epochs=3, dataset_percentage=0.2, limiar_agua=0):
+    nuvens = enchenteSOM.ler_nuvens(item_antes, item_depois, bbox, arquivo_cache)
+    area = {"nome": nome, "bbox": bbox, "pct_nuvens": 100 * nuvens.mean()}
+    if area["pct_nuvens"] > nuvens_max_area:
+        print("%s: pulada, %.1f%% de nuvens ou sem dado" % (nome, area["pct_nuvens"]), flush=True)
+        return area
+
+    refl_antes, refl_depois, nuvens = enchenteSOM.ler_dados(item_antes, item_depois, bbox, arquivo_cache)
+
+    # SOM bi-temporal
+    ROI_sample_conv, nomes_canais = enchenteSOM.montar_entrada(refl_antes, refl_depois)
+    SOM, result = enchenteSOM.treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size, som_size,
+                                                  epochs, dataset_percentage)
+    classe_unidade, tabela = enchenteSOM.classificar_unidades(result, nuvens, refl_antes, refl_depois,
+                                                              som_size, limiar_agua)
+    mapa_som = classe_unidade[result]
+
+    # Baseline: limiar direto de NDWI
+    mapa_ndwi = enchenteSOM.mapa_indice(refl_antes, refl_depois, limiar_agua)
+
+    agua_som = np.isin(mapa_som, [1, 2])
+    agua_ndwi = np.isin(mapa_ndwi, [1, 2])
+    conc = np.zeros(mapa_som.shape, dtype=np.int8)
+    conc[agua_som & agua_ndwi] = 1
+    conc[agua_som & ~agua_ndwi] = 2
+    conc[~agua_som & agua_ndwi] = 3
+    validos = ~nuvens
+
+    area.update(mapa_som=mapa_som.astype(np.int8), mapa_ndwi=mapa_ndwi.astype(np.int8), conc=conc, nuvens=nuvens,
+                rgb=(enchenteSOM.cor_verdadeira(refl_depois) * 255).astype(np.uint8),
+                rgb_antes=(enchenteSOM.cor_verdadeira(refl_antes) * 255).astype(np.uint8),
+                areas_som=enchenteSOM.areas_por_classe(mapa_som, nuvens),
+                areas_ndwi=enchenteSOM.areas_por_classe(mapa_ndwi, nuvens),
+                area_valida=validos.sum() * AREA_PIXEL_KM2,
+                # Interseção sobre união da água dos dois métodos
+                iou=(agua_som & agua_ndwi & validos).sum() / max(((agua_som | agua_ndwi) & validos).sum(), 1),
+                so_som=((conc == 2) & validos).sum() * AREA_PIXEL_KM2,
+                so_ndwi=((conc == 3) & validos).sum() * AREA_PIXEL_KM2)
+    print("%s: SOM permanente %.2f km², alagamento %.2f km² | NDWI permanente %.2f km², alagamento %.2f km² | "
+          "IoU da água %.3f" % (nome, area["areas_som"][1], area["areas_som"][2], area["areas_ndwi"][1],
+                                area["areas_ndwi"][2], area["iou"]), flush=True)
+    return area
+
 # Processa cada área da grade com os dois métodos. Áreas com mais de
 # nuvens_max_area % de pixels inválidos são puladas. Retorna uma lista com um
 # dicionário por área (as processadas têm os mapas e as áreas por classe)
@@ -38,51 +86,9 @@ def processar_grade(item_antes, item_depois, centro_lon, centro_lat, meia_largur
         for j in range(n_colunas):
             nome = enchenteSOM.nome_area_grade(i, j, n_linhas, n_colunas)
             bbox = enchenteSOM.bbox_area_grade(i, j, centro_lon, centro_lat, meia_largura_graus, n_linhas, n_colunas)
-            print("\n== %s (linha %d, coluna %d)" % (nome, i, j), flush=True)
-
             arquivo_cache = os.path.join(pasta_cache, "area_%d_%d.npz" % (i, j))
-            nuvens = enchenteSOM.ler_nuvens(item_antes, item_depois, bbox, arquivo_cache)
-            area = {"nome": nome, "bbox": bbox, "pct_nuvens": 100 * nuvens.mean()}
-            areas_grade.append(area)
-            if area["pct_nuvens"] > nuvens_max_area:
-                print("Pulada: %.1f%% de nuvens ou sem dado" % area["pct_nuvens"])
-                continue
-
-            refl_antes, refl_depois, nuvens = enchenteSOM.ler_dados(item_antes, item_depois, bbox, arquivo_cache)
-
-            # SOM bi-temporal
-            ROI_sample_conv, nomes_canais = enchenteSOM.montar_entrada(refl_antes, refl_depois)
-            SOM, result = enchenteSOM.treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size, som_size,
-                                                          epochs, dataset_percentage)
-            classe_unidade, tabela = enchenteSOM.classificar_unidades(result, nuvens, refl_antes, refl_depois,
-                                                                      som_size, limiar_agua)
-            mapa_som = classe_unidade[result]
-
-            # Baseline: limiar direto de NDWI
-            mapa_ndwi = enchenteSOM.mapa_indice(refl_antes, refl_depois, limiar_agua)
-
-            agua_som = np.isin(mapa_som, [1, 2])
-            agua_ndwi = np.isin(mapa_ndwi, [1, 2])
-            conc = np.zeros(mapa_som.shape, dtype=int)
-            conc[agua_som & agua_ndwi] = 1
-            conc[agua_som & ~agua_ndwi] = 2
-            conc[~agua_som & agua_ndwi] = 3
-            validos = ~nuvens
-
-            area.update(mapa_som=mapa_som, mapa_ndwi=mapa_ndwi, conc=conc, nuvens=nuvens,
-                        rgb=enchenteSOM.cor_verdadeira(refl_depois),
-                        rgb_antes=enchenteSOM.cor_verdadeira(refl_antes),
-                        areas_som=enchenteSOM.areas_por_classe(mapa_som, nuvens),
-                        areas_ndwi=enchenteSOM.areas_por_classe(mapa_ndwi, nuvens),
-                        area_valida=validos.sum() * AREA_PIXEL_KM2,
-                        # Interseção sobre união da água dos dois métodos
-                        iou=(agua_som & agua_ndwi & validos).sum() / max(((agua_som | agua_ndwi) & validos).sum(), 1),
-                        so_som=((conc == 2) & validos).sum() * AREA_PIXEL_KM2,
-                        so_ndwi=((conc == 3) & validos).sum() * AREA_PIXEL_KM2)
-            print("SOM:  água permanente %.2f km², alagamento %.2f km²" % tuple(area["areas_som"][[1, 2]]))
-            print("NDWI: água permanente %.2f km², alagamento %.2f km²" % tuple(area["areas_ndwi"][[1, 2]]))
-            print("Água SOM x NDWI: IoU %.3f, só no SOM %.2f km², só no NDWI %.2f km²"
-                  % (area["iou"], area["so_som"], area["so_ndwi"]), flush=True)
+            areas_grade.append(processar_area(item_antes, item_depois, bbox, nome, arquivo_cache, nuvens_max_area,
+                                              patch_size, som_size, epochs, dataset_percentage, limiar_agua))
     return areas_grade
 
 # Totais das áreas processadas da grade (km²)
@@ -103,9 +109,10 @@ def totais(areas_grade):
             "iou_agua": ambos / max(ambos + so_som + so_ndwi, 1e-9)}
 
 # Figura com as imagens de antes e de depois, os mapas dos dois métodos e a
-# concordância da água. Um painel reúne as legendas e os totais
+# concordância da água. Um painel reúne as legendas e os totais. Em grades
+# grandes, mostrar_nomes=False esconde o nome e os textos de cada área
 def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_agua=0, titulo=None,
-                      arquivo=None, dpi=100):
+                      arquivo=None, dpi=100, mostrar_nomes=True):
     processadas = [a for a in areas_grade if "mapa_som" in a]
 
     # Os mapas mostram só as linhas e colunas da grade com alguma área processada
@@ -135,8 +142,9 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
         for k, ax in enumerate(mapas):
             if "mapa_som" not in a:
                 ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, facecolor="#bdbdbd", hatch="//", edgecolor="none"))
-                ax.text((x0 + x1) / 2, (y0 + y1) / 2, "%.0f%% de nuvens\nou sem dado\n(não processada)"
-                        % a["pct_nuvens"], ha="center", va="center", fontsize=10)
+                if mostrar_nomes:
+                    ax.text((x0 + x1) / 2, (y0 + y1) / 2, "%.0f%% de nuvens\nou sem dado\n(não processada)"
+                            % a["pct_nuvens"], ha="center", va="center", fontsize=10)
             else:
                 ax.imshow(a["rgb_antes"] if k == 0 else a["rgb"], extent=ext)
                 if k in [2, 3]:
@@ -149,9 +157,11 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
                 if k >= 2:
                     ax.imshow(np.ma.masked_where(~a["nuvens"], np.ones(a["nuvens"].shape)),
                               cmap=ListedColormap(["white"]), alpha=0.9, extent=ext)
-            ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, edgecolor="yellow", lw=1))
-            ax.text(x0 + 0.002, y1 - 0.002, a["nome"], color="yellow", fontsize=10, va="top",
-                    fontweight="bold", bbox=dict(facecolor="black", alpha=0.4, lw=0, pad=1.5))
+            ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, edgecolor="yellow",
+                                   lw=1 if mostrar_nomes else 0.4))
+            if mostrar_nomes:
+                ax.text(x0 + 0.002, y1 - 0.002, a["nome"], color="yellow", fontsize=10, va="top",
+                        fontweight="bold", bbox=dict(facecolor="black", alpha=0.4, lw=0, pad=1.5))
 
     for ax, t in zip(mapas, titulos):
         ax.set_xlim(limites[0], limites[1])
