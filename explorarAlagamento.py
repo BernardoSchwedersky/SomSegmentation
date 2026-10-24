@@ -15,6 +15,10 @@ centro vem da tabela e as datas das cenas de antes e de depois vêm do resultado
 do evento em resultados/<evento>.json (gerado por processarEventos.py). Sem
 --evento, usa Pelotas com as datas abaixo.
 
+Com --incluir LAT_MIN LAT_MAX LON_MIN LON_MAX, todas as áreas de um retângulo
+entram na fila desde o início (ex.: para unir a grade a uma cidade vizinha
+separada por água permanente ou por áreas com nuvens).
+
 As cenas de antes e de depois são de datas fixas. Como uma região grande pode
 cruzar a borda entre tiles do Sentinel-2, cada área usa o tile (da mesma
 aquisição) com menos pixels inválidos.
@@ -35,6 +39,7 @@ from multiprocessing import Pool
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 
 import comparacaoGrade
 import enchenteSOM
@@ -73,7 +78,7 @@ def nome_area(di, dj):
 
 # Pares (antes, depois) das duas datas, um por tile que tem as duas cenas, com o
 # retângulo coberto pelo tile (para testar em cada área só os tiles que a cobrem)
-def pares_por_tile(bbox):
+def pares_por_tile(bbox, data_depois):
     def por_tile(data):
         dia = datetime.strptime(data, "%Y-%m-%d")
         return {item.properties["s2:mgrs_tile"]: item
@@ -86,24 +91,33 @@ def intersecta(a, b):
     return a[0] < b[2] and b[0] < a[2] and a[1] < b[3] and b[1] < a[3]
 
 # Processa uma área: escolhe o tile com menos pixels inválidos nas duas datas
-# e aplica os dois métodos. As cenas são buscadas de novo aqui, para que as
-# URLs assinadas não expirem durante processamentos longos. O resultado de cada
-# área fica salvo na pasta de cache, e uma nova execução o reaproveita
+# e aplica os dois métodos. grupos tem os pares da data de depois principal e,
+# em seguida, os das datas alternativas, usadas só se a área tiver nuvens ou
+# falta de dados demais nas anteriores. As cenas são buscadas de novo aqui, para
+# que as URLs assinadas não expirem durante processamentos longos. O resultado
+# de cada área fica salvo na pasta de cache, e uma nova execução o reaproveita
 def processar(args):
-    di, dj, pares, pasta_cache = args
+    di, dj, grupos, pasta_cache = args
+    datas = [g[0] for g in grupos]
     arquivo_resultado = os.path.join(pasta_cache, "resultado_%d_%d.pkl" % (di, dj))
     if os.path.exists(arquivo_resultado):
         with open(arquivo_resultado, "rb") as f:
-            return pickle.load(f)
+            area = pickle.load(f)
+        if "mapa_som" in area or set(datas) <= set(area.get("datas_testadas", datas[:1])):
+            return area
     bbox = bbox_area(di, dj)
     melhor = None
-    for id_antes, id_depois, bbox_tile in pares:
-        if not intersecta(bbox, bbox_tile):
-            continue
-        item_antes, item_depois = sentinelUtils.buscar_item(id_antes), sentinelUtils.buscar_item(id_depois)
-        invalida = max(sentinelUtils.fracao_invalida(item_antes, bbox), sentinelUtils.fracao_invalida(item_depois, bbox))
-        if melhor is None or invalida < melhor[0]:
-            melhor = (invalida, item_antes, item_depois)
+    for data, pares in grupos:
+        for id_antes, id_depois, bbox_tile in pares:
+            if not intersecta(bbox, bbox_tile):
+                continue
+            item_antes, item_depois = sentinelUtils.buscar_item(id_antes), sentinelUtils.buscar_item(id_depois)
+            invalida = max(sentinelUtils.fracao_invalida(item_antes, bbox),
+                           sentinelUtils.fracao_invalida(item_depois, bbox))
+            if melhor is None or invalida < melhor[0]:
+                melhor = (invalida, item_antes, item_depois)
+        if melhor is not None and melhor[0] <= nuvens_max_area / 100:
+            break  # A data principal (ou a alternativa anterior) já serve
     if melhor is None:
         area = {"nome": nome_area(di, dj), "bbox": bbox, "pct_nuvens": 100.0, "tile": None}
     else:
@@ -112,7 +126,8 @@ def processar(args):
             item_antes, item_depois, bbox, nome_area(di, dj), os.path.join(pasta_cache, "area_%d_%d.npz" % (di, dj)),
             nuvens_max_area, patch_size, som_size, epochs, dataset_percentage, limiar_agua)
         area["tile"] = item_depois.properties["s2:mgrs_tile"]
-    area.update(di=di, dj=dj)
+        area["data_depois"] = item_depois.datetime.strftime("%Y-%m-%d")
+    area.update(di=di, dj=dj, datas_testadas=datas)
     with open(arquivo_resultado, "wb") as f:
         pickle.dump(area, f)
     return area
@@ -124,6 +139,12 @@ if __name__ == "__main__":
     parser.add_argument("--processos", type=int, default=4)
     parser.add_argument("--raio-max", type=int, default=raio_max, help="Distância máxima, em áreas, a partir do centro")
     parser.add_argument("--evento", help="Localidade de eventos_inundacao.csv (padrão: Pelotas)")
+    parser.add_argument("--incluir", nargs=4, type=float, action="append", default=[],
+                        metavar=("LAT_MIN", "LAT_MAX", "LON_MIN", "LON_MAX"),
+                        help="Retângulo cujas áreas entram na fila desde o início (pode repetir), ex.: para "
+                             "unir a grade a uma cidade vizinha separada por água permanente ou nuvens")
+    parser.add_argument("--datas-depois-alternativas", nargs="*", default=[], metavar="AAAA-MM-DD",
+                        help="Datas de depois usadas, em ordem, nas áreas com nuvens demais na data principal")
     args = parser.parse_args()
     raio_max = args.raio_max
     if args.evento:
@@ -141,16 +162,24 @@ if __name__ == "__main__":
     os.makedirs(pasta_cache, exist_ok=True)
 
     regiao = sentinelUtils.criar_bbox(centro_lon, centro_lat, (2 * raio_max + 1) * meia_largura_graus)
-    pares = pares_por_tile(regiao)
-    print("Tiles com as duas cenas:", [p[0].split("_")[4] for p in pares], flush=True)
+    grupos = [(d, pares_por_tile(regiao, d)) for d in [data_depois] + args.datas_depois_alternativas]
+    pares = grupos[0][1]
+    for d, p in grupos:
+        print("Depois em %s - tiles com as duas cenas:" % d, [x[0].split("_")[4] for x in p], flush=True)
 
     areas = {}
-    fila = [(di, dj) for di in (-1, 0, 1) for dj in (-1, 0, 1)]
+    fila = {(di, dj) for di in (-1, 0, 1) for dj in (-1, 0, 1)}
+    passo = 2 * meia_largura_graus
+    for lat_min, lat_max, lon_min, lon_max in args.incluir:
+        for di in range(int(np.ceil((lat_min - centro_lat) / passo)), int(np.floor((lat_max - centro_lat) / passo)) + 1):
+            for dj in range(int(np.ceil((lon_min - centro_lon) / passo)), int(np.floor((lon_max - centro_lon) / passo)) + 1):
+                fila.add((di, dj))
+    fila = sorted(fila)
     onda = 0
     with Pool(args.processos) as pool:
         while fila:
             print("\n#### Onda %d: %d áreas" % (onda, len(fila)), flush=True)
-            for area in pool.map(processar, [(di, dj, pares, pasta_cache) for di, dj in fila]):
+            for area in pool.map(processar, [(di, dj, grupos, pasta_cache) for di, dj in fila]):
                 areas[(area["di"], area["dj"])] = area
             nova = set()
             for (di, dj), area in areas.items():
@@ -173,14 +202,25 @@ if __name__ == "__main__":
     item_antes, item_depois = sentinelUtils.buscar_item(pares[0][0]), sentinelUtils.buscar_item(pares[0][1])
     titulo = ("%s: áreas vizinhas com alagamento (%d áreas) - SOM bi-temporal x baseline NDWI (NDWI > %g)"
               % (titulo_evento, len(lista), limiar_agua))
+    # Áreas que usaram uma data de depois alternativa (por causa de nuvens na principal)
+    alternativas = {}
+    for a in lista:
+        if a.get("data_depois", data_depois) != data_depois:
+            alternativas[a["data_depois"]] = alternativas.get(a["data_depois"], 0) + 1
+    rotulo_depois = "Depois: " + "/".join(reversed(data_depois.split("-")))
+    if alternativas:
+        rotulo_depois += " (%s)" % ", ".join("%s em %d áreas" % ("/".join(reversed(d.split("-"))), n)
+                                             for d, n in sorted(alternativas.items()))
     fig = comparacaoGrade.figura_comparacao(lista, item_antes, item_depois, centro_lat, limiar_agua, titulo,
                                             os.path.join(args.pasta_saida, nome + ".png"), dpi=110,
-                                            mostrar_nomes=False)
+                                            mostrar_nomes=False, rotulo_depois=rotulo_depois)
     plt.close(fig)
 
-    resultado = {"nome": nome, "data_antes": data_antes, "data_depois": data_depois, "raio_max": raio_max,
+    resultado = {"nome": nome, "data_antes": data_antes, "data_depois": data_depois,
+                 "datas_depois_alternativas": args.datas_depois_alternativas, "raio_max": raio_max,
                  "limiar_expansao_km2": limiar_expansao_km2, "totais": t,
                  "areas": [{"area": a["nome"], "di": a["di"], "dj": a["dj"], "tile": a["tile"], "bbox": a["bbox"],
+                            "data_depois": a.get("data_depois"),
                             "pct_nuvens": round(a["pct_nuvens"], 1),
                             **({"som_permanente_km2": round(a["areas_som"][1], 3),
                                 "som_alagamento_km2": round(a["areas_som"][2], 3),

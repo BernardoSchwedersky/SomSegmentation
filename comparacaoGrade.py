@@ -112,7 +112,7 @@ def totais(areas_grade):
 # concordância da água. Um painel reúne as legendas e os totais. Em grades
 # grandes, mostrar_nomes=False esconde o nome e os textos de cada área
 def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_agua=0, titulo=None,
-                      arquivo=None, dpi=100, mostrar_nomes=True):
+                      arquivo=None, dpi=100, mostrar_nomes=True, rotulo_depois=None):
     processadas = [a for a in areas_grade if "mapa_som" in a]
 
     # Os mapas mostram só as linhas e colunas da grade com alguma área processada
@@ -133,7 +133,7 @@ def figura_comparacao(areas_grade, item_antes, item_depois, centro_lat, limiar_a
     ax_som, ax_ndwi, ax_conc = eixos[1]
     mapas = [ax_antes, ax_depois, ax_som, ax_ndwi, ax_conc]
     titulos = ["Antes: " + item_antes.datetime.strftime("%d/%m/%Y"),
-               "Depois: " + item_depois.datetime.strftime("%d/%m/%Y"),
+               rotulo_depois or "Depois: " + item_depois.datetime.strftime("%d/%m/%Y"),
                "SOM bi-temporal (somSeg, unidades classificadas pelo MNDWI)",
                "Baseline: limiar direto de NDWI (antes e depois)",
                "Concordância da água (permanente + alagamento)"]
