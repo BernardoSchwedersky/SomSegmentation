@@ -11,6 +11,7 @@ mesmas áreas antes do alagamento. Cada evento tem uma pasta, gerada por
 |---|---|---|---|---|
 | `porto_alegre/` | Porto Alegre e vale do Jacuí - RS, maio de 2024 | 21/04/2024 | 06/05/2024 | 426 |
 | `pelotas/` | Pelotas, Canal São Gonçalo e Rio Grande - RS, maio de 2024 | 01/02/2024 | 26/05/2024 (31/05/2024 em 36 áreas com nuvens em 26/05) | 193 |
+| `kaoh_chen/` | Kaoh Chen e planície do Mekong - Camboja, julho de 2017 | 21/04/2017 | 30/07/2017 | 147 |
 
 ## Arquivos de cada área
 
@@ -31,7 +32,7 @@ Os identificadores das cenas também ficam nas tags de cada GeoTIFF.
 
 ## Dados brutos fora do git
 
-Os GeoTIFF brutos (`*_bruto.tif`, ~1,6 GB para Porto Alegre e ~0,7 GB para Pelotas) não são versionados
+Os GeoTIFF brutos (`*_bruto.tif`, ~1,6 GB para Porto Alegre e ~0,7 GB para Pelotas e ~0,6 GB para Kaoh Chen) não são versionados
 no git, para o repositório não ficar pesado. Estão no git as imagens RGB, as
 máscaras e o `indice.csv`. Para gerar os brutos de novo:
 
@@ -40,6 +41,9 @@ máscaras e o `indice.csv`. Para gerar os brutos de novo:
 
     python explorarAlagamento.py --raio-max 40 --incluir -32.15 -31.75 -52.35 -51.95 --datas-depois-alternativas 2024-05-31
     python criarDataset.py --evento "Pelotas"
+
+    python explorarAlagamento.py --evento "Kaoh Chen" --raio-max 30
+    python criarDataset.py --evento "Kaoh Chen"
 
 `explorarAlagamento.py` guarda as cenas lidas em `cache_explorar/`, que
 `criarDataset.py` usa para escrever o dataset. As cenas usadas em cada área estão
