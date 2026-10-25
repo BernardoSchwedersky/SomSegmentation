@@ -139,6 +139,10 @@ if __name__ == "__main__":
     parser.add_argument("--processos", type=int, default=4)
     parser.add_argument("--raio-max", type=int, default=raio_max, help="Distância máxima, em áreas, a partir do centro")
     parser.add_argument("--evento", help="Localidade de eventos_inundacao.csv (padrão: Pelotas)")
+    parser.add_argument("--data-antes", help="Data da cena de antes (padrão: a do resultado do evento)")
+    parser.add_argument("--data-depois", help="Data da cena de depois (padrão: a do resultado do evento)")
+    parser.add_argument("--rgb-max", type=float, default=enchenteSOM.RGB_MAX,
+                        help="Reflectância que vira branco na figura (use ~0,35 em deserto)")
     parser.add_argument("--incluir", nargs=4, type=float, action="append", default=[],
                         metavar=("LAT_MIN", "LAT_MAX", "LON_MIN", "LON_MAX"),
                         help="Retângulo cujas áreas entram na fila desde o início (pode repetir), ex.: para "
@@ -149,13 +153,20 @@ if __name__ == "__main__":
     raio_max = args.raio_max
     if args.evento:
         evento = next(e for e in processarEventos.ler_eventos("eventos_inundacao.csv") if e["localidade"] == args.evento)
-        with open(os.path.join("resultados", processarEventos.nome_arquivo(args.evento) + ".json"), encoding="utf-8") as f:
-            resultado_evento = json.load(f)
+        arquivo_evento = os.path.join("resultados", processarEventos.nome_arquivo(args.evento) + ".json")
+        resultado_evento = {}
+        if os.path.exists(arquivo_evento):
+            with open(arquivo_evento, encoding="utf-8") as f:
+                resultado_evento = json.load(f)
         nome = processarEventos.nome_arquivo(args.evento) + "_expandido"
         titulo_evento = "%s, %s - evento em %s" % (evento["localidade"], evento["pais"],
                                                    "/".join(reversed(evento["data"].split("-"))))
         centro_lon, centro_lat = float(evento["longitude"]), float(evento["latitude"])
-        data_antes, data_depois = resultado_evento["data_antes"], resultado_evento["data_depois"]
+        data_antes = args.data_antes or resultado_evento["data_antes"]
+        data_depois = args.data_depois or resultado_evento["data_depois"]
+    elif args.data_antes or args.data_depois:
+        data_antes, data_depois = args.data_antes or data_antes, args.data_depois or data_depois
+    enchenteSOM.RGB_MAX = args.rgb_max  # Herdado pelos processos do Pool
     print("%s: antes %s, depois %s" % (titulo_evento, data_antes, data_depois), flush=True)
     os.makedirs(args.pasta_saida, exist_ok=True)
     pasta_cache = os.path.join(args.pasta_cache, nome)

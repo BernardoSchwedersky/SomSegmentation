@@ -10,7 +10,8 @@ Arquivos de cada área, em dataset/<evento>/:
         superfície Sentinel-2 L2A x 10000, uint16), na projeção UTM do tile,
         com pixels de 10 m. <estado> é "antes" ou "enchente".
     <evento>_<area>_lat<lat>_lon<lon>_<estado>_<data>_rgb.png
-        Composição em cor verdadeira (B04, B03, B02).
+        Composição em cor verdadeira (B04, B03, B02); escala fixa (0-0,15) ou, com
+        --rgb-contraste auto, percentis 2-98% da área nas duas datas.
     <evento>_<area>_lat<lat>_lon<lon>_mascara_invalidos.tif
         Pixels com nuvem, sombra ou sem dado em qualquer uma das datas (1) e
         válidos (0).
@@ -68,6 +69,9 @@ if __name__ == "__main__":
     parser.add_argument("--evento", default="Porto Alegre", help="Localidade de eventos_inundacao.csv")
     parser.add_argument("--pasta-cache", default="cache_explorar", help="Cache usado por explorarAlagamento.py")
     parser.add_argument("--pasta-dataset", default="dataset")
+    parser.add_argument("--rgb-contraste", choices=["fixo", "auto"], default="fixo",
+                        help="fixo: reflectância 0-0,15 vira 0-255; auto: percentis 2-98%% de cada área (as duas "
+                             "datas com a mesma escala), melhor em regiões claras como deserto")
     parser.add_argument("--sobreposicao-max", type=float, default=0.5,
                         help="Pula áreas que cobrem mais que essa fração de uma área já existente em outra pasta "
                              "do dataset com as mesmas datas (evita imagens duplicadas)")
@@ -138,6 +142,9 @@ if __name__ == "__main__":
                        ["invalido (nuvem, sombra ou sem dado em qualquer data)"],
                        {"cena_antes": id_antes, "cena_enchente": id_depois})
 
+        if args.rgb_contraste == "auto":
+            rgb_todos = np.concatenate([dados[c][:, :, [2, 1, 0]][~dados["nuvens"]] for c in ("refl_antes", "refl_depois")])
+            rgb_lo, rgb_hi = np.percentile(rgb_todos, [2, 98]) if len(rgb_todos) else (0, 0.15)
         for estado, chave, it in [("antes", "refl_antes", item_antes), ("enchente", "refl_depois", item_depois)]:
             data = it.datetime.strftime("%Y-%m-%d")
             base = "%s_%s_%s" % (prefixo, estado, data)
@@ -146,7 +153,10 @@ if __name__ == "__main__":
             salvar_geotiff(os.path.join(pasta, base + "_bruto.tif"), bruto, crs, transform, enchenteSOM.BANDAS,
                            {"cena": it.id, "data": data, "estado": estado,
                             "escala": "reflectancia = valor / %d" % ESCALA_REFLECTANCIA})
-            rgb = (enchenteSOM.cor_verdadeira(refl) * 255).astype(np.uint8)
+            if args.rgb_contraste == "auto":
+                rgb = (np.clip((refl[:, :, [2, 1, 0]] - rgb_lo) / max(rgb_hi - rgb_lo, 1e-6), 0, 1) * 255).astype(np.uint8)
+            else:
+                rgb = (enchenteSOM.cor_verdadeira(refl, 0.15) * 255).astype(np.uint8)
             Image.fromarray(rgb).save(os.path.join(pasta, base + "_rgb.png"))
             linhas.append({"evento": args.evento, "area": nome_area(area["di"], area["dj"]),
                            "linha_grade": area["di"], "coluna_grade": area["dj"],

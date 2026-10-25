@@ -80,8 +80,11 @@ def montar_entrada(refl_antes, refl_depois, indice=INDICE_AGUA):
     return sentinelUtils.normalizar_0_255(img), nomes_canais
 
 # Composição em cor verdadeira para visualização (mesmo realce em todas as datas)
-def cor_verdadeira(refl):
-    return np.clip(refl[:, :, [BANDAS.index("B04"), BANDAS.index("B03"), BANDAS.index("B02")]] / 0.15, 0, 1)
+# A reflectância RGB_MAX vira branco; em regiões claras (deserto, Sahel) use um valor maior
+RGB_MAX = 0.15
+
+def cor_verdadeira(refl, rgb_max=None):
+    return np.clip(refl[:, :, [BANDAS.index("B04"), BANDAS.index("B03"), BANDAS.index("B02")]] / (rgb_max or RGB_MAX), 0, 1)
 
 # Treina o SOM com uma porcentagem dos pixels sem nuvem e segmenta a imagem toda
 def treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size=1, som_size=12, epochs=3,
