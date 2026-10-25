@@ -1,0 +1,5833 @@
+{
+ "nome": "restinga_seca_expandido",
+ "data_antes": "2024-04-21",
+ "data_depois": "2024-05-06",
+ "datas_depois_alternativas": [],
+ "raio_max": 25,
+ "limiar_expansao_km2": 0.5,
+ "totais": {
+  "areas_processadas": 269,
+  "areas_puladas": 50,
+  "area_valida_km2": 7256.153900000002,
+  "som_permanente_km2": 117.44359999999998,
+  "som_alagamento_km2": 1123.5196000000003,
+  "ndwi_permanente_km2": 115.32620000000003,
+  "ndwi_alagamento_km2": 747.2518000000002,
+  "agua_so_som_km2": 429.60159999999996,
+  "agua_so_ndwi_km2": 51.216400000000014,
+  "iou_agua": 0.627901570338984
+ },
+ "areas": [
+  {
+   "area": "N4 L0",
+   "di": 4,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.471899999999998,
+    -53.3335,
+    -29.4219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.007,
+   "ndwi_alagamento_km2": 0.026,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N4 L1",
+   "di": 4,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.471899999999998,
+    -53.283500000000004,
+    -29.4219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.738,
+   "som_alagamento_km2": 0.292,
+   "ndwi_permanente_km2": 1.337,
+   "ndwi_alagamento_km2": 0.485,
+   "iou_agua": 0.822
+  },
+  {
+   "area": "N4 L2",
+   "di": 4,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.471899999999998,
+    -53.2335,
+    -29.4219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 7.038,
+   "som_alagamento_km2": 0.116,
+   "ndwi_permanente_km2": 6.578,
+   "ndwi_alagamento_km2": 0.074,
+   "iou_agua": 0.929
+  },
+  {
+   "area": "N3 O1",
+   "di": 3,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.5219,
+    -53.3835,
+    -29.4719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.011,
+   "ndwi_alagamento_km2": 0.011,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N3 L0",
+   "di": 3,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.5219,
+    -53.3335,
+    -29.4719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.024,
+   "ndwi_alagamento_km2": 0.025,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N3 L1",
+   "di": 3,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.5219,
+    -53.283500000000004,
+    -29.4719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.252,
+   "ndwi_permanente_km2": 0.709,
+   "ndwi_alagamento_km2": 1.377,
+   "iou_agua": 0.814
+  },
+  {
+   "area": "N3 L2",
+   "di": 3,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.5219,
+    -53.2335,
+    -29.4719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.117,
+   "ndwi_alagamento_km2": 0.116,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N2 O2",
+   "di": 2,
+   "dj": -2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.4835,
+    -29.571899999999996,
+    -53.4335,
+    -29.5219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.127,
+   "ndwi_alagamento_km2": 0.327,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N2 O1",
+   "di": 2,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.571899999999996,
+    -53.3835,
+    -29.5219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.007,
+   "ndwi_alagamento_km2": 0.009,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N2 L0",
+   "di": 2,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.571899999999996,
+    -53.3335,
+    -29.5219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.32,
+   "ndwi_permanente_km2": 0.091,
+   "ndwi_alagamento_km2": 1.837,
+   "iou_agua": 0.564
+  },
+  {
+   "area": "N2 L1",
+   "di": 2,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.571899999999996,
+    -53.283500000000004,
+    -29.5219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.762,
+   "ndwi_permanente_km2": 0.704,
+   "ndwi_alagamento_km2": 3.681,
+   "iou_agua": 0.885
+  },
+  {
+   "area": "N2 L2",
+   "di": 2,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.571899999999996,
+    -53.2335,
+    -29.5219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.008,
+   "ndwi_alagamento_km2": 0.17,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N1 O2",
+   "di": 1,
+   "dj": -2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.4835,
+    -29.621899999999997,
+    -53.4335,
+    -29.5719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.231,
+   "ndwi_alagamento_km2": 0.37,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N1 O1",
+   "di": 1,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.621899999999997,
+    -53.3835,
+    -29.5719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.742,
+   "ndwi_permanente_km2": 0.213,
+   "ndwi_alagamento_km2": 1.053,
+   "iou_agua": 0.303
+  },
+  {
+   "area": "N1 L0",
+   "di": 1,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.621899999999997,
+    -53.3335,
+    -29.5719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.041,
+   "ndwi_alagamento_km2": 0.691,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N1 L1",
+   "di": 1,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.621899999999997,
+    -53.283500000000004,
+    -29.5719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 2.165,
+   "som_alagamento_km2": 12.009,
+   "ndwi_permanente_km2": 1.29,
+   "ndwi_alagamento_km2": 11.985,
+   "iou_agua": 0.93
+  },
+  {
+   "area": "N1 L2",
+   "di": 1,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.621899999999997,
+    -53.2335,
+    -29.5719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.022,
+   "ndwi_alagamento_km2": 0.334,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 O3",
+   "di": 0,
+   "dj": -3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.5335,
+    -29.671899999999997,
+    -53.4835,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.045,
+   "ndwi_alagamento_km2": 0.021,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 O2",
+   "di": 0,
+   "dj": -2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.4835,
+    -29.671899999999997,
+    -53.4335,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.299,
+   "ndwi_alagamento_km2": 0.099,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 O1",
+   "di": 0,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.671899999999997,
+    -53.3835,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.183,
+   "ndwi_permanente_km2": 0.702,
+   "ndwi_alagamento_km2": 3.98,
+   "iou_agua": 0.779
+  },
+  {
+   "area": "N0 L0",
+   "di": 0,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.671899999999997,
+    -53.3335,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 2.667,
+   "som_alagamento_km2": 15.573,
+   "ndwi_permanente_km2": 1.389,
+   "ndwi_alagamento_km2": 14.926,
+   "iou_agua": 0.891
+  },
+  {
+   "area": "N0 L1",
+   "di": 0,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.671899999999997,
+    -53.283500000000004,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 12.034,
+   "ndwi_permanente_km2": 0.648,
+   "ndwi_alagamento_km2": 10.656,
+   "iou_agua": 0.935
+  },
+  {
+   "area": "N0 L2",
+   "di": 0,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.671899999999997,
+    -53.2335,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.239,
+   "ndwi_alagamento_km2": 0.496,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 L3",
+   "di": 0,
+   "dj": 3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2335,
+    -29.671899999999997,
+    -53.1835,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.013,
+   "ndwi_alagamento_km2": 0.005,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 L12",
+   "di": 0,
+   "dj": 12,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7835,
+    -29.671899999999997,
+    -52.7335,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.043,
+   "ndwi_alagamento_km2": 0.186,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 L13",
+   "di": 0,
+   "dj": 13,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7335,
+    -29.671899999999997,
+    -52.6835,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.001,
+   "ndwi_alagamento_km2": 0.003,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 L14",
+   "di": 0,
+   "dj": 14,
+   "tile": "22JCN",
+   "bbox": [
+    -52.683499999999995,
+    -29.671899999999997,
+    -52.6335,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.01,
+   "ndwi_alagamento_km2": 0.015,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 L15",
+   "di": 0,
+   "dj": 15,
+   "tile": "22JCN",
+   "bbox": [
+    -52.6335,
+    -29.671899999999997,
+    -52.5835,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.006,
+   "ndwi_alagamento_km2": 0.009,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "N0 L16",
+   "di": 0,
+   "dj": 16,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5835,
+    -29.671899999999997,
+    -52.533500000000004,
+    -29.6219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.004,
+   "ndwi_alagamento_km2": 0.005,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 O3",
+   "di": -1,
+   "dj": -3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.5335,
+    -29.721899999999998,
+    -53.4835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.225,
+   "ndwi_alagamento_km2": 0.06,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 O2",
+   "di": -1,
+   "dj": -2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.4835,
+    -29.721899999999998,
+    -53.4335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.807,
+   "ndwi_permanente_km2": 0.374,
+   "ndwi_alagamento_km2": 0.364,
+   "iou_agua": 0.386
+  },
+  {
+   "area": "S1 O1",
+   "di": -1,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.721899999999998,
+    -53.3835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.462,
+   "ndwi_permanente_km2": 0.924,
+   "ndwi_alagamento_km2": 1.046,
+   "iou_agua": 0.641
+  },
+  {
+   "area": "S1 L0",
+   "di": -1,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.721899999999998,
+    -53.3335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.905,
+   "ndwi_permanente_km2": 0.925,
+   "ndwi_alagamento_km2": 3.717,
+   "iou_agua": 0.728
+  },
+  {
+   "area": "S1 L1",
+   "di": -1,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.721899999999998,
+    -53.283500000000004,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.899,
+   "som_alagamento_km2": 15.715,
+   "ndwi_permanente_km2": 1.455,
+   "ndwi_alagamento_km2": 13.538,
+   "iou_agua": 0.851
+  },
+  {
+   "area": "S1 L2",
+   "di": -1,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.721899999999998,
+    -53.2335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 8.792,
+   "ndwi_permanente_km2": 0.424,
+   "ndwi_alagamento_km2": 7.366,
+   "iou_agua": 0.868
+  },
+  {
+   "area": "S1 L3",
+   "di": -1,
+   "dj": 3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2335,
+    -29.721899999999998,
+    -53.1835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.132,
+   "ndwi_alagamento_km2": 0.036,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L4",
+   "di": -1,
+   "dj": 4,
+   "tile": "22JBN",
+   "bbox": [
+    -53.183499999999995,
+    -29.721899999999998,
+    -53.1335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 21.5
+  },
+  {
+   "area": "S1 L7",
+   "di": -1,
+   "dj": 7,
+   "tile": "22JCN",
+   "bbox": [
+    -53.0335,
+    -29.721899999999998,
+    -52.9835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.001,
+   "ndwi_alagamento_km2": 0.001,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L8",
+   "di": -1,
+   "dj": 8,
+   "tile": "22JCN",
+   "bbox": [
+    -52.9835,
+    -29.721899999999998,
+    -52.9335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.162,
+   "ndwi_alagamento_km2": 0.17,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L9",
+   "di": -1,
+   "dj": 9,
+   "tile": "22JCN",
+   "bbox": [
+    -52.933499999999995,
+    -29.721899999999998,
+    -52.8835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.034,
+   "ndwi_alagamento_km2": 0.17,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L10",
+   "di": -1,
+   "dj": 10,
+   "tile": "22JCN",
+   "bbox": [
+    -52.8835,
+    -29.721899999999998,
+    -52.8335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.001,
+   "ndwi_alagamento_km2": 0.001,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L12",
+   "di": -1,
+   "dj": 12,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7835,
+    -29.721899999999998,
+    -52.7335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.211,
+   "ndwi_alagamento_km2": 0.271,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L13",
+   "di": -1,
+   "dj": 13,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7335,
+    -29.721899999999998,
+    -52.6835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.852,
+   "ndwi_permanente_km2": 0.216,
+   "ndwi_alagamento_km2": 0.273,
+   "iou_agua": 0.24
+  },
+  {
+   "area": "S1 L14",
+   "di": -1,
+   "dj": 14,
+   "tile": "22JCN",
+   "bbox": [
+    -52.683499999999995,
+    -29.721899999999998,
+    -52.6335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.139,
+   "ndwi_alagamento_km2": 0.86,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L15",
+   "di": -1,
+   "dj": 15,
+   "tile": "22JCN",
+   "bbox": [
+    -52.6335,
+    -29.721899999999998,
+    -52.5835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.552,
+   "ndwi_permanente_km2": 0.341,
+   "ndwi_alagamento_km2": 3.267,
+   "iou_agua": 0.774
+  },
+  {
+   "area": "S1 L16",
+   "di": -1,
+   "dj": 16,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5835,
+    -29.721899999999998,
+    -52.533500000000004,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.026,
+   "ndwi_alagamento_km2": 0.124,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L17",
+   "di": -1,
+   "dj": 17,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5335,
+    -29.721899999999998,
+    -52.4835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.06,
+   "ndwi_alagamento_km2": 0.031,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S1 L18",
+   "di": -1,
+   "dj": 18,
+   "tile": "22JCN",
+   "bbox": [
+    -52.4835,
+    -29.721899999999998,
+    -52.4335,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.159,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.071,
+   "ndwi_alagamento_km2": 0.1,
+   "iou_agua": 0.077
+  },
+  {
+   "area": "S1 L19",
+   "di": -1,
+   "dj": 19,
+   "tile": "22JCN",
+   "bbox": [
+    -52.433499999999995,
+    -29.721899999999998,
+    -52.3835,
+    -29.6719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.076,
+   "ndwi_alagamento_km2": 0.071,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 O3",
+   "di": -2,
+   "dj": -3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.5335,
+    -29.7719,
+    -53.4835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.139,
+   "ndwi_alagamento_km2": 0.317,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 O2",
+   "di": -2,
+   "dj": -2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.4835,
+    -29.7719,
+    -53.4335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 30.7
+  },
+  {
+   "area": "S2 O1",
+   "di": -2,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.7719,
+    -53.3835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 37.1
+  },
+  {
+   "area": "S2 L0",
+   "di": -2,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.7719,
+    -53.3335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.218,
+   "ndwi_permanente_km2": 0.453,
+   "ndwi_alagamento_km2": 0.33,
+   "iou_agua": 0.598
+  },
+  {
+   "area": "S2 L1",
+   "di": -2,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.7719,
+    -53.283500000000004,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 8.498,
+   "ndwi_permanente_km2": 0.754,
+   "ndwi_alagamento_km2": 6.883,
+   "iou_agua": 0.839
+  },
+  {
+   "area": "S2 L2",
+   "di": -2,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.7719,
+    -53.2335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 2.159,
+   "som_alagamento_km2": 14.504,
+   "ndwi_permanente_km2": 1.478,
+   "ndwi_alagamento_km2": 13.945,
+   "iou_agua": 0.923
+  },
+  {
+   "area": "S2 L3",
+   "di": -2,
+   "dj": 3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2335,
+    -29.7719,
+    -53.1835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 7.859,
+   "ndwi_permanente_km2": 1.098,
+   "ndwi_alagamento_km2": 6.474,
+   "iou_agua": 0.932
+  },
+  {
+   "area": "S2 L4",
+   "di": -2,
+   "dj": 4,
+   "tile": "22JBN",
+   "bbox": [
+    -53.183499999999995,
+    -29.7719,
+    -53.1335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 52.6
+  },
+  {
+   "area": "S2 L5",
+   "di": -2,
+   "dj": 5,
+   "tile": "22JBN",
+   "bbox": [
+    -53.1335,
+    -29.7719,
+    -53.0835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.639,
+   "ndwi_alagamento_km2": 0.212,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L6",
+   "di": -2,
+   "dj": 6,
+   "tile": "22JBN",
+   "bbox": [
+    -53.0835,
+    -29.7719,
+    -53.033500000000004,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.347,
+   "ndwi_alagamento_km2": 0.272,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L7",
+   "di": -2,
+   "dj": 7,
+   "tile": "22JBN",
+   "bbox": [
+    -53.0335,
+    -29.7719,
+    -52.9835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.201,
+   "ndwi_alagamento_km2": 0.1,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L8",
+   "di": -2,
+   "dj": 8,
+   "tile": "22JCN",
+   "bbox": [
+    -52.9835,
+    -29.7719,
+    -52.9335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.227,
+   "ndwi_permanente_km2": 0.479,
+   "ndwi_alagamento_km2": 0.308,
+   "iou_agua": 0.312
+  },
+  {
+   "area": "S2 L9",
+   "di": -2,
+   "dj": 9,
+   "tile": "22JCN",
+   "bbox": [
+    -52.933499999999995,
+    -29.7719,
+    -52.8835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.226,
+   "ndwi_permanente_km2": 0.53,
+   "ndwi_alagamento_km2": 0.733,
+   "iou_agua": 0.208
+  },
+  {
+   "area": "S2 L10",
+   "di": -2,
+   "dj": 10,
+   "tile": "22JCN",
+   "bbox": [
+    -52.8835,
+    -29.7719,
+    -52.8335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.103,
+   "ndwi_alagamento_km2": 0.146,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L11",
+   "di": -2,
+   "dj": 11,
+   "tile": "22JCN",
+   "bbox": [
+    -52.8335,
+    -29.7719,
+    -52.783500000000004,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.154,
+   "ndwi_alagamento_km2": 0.164,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L12",
+   "di": -2,
+   "dj": 12,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7835,
+    -29.7719,
+    -52.7335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.284,
+   "ndwi_alagamento_km2": 0.344,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L13",
+   "di": -2,
+   "dj": 13,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7335,
+    -29.7719,
+    -52.6835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.101,
+   "ndwi_permanente_km2": 0.275,
+   "ndwi_alagamento_km2": 1.259,
+   "iou_agua": 0.454
+  },
+  {
+   "area": "S2 L14",
+   "di": -2,
+   "dj": 14,
+   "tile": "22JCN",
+   "bbox": [
+    -52.683499999999995,
+    -29.7719,
+    -52.6335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.831,
+   "ndwi_permanente_km2": 0.149,
+   "ndwi_alagamento_km2": 2.428,
+   "iou_agua": 0.551
+  },
+  {
+   "area": "S2 L15",
+   "di": -2,
+   "dj": 15,
+   "tile": "22JCN",
+   "bbox": [
+    -52.6335,
+    -29.7719,
+    -52.5835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 13.374,
+   "ndwi_permanente_km2": 0.509,
+   "ndwi_alagamento_km2": 10.312,
+   "iou_agua": 0.807
+  },
+  {
+   "area": "S2 L16",
+   "di": -2,
+   "dj": 16,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5835,
+    -29.7719,
+    -52.533500000000004,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.462,
+   "ndwi_permanente_km2": 0.291,
+   "ndwi_alagamento_km2": 4.085,
+   "iou_agua": 0.782
+  },
+  {
+   "area": "S2 L17",
+   "di": -2,
+   "dj": 17,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5335,
+    -29.7719,
+    -52.4835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.018,
+   "ndwi_alagamento_km2": 0.332,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S2 L18",
+   "di": -2,
+   "dj": 18,
+   "tile": "22JCN",
+   "bbox": [
+    -52.4835,
+    -29.7719,
+    -52.4335,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.759,
+   "ndwi_permanente_km2": 0.029,
+   "ndwi_alagamento_km2": 1.824,
+   "iou_agua": 0.477
+  },
+  {
+   "area": "S2 L19",
+   "di": -2,
+   "dj": 19,
+   "tile": "22JCN",
+   "bbox": [
+    -52.433499999999995,
+    -29.7719,
+    -52.3835,
+    -29.7219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.06,
+   "ndwi_alagamento_km2": 0.061,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S3 O1",
+   "di": -3,
+   "dj": -1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.433499999999995,
+    -29.821899999999996,
+    -53.3835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 48.5
+  },
+  {
+   "area": "S3 L0",
+   "di": -3,
+   "dj": 0,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3835,
+    -29.821899999999996,
+    -53.3335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 66.0
+  },
+  {
+   "area": "S3 L1",
+   "di": -3,
+   "dj": 1,
+   "tile": "22JBN",
+   "bbox": [
+    -53.3335,
+    -29.821899999999996,
+    -53.283500000000004,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 28.0
+  },
+  {
+   "area": "S3 L2",
+   "di": -3,
+   "dj": 2,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2835,
+    -29.821899999999996,
+    -53.2335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.9,
+   "som_permanente_km2": 2.497,
+   "som_alagamento_km2": 14.474,
+   "ndwi_permanente_km2": 1.231,
+   "ndwi_alagamento_km2": 14.803,
+   "iou_agua": 0.939
+  },
+  {
+   "area": "S3 L3",
+   "di": -3,
+   "dj": 3,
+   "tile": "22JBN",
+   "bbox": [
+    -53.2335,
+    -29.821899999999996,
+    -53.1835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 21.0
+  },
+  {
+   "area": "S3 L4",
+   "di": -3,
+   "dj": 4,
+   "tile": "22JBN",
+   "bbox": [
+    -53.183499999999995,
+    -29.821899999999996,
+    -53.1335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 12.2,
+   "som_permanente_km2": 2.21,
+   "som_alagamento_km2": 10.866,
+   "ndwi_permanente_km2": 1.25,
+   "ndwi_alagamento_km2": 10.451,
+   "iou_agua": 0.887
+  },
+  {
+   "area": "S3 L5",
+   "di": -3,
+   "dj": 5,
+   "tile": "22JBN",
+   "bbox": [
+    -53.1335,
+    -29.821899999999996,
+    -53.0835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 21.7
+  },
+  {
+   "area": "S3 L6",
+   "di": -3,
+   "dj": 6,
+   "tile": "22JBN",
+   "bbox": [
+    -53.0835,
+    -29.821899999999996,
+    -53.033500000000004,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.672,
+   "ndwi_permanente_km2": 0.582,
+   "ndwi_alagamento_km2": 0.523,
+   "iou_agua": 0.622
+  },
+  {
+   "area": "S3 L7",
+   "di": -3,
+   "dj": 7,
+   "tile": "22JBN",
+   "bbox": [
+    -53.0335,
+    -29.821899999999996,
+    -52.9835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 24.5
+  },
+  {
+   "area": "S3 L8",
+   "di": -3,
+   "dj": 8,
+   "tile": "22JCN",
+   "bbox": [
+    -52.9835,
+    -29.821899999999996,
+    -52.9335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.069,
+   "ndwi_permanente_km2": 0.729,
+   "ndwi_alagamento_km2": 0.788,
+   "iou_agua": 0.523
+  },
+  {
+   "area": "S3 L9",
+   "di": -3,
+   "dj": 9,
+   "tile": "22JCN",
+   "bbox": [
+    -52.933499999999995,
+    -29.821899999999996,
+    -52.8835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.263,
+   "ndwi_permanente_km2": 0.242,
+   "ndwi_alagamento_km2": 3.373,
+   "iou_agua": 0.527
+  },
+  {
+   "area": "S3 L10",
+   "di": -3,
+   "dj": 10,
+   "tile": "22JCN",
+   "bbox": [
+    -52.8835,
+    -29.821899999999996,
+    -52.8335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.591,
+   "ndwi_permanente_km2": 0.502,
+   "ndwi_alagamento_km2": 0.383,
+   "iou_agua": 0.51
+  },
+  {
+   "area": "S3 L11",
+   "di": -3,
+   "dj": 11,
+   "tile": "22JCN",
+   "bbox": [
+    -52.8335,
+    -29.821899999999996,
+    -52.783500000000004,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.633,
+   "ndwi_alagamento_km2": 0.184,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S3 L12",
+   "di": -3,
+   "dj": 12,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7835,
+    -29.821899999999996,
+    -52.7335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.522,
+   "ndwi_alagamento_km2": 0.307,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S3 L13",
+   "di": -3,
+   "dj": 13,
+   "tile": "22JCN",
+   "bbox": [
+    -52.7335,
+    -29.821899999999996,
+    -52.6835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.226,
+   "ndwi_permanente_km2": 0.423,
+   "ndwi_alagamento_km2": 0.339,
+   "iou_agua": 0.615
+  },
+  {
+   "area": "S3 L14",
+   "di": -3,
+   "dj": 14,
+   "tile": "22JCN",
+   "bbox": [
+    -52.683499999999995,
+    -29.821899999999996,
+    -52.6335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 11.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.22,
+   "ndwi_alagamento_km2": 0.523,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S3 L15",
+   "di": -3,
+   "dj": 15,
+   "tile": "22JCN",
+   "bbox": [
+    -52.6335,
+    -29.821899999999996,
+    -52.5835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.472,
+   "ndwi_permanente_km2": 0.297,
+   "ndwi_alagamento_km2": 4.46,
+   "iou_agua": 0.85
+  },
+  {
+   "area": "S3 L16",
+   "di": -3,
+   "dj": 16,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5835,
+    -29.821899999999996,
+    -52.533500000000004,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 3.07,
+   "som_alagamento_km2": 9.284,
+   "ndwi_permanente_km2": 2.06,
+   "ndwi_alagamento_km2": 8.948,
+   "iou_agua": 0.883
+  },
+  {
+   "area": "S3 L17",
+   "di": -3,
+   "dj": 17,
+   "tile": "22JCN",
+   "bbox": [
+    -52.5335,
+    -29.821899999999996,
+    -52.4835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.44,
+   "ndwi_permanente_km2": 0.049,
+   "ndwi_alagamento_km2": 1.925,
+   "iou_agua": 0.79
+  },
+  {
+   "area": "S3 L18",
+   "di": -3,
+   "dj": 18,
+   "tile": "22JCN",
+   "bbox": [
+    -52.4835,
+    -29.821899999999996,
+    -52.4335,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 10.281,
+   "ndwi_permanente_km2": 0.228,
+   "ndwi_alagamento_km2": 9.541,
+   "iou_agua": 0.909
+  },
+  {
+   "area": "S3 L19",
+   "di": -3,
+   "dj": 19,
+   "tile": "22JCN",
+   "bbox": [
+    -52.433499999999995,
+    -29.821899999999996,
+    -52.3835,
+    -29.7719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.28,
+   "ndwi_alagamento_km2": 0.121,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L0",
+   "di": -4,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -29.871899999999997,
+    -53.3335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 11.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.257,
+   "ndwi_alagamento_km2": 0.16,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L1",
+   "di": -4,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -29.871899999999997,
+    -53.283500000000004,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 8.6,
+   "som_permanente_km2": 2.62,
+   "som_alagamento_km2": 2.831,
+   "ndwi_permanente_km2": 2.465,
+   "ndwi_alagamento_km2": 2.564,
+   "iou_agua": 0.839
+  },
+  {
+   "area": "S4 L2",
+   "di": -4,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -29.871899999999997,
+    -53.2335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.2,
+   "som_permanente_km2": 3.555,
+   "som_alagamento_km2": 6.069,
+   "ndwi_permanente_km2": 2.944,
+   "ndwi_alagamento_km2": 6.031,
+   "iou_agua": 0.889
+  },
+  {
+   "area": "S4 L3",
+   "di": -4,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -29.871899999999997,
+    -53.1835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 6.901,
+   "ndwi_permanente_km2": 0.747,
+   "ndwi_alagamento_km2": 5.626,
+   "iou_agua": 0.92
+  },
+  {
+   "area": "S4 L4",
+   "di": -4,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -29.871899999999997,
+    -53.1335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 15.719,
+   "ndwi_permanente_km2": 1.195,
+   "ndwi_alagamento_km2": 14.217,
+   "iou_agua": 0.975
+  },
+  {
+   "area": "S4 L5",
+   "di": -4,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -29.871899999999997,
+    -53.0835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 19.098,
+   "ndwi_permanente_km2": 1.008,
+   "ndwi_alagamento_km2": 16.004,
+   "iou_agua": 0.89
+  },
+  {
+   "area": "S4 L6",
+   "di": -4,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -29.871899999999997,
+    -53.033500000000004,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.234,
+   "ndwi_alagamento_km2": 0.302,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L7",
+   "di": -4,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -29.871899999999997,
+    -52.9835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.261,
+   "ndwi_alagamento_km2": 0.217,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L8",
+   "di": -4,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -29.871899999999997,
+    -52.9335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 13.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.083,
+   "ndwi_alagamento_km2": 0.053,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L9",
+   "di": -4,
+   "dj": 9,
+   "tile": "22JCN",
+   "bbox": [
+    -52.933499999999995,
+    -29.871899999999997,
+    -52.8835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 6.426,
+   "ndwi_permanente_km2": 0.474,
+   "ndwi_alagamento_km2": 4.73,
+   "iou_agua": 0.768
+  },
+  {
+   "area": "S4 L10",
+   "di": -4,
+   "dj": 10,
+   "tile": "22JCN",
+   "bbox": [
+    -52.8835,
+    -29.871899999999997,
+    -52.8335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.198,
+   "ndwi_permanente_km2": 0.319,
+   "ndwi_alagamento_km2": 1.529,
+   "iou_agua": 0.775
+  },
+  {
+   "area": "S4 L11",
+   "di": -4,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -29.871899999999997,
+    -52.783500000000004,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.086,
+   "ndwi_alagamento_km2": 0.16,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L12",
+   "di": -4,
+   "dj": 12,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7835,
+    -29.871899999999997,
+    -52.7335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.412,
+   "ndwi_alagamento_km2": 0.289,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L13",
+   "di": -4,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -29.871899999999997,
+    -52.6835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 15.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.2,
+   "ndwi_alagamento_km2": 0.105,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L14",
+   "di": -4,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -29.871899999999997,
+    -52.6335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.635,
+   "ndwi_permanente_km2": 0.474,
+   "ndwi_alagamento_km2": 0.555,
+   "iou_agua": 0.61
+  },
+  {
+   "area": "S4 L15",
+   "di": -4,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -29.871899999999997,
+    -52.5835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.009,
+   "ndwi_alagamento_km2": 0.313,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L16",
+   "di": -4,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -29.871899999999997,
+    -52.533500000000004,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.894,
+   "ndwi_permanente_km2": 0.179,
+   "ndwi_alagamento_km2": 3.202,
+   "iou_agua": 0.82
+  },
+  {
+   "area": "S4 L17",
+   "di": -4,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -29.871899999999997,
+    -52.4835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 14.743,
+   "ndwi_permanente_km2": 0.889,
+   "ndwi_alagamento_km2": 10.828,
+   "iou_agua": 0.794
+  },
+  {
+   "area": "S4 L18",
+   "di": -4,
+   "dj": 18,
+   "tile": "22JCN",
+   "bbox": [
+    -52.4835,
+    -29.871899999999997,
+    -52.4335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 6.636,
+   "ndwi_permanente_km2": 0.083,
+   "ndwi_alagamento_km2": 5.937,
+   "iou_agua": 0.878
+  },
+  {
+   "area": "S4 L19",
+   "di": -4,
+   "dj": 19,
+   "tile": "22JCN",
+   "bbox": [
+    -52.433499999999995,
+    -29.871899999999997,
+    -52.3835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.187,
+   "ndwi_alagamento_km2": 0.062,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L20",
+   "di": -4,
+   "dj": 20,
+   "tile": "22JCN",
+   "bbox": [
+    -52.3835,
+    -29.871899999999997,
+    -52.3335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.231,
+   "ndwi_alagamento_km2": 0.056,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L21",
+   "di": -4,
+   "dj": 21,
+   "tile": "22JCN",
+   "bbox": [
+    -52.3335,
+    -29.871899999999997,
+    -52.283500000000004,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.079,
+   "ndwi_alagamento_km2": 0.055,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L22",
+   "di": -4,
+   "dj": 22,
+   "tile": "22JCN",
+   "bbox": [
+    -52.2835,
+    -29.871899999999997,
+    -52.2335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.35,
+   "ndwi_alagamento_km2": 0.578,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L23",
+   "di": -4,
+   "dj": 23,
+   "tile": "22JCN",
+   "bbox": [
+    -52.2335,
+    -29.871899999999997,
+    -52.1835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.071,
+   "ndwi_alagamento_km2": 0.046,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L24",
+   "di": -4,
+   "dj": 24,
+   "tile": "22JCN",
+   "bbox": [
+    -52.183499999999995,
+    -29.871899999999997,
+    -52.1335,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.106,
+   "ndwi_alagamento_km2": 0.079,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S4 L25",
+   "di": -4,
+   "dj": 25,
+   "tile": "22JCN",
+   "bbox": [
+    -52.1335,
+    -29.871899999999997,
+    -52.0835,
+    -29.8219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.006,
+   "ndwi_alagamento_km2": 0.02,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L0",
+   "di": -5,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -29.921899999999997,
+    -53.3335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 27.5
+  },
+  {
+   "area": "S5 L1",
+   "di": -5,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -29.921899999999997,
+    -53.283500000000004,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 23.4
+  },
+  {
+   "area": "S5 L2",
+   "di": -5,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -29.921899999999997,
+    -53.2335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.5,
+   "som_permanente_km2": 2.504,
+   "som_alagamento_km2": 0.932,
+   "ndwi_permanente_km2": 1.492,
+   "ndwi_alagamento_km2": 1.166,
+   "iou_agua": 0.762
+  },
+  {
+   "area": "S5 L3",
+   "di": -5,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -29.921899999999997,
+    -53.1835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 3.651,
+   "som_alagamento_km2": 7.514,
+   "ndwi_permanente_km2": 2.317,
+   "ndwi_alagamento_km2": 8.357,
+   "iou_agua": 0.877
+  },
+  {
+   "area": "S5 L4",
+   "di": -5,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -29.921899999999997,
+    -53.1335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 2.695,
+   "som_alagamento_km2": 20.602,
+   "ndwi_permanente_km2": 1.706,
+   "ndwi_alagamento_km2": 20.072,
+   "iou_agua": 0.935
+  },
+  {
+   "area": "S5 L5",
+   "di": -5,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -29.921899999999997,
+    -53.0835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.87,
+   "som_alagamento_km2": 17.087,
+   "ndwi_permanente_km2": 0.826,
+   "ndwi_alagamento_km2": 17.048,
+   "iou_agua": 0.937
+  },
+  {
+   "area": "S5 L6",
+   "di": -5,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -29.921899999999997,
+    -53.033500000000004,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.885,
+   "ndwi_permanente_km2": 0.171,
+   "ndwi_alagamento_km2": 5.389,
+   "iou_agua": 0.91
+  },
+  {
+   "area": "S5 L7",
+   "di": -5,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -29.921899999999997,
+    -52.9835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.085,
+   "ndwi_alagamento_km2": 0.053,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L8",
+   "di": -5,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -29.921899999999997,
+    -52.9335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.017,
+   "ndwi_alagamento_km2": 0.035,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L9",
+   "di": -5,
+   "dj": 9,
+   "tile": "22JCM",
+   "bbox": [
+    -52.933499999999995,
+    -29.921899999999997,
+    -52.8835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.143,
+   "ndwi_alagamento_km2": 0.44,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L10",
+   "di": -5,
+   "dj": 10,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8835,
+    -29.921899999999997,
+    -52.8335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 8.851,
+   "ndwi_permanente_km2": 0.568,
+   "ndwi_alagamento_km2": 7.268,
+   "iou_agua": 0.836
+  },
+  {
+   "area": "S5 L11",
+   "di": -5,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -29.921899999999997,
+    -52.783500000000004,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 5.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.039,
+   "ndwi_alagamento_km2": 0.227,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L13",
+   "di": -5,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -29.921899999999997,
+    -52.6835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.047,
+   "ndwi_alagamento_km2": 0.074,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L14",
+   "di": -5,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -29.921899999999997,
+    -52.6335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 15.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.025,
+   "ndwi_alagamento_km2": 0.14,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L15",
+   "di": -5,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -29.921899999999997,
+    -52.5835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 33.7
+  },
+  {
+   "area": "S5 L16",
+   "di": -5,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -29.921899999999997,
+    -52.533500000000004,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 11.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.014,
+   "ndwi_alagamento_km2": 0.009,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L17",
+   "di": -5,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -29.921899999999997,
+    -52.4835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 6.868,
+   "ndwi_permanente_km2": 0.064,
+   "ndwi_alagamento_km2": 4.496,
+   "iou_agua": 0.662
+  },
+  {
+   "area": "S5 L18",
+   "di": -5,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -29.921899999999997,
+    -52.4335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 16.119,
+   "ndwi_permanente_km2": 0.169,
+   "ndwi_alagamento_km2": 5.178,
+   "iou_agua": 0.331
+  },
+  {
+   "area": "S5 L19",
+   "di": -5,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -29.921899999999997,
+    -52.3835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.563,
+   "ndwi_permanente_km2": 0.03,
+   "ndwi_alagamento_km2": 0.411,
+   "iou_agua": 0.26
+  },
+  {
+   "area": "S5 L20",
+   "di": -5,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -29.921899999999997,
+    -52.3335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.062,
+   "ndwi_alagamento_km2": 0.114,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L21",
+   "di": -5,
+   "dj": 21,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3335,
+    -29.921899999999997,
+    -52.283500000000004,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.017,
+   "ndwi_alagamento_km2": 0.026,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L22",
+   "di": -5,
+   "dj": 22,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2835,
+    -29.921899999999997,
+    -52.2335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.193,
+   "ndwi_permanente_km2": 0.048,
+   "ndwi_alagamento_km2": 0.899,
+   "iou_agua": 0.352
+  },
+  {
+   "area": "S5 L23",
+   "di": -5,
+   "dj": 23,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2335,
+    -29.921899999999997,
+    -52.1835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.549,
+   "ndwi_permanente_km2": 0.062,
+   "ndwi_alagamento_km2": 1.12,
+   "iou_agua": 0.698
+  },
+  {
+   "area": "S5 L24",
+   "di": -5,
+   "dj": 24,
+   "tile": "22JCM",
+   "bbox": [
+    -52.183499999999995,
+    -29.921899999999997,
+    -52.1335,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.06,
+   "ndwi_alagamento_km2": 0.1,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S5 L25",
+   "di": -5,
+   "dj": 25,
+   "tile": "22JCM",
+   "bbox": [
+    -52.1335,
+    -29.921899999999997,
+    -52.0835,
+    -29.8719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 9.164,
+   "ndwi_permanente_km2": 0.006,
+   "ndwi_alagamento_km2": 0.178,
+   "iou_agua": 0.019
+  },
+  {
+   "area": "S6 L0",
+   "di": -6,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -29.971899999999998,
+    -53.3335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 36.1
+  },
+  {
+   "area": "S6 L1",
+   "di": -6,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -29.971899999999998,
+    -53.283500000000004,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 9.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 12.363,
+   "ndwi_permanente_km2": 0.795,
+   "ndwi_alagamento_km2": 10.466,
+   "iou_agua": 0.859
+  },
+  {
+   "area": "S6 L2",
+   "di": -6,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -29.971899999999998,
+    -53.2335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 42.3
+  },
+  {
+   "area": "S6 L3",
+   "di": -6,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -29.971899999999998,
+    -53.1835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.6,
+   "som_permanente_km2": 1.954,
+   "som_alagamento_km2": 7.466,
+   "ndwi_permanente_km2": 1.061,
+   "ndwi_alagamento_km2": 6.985,
+   "iou_agua": 0.799
+  },
+  {
+   "area": "S6 L4",
+   "di": -6,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -29.971899999999998,
+    -53.1335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 11.997,
+   "ndwi_permanente_km2": 0.95,
+   "ndwi_alagamento_km2": 9.456,
+   "iou_agua": 0.843
+  },
+  {
+   "area": "S6 L5",
+   "di": -6,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -29.971899999999998,
+    -53.0835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.1,
+   "som_permanente_km2": 2.739,
+   "som_alagamento_km2": 10.403,
+   "ndwi_permanente_km2": 1.963,
+   "ndwi_alagamento_km2": 8.389,
+   "iou_agua": 0.782
+  },
+  {
+   "area": "S6 L6",
+   "di": -6,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -29.971899999999998,
+    -53.033500000000004,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 5.47,
+   "som_alagamento_km2": 18.386,
+   "ndwi_permanente_km2": 4.329,
+   "ndwi_alagamento_km2": 17.062,
+   "iou_agua": 0.896
+  },
+  {
+   "area": "S6 L7",
+   "di": -6,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -29.971899999999998,
+    -52.9835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.6,
+   "som_permanente_km2": 1.381,
+   "som_alagamento_km2": 4.879,
+   "ndwi_permanente_km2": 0.992,
+   "ndwi_alagamento_km2": 3.921,
+   "iou_agua": 0.78
+  },
+  {
+   "area": "S6 L8",
+   "di": -6,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -29.971899999999998,
+    -52.9335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.067,
+   "ndwi_alagamento_km2": 0.083,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S6 L9",
+   "di": -6,
+   "dj": 9,
+   "tile": "22JCM",
+   "bbox": [
+    -52.933499999999995,
+    -29.971899999999998,
+    -52.8835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.048,
+   "ndwi_alagamento_km2": 0.018,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S6 L10",
+   "di": -6,
+   "dj": 10,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8835,
+    -29.971899999999998,
+    -52.8335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 13.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 6.658,
+   "ndwi_permanente_km2": 0.344,
+   "ndwi_alagamento_km2": 6.007,
+   "iou_agua": 0.926
+  },
+  {
+   "area": "S6 L11",
+   "di": -6,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -29.971899999999998,
+    -52.783500000000004,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 57.4
+  },
+  {
+   "area": "S6 L12",
+   "di": -6,
+   "dj": 12,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7835,
+    -29.971899999999998,
+    -52.7335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 80.9
+  },
+  {
+   "area": "S6 L13",
+   "di": -6,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -29.971899999999998,
+    -52.6835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 73.3
+  },
+  {
+   "area": "S6 L14",
+   "di": -6,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -29.971899999999998,
+    -52.6335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 46.6
+  },
+  {
+   "area": "S6 L15",
+   "di": -6,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -29.971899999999998,
+    -52.5835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 15.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.017,
+   "ndwi_alagamento_km2": 0.012,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S6 L16",
+   "di": -6,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -29.971899999999998,
+    -52.533500000000004,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.003,
+   "ndwi_alagamento_km2": 0.007,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S6 L17",
+   "di": -6,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -29.971899999999998,
+    -52.4835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.005,
+   "ndwi_alagamento_km2": 0.083,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S6 L18",
+   "di": -6,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -29.971899999999998,
+    -52.4335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 7.37,
+   "ndwi_permanente_km2": 0.061,
+   "ndwi_alagamento_km2": 3.683,
+   "iou_agua": 0.507
+  },
+  {
+   "area": "S6 L19",
+   "di": -6,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -29.971899999999998,
+    -52.3835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 15.69,
+   "ndwi_permanente_km2": 0.081,
+   "ndwi_alagamento_km2": 0.934,
+   "iou_agua": 0.065
+  },
+  {
+   "area": "S6 L20",
+   "di": -6,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -29.971899999999998,
+    -52.3335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 9.894,
+   "ndwi_permanente_km2": 0.012,
+   "ndwi_alagamento_km2": 2.004,
+   "iou_agua": 0.202
+  },
+  {
+   "area": "S6 L21",
+   "di": -6,
+   "dj": 21,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3335,
+    -29.971899999999998,
+    -52.283500000000004,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 2.814,
+   "som_alagamento_km2": 9.408,
+   "ndwi_permanente_km2": 0.041,
+   "ndwi_alagamento_km2": 1.169,
+   "iou_agua": 0.094
+  },
+  {
+   "area": "S6 L22",
+   "di": -6,
+   "dj": 22,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2835,
+    -29.971899999999998,
+    -52.2335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.963,
+   "som_alagamento_km2": 3.545,
+   "ndwi_permanente_km2": 0.105,
+   "ndwi_alagamento_km2": 1.644,
+   "iou_agua": 0.333
+  },
+  {
+   "area": "S6 L23",
+   "di": -6,
+   "dj": 23,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2335,
+    -29.971899999999998,
+    -52.1835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 10.453,
+   "ndwi_permanente_km2": 0.007,
+   "ndwi_alagamento_km2": 2.364,
+   "iou_agua": 0.225
+  },
+  {
+   "area": "S6 L24",
+   "di": -6,
+   "dj": 24,
+   "tile": "22JCM",
+   "bbox": [
+    -52.183499999999995,
+    -29.971899999999998,
+    -52.1335,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 3.29,
+   "som_alagamento_km2": 11.424,
+   "ndwi_permanente_km2": 0.03,
+   "ndwi_alagamento_km2": 1.091,
+   "iou_agua": 0.075
+  },
+  {
+   "area": "S6 L25",
+   "di": -6,
+   "dj": 25,
+   "tile": "22JCM",
+   "bbox": [
+    -52.1335,
+    -29.971899999999998,
+    -52.0835,
+    -29.9219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 4.064,
+   "som_alagamento_km2": 17.291,
+   "ndwi_permanente_km2": 0.016,
+   "ndwi_alagamento_km2": 1.498,
+   "iou_agua": 0.071
+  },
+  {
+   "area": "S7 O4",
+   "di": -7,
+   "dj": -4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5835,
+    -30.0219,
+    -53.533500000000004,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 14.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.186,
+   "ndwi_alagamento_km2": 0.166,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S7 O3",
+   "di": -7,
+   "dj": -3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5335,
+    -30.0219,
+    -53.4835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 14.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.058,
+   "ndwi_alagamento_km2": 0.177,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S7 O2",
+   "di": -7,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.0219,
+    -53.4335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 19.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.154,
+   "ndwi_alagamento_km2": 0.224,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S7 O1",
+   "di": -7,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.0219,
+    -53.3835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 23.7
+  },
+  {
+   "area": "S7 L0",
+   "di": -7,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.0219,
+    -53.3335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 40.2
+  },
+  {
+   "area": "S7 L1",
+   "di": -7,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -30.0219,
+    -53.283500000000004,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 6.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.774,
+   "ndwi_permanente_km2": 0.509,
+   "ndwi_alagamento_km2": 1.804,
+   "iou_agua": 0.601
+  },
+  {
+   "area": "S7 L2",
+   "di": -7,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -30.0219,
+    -53.2335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 24.5
+  },
+  {
+   "area": "S7 L3",
+   "di": -7,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -30.0219,
+    -53.1835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 17.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 11.903,
+   "ndwi_permanente_km2": 0.662,
+   "ndwi_alagamento_km2": 10.842,
+   "iou_agua": 0.949
+  },
+  {
+   "area": "S7 L4",
+   "di": -7,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -30.0219,
+    -53.1335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 14.368,
+   "ndwi_permanente_km2": 0.493,
+   "ndwi_alagamento_km2": 13.875,
+   "iou_agua": 0.953
+  },
+  {
+   "area": "S7 L5",
+   "di": -7,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -30.0219,
+    -53.0835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 14.942,
+   "ndwi_permanente_km2": 0.739,
+   "ndwi_alagamento_km2": 12.67,
+   "iou_agua": 0.891
+  },
+  {
+   "area": "S7 L6",
+   "di": -7,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -30.0219,
+    -53.033500000000004,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.2,
+   "som_permanente_km2": 5.634,
+   "som_alagamento_km2": 14.164,
+   "ndwi_permanente_km2": 4.684,
+   "ndwi_alagamento_km2": 13.847,
+   "iou_agua": 0.936
+  },
+  {
+   "area": "S7 L7",
+   "di": -7,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -30.0219,
+    -52.9835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 26.0
+  },
+  {
+   "area": "S7 L8",
+   "di": -7,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -30.0219,
+    -52.9335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 31.3
+  },
+  {
+   "area": "S7 L9",
+   "di": -7,
+   "dj": 9,
+   "tile": "22JCM",
+   "bbox": [
+    -52.933499999999995,
+    -30.0219,
+    -52.8835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 9.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.064,
+   "ndwi_alagamento_km2": 0.056,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S7 L10",
+   "di": -7,
+   "dj": 10,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8835,
+    -30.0219,
+    -52.8335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 5.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.061,
+   "ndwi_permanente_km2": 0.236,
+   "ndwi_alagamento_km2": 3.327,
+   "iou_agua": 0.856
+  },
+  {
+   "area": "S7 L11",
+   "di": -7,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -30.0219,
+    -52.783500000000004,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 35.6
+  },
+  {
+   "area": "S7 L12",
+   "di": -7,
+   "dj": 12,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7835,
+    -30.0219,
+    -52.7335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 30.8
+  },
+  {
+   "area": "S7 L13",
+   "di": -7,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -30.0219,
+    -52.6835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 8.6,
+   "som_permanente_km2": 2.93,
+   "som_alagamento_km2": 17.414,
+   "ndwi_permanente_km2": 0.161,
+   "ndwi_alagamento_km2": 1.787,
+   "iou_agua": 0.096
+  },
+  {
+   "area": "S7 L14",
+   "di": -7,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -30.0219,
+    -52.6335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.1,
+   "som_permanente_km2": 3.407,
+   "som_alagamento_km2": 13.626,
+   "ndwi_permanente_km2": 0.002,
+   "ndwi_alagamento_km2": 1.828,
+   "iou_agua": 0.107
+  },
+  {
+   "area": "S7 L15",
+   "di": -7,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -30.0219,
+    -52.5835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.676,
+   "ndwi_permanente_km2": 0.033,
+   "ndwi_alagamento_km2": 0.364,
+   "iou_agua": 0.075
+  },
+  {
+   "area": "S7 L16",
+   "di": -7,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -30.0219,
+    -52.533500000000004,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.762,
+   "ndwi_permanente_km2": 0.098,
+   "ndwi_alagamento_km2": 0.384,
+   "iou_agua": 0.087
+  },
+  {
+   "area": "S7 L17",
+   "di": -7,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -30.0219,
+    -52.4835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.466,
+   "ndwi_permanente_km2": 0.023,
+   "ndwi_alagamento_km2": 0.755,
+   "iou_agua": 0.436
+  },
+  {
+   "area": "S7 L18",
+   "di": -7,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -30.0219,
+    -52.4335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 10.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.997,
+   "ndwi_permanente_km2": 0.003,
+   "ndwi_alagamento_km2": 0.293,
+   "iou_agua": 0.266
+  },
+  {
+   "area": "S7 L19",
+   "di": -7,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -30.0219,
+    -52.3835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 1.822,
+   "som_alagamento_km2": 19.154,
+   "ndwi_permanente_km2": 0.021,
+   "ndwi_alagamento_km2": 2.193,
+   "iou_agua": 0.105
+  },
+  {
+   "area": "S7 L20",
+   "di": -7,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -30.0219,
+    -52.3335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.5,
+   "som_permanente_km2": 1.892,
+   "som_alagamento_km2": 10.467,
+   "ndwi_permanente_km2": 0.173,
+   "ndwi_alagamento_km2": 4.466,
+   "iou_agua": 0.366
+  },
+  {
+   "area": "S7 L21",
+   "di": -7,
+   "dj": 21,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3335,
+    -30.0219,
+    -52.283500000000004,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 9.465,
+   "ndwi_permanente_km2": 0.187,
+   "ndwi_alagamento_km2": 8.406,
+   "iou_agua": 0.885
+  },
+  {
+   "area": "S7 L22",
+   "di": -7,
+   "dj": 22,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2835,
+    -30.0219,
+    -52.2335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.3,
+   "som_permanente_km2": 2.021,
+   "som_alagamento_km2": 5.492,
+   "ndwi_permanente_km2": 0.266,
+   "ndwi_alagamento_km2": 1.779,
+   "iou_agua": 0.251
+  },
+  {
+   "area": "S7 L23",
+   "di": -7,
+   "dj": 23,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2335,
+    -30.0219,
+    -52.1835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.833,
+   "som_alagamento_km2": 16.006,
+   "ndwi_permanente_km2": 0.091,
+   "ndwi_alagamento_km2": 1.885,
+   "iou_agua": 0.107
+  },
+  {
+   "area": "S7 L24",
+   "di": -7,
+   "dj": 24,
+   "tile": "22JCM",
+   "bbox": [
+    -52.183499999999995,
+    -30.0219,
+    -52.1335,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 7.762,
+   "ndwi_permanente_km2": 0.784,
+   "ndwi_alagamento_km2": 3.729,
+   "iou_agua": 0.575
+  },
+  {
+   "area": "S7 L25",
+   "di": -7,
+   "dj": 25,
+   "tile": "22JCM",
+   "bbox": [
+    -52.1335,
+    -30.0219,
+    -52.0835,
+    -29.9719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 15.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.405,
+   "ndwi_permanente_km2": 0.611,
+   "ndwi_alagamento_km2": 1.776,
+   "iou_agua": 0.699
+  },
+  {
+   "area": "S8 O4",
+   "di": -8,
+   "dj": -4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5835,
+    -30.071899999999996,
+    -53.533500000000004,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 20.5
+  },
+  {
+   "area": "S8 O3",
+   "di": -8,
+   "dj": -3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5335,
+    -30.071899999999996,
+    -53.4835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 6.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.496,
+   "ndwi_permanente_km2": 0.224,
+   "ndwi_alagamento_km2": 4.399,
+   "iou_agua": 0.784
+  },
+  {
+   "area": "S8 O2",
+   "di": -8,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.071899999999996,
+    -53.4335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.887,
+   "ndwi_permanente_km2": 0.081,
+   "ndwi_alagamento_km2": 3.635,
+   "iou_agua": 0.732
+  },
+  {
+   "area": "S8 O1",
+   "di": -8,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.071899999999996,
+    -53.3835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 8.099,
+   "ndwi_permanente_km2": 0.35,
+   "ndwi_alagamento_km2": 5.102,
+   "iou_agua": 0.661
+  },
+  {
+   "area": "S8 L0",
+   "di": -8,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.071899999999996,
+    -53.3335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 28.5
+  },
+  {
+   "area": "S8 L1",
+   "di": -8,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -30.071899999999996,
+    -53.283500000000004,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.289,
+   "ndwi_alagamento_km2": 0.181,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S8 L2",
+   "di": -8,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -30.071899999999996,
+    -53.2335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.163,
+   "ndwi_alagamento_km2": 0.116,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S8 L3",
+   "di": -8,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -30.071899999999996,
+    -53.1835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.224,
+   "ndwi_permanente_km2": 0.254,
+   "ndwi_alagamento_km2": 1.593,
+   "iou_agua": 0.433
+  },
+  {
+   "area": "S8 L4",
+   "di": -8,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -30.071899999999996,
+    -53.1335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.99,
+   "ndwi_permanente_km2": 0.331,
+   "ndwi_alagamento_km2": 0.654,
+   "iou_agua": 0.477
+  },
+  {
+   "area": "S8 L5",
+   "di": -8,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -30.071899999999996,
+    -53.0835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 8.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.208,
+   "ndwi_alagamento_km2": 0.447,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S8 L6",
+   "di": -8,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -30.071899999999996,
+    -53.033500000000004,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 12.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.425,
+   "ndwi_permanente_km2": 0.124,
+   "ndwi_alagamento_km2": 2.426,
+   "iou_agua": 0.737
+  },
+  {
+   "area": "S8 L7",
+   "di": -8,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -30.071899999999996,
+    -52.9835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 25.6
+  },
+  {
+   "area": "S8 L8",
+   "di": -8,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -30.071899999999996,
+    -52.9335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 42.5
+  },
+  {
+   "area": "S8 L9",
+   "di": -8,
+   "dj": 9,
+   "tile": "22JCM",
+   "bbox": [
+    -52.933499999999995,
+    -30.071899999999996,
+    -52.8835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 10.13,
+   "ndwi_permanente_km2": 0.096,
+   "ndwi_alagamento_km2": 1.475,
+   "iou_agua": 0.151
+  },
+  {
+   "area": "S8 L10",
+   "di": -8,
+   "dj": 10,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8835,
+    -30.071899999999996,
+    -52.8335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 14.93,
+   "ndwi_permanente_km2": 0.155,
+   "ndwi_alagamento_km2": 6.01,
+   "iou_agua": 0.411
+  },
+  {
+   "area": "S8 L11",
+   "di": -8,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -30.071899999999996,
+    -52.783500000000004,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.8,
+   "som_permanente_km2": 0.989,
+   "som_alagamento_km2": 17.331,
+   "ndwi_permanente_km2": 0.966,
+   "ndwi_alagamento_km2": 5.491,
+   "iou_agua": 0.351
+  },
+  {
+   "area": "S8 L12",
+   "di": -8,
+   "dj": 12,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7835,
+    -30.071899999999996,
+    -52.7335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.9,
+   "som_permanente_km2": 2.74,
+   "som_alagamento_km2": 11.019,
+   "ndwi_permanente_km2": 1.106,
+   "ndwi_alagamento_km2": 8.543,
+   "iou_agua": 0.701
+  },
+  {
+   "area": "S8 L13",
+   "di": -8,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -30.071899999999996,
+    -52.6835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 14.402,
+   "ndwi_permanente_km2": 0.327,
+   "ndwi_alagamento_km2": 13.021,
+   "iou_agua": 0.916
+  },
+  {
+   "area": "S8 L14",
+   "di": -8,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -30.071899999999996,
+    -52.6335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 18.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 9.126,
+   "ndwi_permanente_km2": 0.56,
+   "ndwi_alagamento_km2": 7.227,
+   "iou_agua": 0.822
+  },
+  {
+   "area": "S8 L15",
+   "di": -8,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -30.071899999999996,
+    -52.5835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.1,
+   "som_permanente_km2": 4.977,
+   "som_alagamento_km2": 16.8,
+   "ndwi_permanente_km2": 0.714,
+   "ndwi_alagamento_km2": 7.236,
+   "iou_agua": 0.361
+  },
+  {
+   "area": "S8 L16",
+   "di": -8,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -30.071899999999996,
+    -52.533500000000004,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 4.195,
+   "som_alagamento_km2": 16.462,
+   "ndwi_permanente_km2": 1.696,
+   "ndwi_alagamento_km2": 3.932,
+   "iou_agua": 0.272
+  },
+  {
+   "area": "S8 L17",
+   "di": -8,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -30.071899999999996,
+    -52.4835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 8.07,
+   "ndwi_permanente_km2": 0.08,
+   "ndwi_alagamento_km2": 1.051,
+   "iou_agua": 0.136
+  },
+  {
+   "area": "S8 L18",
+   "di": -8,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -30.071899999999996,
+    -52.4335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 10.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 10.286,
+   "ndwi_permanente_km2": 0.203,
+   "ndwi_alagamento_km2": 0.274,
+   "iou_agua": 0.029
+  },
+  {
+   "area": "S8 L19",
+   "di": -8,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -30.071899999999996,
+    -52.3835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 11.0,
+   "som_permanente_km2": 1.809,
+   "som_alagamento_km2": 13.815,
+   "ndwi_permanente_km2": 0.235,
+   "ndwi_alagamento_km2": 6.275,
+   "iou_agua": 0.416
+  },
+  {
+   "area": "S8 L20",
+   "di": -8,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -30.071899999999996,
+    -52.3335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.524,
+   "ndwi_permanente_km2": 0.284,
+   "ndwi_alagamento_km2": 0.857,
+   "iou_agua": 0.553
+  },
+  {
+   "area": "S8 L21",
+   "di": -8,
+   "dj": 21,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3335,
+    -30.071899999999996,
+    -52.283500000000004,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.698,
+   "ndwi_permanente_km2": 0.426,
+   "ndwi_alagamento_km2": 2.005,
+   "iou_agua": 0.853
+  },
+  {
+   "area": "S8 L22",
+   "di": -8,
+   "dj": 22,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2835,
+    -30.071899999999996,
+    -52.2335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.419,
+   "ndwi_permanente_km2": 0.007,
+   "ndwi_alagamento_km2": 3.046,
+   "iou_agua": 0.867
+  },
+  {
+   "area": "S8 L23",
+   "di": -8,
+   "dj": 23,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2335,
+    -30.071899999999996,
+    -52.1835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.62,
+   "ndwi_permanente_km2": 0.722,
+   "ndwi_alagamento_km2": 0.728,
+   "iou_agua": 0.79
+  },
+  {
+   "area": "S8 L24",
+   "di": -8,
+   "dj": 24,
+   "tile": "22JCM",
+   "bbox": [
+    -52.183499999999995,
+    -30.071899999999996,
+    -52.1335,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.979,
+   "ndwi_permanente_km2": 0.002,
+   "ndwi_alagamento_km2": 1.394,
+   "iou_agua": 0.464
+  },
+  {
+   "area": "S8 L25",
+   "di": -8,
+   "dj": 25,
+   "tile": "22JCM",
+   "bbox": [
+    -52.1335,
+    -30.071899999999996,
+    -52.0835,
+    -30.0219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.008,
+   "ndwi_alagamento_km2": 0.163,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 O4",
+   "di": -9,
+   "dj": -4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5835,
+    -30.121899999999997,
+    -53.533500000000004,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 58.6
+  },
+  {
+   "area": "S9 O3",
+   "di": -9,
+   "dj": -3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5335,
+    -30.121899999999997,
+    -53.4835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.091,
+   "ndwi_permanente_km2": 0.428,
+   "ndwi_alagamento_km2": 1.755,
+   "iou_agua": 0.7
+  },
+  {
+   "area": "S9 O2",
+   "di": -9,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.121899999999997,
+    -53.4335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 6.0,
+   "som_permanente_km2": 1.33,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.884,
+   "ndwi_alagamento_km2": 0.331,
+   "iou_agua": 0.848
+  },
+  {
+   "area": "S9 O1",
+   "di": -9,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.121899999999997,
+    -53.3835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 5.0,
+   "som_permanente_km2": 1.685,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 1.242,
+   "ndwi_alagamento_km2": 0.393,
+   "iou_agua": 0.866
+  },
+  {
+   "area": "S9 L0",
+   "di": -9,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.121899999999997,
+    -53.3335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.192,
+   "ndwi_permanente_km2": 1.022,
+   "ndwi_alagamento_km2": 0.656,
+   "iou_agua": 0.739
+  },
+  {
+   "area": "S9 L1",
+   "di": -9,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -30.121899999999997,
+    -53.283500000000004,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 18.8,
+   "som_permanente_km2": 2.757,
+   "som_alagamento_km2": 1.017,
+   "ndwi_permanente_km2": 0.571,
+   "ndwi_alagamento_km2": 1.721,
+   "iou_agua": 0.573
+  },
+  {
+   "area": "S9 L2",
+   "di": -9,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -30.121899999999997,
+    -53.2335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.9,
+   "som_permanente_km2": 3.619,
+   "som_alagamento_km2": 2.718,
+   "ndwi_permanente_km2": 1.067,
+   "ndwi_alagamento_km2": 3.657,
+   "iou_agua": 0.739
+  },
+  {
+   "area": "S9 L3",
+   "di": -9,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -30.121899999999997,
+    -53.1835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.8,
+   "som_permanente_km2": 1.643,
+   "som_alagamento_km2": 1.141,
+   "ndwi_permanente_km2": 0.876,
+   "ndwi_alagamento_km2": 1.511,
+   "iou_agua": 0.716
+  },
+  {
+   "area": "S9 L4",
+   "di": -9,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -30.121899999999997,
+    -53.1335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 5.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.294,
+   "ndwi_alagamento_km2": 0.27,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L5",
+   "di": -9,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -30.121899999999997,
+    -53.0835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.088,
+   "ndwi_alagamento_km2": 0.199,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L6",
+   "di": -9,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -30.121899999999997,
+    -53.033500000000004,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.99,
+   "ndwi_permanente_km2": 0.215,
+   "ndwi_alagamento_km2": 1.46,
+   "iou_agua": 0.811
+  },
+  {
+   "area": "S9 L7",
+   "di": -9,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -30.121899999999997,
+    -52.9835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 13.811,
+   "ndwi_permanente_km2": 0.27,
+   "ndwi_alagamento_km2": 12.733,
+   "iou_agua": 0.933
+  },
+  {
+   "area": "S9 L8",
+   "di": -9,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -30.121899999999997,
+    -52.9335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 19.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 11.046,
+   "ndwi_permanente_km2": 0.469,
+   "ndwi_alagamento_km2": 10.532,
+   "iou_agua": 0.965
+  },
+  {
+   "area": "S9 L9",
+   "di": -9,
+   "dj": 9,
+   "tile": "22JCM",
+   "bbox": [
+    -52.933499999999995,
+    -30.121899999999997,
+    -52.8835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 12.255,
+   "ndwi_permanente_km2": 1.094,
+   "ndwi_alagamento_km2": 8.997,
+   "iou_agua": 0.821
+  },
+  {
+   "area": "S9 L10",
+   "di": -9,
+   "dj": 10,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8835,
+    -30.121899999999997,
+    -52.8335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 15.582,
+   "ndwi_permanente_km2": 0.041,
+   "ndwi_alagamento_km2": 14.741,
+   "iou_agua": 0.949
+  },
+  {
+   "area": "S9 L11",
+   "di": -9,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -30.121899999999997,
+    -52.783500000000004,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.64,
+   "ndwi_permanente_km2": 0.392,
+   "ndwi_alagamento_km2": 4.866,
+   "iou_agua": 0.929
+  },
+  {
+   "area": "S9 L12",
+   "di": -9,
+   "dj": 12,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7835,
+    -30.121899999999997,
+    -52.7335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.416,
+   "ndwi_permanente_km2": 0.231,
+   "ndwi_alagamento_km2": 0.276,
+   "iou_agua": 0.208
+  },
+  {
+   "area": "S9 L13",
+   "di": -9,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -30.121899999999997,
+    -52.6835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.776,
+   "ndwi_permanente_km2": 0.249,
+   "ndwi_alagamento_km2": 1.766,
+   "iou_agua": 0.706
+  },
+  {
+   "area": "S9 L14",
+   "di": -9,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -30.121899999999997,
+    -52.6335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.367,
+   "ndwi_alagamento_km2": 0.367,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L15",
+   "di": -9,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -30.121899999999997,
+    -52.5835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 5.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 5.463,
+   "ndwi_permanente_km2": 0.691,
+   "ndwi_alagamento_km2": 4.626,
+   "iou_agua": 0.914
+  },
+  {
+   "area": "S9 L16",
+   "di": -9,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -30.121899999999997,
+    -52.533500000000004,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 6.389,
+   "ndwi_permanente_km2": 0.308,
+   "ndwi_alagamento_km2": 5.965,
+   "iou_agua": 0.946
+  },
+  {
+   "area": "S9 L17",
+   "di": -9,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -30.121899999999997,
+    -52.4835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 10.6,
+   "som_permanente_km2": 1.989,
+   "som_alagamento_km2": 17.019,
+   "ndwi_permanente_km2": 0.448,
+   "ndwi_alagamento_km2": 9.853,
+   "iou_agua": 0.54
+  },
+  {
+   "area": "S9 L18",
+   "di": -9,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -30.121899999999997,
+    -52.4335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 27.2
+  },
+  {
+   "area": "S9 L19",
+   "di": -9,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -30.121899999999997,
+    -52.3835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 23.2
+  },
+  {
+   "area": "S9 L20",
+   "di": -9,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -30.121899999999997,
+    -52.3335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.466,
+   "ndwi_permanente_km2": 0.207,
+   "ndwi_alagamento_km2": 0.39,
+   "iou_agua": 0.407
+  },
+  {
+   "area": "S9 L21",
+   "di": -9,
+   "dj": 21,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3335,
+    -30.121899999999997,
+    -52.283500000000004,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.05,
+   "ndwi_alagamento_km2": 0.109,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L22",
+   "di": -9,
+   "dj": 22,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2835,
+    -30.121899999999997,
+    -52.2335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.107,
+   "ndwi_alagamento_km2": 0.571,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L23",
+   "di": -9,
+   "dj": 23,
+   "tile": "22JCM",
+   "bbox": [
+    -52.2335,
+    -30.121899999999997,
+    -52.1835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.014,
+   "ndwi_alagamento_km2": 0.046,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L24",
+   "di": -9,
+   "dj": 24,
+   "tile": "22JCM",
+   "bbox": [
+    -52.183499999999995,
+    -30.121899999999997,
+    -52.1335,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.241,
+   "ndwi_alagamento_km2": 0.85,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S9 L25",
+   "di": -9,
+   "dj": 25,
+   "tile": "22JCM",
+   "bbox": [
+    -52.1335,
+    -30.121899999999997,
+    -52.0835,
+    -30.0719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.404,
+   "ndwi_alagamento_km2": 0.12,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 O4",
+   "di": -10,
+   "dj": -4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5835,
+    -30.171899999999997,
+    -53.533500000000004,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 20.3
+  },
+  {
+   "area": "S10 O3",
+   "di": -10,
+   "dj": -3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5335,
+    -30.171899999999997,
+    -53.4835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.316,
+   "ndwi_permanente_km2": 0.495,
+   "ndwi_alagamento_km2": 0.505,
+   "iou_agua": 0.671
+  },
+  {
+   "area": "S10 O2",
+   "di": -10,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.171899999999997,
+    -53.4335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 11.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.19,
+   "ndwi_permanente_km2": 0.351,
+   "ndwi_alagamento_km2": 0.322,
+   "iou_agua": 0.563
+  },
+  {
+   "area": "S10 O1",
+   "di": -10,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.171899999999997,
+    -53.3835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 3.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.377,
+   "ndwi_permanente_km2": 0.621,
+   "ndwi_alagamento_km2": 0.447,
+   "iou_agua": 0.762
+  },
+  {
+   "area": "S10 L0",
+   "di": -10,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.171899999999997,
+    -53.3335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.152,
+   "ndwi_permanente_km2": 0.64,
+   "ndwi_alagamento_km2": 0.953,
+   "iou_agua": 0.708
+  },
+  {
+   "area": "S10 L1",
+   "di": -10,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -30.171899999999997,
+    -53.283500000000004,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 9.043,
+   "ndwi_permanente_km2": 0.266,
+   "ndwi_alagamento_km2": 6.029,
+   "iou_agua": 0.641
+  },
+  {
+   "area": "S10 L2",
+   "di": -10,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -30.171899999999997,
+    -53.2335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 6.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.396,
+   "ndwi_permanente_km2": 0.165,
+   "ndwi_alagamento_km2": 0.923,
+   "iou_agua": 0.409
+  },
+  {
+   "area": "S10 L3",
+   "di": -10,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -30.171899999999997,
+    -53.1835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 37.8
+  },
+  {
+   "area": "S10 L4",
+   "di": -10,
+   "dj": 4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.183499999999995,
+    -30.171899999999997,
+    -53.1335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 56.3
+  },
+  {
+   "area": "S10 L5",
+   "di": -10,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -30.171899999999997,
+    -53.0835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 48.4
+  },
+  {
+   "area": "S10 L6",
+   "di": -10,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -30.171899999999997,
+    -53.033500000000004,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 7.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.102,
+   "ndwi_permanente_km2": 0.2,
+   "ndwi_alagamento_km2": 1.29,
+   "iou_agua": 0.4
+  },
+  {
+   "area": "S10 L7",
+   "di": -10,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -30.171899999999997,
+    -52.9835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.5,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.02,
+   "ndwi_permanente_km2": 0.81,
+   "ndwi_alagamento_km2": 3.301,
+   "iou_agua": 0.903
+  },
+  {
+   "area": "S10 L8",
+   "di": -10,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -30.171899999999997,
+    -52.9335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 27.2
+  },
+  {
+   "area": "S10 L9",
+   "di": -10,
+   "dj": 9,
+   "tile": "22JCM",
+   "bbox": [
+    -52.933499999999995,
+    -30.171899999999997,
+    -52.8835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.063,
+   "ndwi_alagamento_km2": 0.226,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L10",
+   "di": -10,
+   "dj": 10,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8835,
+    -30.171899999999997,
+    -52.8335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.287,
+   "ndwi_alagamento_km2": 0.162,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L11",
+   "di": -10,
+   "dj": 11,
+   "tile": "22JCM",
+   "bbox": [
+    -52.8335,
+    -30.171899999999997,
+    -52.783500000000004,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.521,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.888,
+   "ndwi_alagamento_km2": 0.538,
+   "iou_agua": 0.932
+  },
+  {
+   "area": "S10 L12",
+   "di": -10,
+   "dj": 12,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7835,
+    -30.171899999999997,
+    -52.7335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.048,
+   "ndwi_alagamento_km2": 0.44,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L13",
+   "di": -10,
+   "dj": 13,
+   "tile": "22JCM",
+   "bbox": [
+    -52.7335,
+    -30.171899999999997,
+    -52.6835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.184,
+   "ndwi_alagamento_km2": 0.452,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L14",
+   "di": -10,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -30.171899999999997,
+    -52.6335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.052,
+   "ndwi_alagamento_km2": 0.074,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L15",
+   "di": -10,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -30.171899999999997,
+    -52.5835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.213,
+   "ndwi_alagamento_km2": 0.22,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L16",
+   "di": -10,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -30.171899999999997,
+    -52.533500000000004,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.735,
+   "ndwi_permanente_km2": 0.366,
+   "ndwi_alagamento_km2": 1.285,
+   "iou_agua": 0.455
+  },
+  {
+   "area": "S10 L17",
+   "di": -10,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -30.171899999999997,
+    -52.4835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.2,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 14.66,
+   "ndwi_permanente_km2": 0.297,
+   "ndwi_alagamento_km2": 12.706,
+   "iou_agua": 0.884
+  },
+  {
+   "area": "S10 L18",
+   "di": -10,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -30.171899999999997,
+    -52.4335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.4,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 23.224,
+   "ndwi_permanente_km2": 0.003,
+   "ndwi_alagamento_km2": 22.369,
+   "iou_agua": 0.962
+  },
+  {
+   "area": "S10 L19",
+   "di": -10,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -30.171899999999997,
+    -52.3835,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.227,
+   "ndwi_permanente_km2": 0.42,
+   "ndwi_alagamento_km2": 2.707,
+   "iou_agua": 0.789
+  },
+  {
+   "area": "S10 L20",
+   "di": -10,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -30.171899999999997,
+    -52.3335,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.204,
+   "ndwi_alagamento_km2": 0.096,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S10 L21",
+   "di": -10,
+   "dj": 21,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3335,
+    -30.171899999999997,
+    -52.283500000000004,
+    -30.1219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.043,
+   "ndwi_alagamento_km2": 0.434,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S11 O4",
+   "di": -11,
+   "dj": -4,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5835,
+    -30.221899999999998,
+    -53.533500000000004,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 51.4
+  },
+  {
+   "area": "S11 O3",
+   "di": -11,
+   "dj": -3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.5335,
+    -30.221899999999998,
+    -53.4835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 57.2
+  },
+  {
+   "area": "S11 O2",
+   "di": -11,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.221899999999998,
+    -53.4335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 39.8
+  },
+  {
+   "area": "S11 O1",
+   "di": -11,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.221899999999998,
+    -53.3835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 2.204,
+   "ndwi_permanente_km2": 0.169,
+   "ndwi_alagamento_km2": 1.116,
+   "iou_agua": 0.565
+  },
+  {
+   "area": "S11 L0",
+   "di": -11,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.221899999999998,
+    -53.3335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.915,
+   "ndwi_permanente_km2": 0.245,
+   "ndwi_alagamento_km2": 2.749,
+   "iou_agua": 0.593
+  },
+  {
+   "area": "S11 L1",
+   "di": -11,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -30.221899999999998,
+    -53.283500000000004,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.66,
+   "ndwi_permanente_km2": 0.698,
+   "ndwi_alagamento_km2": 1.232,
+   "iou_agua": 0.513
+  },
+  {
+   "area": "S11 L2",
+   "di": -11,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -30.221899999999998,
+    -53.2335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.317,
+   "ndwi_alagamento_km2": 0.447,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S11 L3",
+   "di": -11,
+   "dj": 3,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2335,
+    -30.221899999999998,
+    -53.1835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 13.5,
+   "som_permanente_km2": 1.016,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.482,
+   "ndwi_alagamento_km2": 0.443,
+   "iou_agua": 0.746
+  },
+  {
+   "area": "S11 L5",
+   "di": -11,
+   "dj": 5,
+   "tile": "22JBM",
+   "bbox": [
+    -53.1335,
+    -30.221899999999998,
+    -53.0835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 75.4
+  },
+  {
+   "area": "S11 L6",
+   "di": -11,
+   "dj": 6,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0835,
+    -30.221899999999998,
+    -53.033500000000004,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 75.4
+  },
+  {
+   "area": "S11 L7",
+   "di": -11,
+   "dj": 7,
+   "tile": "22JBM",
+   "bbox": [
+    -53.0335,
+    -30.221899999999998,
+    -52.9835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 43.3
+  },
+  {
+   "area": "S11 L8",
+   "di": -11,
+   "dj": 8,
+   "tile": "22JCM",
+   "bbox": [
+    -52.9835,
+    -30.221899999999998,
+    -52.9335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 65.4
+  },
+  {
+   "area": "S11 L14",
+   "di": -11,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -30.221899999999998,
+    -52.6335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.6,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.178,
+   "ndwi_alagamento_km2": 0.244,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S11 L15",
+   "di": -11,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -30.221899999999998,
+    -52.5835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 1.694,
+   "ndwi_permanente_km2": 0.607,
+   "ndwi_alagamento_km2": 0.192,
+   "iou_agua": 0.472
+  },
+  {
+   "area": "S11 L16",
+   "di": -11,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -30.221899999999998,
+    -52.533500000000004,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.247,
+   "ndwi_alagamento_km2": 0.287,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S11 L17",
+   "di": -11,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -30.221899999999998,
+    -52.4835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 1.464,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.815,
+   "ndwi_alagamento_km2": 0.491,
+   "iou_agua": 0.856
+  },
+  {
+   "area": "S11 L18",
+   "di": -11,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -30.221899999999998,
+    -52.4335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 4.116,
+   "ndwi_permanente_km2": 0.276,
+   "ndwi_alagamento_km2": 3.156,
+   "iou_agua": 0.826
+  },
+  {
+   "area": "S11 L19",
+   "di": -11,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -30.221899999999998,
+    -52.3835,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.666,
+   "ndwi_alagamento_km2": 0.376,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S11 L20",
+   "di": -11,
+   "dj": 20,
+   "tile": "22JCM",
+   "bbox": [
+    -52.3835,
+    -30.221899999999998,
+    -52.3335,
+    -30.1719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.213,
+   "ndwi_alagamento_km2": 0.202,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 O2",
+   "di": -12,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.2719,
+    -53.4335,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 65.6
+  },
+  {
+   "area": "S12 O1",
+   "di": -12,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.2719,
+    -53.3835,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 19.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 3.07,
+   "ndwi_permanente_km2": 0.161,
+   "ndwi_alagamento_km2": 2.146,
+   "iou_agua": 0.741
+  },
+  {
+   "area": "S12 L0",
+   "di": -12,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.2719,
+    -53.3335,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.054,
+   "ndwi_alagamento_km2": 0.117,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L1",
+   "di": -12,
+   "dj": 1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3335,
+    -30.2719,
+    -53.283500000000004,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 2.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.098,
+   "ndwi_alagamento_km2": 0.044,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L2",
+   "di": -12,
+   "dj": 2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.2835,
+    -30.2719,
+    -53.2335,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 27.0
+  },
+  {
+   "area": "S12 L14",
+   "di": -12,
+   "dj": 14,
+   "tile": "22JCM",
+   "bbox": [
+    -52.683499999999995,
+    -30.2719,
+    -52.6335,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.9,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.107,
+   "ndwi_alagamento_km2": 0.1,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L15",
+   "di": -12,
+   "dj": 15,
+   "tile": "22JCM",
+   "bbox": [
+    -52.6335,
+    -30.2719,
+    -52.5835,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.7,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.084,
+   "ndwi_alagamento_km2": 0.104,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L16",
+   "di": -12,
+   "dj": 16,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5835,
+    -30.2719,
+    -52.533500000000004,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 4.3,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.118,
+   "ndwi_alagamento_km2": 0.178,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L17",
+   "di": -12,
+   "dj": 17,
+   "tile": "22JCM",
+   "bbox": [
+    -52.5335,
+    -30.2719,
+    -52.4835,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.0,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.389,
+   "ndwi_alagamento_km2": 0.198,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L18",
+   "di": -12,
+   "dj": 18,
+   "tile": "22JCM",
+   "bbox": [
+    -52.4835,
+    -30.2719,
+    -52.4335,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 1.8,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.186,
+   "ndwi_alagamento_km2": 0.14,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S12 L19",
+   "di": -12,
+   "dj": 19,
+   "tile": "22JCM",
+   "bbox": [
+    -52.433499999999995,
+    -30.2719,
+    -52.3835,
+    -30.2219
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 0.1,
+   "som_permanente_km2": 0.0,
+   "som_alagamento_km2": 0.0,
+   "ndwi_permanente_km2": 0.298,
+   "ndwi_alagamento_km2": 0.106,
+   "iou_agua": 0.0
+  },
+  {
+   "area": "S13 O2",
+   "di": -13,
+   "dj": -2,
+   "tile": "22JBM",
+   "bbox": [
+    -53.4835,
+    -30.321899999999996,
+    -53.4335,
+    -30.2719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 90.1
+  },
+  {
+   "area": "S13 O1",
+   "di": -13,
+   "dj": -1,
+   "tile": "22JBM",
+   "bbox": [
+    -53.433499999999995,
+    -30.321899999999996,
+    -53.3835,
+    -30.2719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 86.4
+  },
+  {
+   "area": "S13 L0",
+   "di": -13,
+   "dj": 0,
+   "tile": "22JBM",
+   "bbox": [
+    -53.3835,
+    -30.321899999999996,
+    -53.3335,
+    -30.2719
+   ],
+   "data_depois": "2024-05-06",
+   "pct_nuvens": 37.7
+  }
+ ]
+}

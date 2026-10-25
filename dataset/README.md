@@ -14,6 +14,8 @@ mesmas áreas antes do alagamento. Cada evento tem uma pasta, gerada por
 | `kaoh_chen/` | Kaoh Chen e planície do Mekong - Camboja, julho de 2017 | 21/04/2017 | 30/07/2017 | 147 |
 | `sa_khut/` | Sa Khut e vale do rio Mun - Tailândia, agosto de 2017 | 03/06/2017 | 02/08/2017 | 64 |
 | `assuncao/` | Assunção e rio Paraguai - Paraguai, janeiro de 2016 | 22/10/2015 | 13/01/2016 | 95 |
+| `restinga_seca/` | Restinga Sêca, alto Jacuí e Vacacaí - RS, maio de 2024 (só áreas fora de `porto_alegre/`) | 21/04/2024 | 06/05/2024 | 121 |
+| `phrai_bueng/` | Phrai Bueng e várzea do rio Mun - Tailândia, agosto de 2017 | 05/03/2017 | 02/08/2017 | 46 |
 
 ## Arquivos de cada área
 
@@ -32,9 +34,13 @@ relação ao centro do evento (ex.: `N03_O12` = 3 áreas ao norte e 12 a oeste) 
 
 Os identificadores das cenas também ficam nas tags de cada GeoTIFF.
 
+Uma área que cobre mais de 50% de uma área de outra pasta com as mesmas datas
+não é salva de novo (ex.: Restinga Sêca e Porto Alegre usam as mesmas cenas, e
+as 148 áreas de Restinga Sêca que já estavam em `porto_alegre/` foram puladas).
+
 ## Dados brutos fora do git
 
-Os GeoTIFF brutos (`*_bruto.tif`, ~1,6 GB para Porto Alegre e ~0,7 GB para Pelotas e ~0,6 GB para Kaoh Chen, ~0,3 GB para Sa Khut e ~0,4 GB para Assunção) não são versionados
+Os GeoTIFF brutos (`*_bruto.tif`, ~1,6 GB para Porto Alegre e ~0,7 GB para Pelotas e ~0,6 GB para Kaoh Chen, ~0,3 GB para Sa Khut e ~0,4 GB para Assunção, ~0,4 GB para Restinga Sêca e ~0,2 GB para Phrai Bueng) não são versionados
 no git, para o repositório não ficar pesado. Estão no git as imagens RGB, as
 máscaras e o `indice.csv`. Para gerar os brutos de novo:
 
@@ -52,6 +58,12 @@ máscaras e o `indice.csv`. Para gerar os brutos de novo:
 
     python explorarAlagamento.py --evento "Assunção" --raio-max 15
     python criarDataset.py --evento "Assunção"
+
+    python explorarAlagamento.py --evento "Restinga Sêca" --raio-max 25
+    python criarDataset.py --evento "Restinga Sêca"   # depois de porto_alegre, para pular as áreas repetidas
+
+    python explorarAlagamento.py --evento "Phrai Bueng" --raio-max 15
+    python criarDataset.py --evento "Phrai Bueng"
 
 `explorarAlagamento.py` guarda as cenas lidas em `cache_explorar/`, que
 `criarDataset.py` usa para escrever o dataset. As cenas usadas em cada área estão

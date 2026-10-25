@@ -17,6 +17,8 @@ Arquivos de cada área, em dataset/<evento>/:
 <area> é a posição na grade em relação ao centro do evento (ex.: N03_O12 = 3
 áreas ao norte e 12 a oeste) e lat/lon são as coordenadas do centro da área.
 O índice de todos os arquivos fica em dataset/<evento>/indice.csv.
+Áreas que já estão em outra pasta do dataset com as mesmas datas (sobreposição
+acima de --sobreposicao-max) são puladas, para não duplicar imagens.
 
 Uso:
     python criarDataset.py --evento "Porto Alegre" --pasta-cache <cache de explorarAlagamento.py>
@@ -66,6 +68,9 @@ if __name__ == "__main__":
     parser.add_argument("--evento", default="Porto Alegre", help="Localidade de eventos_inundacao.csv")
     parser.add_argument("--pasta-cache", default="cache_explorar", help="Cache usado por explorarAlagamento.py")
     parser.add_argument("--pasta-dataset", default="dataset")
+    parser.add_argument("--sobreposicao-max", type=float, default=0.5,
+                        help="Pula áreas que cobrem mais que essa fração de uma área já existente em outra pasta "
+                             "do dataset com as mesmas datas (evita imagens duplicadas)")
     args = parser.parse_args()
 
     evento = processarEventos.nome_arquivo(args.evento)
@@ -79,7 +84,32 @@ if __name__ == "__main__":
             itens[id_cena] = sentinelUtils.buscar_item(id_cena)
         return itens[id_cena]
 
+    # Áreas já salvas em outras pastas do dataset: (bbox, data de antes, data da enchente)
+    existentes = []
+    for indice in glob.glob(os.path.join(args.pasta_dataset, "*", "indice.csv")):
+        if os.path.dirname(indice) == pasta:
+            continue
+        with open(indice, encoding="utf-8") as f:
+            por_area = {}
+            for l in csv.DictReader(f):
+                por_area.setdefault(l["arquivo_mascara"], {})[l["estado"]] = l
+        for d in por_area.values():
+            l = d["enchente"]
+            existentes.append(([float(l[k]) for k in ("lon_min", "lat_min", "lon_max", "lat_max")],
+                               d["antes"]["data"], l["data"], l["evento"]))
+
+    def sobreposta(bbox, data_antes, data_enchente):
+        for b, da, de, ev in existentes:
+            if (da, de) != (data_antes, data_enchente):
+                continue
+            larg = min(bbox[2], b[2]) - max(bbox[0], b[0])
+            alt = min(bbox[3], b[3]) - max(bbox[1], b[1])
+            if larg > 0 and alt > 0 and larg * alt > args.sobreposicao_max * (bbox[2] - bbox[0]) * (bbox[3] - bbox[1]):
+                return ev
+        return None
+
     linhas = []
+    puladas_sobreposicao = {}
     for arquivo_resultado in sorted(glob.glob(os.path.join(pasta_cache, "resultado_*.pkl"))):
         with open(arquivo_resultado, "rb") as f:
             area = pickle.load(f)
@@ -89,6 +119,10 @@ if __name__ == "__main__":
         dados = np.load(arquivo_cache)
         id_antes, id_depois = [str(c) for c in dados["cenas"]]
         item_antes, item_depois = item(id_antes), item(id_depois)
+        ev = sobreposta(area["bbox"], item_antes.datetime.strftime("%Y-%m-%d"), item_depois.datetime.strftime("%Y-%m-%d"))
+        if ev:
+            puladas_sobreposicao[ev] = puladas_sobreposicao.get(ev, 0) + 1
+            continue
 
         # Georreferência: a área foi lida do retângulo da área, reprojetado para o UTM do tile
         crs = "EPSG:%d" % epsg_da_cena(item_depois)
@@ -133,3 +167,5 @@ if __name__ == "__main__":
         escritor.writeheader()
         escritor.writerows(linhas)
     print("\n%d áreas, %d imagens salvas em %s" % (len(linhas) // 2, len(linhas), pasta))
+    for ev, n in puladas_sobreposicao.items():
+        print("%d áreas puladas por já estarem na pasta de %s (mesmas datas)" % (n, ev))
