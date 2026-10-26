@@ -19,6 +19,9 @@ mesmas áreas antes do alagamento. Cada evento tem uma pasta, gerada por
 | `dadu/` | Dadu, Lago Manchar e Indo - Sindh, Paquistão, setembro de 2022 | 27/06/2022 | 05/09/2022 | 347 |
 | `conselice/` | Conselice e Bassa Romagna - Emilia-Romagna, Itália, maio de 2023 | 03/04/2023 | 23/05/2023 | 39 |
 | `nilo_branco/` | Nilo Branco (estado do Nilo Branco) - Sudão, agosto de 2019 | 07/06/2019 | 31/08/2019 | 469 |
+| `palamas/` | Palamas, Larissa e vale do Pineios (Tempestade Daniel) - Tessália, Grécia, setembro de 2023 | 31/08/2023 | 10/09/2023 | 155 |
+| `uralsk/` | Uralsk e rio Ural (degelo) - Cazaquistão, abril de 2024 | 18/10/2023 | 20/04/2024 | 72 |
+| `lokoja/` | Lokoja e confluência Níger-Benue - Nigéria, outubro de 2022 | 22/04/2022 | 19/10/2022 | 56 |
 
 ## Arquivos de cada área
 
@@ -31,11 +34,14 @@ relação ao centro do evento (ex.: `N03_O12` = 3 áreas ao norte e 12 a oeste) 
 |---|---|
 | `..._antes_<data>_bruto.tif` | GeoTIFF, 5 bandas uint16: B02 (azul), B03 (verde), B04 (vermelho), B08 (infravermelho próximo), B11 (infravermelho de ondas curtas, reamostrada de 20 m). Reflectância de superfície = valor / 10000. Projeção UTM do tile, pixels de ~10 m. |
 | `..._enchente_<data>_bruto.tif` | O mesmo, na data da enchente. As duas imagens de uma área estão na mesma grade de pixels. |
-| `..._antes_<data>_rgb.png` e `..._enchente_<data>_rgb.png` | Composição em cor verdadeira (B04, B03, B02), reflectância 0-0,15 escalada para 0-255. Em `dadu/`, `conselice/` e `nilo_branco/` o contraste é automático (percentis 2-98% de cada área, com a mesma escala nas duas datas), porque a escala fixa satura em regiões claras como deserto. |
+| `..._antes_<data>_rgb.png` e `..._enchente_<data>_rgb.png` | Composição em cor verdadeira (B04, B03, B02), reflectância 0-0,15 escalada para 0-255. Em `dadu/`, `conselice/`, `nilo_branco/`, `palamas/`, `uralsk/` e `lokoja/` o contraste é automático (percentis 2-98% de cada área, com a mesma escala nas duas datas), porque a escala fixa satura em regiões claras como deserto. |
 | `..._mascara_invalidos.tif` | 1 = nuvem, sombra ou sem dado em qualquer uma das datas (banda SCL); 0 = válido. |
 | `indice.csv` | Uma linha por imagem: área, coordenadas, data, cena e tile Sentinel-2, CRS, % de pixels inválidos, nomes dos arquivos e o alagamento e a água permanente estimados pelo SOM bi-temporal (km²). |
 
 Os identificadores das cenas também ficam nas tags de cada GeoTIFF.
+
+Em `uralsk/`, a imagem de antes é do outono anterior (18/10/2023): as imagens de
+março de 2024 têm neve, que o índice de água (MNDWI) confunde com água.
 
 Uma área que cobre mais de 50% de uma área de outra pasta com as mesmas datas
 não é salva de novo (ex.: Restinga Sêca e Porto Alegre usam as mesmas cenas, e
@@ -76,6 +82,11 @@ máscaras e o `indice.csv`. Para gerar os brutos de novo:
 
     python explorarAlagamento.py --evento "Nilo Branco" --data-antes 2019-06-07 --data-depois 2019-08-31 --raio-max 15 --rgb-max 0.35
     python criarDataset.py --evento "Nilo Branco" --rgb-contraste auto
+
+    python explorarAlagamento.py --evento "Palamas" --data-antes 2023-08-31 --data-depois 2023-09-10 --raio-max 15 --rgb-max 0.3
+    python explorarAlagamento.py --evento "Uralsk" --data-antes 2023-10-18 --data-depois 2024-04-20 --raio-max 12 --rgb-max 0.3
+    python explorarAlagamento.py --evento "Lokoja" --data-antes 2022-04-22 --data-depois 2022-10-19 --raio-max 12 --rgb-max 0.25
+    python criarDataset.py --evento "Palamas" --rgb-contraste auto   # idem para Uralsk e Lokoja
 
 `explorarAlagamento.py` guarda as cenas lidas em `cache_explorar/`, que
 `criarDataset.py` usa para escrever o dataset. As cenas usadas em cada área estão
