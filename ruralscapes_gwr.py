@@ -13,6 +13,12 @@ Uso:
   # labels/<video>/seg_*.npz, ou máscaras PNG coloridas)
   python ruralscapes_gwr.py --root /caminho/ruralscapes --videos DJI_0043 DJI_0051
 
+  # UAVid (uavid_*/seqN/Images/*.png + uavid_*/seqN/Labels/*.png)
+  python ruralscapes_gwr.py --dataset uavid --root /caminho/uavid --videos seq1 seq2
+
+  # Teste de sanidade: voo simulado sobre uma única imagem rotulada
+  python ruralscapes_gwr.py --dataset uavid4 --pan img.png mask.png
+
   # Validação com sequência sintética com mudança de "estação" no meio
   python ruralscapes_gwr.py --synthetic
 """
@@ -34,18 +40,33 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gwrSeg  # noqa: E402
 import somSeg  # noqa: E402
 
-# Classes do Ruralscapes (ordem dos canais dos rótulos .npz) e cores RGB
-# (convertidas do CLASSES_BGR do código oficial ruralscapes-nn).
-RURAL_CLASSES = ['land', 'forest', 'residential', 'haystack', 'road', 'church',
-                 'car', 'water', 'sky', 'hill', 'person', 'fence']
-RURAL_COLORS = np.array([(0, 255, 0), (0, 127, 0), (255, 255, 0), (255, 127, 0),
-                         (255, 255, 255), (255, 0, 255), (127, 127, 127),
-                         (0, 0, 255), (0, 255, 255), (127, 127, 63),
-                         (255, 0, 0), (127, 127, 0)], dtype=np.uint8)
+# Definição das classes de cada dataset: nomes, cores RGB das máscaras e
+# agrupamento orientado a pouso de emergência (proposta; ajuste conforme o
+# artigo). Rótulos .npz do Ruralscapes seguem a ordem dos nomes.
+DATASETS = {
+    # Cores convertidas do CLASSES_BGR do código oficial ruralscapes-nn
+    'ruralscapes': dict(
+        classes=['land', 'forest', 'residential', 'haystack', 'road', 'church',
+                 'car', 'water', 'sky', 'hill', 'person', 'fence'],
+        colors=[(0, 255, 0), (0, 127, 0), (255, 255, 0), (255, 127, 0),
+                (255, 255, 255), (255, 0, 255), (127, 127, 127), (0, 0, 255),
+                (0, 255, 255), (127, 127, 63), (255, 0, 0), (127, 127, 0)],
+        landing=[0, 1, 1, 1, 0, 1, 1, 2, 3, 1, 1, 1]),
+    # Paleta oficial do UAVid (8 classes)
+    'uavid': dict(
+        classes=['clutter', 'building', 'road', 'tree', 'low_vegetation',
+                 'moving_car', 'static_car', 'human'],
+        colors=[(0, 0, 0), (128, 0, 0), (128, 64, 128), (0, 128, 0),
+                (128, 128, 0), (64, 0, 128), (192, 0, 192), (64, 64, 0)],
+        landing=[1, 1, 0, 1, 0, 1, 1, 1]),
+    # Variante de 4 classes usada em maliksyria/Semantic_Segmentation_UAVid
+    'uavid4': dict(
+        classes=['static', 'road', 'dynamic', 'clutter'],
+        colors=[(128, 0, 0), (0, 128, 0), (0, 0, 128), (0, 0, 0)],
+        landing=[1, 0, 1, 1]),
+}
 
-# Agrupamento orientado a pouso de emergência (proposta; ajuste conforme o artigo)
 LANDING_CLASSES = ['pousavel', 'nao_pousavel', 'agua', 'ceu']
-LANDING_MAP = np.array([0, 1, 1, 1, 0, 1, 1, 2, 3, 1, 1, 1])
 LANDING_COLORS = np.array([(80, 200, 80), (200, 60, 60), (40, 90, 220),
                            (150, 220, 250)], dtype=np.uint8)
 
@@ -58,17 +79,25 @@ def _natural_key(s):
     return [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', s)]
 
 
-def find_ruralscapes_pairs(root, videos=None):
-    """Encontra pares (frame, rótulo) agrupados por vídeo.
+_LABEL_DIR_NAMES = ('labels', 'label', 'gt', 'masks', 'mask')
 
-    Rótulos: arquivos .npz ou .png em qualquer pasta cujo caminho contenha
-    'label' (ex.: labels/<video>/seg_<frame>.npz). O vídeo é o nome da pasta
-    do rótulo. O frame é localizado pelo nome (sem o prefixo 'seg_') em
-    qualquer outra pasta abaixo de root.
+
+def find_pairs(root, videos=None):
+    """Encontra pares (frame, rótulo) agrupados por vídeo/sequência.
+
+    Formatos aceitos:
+      Ruralscapes: rgb_frames/<video>_all/<frame>.jpg + labels/<video>/seg_<frame>.npz
+      UAVid:       uavid_*/seqN/Images/<frame>.png  + uavid_*/seqN/Labels/<frame>.png
+
+    Rótulos são .npz/.npy/.png em pastas cujo caminho contém 'label' (ou
+    gt/mask). O frame correspondente é procurado primeiro na pasta irmã
+    (Images ao lado de Labels) e depois pelo nome em qualquer pasta, sem o
+    prefixo 'seg_'.
     """
     imgs, labs = {}, []
     for dirpath, _, files in os.walk(root):
-        is_label_dir = 'label' in dirpath.lower() or 'gt' in os.path.basename(dirpath).lower()
+        low = dirpath.lower()
+        is_label_dir = ('label' in low or os.path.basename(low) in _LABEL_DIR_NAMES)
         for f in files:
             stem, ext = os.path.splitext(f)
             ext = ext.lower()
@@ -76,17 +105,37 @@ def find_ruralscapes_pairs(root, videos=None):
             if is_label_dir and ext in ('.npz', '.png', '.npy'):
                 labs.append(p)
             elif not is_label_dir and ext in ('.jpg', '.jpeg', '.png'):
-                imgs[stem] = p
+                imgs.setdefault(stem, p)
     seqs = {}
     for lp in labs:
         stem = os.path.splitext(os.path.basename(lp))[0]
         stem = stem[4:] if stem.startswith('seg_') else stem
-        if stem not in imgs:
+        label_dir = os.path.dirname(lp)
+        ip = None
+        # Pasta irmã (ex.: seqN/Labels -> seqN/Images): nomes repetem entre sequências
+        if os.path.basename(label_dir).lower() in _LABEL_DIR_NAMES:
+            parent = os.path.dirname(label_dir)
+            for sib in os.listdir(parent):
+                cand_dir = os.path.join(parent, sib)
+                if sib.lower() in _LABEL_DIR_NAMES or not os.path.isdir(cand_dir):
+                    continue
+                for e in ('.png', '.jpg', '.jpeg'):
+                    c = os.path.join(cand_dir, stem + e)
+                    if os.path.exists(c):
+                        ip = c
+                        break
+                if ip:
+                    break
+            video = os.path.basename(parent)
+        else:
+            video = os.path.basename(label_dir)
+        if ip is None:
+            ip = imgs.get(stem)
+        if ip is None:
             continue
-        video = os.path.basename(os.path.dirname(lp))
         if videos and not any(v in video for v in videos):
             continue
-        seqs.setdefault(video, []).append((imgs[stem], lp, stem))
+        seqs.setdefault(video, []).append((ip, lp, stem))
     for v in seqs:
         seqs[v].sort(key=lambda t: _natural_key(t[2]))
     order = sorted(seqs, key=_natural_key)
@@ -95,33 +144,70 @@ def find_ruralscapes_pairs(root, videos=None):
     return [(v, seqs[v]) for v in order]
 
 
-def load_label(path, shape_hw):
-    """Carrega rótulo como mapa de índices (H, W), -1 = ignorar."""
+def rgb_to_index(rgb, colors):
+    """Converte máscara colorida (H, W, 3) em índices por igualdade exata de
+    cor; cores fora da paleta viram -1 (ignoradas)."""
+    rgb = np.asarray(rgb).astype(np.int64)
+    code = (rgb[..., 0] << 16) | (rgb[..., 1] << 8) | rgb[..., 2]
+    pal = np.asarray(colors, dtype=np.int64)
+    pcode = (pal[:, 0] << 16) | (pal[:, 1] << 8) | pal[:, 2]
+    lab = np.full(code.shape, -1, dtype=int)
+    for i, c in enumerate(pcode):
+        lab[code == c] = i
+    return lab
+
+
+def load_label(path, shape_hw, colors):
+    """Carrega rótulo como mapa de índices (H, W) já no tamanho de trabalho,
+    -1 = ignorar. Máscaras coloridas são redimensionadas (vizinho mais
+    próximo) antes da conversão, para não estourar memória em frames 4K."""
     ext = os.path.splitext(path)[1].lower()
-    if ext == '.npz':
-        arr = np.load(path)['arr_0']
-    elif ext == '.npy':
-        arr = np.load(path)
-    else:
-        rgb = np.asarray(Image.open(path).convert('RGB')).astype(int)
-        d = ((rgb[:, :, None, :] - RURAL_COLORS[None, None].astype(int)) ** 2).sum(-1)
-        arr = np.argmin(d, axis=-1)
-        arr[d.min(-1) > 30 ** 2] = -1
-    if arr.ndim == 3:  # one-hot (H, W, 12)
-        lab = np.argmax(arr, axis=-1)
-        lab[arr.max(-1) <= 0] = -1
-    else:
-        lab = arr.astype(int)
-    im = Image.fromarray((lab + 1).astype(np.uint8))
-    im = im.resize((shape_hw[1], shape_hw[0]), Image.NEAREST)
-    return np.asarray(im).astype(int) - 1
+    size = (shape_hw[1], shape_hw[0])
+    if ext in ('.npz', '.npy'):
+        arr = np.load(path)['arr_0'] if ext == '.npz' else np.load(path)
+        if arr.ndim == 3:  # one-hot (H, W, K)
+            lab = np.argmax(arr, axis=-1)
+            lab[arr.max(-1) <= 0] = -1
+        else:
+            lab = arr.astype(int)
+        im = Image.fromarray((lab + 1).astype(np.uint8)).resize(size, Image.NEAREST)
+        return np.asarray(im).astype(int) - 1
+    im = Image.open(path)
+    if im.mode in ('L', 'I', 'I;16'):  # máscara já em índices
+        return np.asarray(im.resize(size, Image.NEAREST)).astype(int)
+    rgb = np.asarray(im.convert('RGB').resize(size, Image.NEAREST))
+    return rgb_to_index(rgb, colors)
 
 
-def load_frame(img_path, lab_path, width):
+def load_frame(img_path, lab_path, width, colors):
     im = Image.open(img_path).convert('RGB')
     h = int(round(im.height * width / im.width))
     im = np.asarray(im.resize((width, h), Image.BILINEAR))
-    return im, load_label(lab_path, (h, width))
+    return im, load_label(lab_path, (h, width), colors)
+
+
+def make_pan_sequence(img_path, lab_path, colors, n_frames=40, crop=(1024, 540),
+                      width=480, seed=0):
+    """Simula um voo sobre uma única imagem grande: uma janela `crop`
+    percorre a imagem em zigue-zague e cada recorte vira um frame.
+    Serve apenas como teste de sanidade quando não há sequências rotuladas."""
+    big = np.asarray(Image.open(img_path).convert('RGB'))
+    H, W = big.shape[:2]
+    cw, ch = min(crop[0], W), min(crop[1], H)
+    rows = max(1, int(np.ceil(n_frames / 10)))
+    lab_full = load_label(lab_path, (H, W), colors)
+    frames = []
+    for t in range(n_frames):
+        r = t // 10
+        c = t % 10 if r % 2 == 0 else 9 - t % 10
+        y0 = int((H - ch) * (r / max(rows - 1, 1)))
+        x0 = int((W - cw) * (c / 9))
+        h = int(round(ch * width / cw))
+        img = np.asarray(Image.fromarray(big[y0:y0 + ch, x0:x0 + cw]).resize((width, h), Image.BILINEAR))
+        lab = Image.fromarray((lab_full[y0:y0 + ch, x0:x0 + cw] + 1).astype(np.uint8))
+        lab = np.asarray(lab.resize((width, h), Image.NEAREST)).astype(int) - 1
+        frames.append((img, lab))
+    return frames
 
 
 def make_synthetic_sequence(n_frames=60, H=180, W=320, n_classes=5, shift_at=30, seed=0):
@@ -374,19 +460,32 @@ def run(args):
         items = [('estacao_A' if t < len(seq) // 2 else 'estacao_B', 't%03d' % t,
                   (lambda f=f: f)) for t, f in enumerate(seq)]
     else:
-        pairs = find_ruralscapes_pairs(args.root, args.videos)
-        if not pairs:
-            sys.exit('Nenhum par frame/rótulo encontrado em %s' % args.root)
+        ds = DATASETS[args.dataset]
+        mask_colors = ds['colors']
+        landing_map = np.array(ds['landing'])
         if args.classes == 'landing':
             K, class_names, colors = 4, LANDING_CLASSES, LANDING_COLORS
         else:
-            K, class_names, colors = 12, RURAL_CLASSES, RURAL_COLORS
+            K, class_names = len(ds['classes']), ds['classes']
+            colors = np.array(mask_colors, np.uint8)
         items = []
-        for v, lst in pairs:
-            lst = lst[::args.frame_step][:args.max_frames]
-            print('vídeo %s: %d frames rotulados' % (v, len(lst)))
-            for ip, lp, stem in lst:
-                items.append((v, stem, (lambda ip=ip, lp=lp: load_frame(ip, lp, args.width))))
+        if args.pan:
+            seq = make_pan_sequence(args.pan[0], args.pan[1], mask_colors,
+                                    n_frames=args.pan_frames, width=args.width,
+                                    seed=args.seed)
+            name = os.path.splitext(os.path.basename(args.pan[0]))[0]
+            items = [(name, 'pan%03d' % t, (lambda f=f: f)) for t, f in enumerate(seq)]
+            print('voo simulado sobre %s: %d recortes' % (args.pan[0], len(items)))
+        else:
+            pairs = find_pairs(args.root, args.videos)
+            if not pairs:
+                sys.exit('Nenhum par frame/rótulo encontrado em %s' % args.root)
+            for v, lst in pairs:
+                lst = lst[::args.frame_step][:args.max_frames]
+                print('sequência %s: %d frames rotulados' % (v, len(lst)))
+                for ip, lp, stem in lst:
+                    items.append((v, stem, (lambda ip=ip, lp=lp:
+                                            load_frame(ip, lp, args.width, mask_colors))))
 
     methods = [
         GWRMethod('GWR-semi', K, args),
@@ -405,7 +504,7 @@ def run(args):
     for step, (video, fid, loader) in enumerate(items):
         img, lab = loader()
         if (not args.synthetic) and args.classes == 'landing':
-            lab = np.where(lab >= 0, LANDING_MAP[np.clip(lab, 0, None)], -1)
+            lab = np.where(lab >= 0, landing_map[np.clip(lab, 0, None)], -1)
         if video != prev_video:
             boundaries.append((step, video))
             prev_video = video
@@ -483,15 +582,22 @@ def run(args):
         w.writerows(rows)
     save_curves(rows, [m.name for m in methods], boundaries,
                 os.path.join(args.out, 'curvas.png'),
-                'Segmentação online prequencial (%s)' % ('sintético' if args.synthetic else 'Ruralscapes'))
+                'Segmentação online prequencial (%s)' % (
+                    'sintético' if args.synthetic else
+                    args.dataset + (' — voo simulado' if args.pan else '')))
     print('Resultados em', os.path.abspath(args.out))
     return summary
 
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument('--root', help='pasta raiz do Ruralscapes')
-    p.add_argument('--videos', nargs='*', help='vídeos (substrings), na ordem de processamento')
+    p.add_argument('--root', help='pasta raiz do dataset')
+    p.add_argument('--dataset', choices=sorted(DATASETS), default='ruralscapes',
+                   help='define nomes e paleta de cores das classes')
+    p.add_argument('--videos', nargs='*', help='vídeos/sequências (substrings), na ordem de processamento')
+    p.add_argument('--pan', nargs=2, metavar=('IMAGEM', 'MASCARA'),
+                   help='teste de sanidade: simula um voo sobre uma única imagem grande')
+    p.add_argument('--pan-frames', type=int, default=40)
     p.add_argument('--synthetic', action='store_true', help='usa a sequência sintética')
     p.add_argument('--synthetic-frames', type=int, default=60)
     p.add_argument('--classes', choices=['full', 'landing'], default='full')
@@ -513,8 +619,8 @@ def parse_args(argv=None):
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--out', default='resultados_gwr')
     a = p.parse_args(argv)
-    if not a.synthetic and not a.root:
-        p.error('informe --root ou --synthetic')
+    if not a.synthetic and not a.root and not a.pan:
+        p.error('informe --root, --pan ou --synthetic')
     return a
 
 

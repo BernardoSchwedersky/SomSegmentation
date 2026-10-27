@@ -45,7 +45,23 @@ python ruralscapes_gwr.py --root /caminho/ruralscapes --videos DJI_0043 DJI_0051
 
 # Classes agrupadas para pouso de emergência
 python ruralscapes_gwr.py --root ... --classes landing
+
+# UAVid: uavid_*/seqN/Images/*.png + uavid_*/seqN/Labels/*.png (paleta oficial, 8 classes)
+python ruralscapes_gwr.py --dataset uavid --root /caminho/uavid --videos seq1 seq2 seq3
+
+# Teste de sanidade: voo simulado (janela deslizante) sobre uma única imagem rotulada
+python ruralscapes_gwr.py --dataset uavid4 --pan img.png mask.png
 ```
+
+`--dataset` define os nomes e a paleta das classes:
+
+| Valor | Classes |
+|---|---|
+| `ruralscapes` | 12 classes |
+| `uavid` | Paleta oficial do UAVid, 8 classes |
+| `uavid4` | Variante de 4 classes (estático / via / dinâmico / *clutter*) usada em `maliksyria/Semantic_Segmentation_UAVid` |
+
+Máscaras coloridas são convertidas por igualdade exata de cor, depois de redimensionadas. Cores fora da paleta são ignoradas na avaliação.
 
 ### Opções úteis
 
