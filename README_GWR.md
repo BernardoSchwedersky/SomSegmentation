@@ -53,6 +53,42 @@ python ruralscapes_gwr.py --dataset uavid --root /caminho/uavid --videos seq1 se
 python ruralscapes_gwr.py --dataset uavid4 --pan img.png mask.png
 ```
 
+### Semantic Drone Dataset (TU Graz)
+
+O SDD não é um vídeo: são 400 fotos nadir de 6000×4000 px. Mas o EXIF guarda o horário de captura, e o `prepare_sdd.py` usa essa informação para:
+
+- ordenar as fotos na ordem real dos voos;
+- reduzir a resolução;
+- separar os voos por intervalos de mais de 30 minutos entre fotos.
+
+O resultado são 5 voos em dois dias: 21/02/2017 (inverno, voos 00 e 01) e 11/06/2017 (verão, voos 02 a 04). A troca de estação é real.
+
+```bash
+python prepare_sdd.py --src semantic_drone_dataset --dst sdd_prep --width 1500
+python ruralscapes_gwr.py --dataset sdd --root sdd_prep --classes landing --protos 10
+```
+
+As classes 0 (`unlabeled`) e 23 (`conflicting`) são ignoradas. No agrupamento `landing`, as classes ficam assim:
+
+| Grupo | Classes do SDD |
+|---|---|
+| Pousável | paved-area, dirt, grass, gravel, ar-marker |
+| Água | water, pool |
+| Não pousável | todas as demais |
+
+O SDD não tem céu, porque as fotos são nadir.
+
+Resultado (400 fotos, 1% das amostras rotuladas, avaliação prequencial):
+
+| Método | mIoU (pouso) | IoU água | mIoU (24 classes) | Nós | Inferência (ms) |
+|---|---|---|---|---|---|
+| GWR-semi (`--protos 10`) | 0,452 | 0,21 | — | 432 | 15 |
+| GWR-semi (`--protos 30`) | 0,451 | 0,21 | 0,120 | 600 | 36 |
+| k-means online | 0,395 | 0,07 | 0,095 | 100 | 7 |
+| SOM (`somSeg`) | 0,333 | 0,04 | 0,062 | 100 | 5 |
+
+Com `--protos 30`, a rede fica no limite de nós e passa a reciclar continuamente. Com `--protos 10`, ela estabiliza sem reciclar e é mais rápida, com o mesmo mIoU. Esse valor foi escolhido olhando os próprios dados de avaliação; num artigo, fixe-o usando só o primeiro voo.
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |
@@ -60,6 +96,7 @@ python ruralscapes_gwr.py --dataset uavid4 --pan img.png mask.png
 | `ruralscapes` | 12 classes |
 | `uavid` | Paleta oficial do UAVid, 8 classes |
 | `uavid4` | Variante de 4 classes (estático / via / dinâmico / *clutter*) usada em `maliksyria/Semantic_Segmentation_UAVid` |
+| `sdd` | Semantic Drone Dataset, 24 classes em índices; 0 e 23 são ignoradas |
 
 Máscaras coloridas são convertidas por igualdade exata de cor, depois de redimensionadas. Cores fora da paleta são ignoradas na avaliação.
 

@@ -64,6 +64,24 @@ DATASETS = {
         classes=['static', 'road', 'dynamic', 'clutter'],
         colors=[(128, 0, 0), (0, 128, 0), (0, 0, 128), (0, 0, 0)],
         landing=[1, 0, 1, 1]),
+    # Semantic Drone Dataset (TU Graz): máscaras em índices 0-23 (tons de
+    # cinza); 0 = unlabeled e 23 = conflicting são ignorados na avaliação.
+    # Cores do class_dict do dataset, usadas só para visualização.
+    'sdd': dict(
+        classes=['unlabeled', 'paved-area', 'dirt', 'grass', 'gravel', 'water',
+                 'rocks', 'pool', 'vegetation', 'roof', 'wall', 'window', 'door',
+                 'fence', 'fence-pole', 'person', 'dog', 'car', 'bicycle', 'tree',
+                 'bald-tree', 'ar-marker', 'obstacle', 'conflicting'],
+        colors=[(0, 0, 0), (128, 64, 128), (130, 76, 0), (0, 102, 0),
+                (112, 103, 87), (28, 42, 168), (48, 41, 30), (0, 50, 89),
+                (107, 142, 35), (70, 70, 70), (102, 102, 156), (254, 228, 12),
+                (254, 148, 12), (190, 153, 153), (153, 153, 153), (255, 22, 96),
+                (102, 51, 0), (9, 143, 150), (119, 11, 32), (51, 51, 0),
+                (190, 250, 190), (112, 150, 146), (2, 135, 115), (255, 0, 0)],
+        # pousável: pavimento, terra, grama, cascalho, marcador AR (solo plano)
+        landing=[1, 0, 0, 0, 0, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                 1, 0, 1, 1],
+        ignore=[0, 23]),
 }
 
 LANDING_CLASSES = ['pousavel', 'nao_pousavel', 'agua', 'ceu']
@@ -399,8 +417,12 @@ def save_curves(rows, methods, boundaries, path, title):
         r = [x for x in rows if x['method'] == name]
         t = [x['step'] for x in r]
         miou = np.array([x['miou'] for x in r])
+        # Média móvel que ignora NaN e não puxa as bordas para zero
         k = max(1, len(miou) // 30)
-        sm = np.convolve(np.nan_to_num(miou), np.ones(k) / k, mode='same')
+        valid = ~np.isnan(miou)
+        num = np.convolve(np.where(valid, miou, 0.0), np.ones(k), mode='same')
+        den = np.convolve(valid.astype(float), np.ones(k), mode='same')
+        sm = np.divide(num, den, out=np.full(len(miou), np.nan), where=den > 0)
         ax[0].plot(t, sm, label=name)
         ax[1].plot(t, [x['n_nodes'] for x in r], label=name)
         nov = [x['novelty'] for x in r]
@@ -463,6 +485,7 @@ def run(args):
         ds = DATASETS[args.dataset]
         mask_colors = ds['colors']
         landing_map = np.array(ds['landing'])
+        ignore = ds.get('ignore', [])
         if args.classes == 'landing':
             K, class_names, colors = 4, LANDING_CLASSES, LANDING_COLORS
         else:
@@ -503,8 +526,11 @@ def run(args):
 
     for step, (video, fid, loader) in enumerate(items):
         img, lab = loader()
-        if (not args.synthetic) and args.classes == 'landing':
-            lab = np.where(lab >= 0, landing_map[np.clip(lab, 0, None)], -1)
+        if not args.synthetic:
+            if ignore:
+                lab = np.where(np.isin(lab, ignore), -1, lab)
+            if args.classes == 'landing':
+                lab = np.where(lab >= 0, landing_map[np.clip(lab, 0, None)], -1)
         if video != prev_video:
             boundaries.append((step, video))
             prev_video = video
