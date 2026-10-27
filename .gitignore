@@ -1,2 +1,4 @@
 resultados_gwr/
 resultados_*/
+__pycache__/
+*.pyc
