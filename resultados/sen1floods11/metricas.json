@@ -1,0 +1,594 @@
+{
+ "recortes_avaliados": 395,
+ "recortes_total": 446,
+ "recortes_por_evento": {
+  "Bolivia": 15,
+  "Ghana": 35,
+  "India": 67,
+  "Mekong": 29,
+  "Nigeria": 17,
+  "Pakistan": 21,
+  "Paraguay": 50,
+  "Somalia": 26,
+  "Spain": 30,
+  "Sri-Lanka": 36,
+  "USA": 69
+ },
+ "metricas": {
+  "Todos": {
+   "SOM": {
+    "IoU": 0.7100096975975289,
+    "F1": 0.830415989564333,
+    "precisao": 0.878828740542216,
+    "sensibilidade": 0.7870586518281594,
+    "acuracia": 0.9693633330198633
+   },
+   "NDWI": {
+    "IoU": 0.6698861060304273,
+    "F1": 0.8023135273852278,
+    "precisao": 0.9744111995346915,
+    "sensibilidade": 0.6818815849841222,
+    "acuracia": 0.9679751562587282
+   },
+   "MNDWI": {
+    "IoU": 0.7730164119951749,
+    "F1": 0.8719788567837335,
+    "precisao": 0.9040133327864015,
+    "sensibilidade": 0.8421370201807414,
+    "acuracia": 0.9764330312645507
+   },
+   "S1 Otsu": {
+    "IoU": 0.493830737331357,
+    "F1": 0.6611602305272649,
+    "precisao": 0.6170647376974212,
+    "sensibilidade": 0.7120428677119724,
+    "acuracia": 0.9304432926004417
+   }
+  },
+  "Bolivia": {
+   "SOM": {
+    "IoU": 0.6732056901995985,
+    "F1": 0.8046896973190321,
+    "precisao": 0.9639213206942879,
+    "sensibilidade": 0.6906072408788707,
+    "acuracia": 0.9555769144957484
+   },
+   "NDWI": {
+    "IoU": 0.6583273150913732,
+    "F1": 0.7939654724376287,
+    "precisao": 0.9959086780983896,
+    "sensibilidade": 0.6601125855641348,
+    "acuracia": 0.954601941180164
+   },
+   "MNDWI": {
+    "IoU": 0.7235685031393816,
+    "F1": 0.839616762340972,
+    "precisao": 0.9689256507604874,
+    "sensibilidade": 0.7407581794395754,
+    "acuracia": 0.9624996594109013
+   },
+   "S1 Otsu": {
+    "IoU": 0.709338640685549,
+    "F1": 0.829956831024496,
+    "precisao": 0.7832363674829428,
+    "sensibilidade": 0.8826046661322479,
+    "acuracia": 0.9520762508899742
+   }
+  },
+  "Ghana": {
+   "SOM": {
+    "IoU": 0.6560917975765137,
+    "F1": 0.7923374761430776,
+    "precisao": 0.8849074211001362,
+    "sensibilidade": 0.7173008163687093,
+    "acuracia": 0.9885547507120723
+   },
+   "NDWI": {
+    "IoU": 0.6960286713743952,
+    "F1": 0.8207746521293898,
+    "precisao": 0.983945696129405,
+    "sensibilidade": 0.7040239743722227,
+    "acuracia": 0.9906407953015114
+   },
+   "MNDWI": {
+    "IoU": 0.7746819443299535,
+    "F1": 0.8730375003870808,
+    "precisao": 0.9389752446747266,
+    "sensibilidade": 0.8157528159553581,
+    "acuracia": 0.9927776729939201
+   },
+   "S1 Otsu": {
+    "IoU": 0.3207879446591866,
+    "F1": 0.48575238130593634,
+    "precisao": 0.9654091143847914,
+    "sensibilidade": 0.32451792911026145,
+    "acuracia": 0.9790843171447097
+   }
+  },
+  "India": {
+   "SOM": {
+    "IoU": 0.610735060200397,
+    "F1": 0.7583308705336226,
+    "precisao": 0.7847276453876788,
+    "sensibilidade": 0.7336521791333677,
+    "acuracia": 0.9445173504291892
+   },
+   "NDWI": {
+    "IoU": 0.6154670311908302,
+    "F1": 0.7619679254452417,
+    "precisao": 0.9275878779231378,
+    "sensibilidade": 0.6465305053202618,
+    "acuracia": 0.9520716639887837
+   },
+   "MNDWI": {
+    "IoU": 0.7016242675962323,
+    "F1": 0.8246523994246611,
+    "precisao": 0.8232455178190375,
+    "sensibilidade": 0.8260640978295078,
+    "acuracia": 0.9583181307626617
+   },
+   "S1 Otsu": {
+    "IoU": 0.5353664590910563,
+    "F1": 0.6973793857760779,
+    "precisao": 0.8294005229999599,
+    "sensibilidade": 0.6016161807269903,
+    "acuracia": 0.9380482683747365
+   }
+  },
+  "Mekong": {
+   "SOM": {
+    "IoU": 0.877244059682784,
+    "F1": 0.9346084278791329,
+    "precisao": 0.9365432632678373,
+    "sensibilidade": 0.9326815704879688,
+    "acuracia": 0.9692164261051913
+   },
+   "NDWI": {
+    "IoU": 0.8877033274587542,
+    "F1": 0.9405114824412474,
+    "precisao": 0.9959281988316754,
+    "sensibilidade": 0.8909368306502347,
+    "acuracia": 0.9734166618882869
+   },
+   "MNDWI": {
+    "IoU": 0.9174921993224222,
+    "F1": 0.956970984963207,
+    "precisao": 0.9528279530696269,
+    "sensibilidade": 0.9611502031877555,
+    "acuracia": 0.9796132754731435
+   },
+   "S1 Otsu": {
+    "IoU": 0.7713062673089747,
+    "F1": 0.8708897851761885,
+    "precisao": 0.9817953184077488,
+    "sensibilidade": 0.7824973437628029,
+    "acuracia": 0.9452765036762645
+   }
+  },
+  "Nigeria": {
+   "SOM": {
+    "IoU": 0.8828381417045703,
+    "F1": 0.9377738023782752,
+    "precisao": 0.9260621199302155,
+    "sensibilidade": 0.9497855087562013,
+    "acuracia": 0.97130413737526
+   },
+   "NDWI": {
+    "IoU": 0.8054704821022448,
+    "F1": 0.8922554980399071,
+    "precisao": 0.9914699588880488,
+    "sensibilidade": 0.8110911882038581,
+    "acuracia": 0.9554041807903485
+   },
+   "MNDWI": {
+    "IoU": 0.8965859871723206,
+    "F1": 0.9454735964901531,
+    "precisao": 0.9257823281086127,
+    "sensibilidade": 0.9660207303971532,
+    "acuracia": 0.9746333876568309
+   },
+   "S1 Otsu": {
+    "IoU": 0.6791819067624406,
+    "F1": 0.8089438124925279,
+    "precisao": 0.9680875194109538,
+    "sensibilidade": 0.6947362621676513,
+    "acuracia": 0.9252895598257354
+   }
+  },
+  "Pakistan": {
+   "SOM": {
+    "IoU": 0.666156167034257,
+    "F1": 0.7996323276467043,
+    "precisao": 0.8233213945686176,
+    "sensibilidade": 0.7772683255667135,
+    "acuracia": 0.9805099947612262
+   },
+   "NDWI": {
+    "IoU": 0.39473389241570456,
+    "F1": 0.5660347031963471,
+    "precisao": 0.8921797809739863,
+    "sensibilidade": 0.4145074393695395,
+    "acuracia": 0.9681984748395642
+   },
+   "MNDWI": {
+    "IoU": 0.7117527491141489,
+    "F1": 0.8316069589869084,
+    "precisao": 0.8314223985796336,
+    "sensibilidade": 0.8317916013503753,
+    "acuracia": 0.9831451756033223
+   },
+   "S1 Otsu": {
+    "IoU": 0.06678145131647675,
+    "F1": 0.12520174818199953,
+    "precisao": 0.07241974247774541,
+    "sensibilidade": 0.46171707390148253,
+    "acuracia": 0.6771675928436798
+   }
+  },
+  "Paraguay": {
+   "SOM": {
+    "IoU": 0.5200498551937117,
+    "F1": 0.6842536820970754,
+    "precisao": 0.8591349171091508,
+    "sensibilidade": 0.5685271252718127,
+    "acuracia": 0.9631646849828247
+   },
+   "NDWI": {
+    "IoU": 0.5023718104042795,
+    "F1": 0.668771614223904,
+    "precisao": 0.9972066264001553,
+    "sensibilidade": 0.5030797659377887,
+    "acuracia": 0.9650152630100033
+   },
+   "MNDWI": {
+    "IoU": 0.5632745073768867,
+    "F1": 0.7206341620986825,
+    "precisao": 0.9022502566082097,
+    "sensibilidade": 0.5998824089369208,
+    "acuracia": 0.9673474859910605
+   },
+   "S1 Otsu": {
+    "IoU": 0.45761752203122086,
+    "F1": 0.627897943204636,
+    "precisao": 0.481470346017595,
+    "sensibilidade": 0.9023154240277739,
+    "acuracia": 0.9249201428407748
+   }
+  },
+  "Somalia": {
+   "SOM": {
+    "IoU": 0.596170881946972,
+    "F1": 0.7470013250959404,
+    "precisao": 0.7159822849743924,
+    "sensibilidade": 0.780829803117383,
+    "acuracia": 0.9747245558551814
+   },
+   "NDWI": {
+    "IoU": 0.429950163227677,
+    "F1": 0.6013498571966948,
+    "precisao": 0.9780456917076136,
+    "sensibilidade": 0.4341401113479579,
+    "acuracia": 0.9724931939486101
+   },
+   "MNDWI": {
+    "IoU": 0.6868904265355243,
+    "F1": 0.8143865371815945,
+    "precisao": 0.7724348243494537,
+    "sensibilidade": 0.8611568315300001,
+    "acuracia": 0.9812411297830402
+   },
+   "S1 Otsu": {
+    "IoU": 0.11243190655834252,
+    "F1": 0.2021371481625081,
+    "precisao": 0.12528773039984828,
+    "sensibilidade": 0.5228362249624493,
+    "acuracia": 0.802760759664507
+   }
+  },
+  "Spain": {
+   "SOM": {
+    "IoU": 0.7790598797149026,
+    "F1": 0.8758107454367959,
+    "precisao": 0.8817134058140077,
+    "sensibilidade": 0.869986590622644,
+    "acuracia": 0.9708467003341908
+   },
+   "NDWI": {
+    "IoU": 0.7088812685708032,
+    "F1": 0.8296436757875698,
+    "precisao": 0.9595471041052949,
+    "sensibilidade": 0.7307189843403795,
+    "acuracia": 0.9645416558089536
+   },
+   "MNDWI": {
+    "IoU": 0.811401918032372,
+    "F1": 0.8958828076253271,
+    "precisao": 0.9061816691766684,
+    "sensibilidade": 0.8858154110002935,
+    "acuracia": 0.9756714690853028
+   },
+   "S1 Otsu": {
+    "IoU": 0.6987261777602113,
+    "F1": 0.8226472128444966,
+    "precisao": 0.9282238653984124,
+    "sensibilidade": 0.7386345455487198,
+    "acuracia": 0.9623681637888967
+   }
+  },
+  "Sri-Lanka": {
+   "SOM": {
+    "IoU": 0.7512027182395673,
+    "F1": 0.8579277663464677,
+    "precisao": 0.9444387020084888,
+    "sensibilidade": 0.7859357590891924,
+    "acuracia": 0.9709238084428823
+   },
+   "NDWI": {
+    "IoU": 0.7646194388715867,
+    "F1": 0.8666111480224138,
+    "precisao": 0.9945511486979335,
+    "sensibilidade": 0.76783599872588,
+    "acuracia": 0.973596851379113
+   },
+   "MNDWI": {
+    "IoU": 0.8233312418804332,
+    "F1": 0.9031066028697203,
+    "precisao": 0.9632026753937785,
+    "sensibilidade": 0.8500691492292785,
+    "acuracia": 0.9796248221724595
+   },
+   "S1 Otsu": {
+    "IoU": 0.6319321856929863,
+    "F1": 0.7744588791532923,
+    "precisao": 0.7811455361061398,
+    "sensibilidade": 0.7678857270345935,
+    "acuracia": 0.950040744951019
+   }
+  },
+  "USA": {
+   "SOM": {
+    "IoU": 0.6255441738891535,
+    "F1": 0.7696427866275993,
+    "precisao": 0.9110349095709176,
+    "sensibilidade": 0.6662423378104357,
+    "acuracia": 0.9821741699397918
+   },
+   "NDWI": {
+    "IoU": 0.4061650525663719,
+    "F1": 0.5776918603190797,
+    "precisao": 0.9843095166764884,
+    "sensibilidade": 0.40881191110697873,
+    "acuracia": 0.9732846009069003
+   },
+   "MNDWI": {
+    "IoU": 0.7457260341760171,
+    "F1": 0.8543448623403269,
+    "precisao": 0.9459972930557746,
+    "sensibilidade": 0.7788831901508304,
+    "acuracia": 0.9881294771450021
+   },
+   "S1 Otsu": {
+    "IoU": 0.49646182930187166,
+    "F1": 0.6635141900458372,
+    "precisao": 0.6325271259788348,
+    "sensibilidade": 0.6976937202519721,
+    "acuracia": 0.9683709407605711
+   }
+  }
+ },
+ "metricas_por_fracao_de_agua": {
+  "0-1%": {
+   "n": 138,
+   "SOM": {
+    "IoU": 0.0025284055437632662,
+    "F1": 0.005044057664165396,
+    "precisao": 0.20082644628099172,
+    "sensibilidade": 0.002554103908935159,
+    "acuracia": 0.9967431093482223
+   },
+   "NDWI": {
+    "IoU": 0.2493245185398103,
+    "F1": 0.39913491625253084,
+    "precisao": 0.7381918243454086,
+    "sensibilidade": 0.2735098432852293,
+    "acuracia": 0.9973382269985347
+   },
+   "MNDWI": {
+    "IoU": 0.27019644920684943,
+    "F1": 0.4254404102224795,
+    "precisao": 0.5389252441894201,
+    "sensibilidade": 0.3514362892969382,
+    "acuracia": 0.9969317993881741
+   },
+   "S1 Otsu": {
+    "IoU": 0.019082897064619155,
+    "F1": 0.0374511182938813,
+    "precisao": 0.019879218481670374,
+    "sensibilidade": 0.32266846049547515,
+    "acuracia": 0.9463888246030613
+   }
+  },
+  "1-5%": {
+   "n": 111,
+   "SOM": {
+    "IoU": 0.13565988225194675,
+    "F1": 0.23890935018844053,
+    "precisao": 0.5636589006096481,
+    "sensibilidade": 0.15157823129251702,
+    "acuracia": 0.9772982336278919
+   },
+   "NDWI": {
+    "IoU": 0.30240228675389175,
+    "F1": 0.4643761606217683,
+    "precisao": 0.9266229571568811,
+    "sensibilidade": 0.3098214285714286,
+    "acuracia": 0.9831995463388591
+   },
+   "MNDWI": {
+    "IoU": 0.4142599961115308,
+    "F1": 0.5858328698408034,
+    "precisao": 0.7649091556822231,
+    "sensibilidade": 0.4746989795918367,
+    "acuracia": 0.9842224426742101
+   },
+   "S1 Otsu": {
+    "IoU": 0.16302882703309082,
+    "F1": 0.28035216882625436,
+    "precisao": 0.21246082040794134,
+    "sensibilidade": 0.4120085034013605,
+    "acuracia": 0.9502787709333055
+   }
+  },
+  "5-15%": {
+   "n": 70,
+   "SOM": {
+    "IoU": 0.449215997852801,
+    "F1": 0.619943470839919,
+    "precisao": 0.716881397510842,
+    "sensibilidade": 0.5460990278158857,
+    "acuracia": 0.940185464310975
+   },
+   "NDWI": {
+    "IoU": 0.37246347870166974,
+    "F1": 0.542766324177915,
+    "precisao": 0.9648151797421536,
+    "sensibilidade": 0.37759230558171614,
+    "acuracia": 0.9431686888154287
+   },
+   "MNDWI": {
+    "IoU": 0.5702946762420988,
+    "F1": 0.7263537027418083,
+    "precisao": 0.7832668276983675,
+    "sensibilidade": 0.6771510778563007,
+    "acuracia": 0.9544208501510824
+   },
+   "S1 Otsu": {
+    "IoU": 0.37704513745267304,
+    "F1": 0.5476147835649745,
+    "precisao": 0.5247642046439298,
+    "sensibilidade": 0.5725459952095275,
+    "acuracia": 0.9154949143153506
+   }
+  },
+  "15-40%": {
+   "n": 44,
+   "SOM": {
+    "IoU": 0.7197959373874376,
+    "F1": 0.837071331242808,
+    "precisao": 0.8452957068764914,
+    "sensibilidade": 0.8290054530035035,
+    "acuracia": 0.9278322815519546
+   },
+   "NDWI": {
+    "IoU": 0.6138950691362968,
+    "F1": 0.7607620605283008,
+    "precisao": 0.984656365887605,
+    "sensibilidade": 0.6198244092257199,
+    "acuracia": 0.9128232991065129
+   },
+   "MNDWI": {
+    "IoU": 0.7664012972961552,
+    "F1": 0.8677544547428626,
+    "precisao": 0.8953132006236451,
+    "sensibilidade": 0.8418416240454343,
+    "acuracia": 0.9426193924590708
+   },
+   "S1 Otsu": {
+    "IoU": 0.6273249778474115,
+    "F1": 0.7709891833372123,
+    "precisao": 0.8214503848099189,
+    "sensibilidade": 0.7263687870427585,
+    "acuracia": 0.9035026401307442
+   }
+  },
+  "40-100%": {
+   "n": 32,
+   "SOM": {
+    "IoU": 0.9113994926141749,
+    "F1": 0.9536462640446511,
+    "precisao": 0.9491990485113548,
+    "sensibilidade": 0.9581353481942534,
+    "acuracia": 0.9409509960885722
+   },
+   "NDWI": {
+    "IoU": 0.8624733170938821,
+    "F1": 0.9261591123782067,
+    "precisao": 0.9770244140838378,
+    "sensibilidade": 0.8803279673099299,
+    "acuracia": 0.9110094099870799
+   },
+   "MNDWI": {
+    "IoU": 0.9274435088914857,
+    "F1": 0.962356099790316,
+    "precisao": 0.9615027540856043,
+    "sensibilidade": 0.9632109615504906,
+    "acuracia": 0.9522285406257337
+   },
+   "S1 Otsu": {
+    "IoU": 0.7762162422028052,
+    "F1": 0.8740109720426463,
+    "precisao": 0.9563369640962279,
+    "sensibilidade": 0.8047355445200846,
+    "acuracia": 0.8529187516924295
+   }
+  }
+ },
+ "maior_iou_por_recorte": {
+  "SOM": 48,
+  "NDWI": 84,
+  "MNDWI": 232
+ },
+ "erros": {
+  "Ghana_132163": "erro: Menos de 20% de pixels válidos (18%)",
+  "Ghana_134751": "erro: Menos de 20% de pixels válidos (14%)",
+  "Ghana_135389": "erro: Menos de 20% de pixels válidos (9%)",
+  "Ghana_141910": "erro: Menos de 20% de pixels válidos (13%)",
+  "Ghana_144050": "erro: Menos de 20% de pixels válidos (9%)",
+  "Ghana_154838": "erro: Menos de 20% de pixels válidos (13%)",
+  "Ghana_161233": "erro: Menos de 20% de pixels válidos (1%)",
+  "Ghana_168875": "erro: Menos de 20% de pixels válidos (16%)",
+  "Ghana_194723": "erro: Menos de 20% de pixels válidos (18%)",
+  "Ghana_234935": "erro: Menos de 20% de pixels válidos (0%)",
+  "Ghana_247288": "erro: Menos de 20% de pixels válidos (4%)",
+  "Ghana_26376": "erro: Menos de 20% de pixels válidos (0%)",
+  "Ghana_277": "erro: Menos de 20% de pixels válidos (0%)",
+  "Ghana_45911": "erro: Menos de 20% de pixels válidos (10%)",
+  "Ghana_5079": "erro: Menos de 20% de pixels válidos (0%)",
+  "Ghana_83483": "erro: Menos de 20% de pixels válidos (0%)",
+  "Ghana_866994": "erro: Menos de 20% de pixels válidos (18%)",
+  "Ghana_97059": "erro: Menos de 20% de pixels válidos (10%)",
+  "India_979278": "erro: Menos de 20% de pixels válidos (0%)",
+  "Mekong_846007": "erro: Menos de 20% de pixels válidos (19%)",
+  "Nigeria_417184": "erro: Menos de 20% de pixels válidos (4%)",
+  "Pakistan_1027214": "erro: Menos de 20% de pixels válidos (0%)",
+  "Pakistan_1036366": "erro: Menos de 20% de pixels válidos (4%)",
+  "Pakistan_336228": "erro: Menos de 20% de pixels válidos (1%)",
+  "Pakistan_35915": "erro: Menos de 20% de pixels válidos (1%)",
+  "Pakistan_528249": "erro: Menos de 20% de pixels válidos (13%)",
+  "Pakistan_664885": "erro: Menos de 20% de pixels válidos (12%)",
+  "Pakistan_9684": "erro: Menos de 20% de pixels válidos (17%)",
+  "Paraguay_126224": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_12870": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_148318": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_179624": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_198534": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_205585": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_215904": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_225187": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_252217": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_34417": "erro: Nenhuma cena Sentinel-2 na data do evento",
+  "Paraguay_36015": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_36146": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_40936": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_48673": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_581976": "erro: Menos de 20% de pixels válidos (0%)",
+  "Paraguay_80102": "erro: Menos de 20% de pixels válidos (3%)",
+  "Paraguay_913449": "erro: Menos de 20% de pixels válidos (0%)",
+  "Sri-Lanka_1049830": "erro: Menos de 20% de pixels válidos (0%)",
+  "Sri-Lanka_120804": "erro: Menos de 20% de pixels válidos (3%)",
+  "Sri-Lanka_135713": "erro: Menos de 20% de pixels válidos (2%)",
+  "Sri-Lanka_377277": "erro: Menos de 20% de pixels válidos (0%)",
+  "Sri-Lanka_579082": "erro: Menos de 20% de pixels válidos (4%)",
+  "Sri-Lanka_956740": "erro: Menos de 20% de pixels válidos (0%)"
+ }
+}

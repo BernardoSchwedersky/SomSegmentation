@@ -109,6 +109,16 @@ def normalizar_0_255(img, p_min=2, p_max=98):
 def fracao_invalida(item, bbox, resolucao=60):
     return ler_mascara_nuvens(item, bbox, resolucao).mean()
 
+# Repete uma consulta ao catálogo em falhas momentâneas (ex.: "upstream request timeout")
+def _repetir(funcao, tentativas=5):
+    for tentativa in range(tentativas):
+        try:
+            return funcao()
+        except Exception:
+            if tentativa == tentativas - 1:
+                raise
+            time.sleep(10 * 2 ** tentativa)
+
 # Busca todas as cenas que cobrem o bbox no período. Cenas reprocessadas aparecem
 # mais de uma vez: mantém só a versão mais recente de cada aquisição e tile
 def buscar_cenas(bbox, inicio, fim, nuvens_max=100):
@@ -123,7 +133,7 @@ def buscar_cenas(bbox, inicio, fim, nuvens_max=100):
         query={"eo:cloud_cover": {"lt": nuvens_max}},
     )
     cenas = {}
-    for item in busca.items():
+    for item in _repetir(lambda: list(busca.items())):
         chave = (item.datetime.date(), item.properties["s2:mgrs_tile"])
         if chave not in cenas or item.id > cenas[chave].id:
             cenas[chave] = item
@@ -189,7 +199,32 @@ def buscar_item(id_cena):
         "https://planetarycomputer.microsoft.com/api/stac/v1",
         modifier=planetary_computer.sign_inplace,
     )
-    item = next(catalogo.search(collections=["sentinel-2-l2a"], ids=[id_cena]).items(), None)
+    item = _repetir(lambda: next(catalogo.search(collections=["sentinel-2-l2a"], ids=[id_cena]).items(), None))
     if item is None:
         raise RuntimeError("Cena não encontrada: " + id_cena)
     return item
+
+# Lê um asset reprojetado para uma grade de pixels dada (crs, transform, largura,
+# altura), ex.: a grade de um rótulo de referência. Pixels fora da cena ficam com 0
+def ler_asset_na_grade(item, asset, crs, transform, largura, altura, resampling=Resampling.bilinear, tentativas=4):
+    from rasterio.vrt import WarpedVRT
+    for tentativa in range(tentativas):
+        try:
+            with rasterio.open(item.assets[asset].href) as src:
+                with WarpedVRT(src, crs=crs, transform=transform, width=largura, height=altura,
+                               resampling=resampling, nodata=0) as vrt:
+                    return vrt.read(1).astype(float)
+        except rasterio.errors.RasterioIOError:
+            if tentativa == tentativas - 1:
+                raise
+            time.sleep(5 * 2 ** tentativa)
+
+# Bandas em reflectância (0 a 1) e máscara de inválidos (nuvem, sombra ou sem dado) numa grade dada
+def ler_bandas_na_grade(item, bandas, crs, transform, largura, altura):
+    img = np.stack([ler_asset_na_grade(item, b, crs, transform, largura, altura) for b in bandas], axis=2)
+    offset = 1000 if float(item.properties.get("s2:processing_baseline", "0")) >= 4 else 0
+    return np.clip((img - offset) / 10000, 0, 1)
+
+def ler_mascara_nuvens_na_grade(item, crs, transform, largura, altura):
+    scl = ler_asset_na_grade(item, "SCL", crs, transform, largura, altura, resampling=Resampling.nearest)
+    return np.isin(scl, CLASSES_NUVEM_SCL)
