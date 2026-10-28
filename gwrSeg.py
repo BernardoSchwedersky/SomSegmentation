@@ -406,7 +406,7 @@ def calibrate_dist_scale(X, n_protos=100, n=5000, quantile=0.9):
 # Extração de características
 # ---------------------------------------------------------------------------
 
-def extract_features(img, patch_size=2, stride=1, mode='patch'):
+def extract_features(img, patch_size=2, stride=1, mode='patch', levels=4):
     """Extrai uma amostra por posição de uma grade com passo `stride`.
 
     mode='patch': patch (2b+1)x(2b+1) de todos os canais, na mesma ordem de
@@ -453,8 +453,11 @@ def extract_features(img, patch_size=2, stride=1, mode='patch'):
     elif mode == 'filters':
         F, _ = filter_bank(img[:, :, :3].astype(np.float32) / scale)
         X = F[ys][:, xs].reshape(len(ys) * len(xs), F.shape[-1])
+    elif mode == 'pyramid':
+        F, _ = pyramid_features(img[:, :, :3].astype(np.float32) / scale, levels=levels)
+        X = F[ys][:, xs].reshape(len(ys) * len(xs), F.shape[-1])
     else:
-        raise ValueError("mode deve ser 'patch', 'stats' ou 'filters'")
+        raise ValueError("mode deve ser 'patch', 'stats', 'filters' ou 'pyramid'")
     return np.ascontiguousarray(X, dtype=float), (len(ys), len(xs)), (ys, xs)
 
 
@@ -538,6 +541,66 @@ def filter_bank(rgb, color_sigmas=(1, 3, 8), gabor_lambdas=(4, 8, 16),
         feats.append(np.sqrt(np.maximum(blur(L * L, s) - m * m, 0.0)))
         names.append('desvio_s%g' % s)
     return np.stack(feats, -1).astype(np.float32), names
+
+
+def pyramid_features(rgb, levels=4, n_orient=6):
+    """Encoder em pirâmide, no estilo do encoder da U-Net.
+
+    Em cada nível l um banco de filtros *pequeno e fixo* é aplicado à imagem
+    do nível; entre níveis a imagem passa por convolução gaussiana e redução
+    2x2 (cv2.pyrDown = conv + pooling). Como os núcleos não crescem, o campo
+    receptivo efetivo dobra a cada nível (Gabor com lambda = 4, 8, 16, 32...),
+    com custo que cai 4x por nível. Os mapas de cada nível são reamostrados
+    (bilinear) de volta à resolução original e concatenados, como as conexões
+    de salto da U-Net.
+
+    Banco por nível (8 mapas): L, a, b suavizados (sigma 1); energia de Gabor
+    lambda=4 (máximo e média sobre orientações, invariante à rotação);
+    |LoG| sigma 1; gradiente sigma 1; desvio local de L sigma 2.
+
+    Retorna F (H, W, 8 * levels) float32 e os nomes.
+    """
+    import cv2
+    from skimage.color import rgb2lab
+    H, W = rgb.shape[:2]
+    lab = rgb2lab(np.clip(rgb, 0, 1)).astype(np.float32)
+    lab[:, :, 0] /= 100.0
+    lab[:, :, 1:] /= 128.0
+
+    def blur(x, s):
+        return cv2.GaussianBlur(x, (0, 0), s, borderType=cv2.BORDER_REFLECT)
+
+    feats, names = [], []
+    cur = lab
+    for lv in range(levels):
+        h, w = cur.shape[:2]
+        if min(h, w) < 8:
+            break
+        L = np.ascontiguousarray(cur[:, :, 0])
+        maps = [blur(np.ascontiguousarray(cur[:, :, c]), 1.0) for c in range(3)]
+        en = []
+        for k in range(n_orient):
+            ev, od = _gabor_pair(4, np.pi * k / n_orient)
+            re = cv2.filter2D(L, cv2.CV_32F, ev, borderType=cv2.BORDER_REFLECT)
+            im = cv2.filter2D(L, cv2.CV_32F, od, borderType=cv2.BORDER_REFLECT)
+            en.append(blur(np.sqrt(re * re + im * im), 2.0))
+        en = np.stack(en, 0)
+        maps += [en.max(0), en.mean(0)]
+        g = blur(L, 1.0)
+        maps.append(blur(np.abs(cv2.Laplacian(g, cv2.CV_32F, ksize=3)), 2.0))
+        gx = cv2.Sobel(g, cv2.CV_32F, 1, 0, ksize=3)
+        gy = cv2.Sobel(g, cv2.CV_32F, 0, 1, ksize=3)
+        maps.append(blur(np.sqrt(gx * gx + gy * gy), 2.0))
+        m = blur(L, 2.0)
+        maps.append(np.sqrt(np.maximum(blur(L * L, 2.0) - m * m, 0.0)))
+        M = np.stack(maps, -1)
+        if lv > 0:  # "decoder": volta à resolução original (skip connection)
+            M = cv2.resize(M, (W, H), interpolation=cv2.INTER_LINEAR)
+        feats.append(M)
+        names += ['n%d_%s' % (lv, n) for n in
+                  ('L', 'a', 'b', 'gabor_max', 'gabor_media', 'log', 'grad', 'desvio')]
+        cur = cv2.pyrDown(cur)  # conv gaussiana + redução 2x2
+    return np.concatenate(feats, -1).astype(np.float32), names
 
 
 class FeatureNormalizer:

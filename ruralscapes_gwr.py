@@ -291,11 +291,32 @@ class GWRMethod:
         if self.propagate:
             gwrSeg.label_propagation(self.net)
 
-    def predict(self, X):
+    def predict(self, X, shape=None):
+        """Classifica a grade. Com --out-factor f > 1, o GWR só avalia 1 a
+        cada f pontos em cada direção (grade f vezes mais grossa) e as
+        probabilidades e a novidade são interpoladas (bilinear) de volta à
+        grade de avaliação, reduzindo o custo de inferência em ~f^2."""
         if self.net is None:
             return np.zeros(len(X), int), None
-        o = gwrSeg.predict_GWR(self.net, X, use_propagation=self.propagate)
-        return o['label'], o['novelty']
+        f = getattr(self.args, 'out_factor', 1)
+        if f <= 1 or shape is None:
+            o = gwrSeg.predict_GWR(self.net, X, use_propagation=self.propagate)
+            return o['label'], o['novelty']
+        import cv2
+        Hs, Ws = shape
+        Xg = X.reshape(Hs, Ws, -1)[::f, ::f]
+        hc, wc = Xg.shape[:2]
+        o = gwrSeg.predict_GWR(self.net, Xg.reshape(hc * wc, -1), use_propagation=self.propagate)
+        # Interpolação alinhada aos pontos da grade grossa (cantos coincidem)
+        P = o['prob'].reshape(hc, wc, -1).astype(np.float32)
+        nov = o['novelty'].reshape(hc, wc).astype(np.float32)
+        ys = np.minimum(np.arange(Hs) / f, hc - 1).astype(np.float32)
+        xs = np.minimum(np.arange(Ws) / f, wc - 1).astype(np.float32)
+        mx, my = np.meshgrid(xs, ys)
+        Pu = np.stack([cv2.remap(np.ascontiguousarray(P[:, :, k]), mx, my, cv2.INTER_LINEAR,
+                                 borderMode=cv2.BORDER_REPLICATE) for k in range(P.shape[2])], -1)
+        nu = cv2.remap(nov, mx, my, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        return Pu.reshape(Hs * Ws, -1).argmax(1), nu.reshape(-1)
 
     def n_nodes(self):
         return gwrSeg.n_nodes(self.net) if self.net is not None else 0
@@ -570,7 +591,7 @@ def run(args):
             idx = [i for i, x in enumerate(vids) if x == v]
             grid_steps.add(idx[len(idx) // 2])
     grid = []
-    use_norm = args.normalize if args.normalize is not None else (args.features == 'filters')
+    use_norm = args.normalize if args.normalize is not None else (args.features in ('filters', 'pyramid'))
     normalizer = gwrSeg.FeatureNormalizer(args.pca) if (use_norm or args.pca > 0) else None
 
     for step, (video, fid, loader) in enumerate(items):
@@ -584,7 +605,8 @@ def run(args):
             boundaries.append((step, video))
             prev_video = video
         t_feat = time.time()
-        X, shape, (ys, xs) = gwrSeg.extract_features(img, args.patch, args.stride, args.features)
+        X, shape, (ys, xs) = gwrSeg.extract_features(img, args.patch, args.stride, args.features,
+                                                     levels=args.levels)
         if normalizer is not None:
             if not normalizer.fitted:  # ajustado só com o 1º frame, sem rótulos
                 normalizer.fit(X)
@@ -605,7 +627,7 @@ def run(args):
         preds, nov_map = {}, None
         for m in methods:
             t0 = time.time()
-            p, nov = m.predict(X)
+            p, nov = m.predict(X, shape) if isinstance(m, GWRMethod) else m.predict(X)
             t_inf = (time.time() - t0) * 1000
             if step > 0:  # avaliação prequencial (o primeiro frame não tem modelo)
                 C = confusion(y, p, K)
@@ -702,13 +724,17 @@ def parse_args(argv=None):
     p.add_argument('--synthetic-frames', type=int, default=60)
     p.add_argument('--classes', choices=['full', 'landing'], default='full')
     p.add_argument('--width', type=int, default=480, help='largura de trabalho dos frames')
-    p.add_argument('--features', choices=['patch', 'stats', 'filters'], default='stats',
+    p.add_argument('--features', choices=['patch', 'stats', 'filters', 'pyramid'], default='stats',
                    help="'filters' = banco de filtros convolucionais (cor multiescala, "
                         "Gabor invariante à rotação, LoG, gradiente, desvio local)")
     p.add_argument('--normalize', dest='normalize', action='store_true', default=None,
                    help='z-score ajustado no 1º frame (padrão: ligado só para filters)')
     p.add_argument('--no-normalize', dest='normalize', action='store_false')
     p.add_argument('--pca', type=int, default=0, help='nº de componentes PCA (0 = sem PCA)')
+    p.add_argument('--levels', type=int, default=4,
+                   help="níveis do encoder em pirâmide (--features pyramid)")
+    p.add_argument('--out-factor', type=int, default=1,
+                   help='GWR classifica uma grade N vezes mais grossa e interpola as probabilidades')
     p.add_argument('--patch', type=int, default=2, help='meia largura do patch (b)')
     p.add_argument('--stride', type=int, default=4, help='passo da grade de amostras')
     p.add_argument('--samples', type=int, default=3000, help='amostras de treino por frame')

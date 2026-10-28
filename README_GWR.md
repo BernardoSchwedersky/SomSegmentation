@@ -128,6 +128,46 @@ Teste nos voos 01–04, com 3 sementes:
 - **Custo:** a extração de features fica cerca de 8× mais cara na CPU (2 núcleos, 480×320). Numa GPU embarcada, essas convoluções são baratas.
 - **Comparação com os outros métodos** (semente 0, teste): com os mesmos filtros, o k-means também melhora (0,387 → 0,430) e o SOM piora (0,330 → 0,308). O GWR-semi continua o melhor (0,465).
 
+### Redução gradual de resolução, no estilo do encoder da U-Net
+
+**Encoder em pirâmide** (`--features pyramid --levels N`): em cada nível, o mesmo banco pequeno de 8 filtros é aplicado:
+
+- L, a, b suavizados;
+- energia de Gabor com λ = 4, máximo e média sobre as orientações;
+- |LoG|;
+- gradiente;
+- desvio local.
+
+Entre os níveis, a imagem passa por convolução gaussiana e redução 2×2 (`cv2.pyrDown`). Como os núcleos não crescem, o campo receptivo dobra a cada nível (λ efetivo de 4, 8, 16, 32... px), com custo 4× menor por nível. Os mapas voltam à resolução original e são concatenados, como as conexões de salto. Para visualizar o que cada nível captura, use `figura_piramide.py`.
+
+**Saída em grade grossa** (`--out-factor f`): o GWR classifica só 1 a cada f pontos em cada direção, e as probabilidades e a novidade são interpoladas de volta à grade de avaliação.
+
+**Validação** (voo_00, 3 sementes; mIoU):
+
+| Variante | mIoU |
+|---|---|
+| filters (anterior) | 0,424 ± 0,021 |
+| pirâmide 2 níveis | 0,421 ± 0,018 |
+| pirâmide 4 níveis | 0,422 ± 0,026 |
+| **pirâmide 6 níveis** | **0,448 ± 0,015** (escolhida) |
+
+**Teste** (voos 01–04):
+
+| GWR-semi | mIoU teste | Features | Inferência GWR |
+|---|---|---|---|
+| filters (anterior), 3 sementes | 0,472 ± 0,010 | 222 ms | 30 ms |
+| pirâmide 6 níveis, 3 sementes | 0,447 ± 0,008 | 117 ms | 30 ms |
+| pirâmide 6 níveis, `--out-factor 2` | 0,442 | 117 ms | 7,6 ms |
+| pirâmide 6 níveis, `--out-factor 4` | 0,442 | 117 ms | 2,4 ms |
+| *a posteriori:* pirâmide 4 níveis | 0,467 | 100 ms | 30 ms |
+| *a posteriori:* filters + `--out-factor 4` | 0,483 | 236 ms | 2,2 ms |
+
+Conclusões:
+
+1. **A configuração escolhida na validação piorou no teste**, de forma consistente nas três sementes (−0,02 a −0,03). Os níveis 4 e 5 (30×20 e 15×10 px) descrevem a cena quase inteira e não generalizam entre voos com altitudes diferentes. O voo_00 favoreceu essa configuração porque quase não tem água. Num artigo, use validação com mais de um voo (por exemplo, *leave-one-flight-out*).
+2. **Com 4 níveis, a pirâmide empata com o banco anterior** pela metade do custo de extração. Esse resultado é de uma semente e foi visto no teste.
+3. **A saída em grade grossa reduz a inferência do GWR em 12×** (30 → 2,4 ms) sem perda de mIoU. A interpolação das probabilidades ainda suaviza o resultado.
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |
