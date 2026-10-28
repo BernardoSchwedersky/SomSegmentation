@@ -242,6 +242,36 @@ Conclusões:
 3. **Treinar com 3 classes e fundir depois dá praticamente o mesmo resultado** que treinar binário (0,459 contra 0,451). Rotular a água como classe separada não ajuda nem atrapalha; no binário, o falso pousável do GWR+nov é um pouco menor.
 4. **A adaptação sem rótulos continua piorando todos os modelos**, como no cenário de 3 classes.
 
+#### Efeito da entrada: filtros × pirâmide (binário, uma imagem)
+
+O desenho é 2×2, sempre com z-score + PCA 12 ajustados na imagem de treino e com as mesmas 4 imagens de treino:
+
+| Variante | Descrição |
+|---|---|
+| `--features patch` | Pixels RGB crus, em patch 5×5 (a entrada original do `somSeg`) |
+| `--features patch_pyr` | O mesmo patch em cada nível da pirâmide gaussiana (4 níveis), reamostrado e concatenado |
+| `--features filters` | Banco de 22 filtros (resultado da seção anterior) |
+| `--features filters_pyr` | O banco de filtros em cada nível da pirâmide (4 níveis) |
+
+mIoU médio (± desvio entre as 4 imagens de treino) / falso pousável:
+
+| Modelo | Sem filtros, sem pirâmide | Sem filtros, com pirâmide | **Com filtros, sem pirâmide** | Com filtros, com pirâmide |
+|---|---|---|---|---|
+| GWR-cong+nov | 0,353 ± 0,053 / 0,308 | 0,352 ± 0,041 / 0,299 | **0,451 ± 0,021 / 0,245** | 0,333 ± 0,031 / 0,173 |
+| GWR-cong | 0,338 / 0,369 | 0,340 / 0,355 | 0,430 / 0,350 | 0,360 / 0,325 |
+| k-NN | 0,363 / 0,422 | 0,358 / 0,425 | 0,447 / 0,386 | 0,389 / 0,388 |
+| SOM-cong | 0,356 / 0,396 | 0,355 / 0,411 | 0,425 / 0,390 | 0,368 / 0,348 |
+| k-means-cong | 0,412 / 0,433 | 0,353 / 0,400 | 0,422 / 0,399 | 0,390 / 0,437 |
+| Dimensão antes do PCA | 75 | 300 | 22 | 88 |
+| Extração (ms/imagem) | 6 | 189 | ~264 | 342 |
+
+Conclusões:
+
+1. **Os filtros são o que mais importa.** Eles melhoram todos os modelos, e o GWR+nov sobe de 0,353 para 0,451. Com pixels crus, o GWR perde a vantagem em mIoU (o k-means é o melhor, com 0,412), mas a regra de novidade continua reduzindo o falso pousável (0,308 contra 0,37–0,43).
+2. **A pirâmide não ajuda neste protocolo.** Sem filtros, ela não muda nada. Com filtros, ela piora todos os modelos, com variância alta: com a imagem de treino t391, todos caem para cerca de 0,30. Com o banco completo em cada nível, as escalas maiores chegam a ~128 px efetivos, um contexto quase global que, aprendido em uma só imagem, não generaliza. É o mesmo efeito dos níveis profundos no protocolo online.
+3. **Com filtros + pirâmide, a regra de novidade fica conservadora demais.** O falso pousável cai para 0,173, mas à custa de rejeitar terreno pousável (IoU pousável de 0,325 contra 0,514).
+4. **Ressalva:** o PCA 12 é igual em todas as variantes. Nas versões com pirâmide (88 e 300 dimensões), ele descarta proporcionalmente mais informação, o que pode contribuir para a piora. Não ajustei esse valor para não escolher configuração olhando o teste.
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |

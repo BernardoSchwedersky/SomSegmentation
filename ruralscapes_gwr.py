@@ -724,7 +724,7 @@ def parse_args(argv=None):
     p.add_argument('--synthetic-frames', type=int, default=60)
     p.add_argument('--classes', choices=['full', 'landing'], default='full')
     p.add_argument('--width', type=int, default=480, help='largura de trabalho dos frames')
-    p.add_argument('--features', choices=['patch', 'stats', 'filters', 'pyramid'], default='stats',
+    p.add_argument('--features', choices=['patch', 'patch_pyr', 'stats', 'filters', 'filters_pyr', 'pyramid'], default='stats',
                    help="'filters' = banco de filtros convolucionais (cor multiescala, "
                         "Gabor invariante à rotação, LoG, gradiente, desvio local)")
     p.add_argument('--normalize', dest='normalize', action='store_true', default=None,

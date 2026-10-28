@@ -279,6 +279,8 @@ def run(a):
         sys.exit('imagem de treino "%s" não encontrada (ou ambígua)' % a.train_image)
     tr_idx = tr_idx[0]
 
+    feat_ms = []
+
     def load(i):
         v, stem, ip, lp = items[i]
         img, lab = R.load_frame(ip, lp, a.width, ds['colors'])
@@ -286,8 +288,10 @@ def run(a):
         lab = np.where(lab >= 0, lm[np.clip(lab, 0, None)], -1)
         if a.binario:
             lab = np.where(lab == AGUA, NAO_POUSAVEL, lab)
+        t0 = time.time()
         X, shape, (ys, xs) = gwrSeg.extract_features(img, a.patch, a.stride, a.features,
                                                      levels=a.levels)
+        feat_ms.append((time.time() - t0) * 1000)
         return img, lab, X, shape, ys, xs
 
     # ---------------- Treino: uma imagem, 1% dos pontos rotulados ----------
@@ -385,6 +389,8 @@ def run(a):
 
     # ---------------- Resultados -------------------------------------------
     summary = {'args': vars(a), 'train_image': items[tr_idx][:2],
+               'mean_feat_ms': float(np.mean(feat_ms[1:])) if len(feat_ms) > 1 else None,
+               'feat_dim_before_pca': int(norm.mu.shape[0]),
                'labeled_points': dict(zip(class_names, cnt.tolist())), 'methods': {}}
     print('\nResultado (todas as %d imagens não vistas, sem rótulos):' % len(order))
     print(('%-15s %6s ' + '%6s ' * K + '%8s %8s %5s %7s') % (('modelo', 'mIoU') + tuple(n[:6] for n in class_names) +
@@ -433,7 +439,10 @@ def parse_args(argv=None):
     p.add_argument('--adapt-samples', type=int, default=2000,
                    help='pontos (sem rótulo) de cada imagem usados na adaptação')
     p.add_argument('--width', type=int, default=480)
-    p.add_argument('--features', default='filters', choices=['stats', 'filters', 'pyramid'])
+    p.add_argument('--features', default='filters',
+                   choices=['patch', 'patch_pyr', 'stats', 'filters', 'filters_pyr', 'pyramid'],
+                   help="patch = pixels RGB crus (patch 5x5); filters = banco de filtros; "
+                        "*_pyr = o mesmo extrator em cada nível da pirâmide gaussiana")
     p.add_argument('--levels', type=int, default=4)
     p.add_argument('--pca', type=int, default=12)
     p.add_argument('--patch', type=int, default=2)

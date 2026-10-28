@@ -475,8 +475,13 @@ def extract_features(img, patch_size=2, stride=1, mode='patch', levels=4):
     elif mode == 'pyramid':
         F, _ = pyramid_features(img[:, :, :3].astype(np.float32) / scale, levels=levels)
         X = F[ys][:, xs].reshape(len(ys) * len(xs), F.shape[-1])
+    elif mode in ('patch_pyr', 'filters_pyr'):
+        rgb = img[:, :, :3].astype(np.float32) / scale
+        ext = (lambda im: dense_patches(im, b)) if mode == 'patch_pyr' else (lambda im: filter_bank(im)[0])
+        F = gaussian_pyramid_stack(rgb, ext, levels)
+        X = F[ys][:, xs].reshape(len(ys) * len(xs), F.shape[-1])
     else:
-        raise ValueError("mode deve ser 'patch', 'stats', 'filters' ou 'pyramid'")
+        raise ValueError("mode inválido: %s" % mode)
     return np.ascontiguousarray(X, dtype=float), (len(ys), len(xs)), (ys, xs)
 
 
@@ -560,6 +565,39 @@ def filter_bank(rgb, color_sigmas=(1, 3, 8), gabor_lambdas=(4, 8, 16),
         feats.append(np.sqrt(np.maximum(blur(L * L, s) - m * m, 0.0)))
         names.append('desvio_s%g' % s)
     return np.stack(feats, -1).astype(np.float32), names
+
+
+def dense_patches(img, b):
+    """Patch (2b+1)x(2b+1) de todos os canais em cada pixel (bordas
+    replicadas), na ordem canal a canal de prepare_dataset_multichanel.
+    Retorna (H, W, C*(2b+1)^2) float32."""
+    k = 2 * b + 1
+    H, W, C = img.shape
+    f = np.pad(img.astype(np.float32), ((b, b), (b, b), (0, 0)), mode='edge')
+    win = sliding_window_view(f, (k, k), axis=(0, 1))  # (H, W, C, k, k)
+    return np.ascontiguousarray(win.reshape(H, W, C * k * k))
+
+
+def gaussian_pyramid_stack(rgb, extractor, levels=4):
+    """Aplica o mesmo extrator em cada nível da pirâmide gaussiana (conv
+    gaussiana + redução 2x2 entre níveis, como no encoder da U-Net), reamostra
+    os mapas de volta à resolução original (bilinear) e concatena tudo
+    (conexões de salto). O campo receptivo do extrator dobra a cada nível."""
+    import cv2
+    H, W = rgb.shape[:2]
+    out, cur = [], rgb.astype(np.float32)
+    for lv in range(levels):
+        if min(cur.shape[:2]) < 8:
+            break
+        F = extractor(cur).astype(np.float32)
+        if lv > 0:
+            # cv2.resize aceita até 512 canais; redimensiona em blocos
+            F = np.concatenate([cv2.resize(np.ascontiguousarray(F[:, :, i:i + 256]), (W, H),
+                                           interpolation=cv2.INTER_LINEAR).reshape(H, W, -1)
+                                for i in range(0, F.shape[2], 256)], -1)
+        out.append(F)
+        cur = cv2.pyrDown(cur)
+    return np.concatenate(out, -1)
 
 
 def pyramid_features(rgb, levels=4, n_orient=6):
