@@ -86,22 +86,14 @@ RGB_MAX = 0.15
 def cor_verdadeira(refl, rgb_max=None):
     return np.clip(refl[:, :, [BANDAS.index("B04"), BANDAS.index("B03"), BANDAS.index("B02")]] / (rgb_max or RGB_MAX), 0, 1)
 
-# Treina o SOM com uma porcentagem dos pixels sem nuvem e segmenta a imagem toda
+# Treina o SOM com uma porcentagem dos pixels sem nuvem (padrão 2%, sorteada) e
+# segmenta a imagem toda. Usa a versão amostrada e vetorizada abaixo: o resultado
+# é igual ao de montar as janelas de todos os pixels, e 2% dá o mesmo resultado
+# que 1% a 100% nos testes do Sen1Floods11 (experimentoAmostragem.py)
 def treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size=1, som_size=12, epochs=3,
-                        dataset_percentage=0.2, seed=0):
-    numero_canais = ROI_sample_conv.shape[2]
-    all_data, imgInputSOM = somSeg.prepare_dataset_multichanel(ROI_sample_conv, patch_size)
-    validos = np.flatnonzero(~nuvens.ravel())
-    selecionados = np.random.RandomState(seed).choice(validos, int(len(validos) * dataset_percentage), replace=False)
-    train_data = all_data[selecionados]
-    del all_data
-
-    somSeg.rand.seed(seed)  # Mesma inicialização do SOM em todas as execuções
-    SOM = somSeg.create_map(som_size, 1, (2*patch_size+1)*(2*patch_size+1)*numero_canais)
-    SOM = somSeg.train_SOM(SOM, train_data, epochs=epochs)
-
-    # Cada pixel recebe o índice da unidade vencedora (BMU)
-    result = somSeg.evaluate_SOM(SOM, ROI_sample_conv, patch_size)
+                        dataset_percentage=0.02, seed=0):
+    SOM, result, _ = treinar_e_segmentar_amostrado(ROI_sample_conv, nuvens, dataset_percentage, patch_size, som_size,
+                                                   epochs, seed)
     return SOM, result
 
 # Classe de cada pixel a partir da água nas duas datas: água antes e depois é

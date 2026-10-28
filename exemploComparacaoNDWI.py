@@ -43,7 +43,7 @@ arquivo_figura = "comparacao_som_ndwi.png"
 patch_size = 1
 som_size = 12
 epochs = 3
-dataset_percentage = 0.2
+dataset_percentage = 0.02
 
 limiar_agua = 0  # NDWI acima disso indica água, nos dois métodos
 

@@ -31,7 +31,7 @@ CORES_CONC = ["#d9d9d9", "#3fa9f5", "#e7298a", "#ffd92f"]
 # se processada, os mapas e as áreas por classe (as imagens em uint8 e os mapas
 # em int8, para ocupar menos memória em grades grandes)
 def processar_area(item_antes, item_depois, bbox, nome, arquivo_cache=None, nuvens_max_area=20, patch_size=1,
-                   som_size=12, epochs=3, dataset_percentage=0.2, limiar_agua=0):
+                   som_size=12, epochs=3, dataset_percentage=0.02, limiar_agua=0):
     nuvens = enchenteSOM.ler_nuvens(item_antes, item_depois, bbox, arquivo_cache)
     area = {"nome": nome, "bbox": bbox, "pct_nuvens": 100 * nuvens.mean()}
     if area["pct_nuvens"] > nuvens_max_area:
@@ -79,7 +79,7 @@ def processar_area(item_antes, item_depois, bbox, nome, arquivo_cache=None, nuve
 # dicionário por área (as processadas têm os mapas e as áreas por classe)
 def processar_grade(item_antes, item_depois, centro_lon, centro_lat, meia_largura_graus,
                     n_linhas, n_colunas, pasta_cache, nuvens_max_area=20, patch_size=1,
-                    som_size=12, epochs=3, dataset_percentage=0.2, limiar_agua=0):
+                    som_size=12, epochs=3, dataset_percentage=0.02, limiar_agua=0):
     os.makedirs(pasta_cache, exist_ok=True)
     areas_grade = []
     for i in range(n_linhas):

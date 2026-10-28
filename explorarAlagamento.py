@@ -64,7 +64,7 @@ nuvens_max_area = 20          # % máxima de nuvens ou sem dado para processar u
 patch_size = 1
 som_size = 12
 epochs = 3
-dataset_percentage = 0.2
+dataset_percentage = 0.02
 limiar_agua = 0
 
 

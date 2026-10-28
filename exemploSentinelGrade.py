@@ -46,7 +46,7 @@ arquivo_figura = "enchente_grade.png"
 patch_size = 1
 som_size = 12
 epochs = 3
-dataset_percentage = 0.2
+dataset_percentage = 0.02
 
 
 # Retângulo e nome de cada área da grade
