@@ -450,6 +450,118 @@ def extract_features(img, patch_size=2, stride=1, mode='patch'):
         grad = uniform_filter(np.hypot(sobel(L, 0), sobel(L, 1)), size)
         F = np.concatenate([mean, std * 2.0, grad[:, :, None]], axis=-1)
         X = F[ys][:, xs].reshape(len(ys) * len(xs), F.shape[-1])
+    elif mode == 'filters':
+        F, _ = filter_bank(img[:, :, :3].astype(np.float32) / scale)
+        X = F[ys][:, xs].reshape(len(ys) * len(xs), F.shape[-1])
     else:
-        raise ValueError("mode deve ser 'patch' ou 'stats'")
+        raise ValueError("mode deve ser 'patch', 'stats' ou 'filters'")
     return np.ascontiguousarray(X, dtype=float), (len(ys), len(xs)), (ys, xs)
+
+
+# ---------------------------------------------------------------------------
+# Banco de filtros convolucionais
+# ---------------------------------------------------------------------------
+
+_GABOR_CACHE = {}
+
+
+def _gabor_pair(lam, theta):
+    """Par de Gabor em quadratura (par/ímpar), média zero e norma L1 unitária."""
+    key = (lam, theta)
+    if key not in _GABOR_CACHE:
+        import cv2
+        sigma = 0.56 * lam                 # ~1 oitava de largura de banda
+        ksize = int(2 * np.ceil(3 * sigma) + 1)
+        ev = cv2.getGaborKernel((ksize, ksize), sigma, theta, lam, 1.0, 0.0, cv2.CV_32F)
+        od = cv2.getGaborKernel((ksize, ksize), sigma, theta, lam, 1.0, np.pi / 2, cv2.CV_32F)
+        ev -= ev.mean()
+        od -= od.mean()
+        _GABOR_CACHE[key] = (ev / np.abs(ev).sum(), od / np.abs(od).sum())
+    return _GABOR_CACHE[key]
+
+
+def filter_bank(rgb, color_sigmas=(1, 3, 8), gabor_lambdas=(4, 8, 16),
+                n_orient=6, log_sigmas=(1, 2, 4), grad_sigmas=(1, 3),
+                std_sigmas=(3, 8)):
+    """Banco de filtros convolucionais aplicado à imagem (H, W, 3) em [0, 1].
+
+    Grupos de resposta (todos convoluções seguidas de retificação e
+    agregação local com gaussiana, no estilo dos textons):
+      cor     : L, a, b suavizados por gaussianas em várias escalas (contexto)
+      gabor   : energia de Gabor em quadratura (sqrt(par^2 + ímpar^2)) em
+                `n_orient` orientações e 3 comprimentos de onda; para cada
+                escala, guarda o máximo e a média sobre as orientações, o que
+                torna a feature invariante à rotação (câmera nadir)
+      log     : |Laplaciano da gaussiana| (manchas/blobs) em várias escalas
+      grad    : magnitude do gradiente gaussiano
+      desvio  : desvio padrão local de L (rugosidade) em duas escalas
+
+    Retorna F (H, W, D) float32 e a lista de nomes das D features.
+    """
+    import cv2
+    from skimage.color import rgb2lab
+    lab = rgb2lab(np.clip(rgb, 0, 1)).astype(np.float32)
+    lab[:, :, 0] /= 100.0
+    lab[:, :, 1:] /= 128.0
+    L = np.ascontiguousarray(lab[:, :, 0])
+
+    def blur(x, s):
+        return cv2.GaussianBlur(x, (0, 0), s, borderType=cv2.BORDER_REFLECT)
+
+    feats, names = [], []
+    for s in color_sigmas:
+        for c, n in enumerate('Lab'):
+            feats.append(blur(np.ascontiguousarray(lab[:, :, c]), s))
+            names.append('cor_%s_s%g' % (n, s))
+    for lam in gabor_lambdas:
+        en = []
+        for k in range(n_orient):
+            ev, od = _gabor_pair(lam, np.pi * k / n_orient)
+            re = cv2.filter2D(L, cv2.CV_32F, ev, borderType=cv2.BORDER_REFLECT)
+            im = cv2.filter2D(L, cv2.CV_32F, od, borderType=cv2.BORDER_REFLECT)
+            en.append(blur(np.sqrt(re * re + im * im), 0.5 * lam))
+        en = np.stack(en, 0)
+        feats += [en.max(0), en.mean(0)]
+        names += ['gabor_max_l%g' % lam, 'gabor_media_l%g' % lam]
+    for s in log_sigmas:
+        lg = cv2.Laplacian(blur(L, s), cv2.CV_32F, ksize=3) * (s * s)
+        feats.append(blur(np.abs(lg), 2 * s))
+        names.append('log_s%g' % s)
+    for s in grad_sigmas:
+        g = blur(L, s)
+        gx = cv2.Sobel(g, cv2.CV_32F, 1, 0, ksize=3)
+        gy = cv2.Sobel(g, cv2.CV_32F, 0, 1, ksize=3)
+        feats.append(blur(np.sqrt(gx * gx + gy * gy) * s, 2 * s))
+        names.append('grad_s%g' % s)
+    for s in std_sigmas:
+        m = blur(L, s)
+        feats.append(np.sqrt(np.maximum(blur(L * L, s) - m * m, 0.0)))
+        names.append('desvio_s%g' % s)
+    return np.stack(feats, -1).astype(np.float32), names
+
+
+class FeatureNormalizer:
+    """Padronização (z-score) e PCA opcional, ajustados uma única vez com o
+    primeiro frame (sem rótulos) e mantidos fixos, como num sistema embarcado.
+    """
+
+    def __init__(self, n_pca=0):
+        self.n_pca = int(n_pca)
+        self.fitted = False
+
+    def fit(self, X):
+        self.mu = X.mean(0)
+        self.sd = X.std(0) + 1e-6
+        Z = (X - self.mu) / self.sd
+        if self.n_pca > 0 and self.n_pca < X.shape[1]:
+            _, S, Vt = np.linalg.svd(Z - Z.mean(0), full_matrices=False)
+            self.P = Vt[:self.n_pca].T
+            self.explained = float((S[:self.n_pca] ** 2).sum() / (S ** 2).sum())
+        else:
+            self.P = None
+        self.fitted = True
+        return self
+
+    def transform(self, X):
+        Z = (X - self.mu) / self.sd
+        return Z @ self.P if self.P is not None else Z

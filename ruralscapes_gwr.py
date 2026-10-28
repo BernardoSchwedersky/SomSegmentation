@@ -557,6 +557,7 @@ def run(args):
     if args.methods:
         methods = [m for m in methods if m.name in args.methods]
     conf = {m.name: np.zeros((K, K), np.int64) for m in methods}
+    conf_v = {m.name: {} for m in methods}  # confusão acumulada por sequência
     rows, boundaries = [], []
     prev_video = None
     qual_every = max(1, len(items) // args.n_qualitative)
@@ -569,6 +570,8 @@ def run(args):
             idx = [i for i, x in enumerate(vids) if x == v]
             grid_steps.add(idx[len(idx) // 2])
     grid = []
+    use_norm = args.normalize if args.normalize is not None else (args.features == 'filters')
+    normalizer = gwrSeg.FeatureNormalizer(args.pca) if (use_norm or args.pca > 0) else None
 
     for step, (video, fid, loader) in enumerate(items):
         img, lab = loader()
@@ -580,7 +583,16 @@ def run(args):
         if video != prev_video:
             boundaries.append((step, video))
             prev_video = video
+        t_feat = time.time()
         X, shape, (ys, xs) = gwrSeg.extract_features(img, args.patch, args.stride, args.features)
+        if normalizer is not None:
+            if not normalizer.fitted:  # ajustado só com o 1º frame, sem rótulos
+                normalizer.fit(X)
+                if normalizer.P is not None:
+                    print('PCA: %d componentes, %.1f%% da variância' %
+                          (normalizer.n_pca, 100 * normalizer.explained))
+            X = normalizer.transform(X)
+        t_feat = (time.time() - t_feat) * 1000
         y = lab[ys][:, xs].reshape(-1)
 
         # Amostra de treino deste frame e rótulos esparsos
@@ -598,6 +610,8 @@ def run(args):
             if step > 0:  # avaliação prequencial (o primeiro frame não tem modelo)
                 C = confusion(y, p, K)
                 conf[m.name] += C
+                cv = conf_v[m.name].setdefault(video, np.zeros((K, K), np.int64))
+                cv += C
                 miou = float(np.nanmean(iou_from_conf(C))) if (y >= 0).any() else np.nan
             else:
                 miou = np.nan
@@ -608,7 +622,7 @@ def run(args):
                        acc=float((p[y >= 0] == y[y >= 0]).mean()) if step > 0 else np.nan,
                        n_nodes=m.n_nodes(), infer_ms=t_inf, train_s=t_tr,
                        novelty=float(nov.mean()) if nov is not None else None,
-                       n_labeled=int((y_tr >= 0).sum()))
+                       n_labeled=int((y_tr >= 0).sum()), feat_ms=t_feat)
             rows.append(row)
             preds[m.name] = p.reshape(shape)
             if m.name == 'GWR-semi' and nov is not None:
@@ -644,9 +658,13 @@ def run(args):
         summary['methods'][m.name] = {
             'mIoU': float(np.nanmean(iou)),
             'pixel_acc': float(np.diag(C).sum() / max(C.sum(), 1)),
+            'mIoU_per_video': {v: float(np.nanmean(iou_from_conf(Cv)))
+                               for v, Cv in conf_v[m.name].items()},
+            'conf_per_video': {v: Cv.tolist() for v, Cv in conf_v[m.name].items()},
             'IoU_per_class': {c: (None if np.isnan(v) else float(v)) for c, v in zip(class_names, iou)},
             'final_nodes': r[-1]['n_nodes'],
             'mean_infer_ms': float(np.mean([x['infer_ms'] for x in r])),
+            'mean_feat_ms': float(np.mean([x['feat_ms'] for x in r])),
             'mean_train_s': float(np.mean([x['train_s'] for x in r])),
         }
         if isinstance(m, GWRMethod) and m.net is not None:
@@ -684,7 +702,13 @@ def parse_args(argv=None):
     p.add_argument('--synthetic-frames', type=int, default=60)
     p.add_argument('--classes', choices=['full', 'landing'], default='full')
     p.add_argument('--width', type=int, default=480, help='largura de trabalho dos frames')
-    p.add_argument('--features', choices=['patch', 'stats'], default='stats')
+    p.add_argument('--features', choices=['patch', 'stats', 'filters'], default='stats',
+                   help="'filters' = banco de filtros convolucionais (cor multiescala, "
+                        "Gabor invariante à rotação, LoG, gradiente, desvio local)")
+    p.add_argument('--normalize', dest='normalize', action='store_true', default=None,
+                   help='z-score ajustado no 1º frame (padrão: ligado só para filters)')
+    p.add_argument('--no-normalize', dest='normalize', action='store_false')
+    p.add_argument('--pca', type=int, default=0, help='nº de componentes PCA (0 = sem PCA)')
     p.add_argument('--patch', type=int, default=2, help='meia largura do patch (b)')
     p.add_argument('--stride', type=int, default=4, help='passo da grade de amostras')
     p.add_argument('--samples', type=int, default=3000, help='amostras de treino por frame')

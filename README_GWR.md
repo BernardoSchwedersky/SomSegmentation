@@ -89,6 +89,45 @@ Resultado (400 fotos, 1% das amostras rotuladas, avaliação prequencial):
 
 Com `--protos 30`, a rede fica no limite de nós e passa a reciclar continuamente. Com `--protos 10`, ela estabiliza sem reciclar e é mais rápida, com o mesmo mIoU. Esse valor foi escolhido olhando os próprios dados de avaliação; num artigo, fixe-o usando só o primeiro voo.
 
+### Banco de filtros convolucionais na entrada (`--features filters`)
+
+A opção `--features filters` substitui as estatísticas locais de cor por um banco de filtros convolucionais no estilo dos *textons*. Cada resposta é retificada e agregada localmente com uma gaussiana. São 22 features:
+
+| Grupo | Filtros | Features |
+|---|---|---|
+| Cor | L, a, b suavizados (σ = 1, 3, 8) | 9 |
+| Gabor | Energia em quadratura, 6 orientações × λ = 4, 8, 16; máximo e média sobre as orientações | 6 |
+| LoG | Laplaciano da gaussiana em módulo (σ = 1, 2, 4) | 3 |
+| Gradiente | Magnitude do gradiente gaussiano (σ = 1, 3) | 2 |
+| Desvio local | Desvio padrão local de L (σ = 3, 8) | 2 |
+
+Detalhes:
+
+- **Invariância à rotação:** como a câmera é nadir, a orientação da cena é arbitrária. Por isso o Gabor guarda só o máximo e a média sobre as orientações, e não a resposta de cada uma.
+- **Normalização:** z-score e PCA (`--pca`) são ajustados uma única vez, com o primeiro frame e sem rótulos, e depois ficam fixos.
+
+**Protocolo.** A configuração (`--pca 12 --protos 10`) foi escolhida usando só o voo_00. O teste usa os voos 01–04.
+
+| Variante (validação, voo_00) | mIoU |
+|---|---|
+| stats (baseline) | 0,418 |
+| filters | 0,428 |
+| filters + PCA 6 | 0,432 |
+| **filters + PCA 12** | **0,447** |
+| filters + PCA 12, protos 5 / 20 | 0,411 / 0,414 |
+
+Teste nos voos 01–04, com 3 sementes:
+
+| GWR-semi | mIoU teste | Pousável | Não pousável | Água | Features | Inferência |
+|---|---|---|---|---|---|---|
+| stats | 0,452 ± 0,005 | 0,712 | 0,421 | 0,222 | 27 ms | 17 ms |
+| filters + PCA 12 | **0,472 ± 0,010** | 0,711 | 0,444 | 0,261 | 230 ms | 31 ms |
+
+- **Ganho:** +0,020 de mIoU, positivo nas três sementes (+0,013, +0,021, +0,027).
+- **Qualitativo:** as segmentações ficam bem menos ruidosas, e objetos como a mesa e o carro passam a ser recortados inteiros.
+- **Custo:** a extração de features fica cerca de 8× mais cara na CPU (2 núcleos, 480×320). Numa GPU embarcada, essas convoluções são baratas.
+- **Comparação com os outros métodos** (semente 0, teste): com os mesmos filtros, o k-means também melhora (0,387 → 0,430) e o SOM piora (0,330 → 0,308). O GWR-semi continua o melhor (0,465).
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |
