@@ -109,6 +109,49 @@ def treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size=1, som_size=12, epoc
 def classe_por_agua(agua_antes, agua_depois):
     return np.where(agua_depois, np.where(agua_antes, 1, 2), 0)
 
+# Janelas (2*patch_size+1)x(2*patch_size+1) de todos os canais em volta dos pixels
+# indicados (índices na imagem achatada), no mesmo formato de
+# somSeg.prepare_dataset_multichanel (canal a canal, cada janela por linhas, borda
+# repetida), mas sem montar as janelas de todos os pixels
+def extrair_janelas(img, patch_size, indices):
+    k = 2 * patch_size + 1
+    pad = np.pad(img, ((patch_size, patch_size), (patch_size, patch_size), (0, 0)), mode="edge")
+    janelas = np.lib.stride_tricks.sliding_window_view(pad, (k, k), axis=(0, 1))  # (H, W, C, k, k)
+    linhas, colunas = np.unravel_index(indices, img.shape[:2])
+    return janelas[linhas, colunas].reshape(len(indices), -1)
+
+# Unidade vencedora (BMU) de cada pixel, calculada em blocos de forma vetorizada
+# (mesmo resultado de somSeg.evaluate_SOM, que percorre pixel a pixel)
+def segmentar(SOM, img, patch_size, bloco=65536):
+    pesos = SOM["weights"][:, 0, :]
+    n = img.shape[0] * img.shape[1]
+    result = np.empty(n, dtype=int)
+    for inicio in range(0, n, bloco):
+        x = extrair_janelas(img, patch_size, np.arange(inicio, min(inicio + bloco, n)))
+        dist = (x ** 2).sum(1)[:, None] - 2 * x @ pesos.T + (pesos ** 2).sum(1)[None, :]
+        result[inicio:inicio + len(x)] = np.argmin(dist, axis=1)
+    return result.reshape(img.shape[:2])
+
+# Variação com amostragem: treina o SOM só com uma porcentagem dos pixels sem
+# nuvem, sorteada aleatoriamente, montando as janelas apenas desses pixels, e
+# segmenta a imagem toda de forma vetorizada. Retorna também os tempos (s) do
+# treino (sorteio + janelas + treinamento) e da segmentação
+def treinar_e_segmentar_amostrado(ROI_sample_conv, nuvens, porcentagem=0.1, patch_size=1, som_size=12, epochs=3,
+                                  seed=0):
+    import time
+    t0 = time.perf_counter()
+    validos = np.flatnonzero(~nuvens.ravel())
+    n = max(int(round(len(validos) * porcentagem)), som_size)
+    selecionados = np.random.RandomState(seed).choice(validos, min(n, len(validos)), replace=False)
+    train_data = extrair_janelas(ROI_sample_conv, patch_size, selecionados)
+    somSeg.rand.seed(seed)  # Mesma inicialização do SOM em todas as execuções
+    SOM = somSeg.create_map(som_size, 1, train_data.shape[1])
+    SOM = somSeg.train_SOM(SOM, train_data, epochs=epochs)
+    t1 = time.perf_counter()
+    result = segmentar(SOM, ROI_sample_conv, patch_size)
+    t2 = time.perf_counter()
+    return SOM, result, {"treino_s": t1 - t0, "segmentacao_s": t2 - t1, "amostras": len(selecionados)}
+
 # Atribui uma classe a cada unidade a partir do índice de água médio dos seus
 # pixels nas duas datas. Retorna a classe de cada unidade e uma tabela com
 # (unidade, pixels, índice antes, índice depois, classe)

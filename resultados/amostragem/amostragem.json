@@ -1,0 +1,273 @@
+{
+ "recortes": 40,
+ "sementes": 5,
+ "resumo": {
+  "1": {
+   "amostras_media": 2295.125,
+   "treino_s": 0.3914040082100155,
+   "segmentacao_s": 0.9142957706749815,
+   "iou_media": 0.7987435219008157,
+   "iou_min": 0.7964608945293519,
+   "iou_max": 0.803837410707472,
+   "dp_iou_entre_sementes_por_recorte": 0.041532046801333024,
+   "concordancia_100": 0.9771800759928091,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.14627368722092327,
+   "iou_agua_5-15%": 0.4980539118824024,
+   "iou_agua_15-40%": 0.7561318958953537,
+   "iou_agua_40-100%": 0.9007438396783792
+  },
+  "2": {
+   "amostras_media": 4590.475,
+   "treino_s": 0.7399599743449835,
+   "segmentacao_s": 0.9645047589449973,
+   "iou_media": 0.7950257736310948,
+   "iou_min": 0.7804166276818448,
+   "iou_max": 0.8054661764245488,
+   "dp_iou_entre_sementes_por_recorte": 0.02838936165439241,
+   "concordancia_100": 0.9794651373826029,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.041334672991097506,
+   "iou_agua_5-15%": 0.4805672103559431,
+   "iou_agua_15-40%": 0.7727569474683863,
+   "iou_agua_40-100%": 0.8976882583739355
+  },
+  "5": {
+   "amostras_media": 11476.05,
+   "treino_s": 1.73381900727499,
+   "segmentacao_s": 1.166683993945029,
+   "iou_media": 0.796884933796581,
+   "iou_min": 0.7893745314197741,
+   "iou_max": 0.8078254399397281,
+   "dp_iou_entre_sementes_por_recorte": 0.02011800528291912,
+   "concordancia_100": 0.9799309942207145,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.0,
+   "iou_agua_5-15%": 0.4885384978706499,
+   "iou_agua_15-40%": 0.7682475532638896,
+   "iou_agua_40-100%": 0.8991334625686367
+  },
+  "10": {
+   "amostras_media": 22952.175,
+   "treino_s": 3.5011670483599833,
+   "segmentacao_s": 1.2660736561000272,
+   "iou_media": 0.7988249188777713,
+   "iou_min": 0.7924449813204483,
+   "iou_max": 0.8067772191280923,
+   "dp_iou_entre_sementes_por_recorte": 0.030402535577623867,
+   "concordancia_100": 0.9799450317976323,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.038356490293110015,
+   "iou_agua_5-15%": 0.48917521340815373,
+   "iou_agua_15-40%": 0.7786979568399063,
+   "iou_agua_40-100%": 0.8967096056994974
+  },
+  "20": {
+   "amostras_media": 45904.225,
+   "treino_s": 7.038787264795015,
+   "segmentacao_s": 1.323219039509986,
+   "iou_media": 0.7861870589263972,
+   "iou_min": 0.7680571989338864,
+   "iou_max": 0.7944977750022241,
+   "dp_iou_entre_sementes_por_recorte": 0.03103918022695344,
+   "concordancia_100": 0.9779059388338317,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.041747345774285585,
+   "iou_agua_5-15%": 0.49205525072484935,
+   "iou_agua_15-40%": 0.7427749095635511,
+   "iou_agua_40-100%": 0.8923576922549357
+  },
+  "50": {
+   "amostras_media": 114760.675,
+   "treino_s": 17.257079916519995,
+   "segmentacao_s": 1.3686315043150228,
+   "iou_media": 0.7976748792421787,
+   "iou_min": 0.7913513021328067,
+   "iou_max": 0.8099075927330085,
+   "dp_iou_entre_sementes_por_recorte": 0.03552224257084084,
+   "concordancia_100": 0.9788929866857988,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.08294591038004914,
+   "iou_agua_5-15%": 0.4879821400889065,
+   "iou_agua_15-40%": 0.7705059372062796,
+   "iou_agua_40-100%": 0.8991920959699907
+  },
+  "100": {
+   "amostras_media": 229521.4,
+   "treino_s": 34.51815890104001,
+   "segmentacao_s": 1.4438675869949986,
+   "iou_media": 0.7977516242475472,
+   "iou_min": 0.7932831882902059,
+   "iou_max": 0.8036814538338641,
+   "dp_iou_entre_sementes_por_recorte": 0.029084778722728265,
+   "concordancia_100": 1.0,
+   "iou_agua_0-1%": 0.0,
+   "iou_agua_1-5%": 0.04034141537307133,
+   "iou_agua_5-15%": 0.4937555409006012,
+   "iou_agua_15-40%": 0.7717765514691793,
+   "iou_agua_40-100%": 0.8975831889456082
+  }
+ },
+ "por_recorte": [
+  {
+   "recorte": "Ghana_141271",
+   "pct_agua_rotulo": 0.6
+  },
+  {
+   "recorte": "Paraguay_191503",
+   "pct_agua_rotulo": 0.0
+  },
+  {
+   "recorte": "India_177319",
+   "pct_agua_rotulo": 0.6
+  },
+  {
+   "recorte": "USA_181263",
+   "pct_agua_rotulo": 0.5
+  },
+  {
+   "recorte": "Ghana_97516",
+   "pct_agua_rotulo": 0.4
+  },
+  {
+   "recorte": "Nigeria_35845",
+   "pct_agua_rotulo": 0.1
+  },
+  {
+   "recorte": "Paraguay_7894",
+   "pct_agua_rotulo": 0.0
+  },
+  {
+   "recorte": "Paraguay_44682",
+   "pct_agua_rotulo": 0.5
+  },
+  {
+   "recorte": "India_324254",
+   "pct_agua_rotulo": 1.5
+  },
+  {
+   "recorte": "Sri-Lanka_49764",
+   "pct_agua_rotulo": 1.0
+  },
+  {
+   "recorte": "USA_308150",
+   "pct_agua_rotulo": 1.0
+  },
+  {
+   "recorte": "Ghana_597288",
+   "pct_agua_rotulo": 2.1
+  },
+  {
+   "recorte": "USA_826217",
+   "pct_agua_rotulo": 1.7
+  },
+  {
+   "recorte": "Ghana_359826",
+   "pct_agua_rotulo": 1.3
+  },
+  {
+   "recorte": "India_981708",
+   "pct_agua_rotulo": 4.1
+  },
+  {
+   "recorte": "Sri-Lanka_551926",
+   "pct_agua_rotulo": 4.8
+  },
+  {
+   "recorte": "USA_11422",
+   "pct_agua_rotulo": 13.1
+  },
+  {
+   "recorte": "Spain_7604243",
+   "pct_agua_rotulo": 8.1
+  },
+  {
+   "recorte": "USA_58086",
+   "pct_agua_rotulo": 6.1
+  },
+  {
+   "recorte": "India_664410",
+   "pct_agua_rotulo": 5.2
+  },
+  {
+   "recorte": "Paraguay_868895",
+   "pct_agua_rotulo": 6.5
+  },
+  {
+   "recorte": "India_566697",
+   "pct_agua_rotulo": 6.7
+  },
+  {
+   "recorte": "Sri-Lanka_1038087",
+   "pct_agua_rotulo": 5.9
+  },
+  {
+   "recorte": "Somalia_12849",
+   "pct_agua_rotulo": 9.3
+  },
+  {
+   "recorte": "Spain_3285448",
+   "pct_agua_rotulo": 21.5
+  },
+  {
+   "recorte": "Sri-Lanka_713926",
+   "pct_agua_rotulo": 30.1
+  },
+  {
+   "recorte": "India_533192",
+   "pct_agua_rotulo": 36.7
+  },
+  {
+   "recorte": "Bolivia_314919",
+   "pct_agua_rotulo": 38.2
+  },
+  {
+   "recorte": "Nigeria_1095404",
+   "pct_agua_rotulo": 17.7
+  },
+  {
+   "recorte": "India_1068117",
+   "pct_agua_rotulo": 20.2
+  },
+  {
+   "recorte": "Paraguay_822142",
+   "pct_agua_rotulo": 30.6
+  },
+  {
+   "recorte": "Sri-Lanka_92824",
+   "pct_agua_rotulo": 21.8
+  },
+  {
+   "recorte": "Mekong_596495",
+   "pct_agua_rotulo": 73.5
+  },
+  {
+   "recorte": "Nigeria_812045",
+   "pct_agua_rotulo": 52.6
+  },
+  {
+   "recorte": "India_1018317",
+   "pct_agua_rotulo": 77.9
+  },
+  {
+   "recorte": "Ghana_1033830",
+   "pct_agua_rotulo": 40.3
+  },
+  {
+   "recorte": "Mekong_1439641",
+   "pct_agua_rotulo": 73.7
+  },
+  {
+   "recorte": "Pakistan_849790",
+   "pct_agua_rotulo": 66.8
+  },
+  {
+   "recorte": "Bolivia_129334",
+   "pct_agua_rotulo": 62.6
+  },
+  {
+   "recorte": "India_1050276",
+   "pct_agua_rotulo": 45.3
+  }
+ ]
+}
