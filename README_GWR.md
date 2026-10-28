@@ -214,6 +214,34 @@ Conclusões:
 2. **A adaptação não supervisionada piora todos os modelos.** Sem nenhuma fonte de rótulo, os protótipos se deslocam e os novos nós herdam classes por vizinhança, o que gera deriva semântica. Para adaptar é preciso algum sinal de supervisão, ainda que fraco (por exemplo, geometria por profundidade ou LiDAR).
 3. **A vantagem do GWR nesse cenário é a novidade, não a adaptação.** A regra "o que o mapa não reconhece não é pousável" foi a melhor ou empatou nas 4 imagens de treino. Ela reduz o falso pousável de ~0,39–0,44 para 0,28 e eleva a precisão do pousável para 0,84. Para pouso de emergência, esse é o resultado mais relevante. A regra só funciona no modo congelado: com adaptação, os nós novos absorvem a novidade.
 
+#### Cenário binário: pousável × não pousável (`--binario`)
+
+Neste cenário, a água é fundida em "não pousável". As 4 imagens de treino são as mesmas, e os 96 pontos rotulados também.
+
+```bash
+python experimento_uma_imagem.py --root sdd_prep --train-image t013_572 --binario
+```
+
+| Modelo (média das 4) | mIoU | IoU pousável | IoU não pousável | Falso pousável ↓ | Precisão pousável ↑ | 3 classes fundidas depois: mIoU / falso pousável |
+|---|---|---|---|---|---|---|
+| **GWR-cong+nov** | **0,451 ± 0,021** | 0,514 | **0,388** | **0,245** | **0,847** | 0,459 / 0,277 |
+| k-NN | 0,447 ± 0,027 | 0,554 | 0,340 | 0,386 | 0,802 | 0,450 / 0,439 |
+| GWR-cong | 0,430 ± 0,018 | 0,519 | 0,340 | 0,350 | 0,807 | 0,434 / 0,392 |
+| SOM-cong | 0,425 ± 0,025 | 0,522 | 0,327 | 0,390 | 0,784 | 0,425 / 0,390 |
+| k-means-cong | 0,422 ± 0,047 | 0,519 | 0,325 | 0,399 | 0,775 | 0,421 / 0,403 |
+| k-means-adapt | 0,353 ± 0,061 | 0,415 | 0,291 | 0,383 | 0,737 | 0,353 / 0,387 |
+| SOM-adapt | 0,322 ± 0,058 | 0,374 | 0,270 | 0,392 | 0,716 | 0,322 / 0,392 |
+| GWR-adapt | 0,298 ± 0,060 | 0,318 | 0,279 | 0,318 | 0,756 | 0,318 / 0,405 |
+
+A última coluna vem dos experimentos de 3 classes (seção anterior), com água e não pousável fundidos só na avaliação.
+
+Conclusões:
+
+1. **No mIoU, GWR-cong+nov e k-NN empatam** (0,451 contra 0,447): cada um vence em 2 das 4 imagens de treino.
+2. **Na segurança, o GWR-cong+nov é claramente melhor.** O falso pousável cai de 0,386 (k-NN) e ~0,39–0,40 (SOM, k-means) para 0,245, e a precisão do pousável sobe para 0,847. O custo no IoU pousável é pequeno em relação ao GWR sem a regra (0,514 contra 0,519).
+3. **Treinar com 3 classes e fundir depois dá praticamente o mesmo resultado** que treinar binário (0,459 contra 0,451). Rotular a água como classe separada não ajuda nem atrapalha; no binário, o falso pousável do GWR+nov é um pouco menor.
+4. **A adaptação sem rótulos continua piorando todos os modelos**, como no cenário de 3 classes.
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |

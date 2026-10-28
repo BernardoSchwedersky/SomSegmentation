@@ -220,8 +220,8 @@ def save_train_figure(img, gt, lab_pts, colors, class_names, path, title):
     ax[2].set_title('pontos rotulados fornecidos (%d = 1%%)' % len(cc))
     for a in ax:
         a.set_xticks([]); a.set_yticks([])
-    hd = [Patch(color=np.array(colors[k]) / 255.0, label=class_names[k]) for k in range(3)]
-    fig.legend(handles=hd, loc='lower center', ncol=3, frameon=False, fontsize=9)
+    hd = [Patch(color=np.array(colors[k]) / 255.0, label=class_names[k]) for k in range(len(class_names))]
+    fig.legend(handles=hd, loc='lower center', ncol=len(hd), frameon=False, fontsize=9)
     fig.suptitle(title, fontsize=9)
     fig.tight_layout(rect=(0, 0.07, 1, 1))
     fig.savefig(path, dpi=130)
@@ -267,7 +267,8 @@ def run(a):
     gwrSeg.rand.seed(a.seed)
     ds = R.DATASETS[a.dataset]
     lm, ignore = np.array(ds['landing']), ds.get('ignore', [])
-    K, class_names, colors = 3, R.LANDING_CLASSES[:3], R.LANDING_COLORS[:3]
+    K = 2 if a.binario else 3  # binário: água passa a ser não pousável
+    class_names, colors = R.LANDING_CLASSES[:K], R.LANDING_COLORS[:K]
 
     items = []
     for v, lst in R.find_pairs(a.root):
@@ -283,6 +284,8 @@ def run(a):
         img, lab = R.load_frame(ip, lp, a.width, ds['colors'])
         lab = np.where(np.isin(lab, ignore), -1, lab)
         lab = np.where(lab >= 0, lm[np.clip(lab, 0, None)], -1)
+        if a.binario:
+            lab = np.where(lab == AGUA, NAO_POUSAVEL, lab)
         X, shape, (ys, xs) = gwrSeg.extract_features(img, a.patch, a.stride, a.features,
                                                      levels=a.levels)
         return img, lab, X, shape, ys, xs
@@ -384,8 +387,8 @@ def run(a):
     summary = {'args': vars(a), 'train_image': items[tr_idx][:2],
                'labeled_points': dict(zip(class_names, cnt.tolist())), 'methods': {}}
     print('\nResultado (todas as %d imagens não vistas, sem rótulos):' % len(order))
-    print('%-15s %6s %6s %6s %6s %8s %8s %5s %7s' % ('modelo', 'mIoU', 'pous', 'nao', 'agua',
-                                                     'falsoPous', 'precPous', 'tam.', 'inf(ms)'))
+    print(('%-15s %6s ' + '%6s ' * K + '%8s %8s %5s %7s') % (('modelo', 'mIoU') + tuple(n[:6] for n in class_names) +
+                                                          ('falsoPous', 'precPous', 'tam.', 'inf(ms)')))
     for m in models:
         iou = R.iou_from_conf(conf[m.name])
         r = [x for x in rows if x['method'] == m.name]
@@ -400,7 +403,7 @@ def run(a):
         if isinstance(m, GWRModel):
             summary['methods'][m.name]['growth'] = {k: int(v) for k, v in m.net['stats'].items()}
         s = summary['methods'][m.name]
-        print('%-15s %6.3f %6.3f %6.3f %6.3f %8.3f %8.3f %5d %7.1f' % (
+        print(('%-15s %6.3f ' + '%6.3f ' * K + '%8.3f %8.3f %5d %7.1f') % (
             m.name, s['mIoU'], *iou, s['false_landable'], s['landable_precision'],
             s['final_size'], s['mean_infer_ms']))
     with open(os.path.join(a.out, 'summary.json'), 'w') as f:
@@ -410,7 +413,8 @@ def run(a):
         w.writeheader()
         w.writerows(rows)
     save_curves(rows, [m.name for m in models], boundaries, os.path.join(a.out, 'curvas.png'),
-                'Uma imagem de treino (%s), sem rótulos depois' % items[tr_idx][1])
+                'Uma imagem de treino (%s), sem rótulos depois%s' % (items[tr_idx][1],
+                                                                     ' — binário' if a.binario else ''))
     if grid:
         R.save_qualitative_grid(grid, colors, class_names, os.path.join(a.out, 'qual_grade.png'))
     print('Resultados em', os.path.abspath(a.out))
@@ -421,6 +425,8 @@ def parse_args(argv=None):
     p.add_argument('--root', required=True)
     p.add_argument('--dataset', default='sdd', choices=sorted(R.DATASETS))
     p.add_argument('--train-image', required=True, help='nome (ou parte) da imagem de treino')
+    p.add_argument('--binario', action='store_true',
+                   help='só duas classes: água é fundida em não pousável')
     p.add_argument('--label-frac', type=float, default=0.01,
                    help='fração dos pontos da grade da imagem de treino que recebe rótulo')
     p.add_argument('--train-epochs', type=int, default=5)
