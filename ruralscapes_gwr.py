@@ -461,6 +461,43 @@ def save_qualitative(img, gt, preds, novelty, colors, path, title):
     plt.close(fig)
 
 
+def save_qualitative_grid(entries, colors, class_names, path):
+    """Grade com uma linha por imagem: RGB, GT, um mapa por método e a
+    novidade do GWR. `entries` é uma lista de dicionários com img, gt, preds
+    (nome -> mapa), miou (nome -> valor), novelty e title."""
+    from matplotlib.patches import Patch
+    names = list(entries[0]['preds'])
+    ncol = 3 + len(names)
+    nrow = len(entries)
+    h, w = entries[0]['gt'].shape
+    cw = 3.0
+    fig, ax = plt.subplots(nrow, ncol, figsize=(cw * ncol, cw * h / w * nrow + 1.2),
+                           squeeze=False)
+    for r, e in enumerate(entries):
+        ax[r, 0].imshow(e['img'])
+        ax[r, 1].imshow(colorize(e['gt'], colors))
+        for i, n in enumerate(names):
+            ax[r, 2 + i].imshow(colorize(e['preds'][n], colors))
+            ax[r, 2 + i].set_xlabel('mIoU %.2f' % e['miou'][n], fontsize=8, labelpad=2)
+        im = ax[r, -1].imshow(e['novelty'], cmap='magma', vmin=0, vmax=1)
+        ax[r, -1].set_xlabel('média %.2f' % float(np.mean(e['novelty'])), fontsize=8, labelpad=2)
+        ax[r, 0].set_ylabel(e['title'], fontsize=8)
+        for a in ax[r]:
+            a.set_xticks([]); a.set_yticks([])
+    for c, t in enumerate(['RGB', 'GT (anotação)'] + names + ['novidade GWR']):
+        ax[0, c].set_title(t, fontsize=10)
+    present = sorted({int(v) for e in entries for v in np.unique(e['gt']) if v >= 0} |
+                     {int(v) for e in entries for p in e['preds'].values() for v in np.unique(p)})
+    handles = [Patch(color=np.array(colors[k]) / 255.0, label=class_names[k]) for k in present]
+    handles.append(Patch(color='black', label='ignorado'))
+    fig.legend(handles=handles, loc='lower center', ncol=len(handles), fontsize=9, frameon=False)
+    fig.tight_layout(rect=(0, 0.04, 0.97, 1))
+    cax = fig.add_axes([0.975, 0.1, 0.008, 0.8])
+    fig.colorbar(im, cax=cax).ax.tick_params(labelsize=7)
+    fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
 # ---------------------------------------------------------------------------
 # Loop principal
 # ---------------------------------------------------------------------------
@@ -523,6 +560,15 @@ def run(args):
     rows, boundaries = [], []
     prev_video = None
     qual_every = max(1, len(items) // args.n_qualitative)
+    # Imagens da grade qualitativa: passos explícitos e/ou o frame central
+    # de cada sequência
+    grid_steps = set(args.qual_steps or [])
+    if args.qual_per_video:
+        vids = [it[0] for it in items]
+        for v in dict.fromkeys(vids):
+            idx = [i for i, x in enumerate(vids) if x == v]
+            grid_steps.add(idx[len(idx) // 2])
+    grid = []
 
     for step, (video, fid, loader) in enumerate(items):
         img, lab = loader()
@@ -576,6 +622,16 @@ def run(args):
             save_qualitative(img[ys][:, xs], lab[ys][:, xs], sel, nov_map, colors,
                              os.path.join(args.out, 'qual_%03d.png' % step),
                              '%s %s' % (video, fid))
+        if step in grid_steps and step > 0 and nov_map is not None:
+            sel = {k: v for k, v in preds.items() if k in ('GWR-semi', 'SOM', 'k-means')}
+            mi = {r['method']: r['miou'] for r in rows[-len(methods):]}
+            grid.append(dict(img=img[ys][:, xs], gt=lab[ys][:, xs], preds=sel,
+                             miou={k: mi[k] for k in sel}, novelty=nov_map,
+                             title='%s\n%s (#%d)' % (video, fid, step)))
+
+    if grid:
+        save_qualitative_grid(grid, colors, class_names,
+                              os.path.join(args.out, 'qual_grade.png'))
 
     # Resultados agregados
     summary = {'args': {k: v for k, v in vars(args).items()}, 'classes': class_names, 'methods': {}}
@@ -642,6 +698,10 @@ def parse_args(argv=None):
     p.add_argument('--som-shape', type=int, nargs=2, default=[10, 10])
     p.add_argument('--methods', nargs='*', help='subconjunto de métodos')
     p.add_argument('--n-qualitative', type=int, default=6)
+    p.add_argument('--qual-steps', type=int, nargs='*',
+                   help='passos (índice do frame) para a grade qualitativa qual_grade.png')
+    p.add_argument('--qual-per-video', action='store_true',
+                   help='inclui na grade o frame central de cada sequência')
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--out', default='resultados_gwr')
     a = p.parse_args(argv)
