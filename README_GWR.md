@@ -168,6 +168,52 @@ Conclusões:
 2. **Com 4 níveis, a pirâmide empata com o banco anterior** pela metade do custo de extração. Esse resultado é de uma semente e foi visto no teste.
 3. **A saída em grade grossa reduz a inferência do GWR em 12×** (30 → 2,4 ms) sem perda de mIoU. A interpolação das probabilidades ainda suaviza o resultado.
 
+### Protocolo "uma imagem" (`experimento_uma_imagem.py`)
+
+**Regras:**
+
+- Todos os modelos são treinados com **uma única imagem**, na qual só 1% dos pontos da grade (96 pontos) recebe rótulo (pousável / não pousável / água).
+- Depois disso, **nenhum modelo recebe anotação**. As outras 399 imagens são classificadas usando só a própria imagem.
+
+**Modos de cada modelo:**
+
+- *cong* (congelado): o modelo nunca mais muda.
+- *adapt* (adaptativo): o modelo continua aprendendo sem supervisão. No GWR, os nós novos recebem classe só pela propagação no grafo.
+- As duas versões partem do mesmo modelo treinado.
+
+**Variantes e comparação:**
+
+- *+nov*: regra conservadora em que pontos com novidade acima do limiar de crescimento do próprio GWR (1 − a_T ≈ 0,65) viram "não pousável".
+- k-NN treinado só nos 96 pontos rotulados, como referência.
+- Capacidade igualada: `--protos 30` deixa o GWR com cerca de 100 nós após o treino, como o SOM 10×10 e o k-means com 100 grupos.
+
+**Imagens de treino.** Para não depender de uma escolha, repeti o experimento com 4 imagens. A regra foi: em cada voo com as três classes, a imagem mais equilibrada. Ficaram t013 (voo_00), t078 (voo_01), t247 (voo_03) e t391 (voo_04); o voo_02 não tem água.
+
+```bash
+python experimento_uma_imagem.py --root sdd_prep --train-image t013_572
+```
+
+Resultado (média das 4 imagens de treino; 399 imagens avaliadas em cada):
+
+| Modelo | mIoU | Pousável | Não pousável | Água | Falso pousável ↓ | Precisão pousável ↑ |
+|---|---|---|---|---|---|---|
+| **GWR-cong+nov** | **0,312 ± 0,025** | 0,533 | **0,334** | 0,067 | **0,277** | **0,836** |
+| k-NN (só os 96 pontos) | 0,290 ± 0,039 | 0,576 | 0,237 | 0,058 | 0,439 | 0,789 |
+| GWR-cong | 0,279 ± 0,038 | 0,538 | 0,238 | 0,061 | 0,392 | 0,795 |
+| k-means-cong | 0,270 ± 0,046 | 0,520 | 0,241 | 0,049 | 0,403 | 0,773 |
+| SOM-cong | 0,268 ± 0,024 | 0,522 | 0,240 | 0,042 | 0,390 | 0,784 |
+| k-means-adapt | 0,226 ± 0,044 | 0,416 | 0,216 | 0,045 | 0,387 | 0,736 |
+| SOM-adapt | 0,197 ± 0,039 | 0,374 | 0,195 | 0,021 | 0,392 | 0,716 |
+| GWR-adapt | 0,188 ± 0,044 | 0,376 | 0,163 | 0,025 | 0,405 | 0,736 |
+
+"Falso pousável" é a fração dos pixels não pousáveis ou de água classificados como pousáveis, o erro perigoso.
+
+Conclusões:
+
+1. **Uma imagem não cobre a variedade de aparências do SDD.** Todos os métodos ficam entre 0,19 e 0,31 de mIoU, e a água é praticamente irrecuperável. O modelo aprende a aparência da água *daquela* imagem: uma piscina clara em t013, um lago escuro em t247. Depois, generaliza para qualquer região com aparência parecida (cascalho claro, sombras, vegetação escura).
+2. **A adaptação não supervisionada piora todos os modelos.** Sem nenhuma fonte de rótulo, os protótipos se deslocam e os novos nós herdam classes por vizinhança, o que gera deriva semântica. Para adaptar é preciso algum sinal de supervisão, ainda que fraco (por exemplo, geometria por profundidade ou LiDAR).
+3. **A vantagem do GWR nesse cenário é a novidade, não a adaptação.** A regra "o que o mapa não reconhece não é pousável" foi a melhor ou empatou nas 4 imagens de treino. Ela reduz o falso pousável de ~0,39–0,44 para 0,28 e eleva a precisão do pousável para 0,84. Para pouso de emergência, esse é o resultado mais relevante. A regra só funciona no modo congelado: com adaptação, os nós novos absorvem a novidade.
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |

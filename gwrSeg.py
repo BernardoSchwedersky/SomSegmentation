@@ -296,6 +296,25 @@ def train_GWR(gwr, data, labels=None, epochs=1, semi=True, conflict=True,
 # Propagação de rótulos pelo grafo
 # ---------------------------------------------------------------------------
 
+def fill_uninformed(gwr, tol=1e-3):
+    """Nós cuja distribuição propagada continua (quase) uniforme, isto é, sem
+    nenhum caminho até nós rotulados, recebem a distribuição do nó informado
+    mais próximo no espaço de pesos. Evita que o empate (argmax de uma
+    distribuição uniforme) atribua sempre a classe 0."""
+    K = gwr['n_classes']
+    if K == 0 or gwr['Pp'] is None:
+        return gwr
+    idx = np.flatnonzero(gwr['active'][:gwr['top']])
+    Pp = gwr['Pp'][idx]
+    informed = (Pp.max(1) - Pp.min(1)) > tol
+    if informed.all() or not informed.any():
+        return gwr
+    Wi, Wu = gwr['W'][idx[informed]], gwr['W'][idx[~informed]]
+    d2 = (Wu ** 2).sum(1)[:, None] + (Wi ** 2).sum(1)[None] - 2 * Wu @ Wi.T
+    gwr['Pp'][idx[~informed]] = Pp[informed][np.argmin(d2, 1)]
+    return gwr
+
+
 def label_propagation(gwr, n0=5.0, iters=30, sigma2=None):
     """Propaga os rótulos dos nós com evidência para os demais pelo grafo do GWR.
 
