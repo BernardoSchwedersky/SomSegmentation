@@ -296,6 +296,74 @@ def train_GWR(gwr, data, labels=None, epochs=1, semi=True, conflict=True,
 # Propagação de rótulos pelo grafo
 # ---------------------------------------------------------------------------
 
+def train_GNG(gwr, data, labels=None, epochs=1, lam=300, max_nodes=100,
+              eps_b=0.05, eps_n=0.006, alpha=0.5, beta=0.0005, max_age=50,
+              shuffle=True):
+    """Growing Neural Gas (Fritzke, 1995) sobre a mesma estrutura do GWR.
+
+    Diferente do GWR, o GNG cresce em intervalos fixos (a cada `lam` passos),
+    inserindo um nó entre o nó de maior erro acumulado e seu vizinho de maior
+    erro, até `max_nodes`. A rotulagem semi-supervisionada (P, n), a
+    propagação de rótulos e a novidade são as mesmas do GWR, de modo que a
+    comparação isola o mecanismo de crescimento.
+    """
+    data = np.asarray(data, dtype=float)
+    if labels is None:
+        labels = -np.ones(len(data), dtype=int)
+    labels = np.asarray(labels, dtype=int)
+    cfg = gwr['cfg']
+    K = gwr['n_classes']
+    err = gwr.setdefault('err', np.zeros(gwr['W'].shape[0]))
+    W, A, P = gwr['W'], gwr['A'], gwr['P']
+    step = gwr.setdefault('gng_step', 0)
+    for _ in range(epochs):
+        order = rand.permutation(len(data)) if shuffle else np.arange(len(data))
+        for i in order:
+            x, y = data[i], labels[i]
+            top = gwr['top']
+            diff = W[:top] - x
+            d2 = np.einsum('ij,ij->i', diff, diff)
+            b, s = _two_best(d2)
+            err[b] += d2[b]
+            W[b] += eps_b * (x - W[b])
+            nb = _neighbors(gwr, b)
+            if nb.size:
+                W[nb] += eps_n * (x - W[nb])
+                A[b, nb] += 1
+                A[nb, b] += 1
+            _connect(gwr, b, s)
+            nb = _neighbors(gwr, b)
+            for j in nb[A[b, nb] > max_age]:
+                _disconnect(gwr, b, j)
+                if _neighbors(gwr, j).size == 0 and n_nodes(gwr) > 2:
+                    _remove_node(gwr, j)
+            if K > 0 and y >= 0:
+                onehot = np.zeros(K)
+                onehot[y] = 1.0
+                P[b] += cfg['label_rate'] * (onehot - P[b])
+                gwr['n'][b] += 1
+            step += 1
+            if step % lam == 0 and n_nodes(gwr) < max_nodes:
+                act = np.flatnonzero(gwr['active'][:gwr['top']])
+                q = act[np.argmax(err[act])]
+                nq = _neighbors(gwr, q)
+                if nq.size:
+                    f = nq[np.argmax(err[nq])]
+                    r = _new_node(gwr, (W[q] + W[f]) / 2.0, P=(P[q] + P[f]) / 2.0)
+                    if r >= 0:
+                        _disconnect(gwr, q, f)
+                        _connect(gwr, r, q)
+                        _connect(gwr, r, f)
+                        err[q] *= alpha
+                        err[f] *= alpha
+                        err[r] = err[q]
+                        gwr['stats']['inserted_novelty'] += 1
+            err[:gwr['top']] *= (1.0 - beta)
+    gwr['gng_step'] = step
+    gwr['Pp'] = None
+    return gwr
+
+
 def fill_uninformed(gwr, tol=1e-3):
     """Nós cuja distribuição propagada continua (quase) uniforme, isto é, sem
     nenhum caminho até nós rotulados, recebem a distribuição do nó informado

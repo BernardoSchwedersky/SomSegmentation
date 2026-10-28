@@ -272,6 +272,63 @@ Conclusões:
 3. **Com filtros + pirâmide, a regra de novidade fica conservadora demais.** O falso pousável cai para 0,173, mas à custa de rejeitar terreno pousável (IoU pousável de 0,325 contra 0,514).
 4. **Ressalva:** o PCA 12 é igual em todas as variantes. Nas versões com pirâmide (88 e 300 dimensões), ele descarta proporcionalmente mais informação, o que pode contribuir para a piora. Não ajustei esse valor para não escolher configuração olhando o teste.
 
+#### Baselines (`baselines_uma_imagem.py`)
+
+Mesmo protocolo (binário, uma imagem de treino com 96 pontos rotulados, filtros + PCA 12, as mesmas 4 imagens de treino):
+
+| Grupo | Métodos |
+|---|---|
+| Triviais | tudo pousável; tudo não pousável; regressão logística só com a cor Lab |
+| Supervisionados (só os 96 pontos) | k-NN, SVM-RBF, Random Forest, regressão logística (pesos balanceados por classe) |
+| Semi-supervisionados | LabelSpreading com extensão indutiva por k-NN; self-training com SVM na imagem de treino; k-NN-pseudo, que incorpora pseudo-rótulos confiantes de cada imagem de teste |
+| Protótipos | GWR, GNG (mesma rotulagem, propagação e novidade do GWR, crescimento a intervalos fixos, 100 nós), SOM, k-means |
+| Com rejeição (rejeitado = não pousável) | k-NN+rej (distância aos 96 pontos), SOM+rej, k-means+rej, GWR+rej, GNG+rej (distância ao protótipo), GMM+rej (verossimilhança), OCSVM / Isolation Forest / LOF + k-NN |
+
+**Ponto de operação comum:** rejeitar o que for mais estranho que 99% dos pontos da imagem de treino (`--op-quantile 0.99`), com a mesma regra para todos os métodos. GWR e GNG aparecem também com o limiar natural (`+nov`).
+
+**Métricas novas:**
+
+- **Cobertura do pousável:** fração do terreno pousável que o método recupera.
+- **Curvas de segurança:** cobertura × falso pousável, variando o limiar de rejeição.
+- **Ponto de pouso:** em cada imagem, escolhe-se o ponto previsto como pousável mais distante de qualquer área não pousável. Se a área disponível for menor que o raio de segurança (4 pontos da grade = 16 px), o método se abstém. Senão, o pouso é seguro se ≥ 95% do disco no GT é pousável. Todas as imagens têm área pousável segura no GT.
+
+Média das 4 imagens de treino (399 imagens avaliadas cada):
+
+| Método | mIoU | Cobertura pousável | Falso pousável ↓ | Precisão pousável | Pouso seguro | Pouso inseguro ↓ | Abstenção |
+|---|---|---|---|---|---|---|---|
+| SVM-RBF | **0,490** ± 0,046 | 0,663 | 0,309 | 0,826 | 0,815 | 0,176 | 0,009 |
+| SelfTraining-SVM | 0,479 ± 0,031 | 0,615 | 0,250 | 0,847 | 0,823 | 0,156 | 0,021 |
+| OCSVM+kNN | 0,470 ± 0,026 | 0,614 | 0,266 | 0,844 | **0,872** | 0,115 | 0,014 |
+| GNG+rej | 0,464 ± 0,035 | 0,605 | 0,264 | 0,846 | 0,850 | 0,133 | 0,017 |
+| k-NN+rej | 0,458 ± 0,024 | 0,643 | 0,343 | 0,814 | 0,793 | 0,197 | 0,010 |
+| IForest+kNN | 0,454 ± 0,024 | 0,654 | 0,365 | 0,809 | 0,790 | 0,200 | 0,010 |
+| GWR+rej | 0,452 ± 0,028 | 0,552 | **0,204** | **0,864** | 0,856 | **0,112** | 0,032 |
+| GWR+nov | 0,451 ± 0,021 | 0,575 | 0,245 | 0,847 | 0,849 | 0,123 | 0,028 |
+| k-means+rej | 0,448 ± 0,046 | 0,572 | 0,255 | 0,833 | 0,825 | 0,134 | 0,041 |
+| k-NN | 0,447 ± 0,027 | 0,657 | 0,386 | 0,802 | 0,776 | 0,214 | 0,009 |
+| RandomForest | 0,445 ± 0,053 | 0,598 | 0,302 | 0,822 | 0,826 | 0,151 | 0,023 |
+| LabelSpreading | 0,440 ± 0,031 | 0,644 | 0,398 | 0,787 | 0,789 | 0,201 | 0,010 |
+| GNG | 0,435 ± 0,018 | 0,640 | 0,382 | 0,803 | 0,790 | 0,199 | 0,011 |
+| GWR | 0,430 ± 0,018 | 0,607 | 0,350 | 0,807 | 0,783 | 0,198 | 0,019 |
+| SOM+rej | 0,423 ± 0,037 | 0,575 | 0,326 | 0,800 | 0,808 | 0,164 | 0,028 |
+| LogReg | 0,423 ± 0,045 | 0,587 | 0,354 | 0,784 | 0,729 | 0,241 | 0,029 |
+| k-means | 0,422 ± 0,047 | 0,616 | 0,399 | 0,775 | 0,756 | 0,226 | 0,019 |
+| k-NN-pseudo | 0,413 ± 0,118 | 0,583 | 0,392 | 0,753 | 0,660 | 0,334 | 0,006 |
+| cor-logistica | 0,412 ± 0,079 | 0,650 | 0,485 | 0,753 | 0,700 | 0,273 | 0,027 |
+| SOM | 0,409 ± 0,037 | 0,597 | 0,398 | 0,774 | 0,768 | 0,208 | 0,024 |
+| tudo-pousavel | 0,343 | 1,000 | 1,000 | 0,687 | 0,546 | 0,454 | 0,000 |
+| GMM+rej | 0,342 ± 0,075 | 0,353 | 0,145 | 0,841 | 0,715 | 0,120 | 0,165 |
+| GMM | 0,334 ± 0,072 | 0,461 | 0,364 | 0,743 | 0,669 | 0,234 | 0,096 |
+| LOF+kNN | 0,228 ± 0,023 | 0,150 | 0,101 | 0,787 | 0,221 | 0,161 | 0,618 |
+| tudo-nao-pousavel | 0,157 | 0,000 | 0,000 | — | 0,000 | 0,000 | 1,000 |
+
+Conclusões:
+
+1. **O GWR não é o melhor classificador neste protocolo.** O SVM-RBF (0,490) e o self-training com SVM (0,479) superam o GWR+nov (0,451). As diferenças de até ~0,03 ficam dentro da variação entre imagens de treino (desvio de 0,02 a 0,05), mas a do SVM é consistente.
+2. **A vantagem de segurança vem da opção de rejeição, não do GWR em si.** Com a mesma rejeição para todos, as curvas de segurança do k-NN+rej e do Isolation Forest + k-NN ficam iguais ou ligeiramente acima das do GWR (`curvas_seguranca_media.png`). O GNG praticamente coincide com o GWR, então o crescimento por novidade também não é o fator decisivo.
+3. **Na decisão de pouso, o GWR com rejeição está entre os mais seguros.** Tem a menor taxa de pouso inseguro (0,112), empatada com o OCSVM + k-NN (0,115), que tem a maior taxa de pouso seguro (0,872). O GWR+rej faz isso com abstenção baixa (3%) e a maior precisão do pousável (0,864), mas com cobertura menor.
+4. **A adaptação com pseudo-rótulos (k-NN-pseudo) também piora,** com o pior resultado entre os métodos não triviais e variância alta. É a mesma conclusão da adaptação não supervisionada: sem uma fonte externa de supervisão, a adaptação acumula erros.
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |
