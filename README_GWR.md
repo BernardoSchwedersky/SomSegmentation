@@ -329,6 +329,20 @@ Conclusões:
 3. **Na decisão de pouso, o GWR com rejeição está entre os mais seguros.** Tem a menor taxa de pouso inseguro (0,112), empatada com o OCSVM + k-NN (0,115), que tem a maior taxa de pouso seguro (0,872). O GWR+rej faz isso com abstenção baixa (3%) e a maior precisão do pousável (0,864), mas com cobertura menor.
 4. **A adaptação com pseudo-rótulos (k-NN-pseudo) também piora,** com o pior resultado entre os métodos não triviais e variância alta. É a mesma conclusão da adaptação não supervisionada: sem uma fonte externa de supervisão, a adaptação acumula erros.
 
+#### Teste de extrapolação para outro dataset
+
+`baselines_uma_imagem.py` aceita um dataset de teste diferente do de treino. O treino continua com uma imagem do SDD e 96 pontos rotulados; o teste usa as sequências de outro dataset, com as classes mapeadas para pousável / não pousável (água e céu contam como não pousável):
+
+```bash
+# UAVid: uavid_val/seqN/Images/*.png + Labels/*.png (8 classes; road e low_vegetation = pousável)
+python baselines_uma_imagem.py --root sdd_prep --train-image t078_312 \
+    --test-root /caminho/uavid --test-dataset uavid --test-videos seq16 seq17
+
+# Ruralscapes: land e road = pousável
+python baselines_uma_imagem.py --root sdd_prep --train-image t078_312 \
+    --test-root /caminho/ruralscapes --test-dataset ruralscapes
+```
+
 `--dataset` define os nomes e a paleta das classes:
 
 | Valor | Classes |

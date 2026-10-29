@@ -365,28 +365,46 @@ def run(a):
     os.makedirs(a.out, exist_ok=True)
     rs = np.random.RandomState(a.seed)
     gwrSeg.rand.seed(a.seed)
-    ds = R.DATASETS[a.dataset]
-    lm, ignore = np.array(ds['landing']), ds.get('ignore', [])
     K, class_names, colors = 2, R.LANDING_CLASSES[:2], R.LANDING_COLORS[:2]
     from skimage.color import rgb2lab
 
-    items = [(v, stem, ip, lp) for v, lst in R.find_pairs(a.root) for ip, lp, stem in lst]
+    def items_of(root, videos=None):
+        return [(v, stem, ip, lp) for v, lst in R.find_pairs(root, videos) for ip, lp, stem in lst]
+
+    def loader(ds_name):
+        ds = R.DATASETS[ds_name]
+        lm, ignore = np.array(ds['landing']), ds.get('ignore', [])
+
+        def load(item):
+            v, stem, ip, lp = item
+            img, lab = R.load_frame(ip, lp, a.width, ds['colors'])
+            lab = np.where(np.isin(lab, ignore), -1, lab)
+            lab = np.where(lab >= 0, lm[np.clip(lab, 0, None)], -1)
+            lab = np.where(lab >= 1, NAO, lab)  # água e céu -> não pousável
+            X, shape, (ys, xs) = gwrSeg.extract_features(img, a.patch, a.stride, a.features,
+                                                         levels=a.levels)
+            color = rgb2lab(img[ys][:, xs].astype(np.float32) / 255.0).reshape(-1, 3) / [100, 128, 128]
+            return img, lab, X, color, shape, ys, xs
+        return load
+
+    items = items_of(a.root)
     tr = [i for i, it in enumerate(items) if a.train_image in it[1]]
     assert len(tr) == 1, 'imagem de treino não encontrada'
     tr = tr[0]
-
-    def load(i):
-        v, stem, ip, lp = items[i]
-        img, lab = R.load_frame(ip, lp, a.width, ds['colors'])
-        lab = np.where(np.isin(lab, ignore), -1, lab)
-        lab = np.where(lab >= 0, lm[np.clip(lab, 0, None)], -1)
-        lab = np.where(lab == 2, NAO, lab)  # água -> não pousável
-        X, shape, (ys, xs) = gwrSeg.extract_features(img, a.patch, a.stride, a.features, levels=a.levels)
-        color = rgb2lab(img[ys][:, xs].astype(np.float32) / 255.0).reshape(-1, 3) / [100, 128, 128]
-        return img, lab, X, color, shape, ys, xs
+    load_train = loader(a.dataset)
+    # Teste: as demais imagens do mesmo dataset, ou (extrapolação) as de
+    # outro dataset passado em --test-root / --test-dataset
+    if a.test_root:
+        test_items = items_of(a.test_root, a.test_videos)
+        load_test = loader(a.test_dataset)
+        print('extrapolação: treino em %s (%s), teste em %s (%s, %d imagens)' %
+              (a.root, a.dataset, a.test_root, a.test_dataset, len(test_items)))
+    else:
+        test_items = [it for i, it in enumerate(items) if i != tr]
+        load_test = load_train
 
     # ---------------- treino ----------------
-    img, lab, X, color, shape, ys, xs = load(tr)
+    img, lab, X, color, shape, ys, xs = load_train(items[tr])
     norm = gwrSeg.FeatureNormalizer(a.pca).fit(X)
     X = norm.transform(X)
     yg = lab[ys][:, xs].reshape(-1)
@@ -450,9 +468,9 @@ def run(a):
     gt_safe = 0
     times = {n: [] for n in out_names}
 
-    order = [i for i in range(len(items)) if i != tr]
+    order = list(range(len(test_items)))
     for step, i in enumerate(order):
-        img, lab, X, color, shape, ys, xs = load(i)
+        img, lab, X, color, shape, ys, xs = load_test(test_items[i])
         X = norm.transform(X)
         ctx['color'] = color
         gt = lab[ys][:, xs]
@@ -480,7 +498,7 @@ def run(a):
                 landing[n][res] += 1
                 times[n].append(dt)
         if step % 25 == 0 or step == len(order) - 1:
-            print('[%3d/%d] %s %s' % (step + 1, len(order), *items[i][:2]), flush=True)
+            print('[%3d/%d] %s %s' % (step + 1, len(order), *test_items[i][:2]), flush=True)
 
     # ---------------- resultados ----------------
     N = len(order)
@@ -556,6 +574,10 @@ def parse_args(argv=None):
     p.add_argument('--root', required=True)
     p.add_argument('--dataset', default='sdd', choices=sorted(R.DATASETS))
     p.add_argument('--train-image', required=True)
+    p.add_argument('--test-root', help='extrapolação: pasta de outro dataset para o teste')
+    p.add_argument('--test-dataset', default='uavid', choices=sorted(R.DATASETS),
+                   help='paleta/classes do dataset de teste')
+    p.add_argument('--test-videos', nargs='*', help='sequências do dataset de teste')
     p.add_argument('--label-frac', type=float, default=0.01)
     p.add_argument('--train-epochs', type=int, default=5)
     p.add_argument('--width', type=int, default=480)
