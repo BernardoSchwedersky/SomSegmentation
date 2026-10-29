@@ -70,7 +70,7 @@ def ler_area(pasta, area):
 def metodos(refl_antes, refl_depois, invalidos, seed=0):
     entrada, _ = enchenteSOM.montar_entrada(refl_antes, refl_depois)
     _, result = enchenteSOM.treinar_e_segmentar(entrada, invalidos, seed=seed)
-    classe_unidade, _ = enchenteSOM.classificar_unidades(result, invalidos, refl_antes, refl_depois, 12)
+    classe_unidade, _ = enchenteSOM.classificar_unidades(result, invalidos, refl_antes, refl_depois, enchenteSOM.SOM_SIZE)
     return {"SOM": classe_unidade[result],
             "NDWI": enchenteSOM.mapa_indice(refl_antes, refl_depois, 0, "NDWI"),
             "MNDWI": enchenteSOM.mapa_indice(refl_antes, refl_depois, 0, "MNDWI")}

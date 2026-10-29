@@ -111,7 +111,7 @@ if __name__ == "__main__":
         # SOM bi-temporal (unidades classificadas pelo MNDWI)
         entrada, _ = enchenteSOM.montar_entrada(refl_antes, refl_depois)
         SOM, result = enchenteSOM.treinar_e_segmentar(entrada, invalidos)
-        classe_unidade, _ = enchenteSOM.classificar_unidades(result, invalidos, refl_antes, refl_depois, 12, limiar_agua)
+        classe_unidade, _ = enchenteSOM.classificar_unidades(result, invalidos, refl_antes, refl_depois, enchenteSOM.SOM_SIZE, limiar_agua)
         mapas = {"SOM": classe_unidade[result],
                  "NDWI": enchenteSOM.mapa_indice(refl_antes, refl_depois, limiar_agua, "NDWI"),
                  "MNDWI": enchenteSOM.mapa_indice(refl_antes, refl_depois, limiar_agua, "MNDWI")}

@@ -62,7 +62,7 @@ nuvens_max_area = 20          # % máxima de nuvens ou sem dado para processar u
 
 # Parâmetros de ajuste do SOM e do baseline
 patch_size = 1
-som_size = 12
+som_size = enchenteSOM.SOM_SIZE
 epochs = 3
 dataset_percentage = 0.02
 limiar_agua = 0

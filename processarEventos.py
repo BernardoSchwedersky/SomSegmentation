@@ -54,7 +54,7 @@ nuvens_max_area = 20         # % máxima de nuvens ou sem dado para processar um
 
 # Parâmetros de ajuste do SOM
 patch_size = 1
-som_size = 12
+som_size = enchenteSOM.SOM_SIZE
 epochs = 3
 dataset_percentage = 0.02
 

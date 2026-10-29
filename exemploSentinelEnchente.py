@@ -41,7 +41,7 @@ arquivo_cache = "sentinel_enchente_cache.npz"  # Evita baixar as imagens novamen
 
 # Parâmetros de ajuste do método
 patch_size = 1  # Vizinhança de (2*patch_size+1)x(2*patch_size+1) pixels em torno de cada pixel
-som_size = 12  # Número de unidades do SOM
+som_size = enchenteSOM.SOM_SIZE  # Número de unidades do SOM
 epochs = 3  # Quantidade de épocas do treinamento
 dataset_percentage = 0.02  # Porcentagem dos pixels sem nuvem usados no treinamento
 

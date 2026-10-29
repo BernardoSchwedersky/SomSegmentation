@@ -12,6 +12,8 @@ treinado com 100% dos pixels (mesma semente).
 
 Saída: resultados/amostragem/amostragem.json e amostragem.png.
 
+Os resultados em resultados/amostragem/ usam 12 unidades (o padrão na época).
+
 Uso:
     python experimentoAmostragem.py --porcentagens 1 2 5 10 20 50 100 --sementes 5 --recortes 40
 """
@@ -46,7 +48,7 @@ def rodar(args):
     agua_100 = {}
     for p in sorted(porcentagens, reverse=True):  # 100% primeiro, para a concordância
         for s in range(sementes):
-            _, result, tempos = enchenteSOM.treinar_e_segmentar_amostrado(entrada, invalidos, p / 100, seed=s)
+            _, result, tempos = enchenteSOM.treinar_e_segmentar_amostrado(entrada, invalidos, p / 100, som_size=12, seed=s)
             classe_unidade, _ = enchenteSOM.classificar_unidades(result, invalidos, antes, depois, 12)
             agua = np.isin(classe_unidade[result], [1, 2])
             if p == max(porcentagens):

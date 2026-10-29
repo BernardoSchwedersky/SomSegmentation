@@ -44,7 +44,7 @@ arquivo_figura = "enchente_grade.png"
 
 # Parâmetros de ajuste do método (iguais aos de exemploSentinelEnchente.py)
 patch_size = 1
-som_size = 12
+som_size = enchenteSOM.SOM_SIZE
 epochs = 3
 dataset_percentage = 0.02
 

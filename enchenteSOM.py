@@ -40,6 +40,9 @@ INDICE_BASELINE = "NDWI"  # Índice do método direto usado como baseline
 
 AREA_PIXEL_KM2 = 10 * 10 / 1e6
 
+# Número padrão de unidades do SOM (testado de 4 a 128 no Sen1Floods11, variacaoUnidadesSOM.py)
+SOM_SIZE = 36
+
 
 # Lê o cache se ele existir e for das mesmas cenas (o cache guarda os ids delas)
 def _ler_cache(arquivo_cache, item_antes, item_depois):
@@ -72,11 +75,19 @@ def indice_agua(refl, indice=INDICE_AGUA):
     outra = refl[:, :, BANDAS.index("B11" if indice == "MNDWI" else "B08")]
     return sentinelUtils.indice_normalizado(b03, outra)
 
-# Imagem de entrada bi-temporal: bandas + índice de água de antes e de depois, em 0-255
-def montar_entrada(refl_antes, refl_depois, indice=INDICE_AGUA):
-    img = np.concatenate((refl_antes, indice_agua(refl_antes, indice)[:, :, None],
-                          refl_depois, indice_agua(refl_depois, indice)[:, :, None]), axis=2)
-    nomes_canais = [b + " antes" for b in BANDAS + [indice]] + [b + " depois" for b in BANDAS + [indice]]
+# Imagem de entrada bi-temporal: bandas + índice de água de antes e de depois, em 0-255.
+# extras: canais adicionais (antes, depois), ex.: features de filtros convolucionais
+# (featuresCNN.features_pca), acrescentados a cada data
+def montar_entrada(refl_antes, refl_depois, indice=INDICE_AGUA, extras=None):
+    partes = [refl_antes, indice_agua(refl_antes, indice)[:, :, None]]
+    partes_depois = [refl_depois, indice_agua(refl_depois, indice)[:, :, None]]
+    nomes = BANDAS + [indice]
+    if extras is not None:
+        partes.append(extras[0])
+        partes_depois.append(extras[1])
+        nomes = nomes + ["extra %d" % (i + 1) for i in range(extras[0].shape[2])]
+    img = np.concatenate(partes + partes_depois, axis=2)
+    nomes_canais = [n + " antes" for n in nomes] + [n + " depois" for n in nomes]
     return sentinelUtils.normalizar_0_255(img), nomes_canais
 
 # Composição em cor verdadeira para visualização (mesmo realce em todas as datas)
@@ -90,7 +101,7 @@ def cor_verdadeira(refl, rgb_max=None):
 # segmenta a imagem toda. Usa a versão amostrada e vetorizada abaixo: o resultado
 # é igual ao de montar as janelas de todos os pixels, e 2% dá o mesmo resultado
 # que 1% a 100% nos testes do Sen1Floods11 (experimentoAmostragem.py)
-def treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size=1, som_size=12, epochs=3,
+def treinar_e_segmentar(ROI_sample_conv, nuvens, patch_size=1, som_size=SOM_SIZE, epochs=3,
                         dataset_percentage=0.02, seed=0):
     SOM, result, _ = treinar_e_segmentar_amostrado(ROI_sample_conv, nuvens, dataset_percentage, patch_size, som_size,
                                                    epochs, seed)
@@ -128,7 +139,7 @@ def segmentar(SOM, img, patch_size, bloco=65536):
 # nuvem, sorteada aleatoriamente, montando as janelas apenas desses pixels, e
 # segmenta a imagem toda de forma vetorizada. Retorna também os tempos (s) do
 # treino (sorteio + janelas + treinamento) e da segmentação
-def treinar_e_segmentar_amostrado(ROI_sample_conv, nuvens, porcentagem=0.1, patch_size=1, som_size=12, epochs=3,
+def treinar_e_segmentar_amostrado(ROI_sample_conv, nuvens, porcentagem=0.02, patch_size=1, som_size=SOM_SIZE, epochs=3,
                                   seed=0):
     import time
     t0 = time.perf_counter()
