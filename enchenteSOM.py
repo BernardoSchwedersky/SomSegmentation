@@ -78,7 +78,13 @@ def indice_agua(refl, indice=INDICE_AGUA):
 # Imagem de entrada bi-temporal: bandas + índice de água de antes e de depois, em 0-255.
 # extras: canais adicionais (antes, depois), ex.: features de filtros convolucionais
 # (featuresCNN.features_pca), acrescentados a cada data
-def montar_entrada(refl_antes, refl_depois, indice=INDICE_AGUA, extras=None):
+# normalizacao: "percentil" (padrão) escala cada canal pelos percentis 2-98% da
+# própria imagem; "fixa" usa a mesma escala para todas as imagens (reflectância
+# 0-REFL_MAX_FIXA e índice -1 a 1 viram 0-255), necessária para aplicar um SOM
+# já treinado em outras imagens sem alterá-lo
+REFL_MAX_FIXA = 0.4
+
+def montar_entrada(refl_antes, refl_depois, indice=INDICE_AGUA, extras=None, normalizacao="percentil"):
     partes = [refl_antes, indice_agua(refl_antes, indice)[:, :, None]]
     partes_depois = [refl_depois, indice_agua(refl_depois, indice)[:, :, None]]
     nomes = BANDAS + [indice]
@@ -88,6 +94,15 @@ def montar_entrada(refl_antes, refl_depois, indice=INDICE_AGUA, extras=None):
         nomes = nomes + ["extra %d" % (i + 1) for i in range(extras[0].shape[2])]
     img = np.concatenate(partes + partes_depois, axis=2)
     nomes_canais = [n + " antes" for n in nomes] + [n + " depois" for n in nomes]
+    if normalizacao == "fixa":
+        if extras is not None:
+            raise ValueError("A normalização fixa não suporta canais extras")
+        n = len(BANDAS)
+        escala = np.array(([REFL_MAX_FIXA] * n + [None]) * 2, dtype=object)
+        saida = np.empty(img.shape)
+        for i, e in enumerate(escala):
+            saida[:, :, i] = (img[:, :, i] / e if e is not None else (img[:, :, i] + 1) / 2)
+        return np.clip(saida, 0, 1) * 255, nomes_canais
     return sentinelUtils.normalizar_0_255(img), nomes_canais
 
 # Composição em cor verdadeira para visualização (mesmo realce em todas as datas)

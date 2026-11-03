@@ -1,0 +1,964 @@
+{
+ "recortes": 392,
+ "pre_treino": [
+  "India_399883",
+  "Mekong_922373",
+  "USA_788696"
+ ],
+ "sementes": 3,
+ "unidades": 36,
+ "metricas": {
+  "Todos": {
+   "n": 392,
+   "SOM por recorte": {
+    "IoU": 0.7323530261503968,
+    "F1": 0.8454996776547782,
+    "precisao": 0.890825067602072,
+    "sensibilidade": 0.8045685730957765,
+    "acuracia": 0.9729739085702644,
+    "IoU_min_semente": 0.730471416731829
+   },
+   "India_399883 | percentil | classe fixa": {
+    "IoU": 0.3563444402604128,
+    "F1": 0.5252683779394388,
+    "precisao": 0.3632733140005091,
+    "sensibilidade": 0.9497577086184945,
+    "acuracia": 0.8418209364282726,
+    "IoU_min_semente": 0.33524864520458314
+   },
+   "India_399883 | percentil | classe local": {
+    "IoU": 0.725558910008124,
+    "F1": 0.8409547478780627,
+    "precisao": 0.8838162146443321,
+    "sensibilidade": 0.8020654314853767,
+    "acuracia": 0.9721157561990058,
+    "IoU_min_semente": 0.7247418287538828
+   },
+   "India_399883 | fixa | classe fixa": {
+    "IoU": 0.7167239469248173,
+    "F1": 0.834946660743229,
+    "precisao": 0.812471098314628,
+    "sensibilidade": 0.8631727848744551,
+    "acuracia": 0.9685525461967567,
+    "IoU_min_semente": 0.7079023995215474
+   },
+   "India_399883 | fixa | classe local": {
+    "IoU": 0.7501124480417568,
+    "F1": 0.8571940775759224,
+    "precisao": 0.9075795326879875,
+    "sensibilidade": 0.812225211202036,
+    "acuracia": 0.9751326364452746,
+    "IoU_min_semente": 0.7395575490898205
+   },
+   "Mekong_922373 | percentil | classe fixa": {
+    "IoU": 0.35279699072776555,
+    "F1": 0.5211903179504996,
+    "precisao": 0.37073728306251574,
+    "sensibilidade": 0.8836540467398709,
+    "acuracia": 0.8496935327607064,
+    "IoU_min_semente": 0.3223058300676125
+   },
+   "Mekong_922373 | percentil | classe local": {
+    "IoU": 0.7077743598772946,
+    "F1": 0.8288600257291718,
+    "precisao": 0.8702053897989045,
+    "sensibilidade": 0.7912749649895532,
+    "acuracia": 0.9699678758056063,
+    "IoU_min_semente": 0.6974799256870511
+   },
+   "Mekong_922373 | fixa | classe fixa": {
+    "IoU": 0.6940658216163612,
+    "F1": 0.8191811371950134,
+    "precisao": 0.7385365240326432,
+    "sensibilidade": 0.9219967417024425,
+    "acuracia": 0.9624852987974178,
+    "IoU_min_semente": 0.6669253295232153
+   },
+   "Mekong_922373 | fixa | classe local": {
+    "IoU": 0.7378460740444108,
+    "F1": 0.8491431606841449,
+    "precisao": 0.8812927087000171,
+    "sensibilidade": 0.8193994506674729,
+    "acuracia": 0.9732455737691029,
+    "IoU_min_semente": 0.7320884169567409
+   },
+   "USA_788696 | percentil | classe fixa": {
+    "IoU": 0.40240589943644584,
+    "F1": 0.5714673979845822,
+    "precisao": 0.43011866576883867,
+    "sensibilidade": 0.8709134342948115,
+    "acuracia": 0.8765544974630881,
+    "IoU_min_semente": 0.34192053297071023
+   },
+   "USA_788696 | percentil | classe local": {
+    "IoU": 0.7154857947328986,
+    "F1": 0.8341296636113696,
+    "precisao": 0.8720952536248837,
+    "sensibilidade": 0.7995316777687146,
+    "acuracia": 0.9707632748041952,
+    "IoU_min_semente": 0.7101862721140871
+   },
+   "USA_788696 | fixa | classe fixa": {
+    "IoU": 0.5787038422691435,
+    "F1": 0.7329922699637145,
+    "precisao": 0.7076640963595588,
+    "sensibilidade": 0.7743318090912109,
+    "acuracia": 0.9484793190174713,
+    "IoU_min_semente": 0.5560276468494336
+   },
+   "USA_788696 | fixa | classe local": {
+    "IoU": 0.7079567236273414,
+    "F1": 0.8289610142490568,
+    "precisao": 0.8622714638747645,
+    "sensibilidade": 0.7983403852963519,
+    "acuracia": 0.9697335464924722,
+    "IoU_min_semente": 0.692387118890772
+   },
+   "3 imagens | percentil | classe fixa": {
+    "IoU": 0.33307995843116256,
+    "F1": 0.4971882580347832,
+    "precisao": 0.34080888749013766,
+    "sensibilidade": 0.9507131330923232,
+    "acuracia": 0.8169298072070967,
+    "IoU_min_semente": 0.2838493924870881
+   },
+   "3 imagens | percentil | classe local": {
+    "IoU": 0.7192512742402716,
+    "F1": 0.8366758331782416,
+    "precisao": 0.8790570628908787,
+    "sensibilidade": 0.7982087360416106,
+    "acuracia": 0.9713574678378691,
+    "IoU_min_semente": 0.7089423882381631
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.7382687960665256,
+    "F1": 0.8494154717697647,
+    "precisao": 0.8242658949136586,
+    "sensibilidade": 0.8772342323145864,
+    "acuracia": 0.971389437282762,
+    "IoU_min_semente": 0.7307616418079247
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7500114586792614,
+    "F1": 0.8571478061533169,
+    "precisao": 0.9028119823532892,
+    "sensibilidade": 0.8159154318207341,
+    "acuracia": 0.9750027116728165,
+    "IoU_min_semente": 0.7476260610669544
+   },
+   "NDWI": {
+    "IoU": 0.6598420921628215,
+    "F1": 0.7950661033098981,
+    "precisao": 0.9749738590880724,
+    "sensibilidade": 0.6712105007091518,
+    "acuracia": 0.9681966658137267,
+    "IoU_min_semente": 0.6598420921628215
+   },
+   "MNDWI": {
+    "IoU": 0.7663821942689196,
+    "F1": 0.8677422097612507,
+    "precisao": 0.900594099684649,
+    "sensibilidade": 0.8372027121638236,
+    "acuracia": 0.9765434294752939,
+    "IoU_min_semente": 0.7663821942689196
+   }
+  },
+  "0-1%": {
+   "n": 138,
+   "SOM por recorte": {
+    "IoU": 0.015089773170598847,
+    "F1": 0.029708578436753532,
+    "precisao": 0.5779098899200825,
+    "sensibilidade": 0.01534914845685176,
+    "acuracia": 0.996758839180505,
+    "IoU_min_semente": 0.01260817118581843
+   },
+   "India_399883 | percentil | classe fixa": {
+    "IoU": 0.013856211236201394,
+    "F1": 0.027332144428041456,
+    "precisao": 0.01386974651528543,
+    "sensibilidade": 0.9351103449967243,
+    "acuracia": 0.7838623766284001,
+    "IoU_min_semente": 0.01262858314849781
+   },
+   "India_399883 | percentil | classe local": {
+    "IoU": 0.12878793795216004,
+    "F1": 0.22790415927783503,
+    "precisao": 0.5853662802123277,
+    "sensibilidade": 0.1417229865848232,
+    "acuracia": 0.9969030576211955,
+    "IoU_min_semente": 0.11385452936536945
+   },
+   "India_399883 | fixa | classe fixa": {
+    "IoU": 0.1623084656509954,
+    "F1": 0.27816170056468853,
+    "precisao": 0.19821224008022706,
+    "sensibilidade": 0.48501347123392297,
+    "acuracia": 0.9916636984960107,
+    "IoU_min_semente": 0.13163112811133793
+   },
+   "India_399883 | fixa | classe local": {
+    "IoU": 0.24597986661804958,
+    "F1": 0.3945501775639478,
+    "precisao": 0.7835975728869754,
+    "sensibilidade": 0.265500677941161,
+    "acuracia": 0.9973751790811396,
+    "IoU_min_semente": 0.22325068870523415
+   },
+   "Mekong_922373 | percentil | classe fixa": {
+    "IoU": 0.01381282998333397,
+    "F1": 0.027245265695173337,
+    "precisao": 0.013845560785015776,
+    "sensibilidade": 0.8612795745262295,
+    "acuracia": 0.7982645385890951,
+    "IoU_min_semente": 0.011917550153869265
+   },
+   "Mekong_922373 | percentil | classe local": {
+    "IoU": 0.08508342163671535,
+    "F1": 0.1565805659827111,
+    "precisao": 0.4752046069443459,
+    "sensibilidade": 0.09395879098741167,
+    "acuracia": 0.9967385908434845,
+    "IoU_min_semente": 0.0689036391000656
+   },
+   "Mekong_922373 | fixa | classe fixa": {
+    "IoU": 0.1403889207710166,
+    "F1": 0.24414879749489615,
+    "precisao": 0.15479137166685583,
+    "sensibilidade": 0.6155285313376987,
+    "acuracia": 0.9866005723801722,
+    "IoU_min_semente": 0.08779151923760123
+   },
+   "Mekong_922373 | fixa | classe local": {
+    "IoU": 0.25132568491174073,
+    "F1": 0.40104716732650364,
+    "precisao": 0.7510732891152533,
+    "sensibilidade": 0.27397231477491296,
+    "acuracia": 0.9973606043553312,
+    "IoU_min_semente": 0.21682642337452362
+   },
+   "USA_788696 | percentil | classe fixa": {
+    "IoU": 0.01946477629390356,
+    "F1": 0.03812915878038566,
+    "precisao": 0.019533270389095664,
+    "sensibilidade": 0.8790321733006801,
+    "acuracia": 0.8443110236068884,
+    "IoU_min_semente": 0.014279194255296215
+   },
+   "USA_788696 | percentil | classe local": {
+    "IoU": 0.1803062901794249,
+    "F1": 0.3053187901218673,
+    "precisao": 0.6957771403901601,
+    "sensibilidade": 0.19581813659025374,
+    "acuracia": 0.9971235923612038,
+    "IoU_min_semente": 0.1706617315864716
+   },
+   "USA_788696 | fixa | classe fixa": {
+    "IoU": 0.1365917930388429,
+    "F1": 0.23844074304589613,
+    "precisao": 0.1624435080425079,
+    "sensibilidade": 0.5387092140437176,
+    "acuracia": 0.9874075954456553,
+    "IoU_min_semente": 0.08827301059307215
+   },
+   "USA_788696 | fixa | classe local": {
+    "IoU": 0.20676369098425193,
+    "F1": 0.3426160376053771,
+    "precisao": 0.84235130361193,
+    "sensibilidade": 0.21517186771913965,
+    "acuracia": 0.9973310132453568,
+    "IoU_min_semente": 0.20142786316311354
+   },
+   "3 imagens | percentil | classe fixa": {
+    "IoU": 0.01251870554932099,
+    "F1": 0.02470494218323099,
+    "precisao": 0.012536877828669005,
+    "sensibilidade": 0.9288529655984276,
+    "acuracia": 0.7434951764339073,
+    "IoU_min_semente": 0.009393467301017115
+   },
+   "3 imagens | percentil | classe local": {
+    "IoU": 0.12409533326489568,
+    "F1": 0.2195478165885897,
+    "precisao": 0.6717394535558542,
+    "sensibilidade": 0.13148554951773334,
+    "acuracia": 0.9969943110326666,
+    "IoU_min_semente": 0.08269511752650108
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.2525307576232784,
+    "F1": 0.4031357628200778,
+    "precisao": 0.36327570113028534,
+    "sensibilidade": 0.4591536071024409,
+    "acuracia": 0.9955915021670476,
+    "IoU_min_semente": 0.24346652240518937
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.2620785714667632,
+    "F1": 0.41503518177044657,
+    "precisao": 0.8469915251644005,
+    "sensibilidade": 0.27504440777372535,
+    "acuracia": 0.9974963633397834,
+    "IoU_min_semente": 0.24940200291802725
+   },
+   "NDWI": {
+    "IoU": 0.2493245185398103,
+    "F1": 0.39913491625253084,
+    "precisao": 0.7381918243454088,
+    "sensibilidade": 0.2735098432852293,
+    "acuracia": 0.9973382269985347,
+    "IoU_min_semente": 0.2493245185398103
+   },
+   "MNDWI": {
+    "IoU": 0.27019644920684943,
+    "F1": 0.4254404102224795,
+    "precisao": 0.5389252441894201,
+    "sensibilidade": 0.3514362892969382,
+    "acuracia": 0.996931799388174,
+    "IoU_min_semente": 0.27019644920684943
+   }
+  },
+  "1-5%": {
+   "n": 111,
+   "SOM por recorte": {
+    "IoU": 0.28342537434361953,
+    "F1": 0.441633291417125,
+    "precisao": 0.7288251225183139,
+    "sensibilidade": 0.3170861678004535,
+    "acuracia": 0.9811619756433645,
+    "IoU_min_semente": 0.27480832302147495
+   },
+   "India_399883 | percentil | classe fixa": {
+    "IoU": 0.13716416473845824,
+    "F1": 0.24115778425209902,
+    "precisao": 0.1387538090643894,
+    "sensibilidade": 0.9240085034013606,
+    "acuracia": 0.8627815368550705,
+    "IoU_min_semente": 0.1267803233666951
+   },
+   "India_399883 | percentil | classe local": {
+    "IoU": 0.30267089629804644,
+    "F1": 0.46457175161004,
+    "precisao": 0.7304943664937348,
+    "sensibilidade": 0.3411712018140589,
+    "acuracia": 0.9815376279628177,
+    "IoU_min_semente": 0.2880756243702456
+   },
+   "India_399883 | fixa | classe fixa": {
+    "IoU": 0.3953059139607005,
+    "F1": 0.566504165605222,
+    "precisao": 0.5662850237717466,
+    "sensibilidade": 0.5871972789115646,
+    "acuracia": 0.9787464472771837,
+    "IoU_min_semente": 0.3805940642866166
+   },
+   "India_399883 | fixa | classe local": {
+    "IoU": 0.3584105344926199,
+    "F1": 0.5275741784839177,
+    "precisao": 0.8370507061600957,
+    "sensibilidade": 0.38541950113378687,
+    "acuracia": 0.9837860250274527,
+    "IoU_min_semente": 0.34834906224821105
+   },
+   "Mekong_922373 | percentil | classe fixa": {
+    "IoU": 0.12144351990349951,
+    "F1": 0.21649343643366095,
+    "precisao": 0.12447153222845264,
+    "sensibilidade": 0.8380340136054422,
+    "acuracia": 0.8563975129124656,
+    "IoU_min_semente": 0.11016376568593365
+   },
+   "Mekong_922373 | percentil | classe local": {
+    "IoU": 0.26485592026744326,
+    "F1": 0.41862687875020477,
+    "precisao": 0.708013559979742,
+    "sensibilidade": 0.29759353741496597,
+    "acuracia": 0.98059219409405,
+    "IoU_min_semente": 0.25340686864200274
+   },
+   "Mekong_922373 | fixa | classe fixa": {
+    "IoU": 0.3895238580811015,
+    "F1": 0.5598819474848772,
+    "precisao": 0.470691072649357,
+    "sensibilidade": 0.7078344671201814,
+    "acuracia": 0.9734240975432752,
+    "IoU_min_semente": 0.3454305124718075
+   },
+   "Mekong_922373 | fixa | classe local": {
+    "IoU": 0.356465915532235,
+    "F1": 0.5255367192690471,
+    "precisao": 0.79315320254728,
+    "sensibilidade": 0.3933883219954648,
+    "acuracia": 0.9833081510356857,
+    "IoU_min_semente": 0.3465183128763949
+   },
+   "USA_788696 | percentil | classe fixa": {
+    "IoU": 0.16420792759383232,
+    "F1": 0.28067019819638467,
+    "precisao": 0.16969339169518985,
+    "sensibilidade": 0.857204081632653,
+    "acuracia": 0.8917272870766607,
+    "IoU_min_semente": 0.1344151464366699
+   },
+   "USA_788696 | percentil | classe local": {
+    "IoU": 0.28753305910051863,
+    "F1": 0.44639891222806716,
+    "precisao": 0.7470311884913435,
+    "sensibilidade": 0.3189421768707483,
+    "acuracia": 0.981439710501188,
+    "IoU_min_semente": 0.2667218355398295
+   },
+   "USA_788696 | fixa | classe fixa": {
+    "IoU": 0.2788279401713887,
+    "F1": 0.4357173021181214,
+    "precisao": 0.3760380802482018,
+    "sensibilidade": 0.5619155328798185,
+    "acuracia": 0.965156215196942,
+    "IoU_min_semente": 0.2600674513971774
+   },
+   "USA_788696 | fixa | classe local": {
+    "IoU": 0.3004265265744286,
+    "F1": 0.46200211071816133,
+    "precisao": 0.7992555709401375,
+    "sensibilidade": 0.325233560090703,
+    "acuracia": 0.9822037012347421,
+    "IoU_min_semente": 0.29099385963094004
+   },
+   "3 imagens | percentil | classe fixa": {
+    "IoU": 0.12070175979223303,
+    "F1": 0.21451836920812517,
+    "precisao": 0.12242323922486477,
+    "sensibilidade": 0.9175204081632654,
+    "acuracia": 0.8344389891128122,
+    "IoU_min_semente": 0.10035287177869481
+   },
+   "3 imagens | percentil | classe local": {
+    "IoU": 0.28597579665414036,
+    "F1": 0.44455592217265977,
+    "precisao": 0.743629045933924,
+    "sensibilidade": 0.31792687074829934,
+    "acuracia": 0.981363700539139,
+    "IoU_min_semente": 0.2680656095375385
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.4199107428818123,
+    "F1": 0.5914432691203914,
+    "precisao": 0.6012694477734847,
+    "sensibilidade": 0.5866660997732427,
+    "acuracia": 0.9809231385904537,
+    "IoU_min_semente": 0.41423538570972496
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.3645548677623249,
+    "F1": 0.534161353026779,
+    "precisao": 0.8534816816892395,
+    "sensibilidade": 0.3888605442176871,
+    "acuracia": 0.9840669713861271,
+    "IoU_min_semente": 0.3528945900725042
+   },
+   "NDWI": {
+    "IoU": 0.30240228675389175,
+    "F1": 0.4643761606217683,
+    "precisao": 0.9266229571568813,
+    "sensibilidade": 0.3098214285714286,
+    "acuracia": 0.9831995463388591,
+    "IoU_min_semente": 0.30240228675389175
+   },
+   "MNDWI": {
+    "IoU": 0.4142599961115308,
+    "F1": 0.5858328698408034,
+    "precisao": 0.7649091556822231,
+    "sensibilidade": 0.47469897959183677,
+    "acuracia": 0.9842224426742101,
+    "IoU_min_semente": 0.4142599961115308
+   }
+  },
+  "5-15%": {
+   "n": 70,
+   "SOM por recorte": {
+    "IoU": 0.5011566714258016,
+    "F1": 0.6676771076116784,
+    "precisao": 0.7355721808228162,
+    "sensibilidade": 0.6114338541550798,
+    "acuracia": 0.945613736518999,
+    "IoU_min_semente": 0.49360658557094406
+   },
+   "India_399883 | percentil | classe fixa": {
+    "IoU": 0.3577495107145672,
+    "F1": 0.5267551146585294,
+    "precisao": 0.36812499624779393,
+    "sensibilidade": 0.9274638922465042,
+    "acuracia": 0.8507147856612406,
+    "IoU_min_semente": 0.33597091816557945
+   },
+   "India_399883 | percentil | classe local": {
+    "IoU": 0.468200842424012,
+    "F1": 0.6377534747802343,
+    "precisao": 0.7268481209996743,
+    "sensibilidade": 0.5681352010737778,
+    "acuracia": 0.942341881251196,
+    "IoU_min_semente": 0.4590649850124349
+   },
+   "India_399883 | fixa | classe fixa": {
+    "IoU": 0.5418846028272178,
+    "F1": 0.7026218084741439,
+    "precisao": 0.6513317311003176,
+    "sensibilidade": 0.7756827906355904,
+    "acuracia": 0.9409211625087032,
+    "IoU_min_semente": 0.5188326824485032
+   },
+   "India_399883 | fixa | classe local": {
+    "IoU": 0.5188454041100944,
+    "F1": 0.6829742808832107,
+    "precisao": 0.7848831549994061,
+    "sensibilidade": 0.6048171685786534,
+    "acuracia": 0.9498771072436076,
+    "IoU_min_semente": 0.4906811984980021
+   },
+   "Mekong_922373 | percentil | classe fixa": {
+    "IoU": 0.3913634086591684,
+    "F1": 0.5617857209012207,
+    "precisao": 0.4182869768283724,
+    "sensibilidade": 0.8649949450381037,
+    "acuracia": 0.8780290248473527,
+    "IoU_min_semente": 0.3523924241741856
+   },
+   "Mekong_922373 | percentil | classe local": {
+    "IoU": 0.45879062727626,
+    "F1": 0.6284841064513387,
+    "precisao": 0.7083666664060053,
+    "sensibilidade": 0.5677545340165565,
+    "acuracia": 0.940278472709355,
+    "IoU_min_semente": 0.424476854938992
+   },
+   "Mekong_922373 | fixa | classe fixa": {
+    "IoU": 0.5242960473844249,
+    "F1": 0.687496654975028,
+    "precisao": 0.576990057683636,
+    "sensibilidade": 0.8613328785103559,
+    "acuracia": 0.9294804228914337,
+    "IoU_min_semente": 0.486100135576647
+   },
+   "Mekong_922373 | fixa | classe local": {
+    "IoU": 0.4914789838076148,
+    "F1": 0.6589710908127051,
+    "precisao": 0.722330651598579,
+    "sensibilidade": 0.6065064404416726,
+    "acuracia": 0.9439723767706623,
+    "IoU_min_semente": 0.4798030537974489
+   },
+   "USA_788696 | percentil | classe fixa": {
+    "IoU": 0.3996427181861379,
+    "F1": 0.5696502968592706,
+    "precisao": 0.43142296009837794,
+    "sensibilidade": 0.8563656677864211,
+    "acuracia": 0.8819751026763475,
+    "IoU_min_semente": 0.35422041203593213
+   },
+   "USA_788696 | percentil | classe local": {
+    "IoU": 0.46477979443565287,
+    "F1": 0.634362511900346,
+    "precisao": 0.7117317015842716,
+    "sensibilidade": 0.5728085071671698,
+    "acuracia": 0.9409297964792082,
+    "IoU_min_semente": 0.448713180269022
+   },
+   "USA_788696 | fixa | classe fixa": {
+    "IoU": 0.37858915759538375,
+    "F1": 0.5490487158724264,
+    "precisao": 0.4871556396867705,
+    "sensibilidade": 0.6492091271106628,
+    "acuracia": 0.9051534712547188,
+    "IoU_min_semente": 0.3668583243493795
+   },
+   "USA_788696 | fixa | classe local": {
+    "IoU": 0.438729400957028,
+    "F1": 0.609159652691471,
+    "precisao": 0.7042931678188494,
+    "sensibilidade": 0.5403161019693341,
+    "acuracia": 0.9385007580559859,
+    "IoU_min_semente": 0.39289077019809454
+   },
+   "3 imagens | percentil | classe fixa": {
+    "IoU": 0.35427702555155455,
+    "F1": 0.521102098433184,
+    "precisao": 0.36485165938297587,
+    "sensibilidade": 0.9395493297540742,
+    "acuracia": 0.8411161511269882,
+    "IoU_min_semente": 0.31597586616294765
+   },
+   "3 imagens | percentil | classe local": {
+    "IoU": 0.4587246703699615,
+    "F1": 0.6286544863126081,
+    "precisao": 0.7261755261848512,
+    "sensibilidade": 0.554714462629124,
+    "acuracia": 0.9415476001282773,
+    "IoU_min_semente": 0.43041379072929753
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.5469531082979125,
+    "F1": 0.7069956157823288,
+    "precisao": 0.6515857089024593,
+    "sensibilidade": 0.7766831539995995,
+    "acuracia": 0.9423082948851144,
+    "IoU_min_semente": 0.5338137358796651
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.5242738875181738,
+    "F1": 0.687888322078003,
+    "precisao": 0.7976537605713309,
+    "sensibilidade": 0.604941997711054,
+    "acuracia": 0.950971589975258,
+    "IoU_min_semente": 0.5208530419447062
+   },
+   "NDWI": {
+    "IoU": 0.3724634787016698,
+    "F1": 0.542766324177915,
+    "precisao": 0.9648151797421537,
+    "sensibilidade": 0.37759230558171614,
+    "acuracia": 0.9431686888154287,
+    "IoU_min_semente": 0.37246347870166974
+   },
+   "MNDWI": {
+    "IoU": 0.5702946762420988,
+    "F1": 0.7263537027418083,
+    "precisao": 0.7832668276983675,
+    "sensibilidade": 0.6771510778563007,
+    "acuracia": 0.9544208501510824,
+    "IoU_min_semente": 0.5702946762420988
+   }
+  },
+  "15-40%": {
+   "n": 44,
+   "SOM por recorte": {
+    "IoU": 0.752057115781672,
+    "F1": 0.8584739486144191,
+    "precisao": 0.8835534279205263,
+    "sensibilidade": 0.8347806340208495,
+    "acuracia": 0.9384511196925948,
+    "IoU_min_semente": 0.7445139581927351
+   },
+   "India_399883 | percentil | classe fixa": {
+    "IoU": 0.6846942860530287,
+    "F1": 0.8126330293803187,
+    "precisao": 0.708959109509706,
+    "sensibilidade": 0.9529720754775367,
+    "acuracia": 0.9014600596090542,
+    "IoU_min_semente": 0.6566305920382083
+   },
+   "India_399883 | percentil | classe local": {
+    "IoU": 0.7403866876967351,
+    "F1": 0.8508250633006865,
+    "precisao": 0.8664710635524594,
+    "sensibilidade": 0.8358014806305074,
+    "acuracia": 0.9344643159312307,
+    "IoU_min_semente": 0.7353612809498069
+   },
+   "India_399883 | fixa | classe fixa": {
+    "IoU": 0.7489901290443942,
+    "F1": 0.8564513224699754,
+    "precisao": 0.8335720600476314,
+    "sensibilidade": 0.88391004558836,
+    "acuracia": 0.9336210527112496,
+    "IoU_min_semente": 0.7390414394782961
+   },
+   "India_399883 | fixa | classe local": {
+    "IoU": 0.7597744427623212,
+    "F1": 0.8634425132462988,
+    "precisao": 0.8942305366980098,
+    "sensibilidade": 0.8347894983346372,
+    "acuracia": 0.9409773772845137,
+    "IoU_min_semente": 0.7439608358011287
+   },
+   "Mekong_922373 | percentil | classe fixa": {
+    "IoU": 0.6731613915617386,
+    "F1": 0.8043715930145935,
+    "precisao": 0.7622087426685843,
+    "sensibilidade": 0.8556859093190369,
+    "acuracia": 0.9067078837380165,
+    "IoU_min_semente": 0.6537566035236351
+   },
+   "Mekong_922373 | percentil | classe local": {
+    "IoU": 0.7094647084671749,
+    "F1": 0.8298750420210443,
+    "precisao": 0.8419988836436606,
+    "sensibilidade": 0.8186090634546263,
+    "acuracia": 0.9248451251244107,
+    "IoU_min_semente": 0.6924798480620381
+   },
+   "Mekong_922373 | fixa | classe fixa": {
+    "IoU": 0.731243788901792,
+    "F1": 0.8446166785956682,
+    "precisao": 0.7762597358518603,
+    "sensibilidade": 0.9295573935307271,
+    "acuracia": 0.9234127634161369,
+    "IoU_min_semente": 0.7109814933702331
+   },
+   "Mekong_922373 | fixa | classe local": {
+    "IoU": 0.737324817443277,
+    "F1": 0.848796106963043,
+    "precisao": 0.8652088176224683,
+    "sensibilidade": 0.8335612267823476,
+    "acuracia": 0.9336008694653981,
+    "IoU_min_semente": 0.7316513281557867
+   },
+   "USA_788696 | percentil | classe fixa": {
+    "IoU": 0.6954508867066442,
+    "F1": 0.8201228688447566,
+    "precisao": 0.7876382526424811,
+    "sensibilidade": 0.8610151347681918,
+    "acuracia": 0.9150584494185333,
+    "IoU_min_semente": 0.676641238917374
+   },
+   "USA_788696 | percentil | classe local": {
+    "IoU": 0.713252914459957,
+    "F1": 0.8325906967987708,
+    "precisao": 0.8457234408138724,
+    "sensibilidade": 0.8212686799296142,
+    "acuracia": 0.9261250672849949,
+    "IoU_min_semente": 0.7005403133387776
+   },
+   "USA_788696 | fixa | classe fixa": {
+    "IoU": 0.581484797394215,
+    "F1": 0.7340474992570617,
+    "precisao": 0.7493565178899285,
+    "sensibilidade": 0.7300216901699917,
+    "acuracia": 0.8836190073555317,
+    "IoU_min_semente": 0.5183138271643148
+   },
+   "USA_788696 | fixa | classe local": {
+    "IoU": 0.7032942595913627,
+    "F1": 0.8257141691884647,
+    "precisao": 0.8214544886554004,
+    "sensibilidade": 0.8306896726231633,
+    "acuracia": 0.9215524448127886,
+    "IoU_min_semente": 0.6822947727109937
+   },
+   "3 imagens | percentil | classe fixa": {
+    "IoU": 0.6754195008540204,
+    "F1": 0.805378662017935,
+    "precisao": 0.7058468813421169,
+    "sensibilidade": 0.949280814047004,
+    "acuracia": 0.8957215303153254,
+    "IoU_min_semente": 0.6392124269770528
+   },
+   "3 imagens | percentil | classe local": {
+    "IoU": 0.7259254535243258,
+    "F1": 0.8410883578834495,
+    "precisao": 0.8523670118632335,
+    "sensibilidade": 0.8305144815488502,
+    "acuracia": 0.9298337747517325,
+    "IoU_min_semente": 0.7078052040203605
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.7528586123783617,
+    "F1": 0.859000900267084,
+    "precisao": 0.8265358247904805,
+    "sensibilidade": 0.8947423982062497,
+    "acuracia": 0.9342881810696652,
+    "IoU_min_semente": 0.7491530039198699
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7480706231602423,
+    "F1": 0.8558798475916394,
+    "precisao": 0.871899417496948,
+    "sensibilidade": 0.8406227003149572,
+    "acuracia": 0.936689194412773,
+    "IoU_min_semente": 0.7456922403977064
+   },
+   "NDWI": {
+    "IoU": 0.6138950691362968,
+    "F1": 0.7607620605283008,
+    "precisao": 0.984656365887605,
+    "sensibilidade": 0.6198244092257199,
+    "acuracia": 0.9128232991065129,
+    "IoU_min_semente": 0.6138950691362968
+   },
+   "MNDWI": {
+    "IoU": 0.7664012972961552,
+    "F1": 0.8677544547428626,
+    "precisao": 0.8953132006236451,
+    "sensibilidade": 0.8418416240454342,
+    "acuracia": 0.9426193924590708,
+    "IoU_min_semente": 0.7664012972961552
+   }
+  },
+  "40-100%": {
+   "n": 29,
+   "SOM por recorte": {
+    "IoU": 0.9155237787367668,
+    "F1": 0.9558986134213837,
+    "precisao": 0.9540264804129395,
+    "sensibilidade": 0.9577789001260588,
+    "acuracia": 0.941919972856421,
+    "IoU_min_semente": 0.9137984294343078
+   },
+   "India_399883 | percentil | classe fixa": {
+    "IoU": 0.9015731169885651,
+    "F1": 0.9482145503043022,
+    "precisao": 0.9361325125471686,
+    "sensibilidade": 0.9606936294872831,
+    "acuracia": 0.9310223032020056,
+    "IoU_min_semente": 0.8923434090265735
+   },
+   "India_399883 | percentil | classe local": {
+    "IoU": 0.9158125309151409,
+    "F1": 0.9560542482259632,
+    "precisao": 0.9514589266922605,
+    "sensibilidade": 0.9607039404918166,
+    "acuracia": 0.941962129837866,
+    "IoU_min_semente": 0.9118467857403154
+   },
+   "India_399883 | fixa | classe fixa": {
+    "IoU": 0.9023983204468862,
+    "F1": 0.9486393524042339,
+    "precisao": 0.9605101595383946,
+    "sensibilidade": 0.9379989260130676,
+    "acuracia": 0.9334565540523564,
+    "IoU_min_semente": 0.8839082888049529
+   },
+   "India_399883 | fixa | classe local": {
+    "IoU": 0.9181421497118665,
+    "F1": 0.9573227037236943,
+    "precisao": 0.9558608371415133,
+    "sensibilidade": 0.9589521646950292,
+    "acuracia": 0.9438250726338405,
+    "IoU_min_semente": 0.9148188342654351
+   },
+   "Mekong_922373 | percentil | classe fixa": {
+    "IoU": 0.8825261373911203,
+    "F1": 0.937573336043284,
+    "precisao": 0.9624070901638825,
+    "sensibilidade": 0.9143022301425336,
+    "acuracia": 0.9200448171289514,
+    "IoU_min_semente": 0.8699793652118942
+   },
+   "Mekong_922373 | percentil | classe local": {
+    "IoU": 0.9076606739866254,
+    "F1": 0.9515904377973649,
+    "precisao": 0.9475076013140257,
+    "sensibilidade": 0.9559356940058846,
+    "acuracia": 0.9361019496134722,
+    "IoU_min_semente": 0.9035338965886784
+   },
+   "Mekong_922373 | fixa | classe fixa": {
+    "IoU": 0.9152742707450797,
+    "F1": 0.9557530630487641,
+    "precisao": 0.9304513519194136,
+    "sensibilidade": 0.9825635438466342,
+    "acuracia": 0.9402028104614318,
+    "IoU_min_semente": 0.9109613447123093
+   },
+   "Mekong_922373 | fixa | classe local": {
+    "IoU": 0.9217534337916581,
+    "F1": 0.959279225642783,
+    "precisao": 0.9461796831390266,
+    "sensibilidade": 0.9727466463001515,
+    "acuracia": 0.9457253750307256,
+    "IoU_min_semente": 0.9161367591820968
+   },
+   "USA_788696 | percentil | classe fixa": {
+    "IoU": 0.8536441709856111,
+    "F1": 0.9208163909852481,
+    "precisao": 0.9612827610733613,
+    "sensibilidade": 0.8838829418117164,
+    "acuracia": 0.9002297765374151,
+    "IoU_min_semente": 0.8193796646337105
+   },
+   "USA_788696 | percentil | classe local": {
+    "IoU": 0.91140664736952,
+    "F1": 0.9536479605594002,
+    "precisao": 0.9435802933621084,
+    "sensibilidade": 0.9639984433120589,
+    "acuracia": 0.938421063331,
+    "IoU_min_semente": 0.9092179014870291
+   },
+   "USA_788696 | fixa | classe fixa": {
+    "IoU": 0.843713862095436,
+    "F1": 0.91397729204517,
+    "precisao": 0.948793380662767,
+    "sensibilidade": 0.8859343754747738,
+    "acuracia": 0.8928704148960586,
+    "IoU_min_semente": 0.7567510279425146
+   },
+   "USA_788696 | fixa | classe local": {
+    "IoU": 0.9039026547267387,
+    "F1": 0.9495186734102757,
+    "precisao": 0.9330394037194667,
+    "sensibilidade": 0.9666140622939795,
+    "acuracia": 0.9324631964454767,
+    "IoU_min_semente": 0.8968207992695549
+   },
+   "3 imagens | percentil | classe fixa": {
+    "IoU": 0.9004821244291907,
+    "F1": 0.9476324754327363,
+    "precisao": 0.9351795431068027,
+    "sensibilidade": 0.961557198928933,
+    "acuracia": 0.93021718281384,
+    "IoU_min_semente": 0.8959603595991489
+   },
+   "3 imagens | percentil | classe local": {
+    "IoU": 0.914355362884752,
+    "F1": 0.955258761265568,
+    "precisao": 0.9462490897214656,
+    "sensibilidade": 0.964474391981506,
+    "acuracia": 0.9406161047944601,
+    "IoU_min_semente": 0.9117625062344847
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.9146471796160919,
+    "F1": 0.9554060555159133,
+    "precisao": 0.9490225524323425,
+    "sensibilidade": 0.9620985722908634,
+    "acuracia": 0.9410349161151027,
+    "IoU_min_semente": 0.904517575736555
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.9188379105801636,
+    "F1": 0.9577013897833576,
+    "precisao": 0.9528660563240546,
+    "sensibilidade": 0.9626329195700585,
+    "acuracia": 0.9441100370375768,
+    "IoU_min_semente": 0.9163131596958984
+   },
+   "NDWI": {
+    "IoU": 0.8604076328458315,
+    "F1": 0.9249667843274558,
+    "precisao": 0.9782121143391609,
+    "sensibilidade": 0.8772186567133536,
+    "acuracia": 0.9064687099549905,
+    "IoU_min_semente": 0.8604076328458314
+   },
+   "MNDWI": {
+    "IoU": 0.9276377615728566,
+    "F1": 0.9624606656553047,
+    "precisao": 0.9602721606738781,
+    "sensibilidade": 0.9646591688326621,
+    "acuracia": 0.9505462627296244,
+    "IoU_min_semente": 0.9276377615728566
+   }
+  }
+ },
+ "falhas_recortes_com_agua": {
+  "SOM por recorte": 72,
+  "India_399883 | percentil | classe fixa": 8,
+  "India_399883 | percentil | classe local": 50,
+  "India_399883 | fixa | classe fixa": 2,
+  "India_399883 | fixa | classe local": 25,
+  "Mekong_922373 | percentil | classe fixa": 16,
+  "Mekong_922373 | percentil | classe local": 53,
+  "Mekong_922373 | fixa | classe fixa": 1,
+  "Mekong_922373 | fixa | classe local": 25,
+  "USA_788696 | percentil | classe fixa": 4,
+  "USA_788696 | percentil | classe local": 43,
+  "USA_788696 | fixa | classe fixa": 9,
+  "USA_788696 | fixa | classe local": 45,
+  "3 imagens | percentil | classe fixa": 13,
+  "3 imagens | percentil | classe local": 48,
+  "3 imagens | fixa | classe fixa": 4,
+  "3 imagens | fixa | classe local": 23,
+  "NDWI": 47,
+  "MNDWI": 17
+ },
+ "recortes_com_agua": 254
+}
