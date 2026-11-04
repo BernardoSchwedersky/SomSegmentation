@@ -1,0 +1,1582 @@
+{
+ "recortes": 384,
+ "sementes": 3,
+ "unidades": 36,
+ "imagens_pre_treino": {
+  "Ghana": "Ghana_1033830",
+  "India": "India_399883",
+  "Mekong": "Mekong_922373",
+  "Nigeria": "Nigeria_812045",
+  "Pakistan": "Pakistan_849790",
+  "Paraguay": "Paraguay_822142",
+  "Somalia": "Somalia_886726",
+  "Spain": "Spain_8372658",
+  "Sri-Lanka": "Sri-Lanka_321316",
+  "USA": "USA_788696"
+ },
+ "metricas": {
+  "Todos": {
+   "n": 384,
+   "SOM por recorte": {
+    "IoU": 0.7233747859017076,
+    "F1": 0.8394850916428046,
+    "precisao": 0.8866815384186723,
+    "sensibilidade": 0.7970713497883105,
+    "acuracia": 0.9738212680585301,
+    "IoU_min_semente": 0.7216138428559797
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7415828860609266,
+    "F1": 0.8516150421503174,
+    "precisao": 0.9012900265736782,
+    "sensibilidade": 0.8071711418053161,
+    "acuracia": 0.9758422686077001,
+    "IoU_min_semente": 0.7389758271005229
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.7292164672788267,
+    "F1": 0.8433882503715365,
+    "precisao": 0.8176819913022793,
+    "sensibilidade": 0.8718688820830512,
+    "acuracia": 0.9721656571709539,
+    "IoU_min_semente": 0.7207278824139025
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.7261030859079428,
+    "F1": 0.8413176354005256,
+    "precisao": 0.8998961535322364,
+    "sensibilidade": 0.7899248908721179,
+    "acuracia": 0.9744080979148727,
+    "IoU_min_semente": 0.7221672777308314
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.6315910634097657,
+    "F1": 0.7741688047952394,
+    "precisao": 0.8088353665977781,
+    "sensibilidade": 0.7426727850484199,
+    "acuracia": 0.9627938673347177,
+    "IoU_min_semente": 0.6194982624782248
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.7082606068773623,
+    "F1": 0.8291066740815118,
+    "precisao": 0.8533284962421851,
+    "sensibilidade": 0.8066199659249986,
+    "acuracia": 0.9714741305457659,
+    "IoU_min_semente": 0.6850985794786968
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.7450712261612046,
+    "F1": 0.8538456812862161,
+    "precisao": 0.9183305964928149,
+    "sensibilidade": 0.7978907708728918,
+    "acuracia": 0.9765336901278263,
+    "IoU_min_semente": 0.7267663252346015
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.6779502208842617,
+    "F1": 0.8075871073458534,
+    "precisao": 0.7737582556076738,
+    "sensibilidade": 0.8481443141312788,
+    "acuracia": 0.9650389640026927,
+    "IoU_min_semente": 0.6405195722773629
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.7392796853222837,
+    "F1": 0.8500964418043305,
+    "precisao": 0.9003440225987432,
+    "sensibilidade": 0.8052918721044144,
+    "acuracia": 0.9756099904641008,
+    "IoU_min_semente": 0.7358840275747622
+   },
+   "NDWI": {
+    "IoU": 0.6565237628379056,
+    "F1": 0.7926523936042659,
+    "precisao": 0.9731780764933702,
+    "sensibilidade": 0.6686221878557079,
+    "acuracia": 0.9699569511093012,
+    "IoU_min_semente": 0.6565237628379056
+   },
+   "MNDWI": {
+    "IoU": 0.7593211529334076,
+    "F1": 0.8631978893306114,
+    "precisao": 0.8976040721077512,
+    "sensibilidade": 0.8313319906481786,
+    "acuracia": 0.9773689923922572,
+    "IoU_min_semente": 0.7593211529334076
+   }
+  },
+  "0-1%": {
+   "n": 138,
+   "SOM por recorte": {
+    "IoU": 0.015089773170598847,
+    "F1": 0.029708578436753532,
+    "precisao": 0.5779098899200825,
+    "sensibilidade": 0.01534914845685176,
+    "acuracia": 0.996758839180505,
+    "IoU_min_semente": 0.01260817118581843
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.2620785714667632,
+    "F1": 0.41503518177044657,
+    "precisao": 0.8469915251644005,
+    "sensibilidade": 0.27504440777372535,
+    "acuracia": 0.9974963633397834,
+    "IoU_min_semente": 0.24940200291802725
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.2525307576232784,
+    "F1": 0.4031357628200778,
+    "precisao": 0.36327570113028534,
+    "sensibilidade": 0.4591536071024409,
+    "acuracia": 0.9955915021670476,
+    "IoU_min_semente": 0.24346652240518937
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.22393886339607447,
+    "F1": 0.36577850218118235,
+    "precisao": 0.7849346728405706,
+    "sensibilidade": 0.23855120295140897,
+    "acuracia": 0.9973263248720198,
+    "IoU_min_semente": 0.20785490858930272
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.11954232635018687,
+    "F1": 0.21321908710059811,
+    "precisao": 0.14280319631604402,
+    "sensibilidade": 0.4254527490776847,
+    "acuracia": 0.9897334589545599,
+    "IoU_min_semente": 0.10855438679476567
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.2168383799854454,
+    "F1": 0.3562435618375361,
+    "precisao": 0.41826941691507274,
+    "sensibilidade": 0.31990414227304736,
+    "acuracia": 0.9962821199438102,
+    "IoU_min_semente": 0.2006582413930074
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.2517673645403071,
+    "F1": 0.40210256804665184,
+    "precisao": 0.8578065990737275,
+    "sensibilidade": 0.2626522739933362,
+    "acuracia": 0.9974763414942286,
+    "IoU_min_semente": 0.23807235669809998
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.09830901662005286,
+    "F1": 0.1786537983457511,
+    "precisao": 0.11788458228210852,
+    "sensibilidade": 0.39079891949842865,
+    "acuracia": 0.987907156346651,
+    "IoU_min_semente": 0.07853664865524926
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.24794672534092388,
+    "F1": 0.3972796240306538,
+    "precisao": 0.7487562396708641,
+    "sensibilidade": 0.2714287215816525,
+    "acuracia": 0.9973422019237551,
+    "IoU_min_semente": 0.23851866521437767
+   },
+   "NDWI": {
+    "IoU": 0.2493245185398103,
+    "F1": 0.39913491625253084,
+    "precisao": 0.7381918243454088,
+    "sensibilidade": 0.2735098432852293,
+    "acuracia": 0.9973382269985347,
+    "IoU_min_semente": 0.2493245185398103
+   },
+   "MNDWI": {
+    "IoU": 0.27019644920684943,
+    "F1": 0.4254404102224795,
+    "precisao": 0.5389252441894201,
+    "sensibilidade": 0.3514362892969382,
+    "acuracia": 0.996931799388174,
+    "IoU_min_semente": 0.27019644920684943
+   }
+  },
+  "1-5%": {
+   "n": 110,
+   "SOM por recorte": {
+    "IoU": 0.28671270022917933,
+    "F1": 0.44562341360986735,
+    "precisao": 0.7305020709709295,
+    "sensibilidade": 0.3208244204230584,
+    "acuracia": 0.9813664819504085,
+    "IoU_min_semente": 0.27899729294817704
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.3683784115161739,
+    "F1": 0.5382579612690727,
+    "precisao": 0.855529823941693,
+    "sensibilidade": 0.39278943397183497,
+    "acuracia": 0.9842730715419935,
+    "IoU_min_semente": 0.35521152781543286
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.42327789935857046,
+    "F1": 0.5947783756115895,
+    "precisao": 0.6076002578776318,
+    "sensibilidade": 0.5870248777555087,
+    "acuracia": 0.9812997436349509,
+    "IoU_min_semente": 0.41823673847152687
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.3337465835855666,
+    "F1": 0.5004207859735094,
+    "precisao": 0.8226594138411398,
+    "sensibilidade": 0.35971497132593555,
+    "acuracia": 0.9832318030606423,
+    "IoU_min_semente": 0.3280768392292526
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.29958013410716056,
+    "F1": 0.4608317038168541,
+    "precisao": 0.5008689988662797,
+    "sensibilidade": 0.4269792713231111,
+    "acuracia": 0.9766951229259736,
+    "IoU_min_semente": 0.286245668554585
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.3353472566856268,
+    "F1": 0.5021893106331723,
+    "precisao": 0.567396782128937,
+    "sensibilidade": 0.45495471348127753,
+    "acuracia": 0.9789950776521433,
+    "IoU_min_semente": 0.3234461352108411
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.3530200749100663,
+    "F1": 0.5215437635590409,
+    "precisao": 0.8427170835722125,
+    "sensibilidade": 0.3777465741856756,
+    "acuracia": 0.9838122433391514,
+    "IoU_min_semente": 0.3292313404423356
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.3552379900043765,
+    "F1": 0.5232454264830909,
+    "precisao": 0.5439072186970587,
+    "sensibilidade": 0.5217745928594114,
+    "acuracia": 0.9774129838302402,
+    "IoU_min_semente": 0.3267708502450647
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.33936550375949887,
+    "F1": 0.5066674339546346,
+    "precisao": 0.8080537022757359,
+    "sensibilidade": 0.36916481779619253,
+    "acuracia": 0.9832187326886558,
+    "IoU_min_semente": 0.32566490083565636
+   },
+   "NDWI": {
+    "IoU": 0.3047198859466345,
+    "F1": 0.46710391897728476,
+    "precisao": 0.9260432849825414,
+    "sensibilidade": 0.3123204808734854,
+    "acuracia": 0.9833586570107982,
+    "IoU_min_semente": 0.3047198859466345
+   },
+   "MNDWI": {
+    "IoU": 0.41825170164449577,
+    "F1": 0.5898130792433011,
+    "precisao": 0.7656468237099686,
+    "sensibilidade": 0.479657813415969,
+    "acuracia": 0.9844203454244909,
+    "IoU_min_semente": 0.41825170164449577
+   }
+  },
+  "5-15%": {
+   "n": 70,
+   "SOM por recorte": {
+    "IoU": 0.5011566714258016,
+    "F1": 0.6676771076116784,
+    "precisao": 0.7355721808228162,
+    "sensibilidade": 0.6114338541550798,
+    "acuracia": 0.945613736518999,
+    "IoU_min_semente": 0.49360658557094406
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.5242738875181738,
+    "F1": 0.687888322078003,
+    "precisao": 0.7976537605713309,
+    "sensibilidade": 0.604941997711054,
+    "acuracia": 0.950971589975258,
+    "IoU_min_semente": 0.5208530419447062
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.5469531082979125,
+    "F1": 0.7069956157823288,
+    "precisao": 0.6515857089024593,
+    "sensibilidade": 0.7766831539995995,
+    "acuracia": 0.9423082948851144,
+    "IoU_min_semente": 0.5338137358796651
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.49114358212929216,
+    "F1": 0.6586932363241891,
+    "precisao": 0.7652391370143502,
+    "sensibilidade": 0.5782349902237779,
+    "acuracia": 0.946461720496823,
+    "IoU_min_semente": 0.4778208003440148
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.41734636443345957,
+    "F1": 0.5887831133697926,
+    "precisao": 0.6423224412813321,
+    "sensibilidade": 0.5470556391869544,
+    "acuracia": 0.9316086855800085,
+    "IoU_min_semente": 0.4041636637155998
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.4872492451603132,
+    "F1": 0.6545711130428284,
+    "precisao": 0.6928778385769866,
+    "sensibilidade": 0.6206704683935108,
+    "acuracia": 0.9415941043274675,
+    "IoU_min_semente": 0.44368355216633487
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.5268690514857285,
+    "F1": 0.6897632189232854,
+    "precisao": 0.8288277020009245,
+    "sensibilidade": 0.5908377888682076,
+    "acuracia": 0.9525001560628811,
+    "IoU_min_semente": 0.4936347920374803
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.4893475185327132,
+    "F1": 0.6563047684490471,
+    "precisao": 0.6049869331863902,
+    "sensibilidade": 0.7297034010376885,
+    "acuracia": 0.9308409246580522,
+    "IoU_min_semente": 0.45670073717972137
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.5231258349713372,
+    "F1": 0.6867989399510995,
+    "precisao": 0.7967790839066433,
+    "sensibilidade": 0.6046436437252969,
+    "acuracia": 0.9507805826993824,
+    "IoU_min_semente": 0.5037678173028255
+   },
+   "NDWI": {
+    "IoU": 0.3724634787016698,
+    "F1": 0.542766324177915,
+    "precisao": 0.9648151797421537,
+    "sensibilidade": 0.37759230558171614,
+    "acuracia": 0.9431686888154287,
+    "IoU_min_semente": 0.37246347870166974
+   },
+   "MNDWI": {
+    "IoU": 0.5702946762420988,
+    "F1": 0.7263537027418083,
+    "precisao": 0.7832668276983675,
+    "sensibilidade": 0.6771510778563007,
+    "acuracia": 0.9544208501510824,
+    "IoU_min_semente": 0.5702946762420988
+   }
+  },
+  "15-40%": {
+   "n": 40,
+   "SOM por recorte": {
+    "IoU": 0.7415193138895878,
+    "F1": 0.8515625288033991,
+    "precisao": 0.8788802378408405,
+    "sensibilidade": 0.8259092519819399,
+    "acuracia": 0.9381976164699526,
+    "IoU_min_semente": 0.7326555171422805
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7382858477119966,
+    "F1": 0.8494386562512645,
+    "precisao": 0.8696985097752132,
+    "sensibilidade": 0.8302902294739853,
+    "acuracia": 0.9368212802050756,
+    "IoU_min_semente": 0.7346096146862516
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.7415591298394203,
+    "F1": 0.8516001151553224,
+    "precisao": 0.8206936732707613,
+    "sensibilidade": 0.8855996028173044,
+    "acuracia": 0.9337231888997137,
+    "IoU_min_semente": 0.7379873035963347
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.7150310124915588,
+    "F1": 0.8338348602672716,
+    "precisao": 0.8792137694776945,
+    "sensibilidade": 0.7931083940373976,
+    "acuracia": 0.9321518847100108,
+    "IoU_min_semente": 0.7100249636021269
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.6198192712908005,
+    "F1": 0.765112574707237,
+    "precisao": 0.8581813847338794,
+    "sensibilidade": 0.6906208597584179,
+    "acuracia": 0.9090667109830325,
+    "IoU_min_semente": 0.5929162189386323
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.7231262222118419,
+    "F1": 0.8391269916617935,
+    "precisao": 0.8674869040513733,
+    "sensibilidade": 0.8128542083320477,
+    "acuracia": 0.933185973388504,
+    "IoU_min_semente": 0.69320166860262
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.7469851732404734,
+    "F1": 0.855086112342241,
+    "precisao": 0.9010020289003314,
+    "sensibilidade": 0.8137570322748339,
+    "acuracia": 0.9407649952090958,
+    "IoU_min_semente": 0.7266816327579094
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.7228577218482527,
+    "F1": 0.8389533939774271,
+    "precisao": 0.8116853255919613,
+    "sensibilidade": 0.8704773017756348,
+    "acuracia": 0.9279743446777612,
+    "IoU_min_semente": 0.6991017977199009
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.7457353657046504,
+    "F1": 0.8543508536266259,
+    "precisao": 0.880437169113259,
+    "sensibilidade": 0.8300043102924359,
+    "acuracia": 0.9392517358246838,
+    "IoU_min_semente": 0.7452923189172128
+   },
+   "NDWI": {
+    "IoU": 0.5902090508361256,
+    "F1": 0.7423037248163014,
+    "precisao": 0.9831181672791584,
+    "sensibilidade": 0.5962520090544191,
+    "acuracia": 0.9111319580006093,
+    "IoU_min_semente": 0.5902090508361256
+   },
+   "MNDWI": {
+    "IoU": 0.7579650612484952,
+    "F1": 0.8623209618400418,
+    "precisao": 0.8939172529646053,
+    "sensibilidade": 0.8328820148606916,
+    "acuracia": 0.9429084782747447,
+    "IoU_min_semente": 0.7579650612484952
+   }
+  },
+  "40-100%": {
+   "n": 26,
+   "SOM por recorte": {
+    "IoU": 0.921948798832427,
+    "F1": 0.9593894358775691,
+    "precisao": 0.9543394176008139,
+    "sensibilidade": 0.9644958221225209,
+    "acuracia": 0.9449359463180639,
+    "IoU_min_semente": 0.921136294161317
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.9230480879439442,
+    "F1": 0.9599808258364679,
+    "precisao": 0.9537059923894425,
+    "sensibilidade": 0.9663712239979837,
+    "acuracia": 0.9456582469364125,
+    "IoU_min_semente": 0.9198506052564132
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.9184102499200236,
+    "F1": 0.9574591862432813,
+    "precisao": 0.9494107329352506,
+    "sensibilidade": 0.9658075558384406,
+    "acuracia": 0.9421680074942033,
+    "IoU_min_semente": 0.9096786443502453
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.9283322826177255,
+    "F1": 0.9628328094415889,
+    "precisao": 0.9585001263282483,
+    "sensibilidade": 0.9672123527744944,
+    "acuracia": 0.9496470528200588,
+    "IoU_min_semente": 0.9250555278811499
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.8821952138095573,
+    "F1": 0.9374054960834094,
+    "precisao": 0.9594605294755914,
+    "sensibilidade": 0.9163859005254867,
+    "acuracia": 0.9174647913599925,
+    "IoU_min_semente": 0.876330675055193
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.9163431776121839,
+    "F1": 0.9562932096758322,
+    "precisao": 0.956728705134013,
+    "sensibilidade": 0.9559207837733545,
+    "acuracia": 0.9411317794302008,
+    "IoU_min_semente": 0.8972502621479383
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.9264568157507709,
+    "F1": 0.9618198221088109,
+    "precisao": 0.959543539582881,
+    "sensibilidade": 0.9641276375794775,
+    "acuracia": 0.9483724813272499,
+    "IoU_min_semente": 0.9206619463216927
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.9059486301216816,
+    "F1": 0.9506343382537011,
+    "precisao": 0.94580840674617,
+    "sensibilidade": 0.9555956218992913,
+    "acuracia": 0.9330382538802652,
+    "IoU_min_semente": 0.8948205774399518
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.9215223874064367,
+    "F1": 0.95915574689161,
+    "precisao": 0.9515863760153541,
+    "sensibilidade": 0.966862170624854,
+    "acuracia": 0.9444637176828602,
+    "IoU_min_semente": 0.9180664043863236
+   },
+   "NDWI": {
+    "IoU": 0.8831994522271644,
+    "F1": 0.9379776010264332,
+    "precisao": 0.9768601873693386,
+    "sensibilidade": 0.9020718618929608,
+    "acuracia": 0.9195513766236333,
+    "IoU_min_semente": 0.8831994522271644
+   },
+   "MNDWI": {
+    "IoU": 0.933114013200305,
+    "F1": 0.9653998748428892,
+    "precisao": 0.9609290379841964,
+    "sensibilidade": 0.9699125083680616,
+    "acuracia": 0.9531160299707774,
+    "IoU_min_semente": 0.9331140132003048
+   }
+  }
+ },
+ "metricas_por_evento": {
+  "Bolivia": {
+   "n": 14,
+   "SOM por recorte": {
+    "IoU": 0.7118274617695693,
+    "F1": 0.8316256249694153,
+    "precisao": 0.9559446023703391,
+    "sensibilidade": 0.7360630314338792,
+    "acuracia": 0.9574240257935794,
+    "IoU_min_semente": 0.7049728496357095
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7209875182605874,
+    "F1": 0.8376961850019828,
+    "precisao": 0.9355780963790443,
+    "sensibilidade": 0.7611800594142054,
+    "acuracia": 0.9580502225584535,
+    "IoU_min_semente": 0.7027787749979637
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.7761830721115381,
+    "F1": 0.873985861110438,
+    "precisao": 0.8400128162919581,
+    "sensibilidade": 0.9110884011359079,
+    "acuracia": 0.9624755314271588,
+    "IoU_min_semente": 0.7730041779003478
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.6922516406625231,
+    "F1": 0.8179433659391065,
+    "precisao": 0.9318928500287548,
+    "sensibilidade": 0.7298126733937296,
+    "acuracia": 0.9537096533359515,
+    "IoU_min_semente": 0.6613222012461556
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.0748951515309418,
+    "F1": 0.1343907296051902,
+    "precisao": 0.653746163379688,
+    "sensibilidade": 0.07505851399016311,
+    "acuracia": 0.8676905845779105,
+    "IoU_min_semente": 0.0
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.7375247253864498,
+    "F1": 0.8457249713857834,
+    "precisao": 0.9148721858947284,
+    "sensibilidade": 0.7903787450999649,
+    "acuracia": 0.9597596257663459,
+    "IoU_min_semente": 0.610401262347191
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.7630084915082262,
+    "F1": 0.8654702993641689,
+    "precisao": 0.9595716680269315,
+    "sensibilidade": 0.7882632393017603,
+    "acuracia": 0.965023418823948,
+    "IoU_min_semente": 0.7397906317166897
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.7375247253864498,
+    "F1": 0.8457249713857834,
+    "precisao": 0.9148721858947284,
+    "sensibilidade": 0.7903787450999649,
+    "acuracia": 0.9597596257663459,
+    "IoU_min_semente": 0.610401262347191
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.7630084915082262,
+    "F1": 0.8654702993641689,
+    "precisao": 0.9595716680269315,
+    "sensibilidade": 0.7882632393017603,
+    "acuracia": 0.965023418823948,
+    "IoU_min_semente": 0.7397906317166897
+   },
+   "NDWI": {
+    "IoU": 0.6731200039172961,
+    "F1": 0.8046284813298653,
+    "precisao": 0.995888686643665,
+    "sensibilidade": 0.6749957035182049,
+    "acuracia": 0.9531842675294916,
+    "IoU_min_semente": 0.6731200039172961
+   },
+   "MNDWI": {
+    "IoU": 0.7413721638522951,
+    "F1": 0.8514804350750825,
+    "precisao": 0.9720929133486141,
+    "sensibilidade": 0.7574942918170434,
+    "acuracia": 0.9622590070208258,
+    "IoU_min_semente": 0.7413721638522951
+   }
+  },
+  "Ghana": {
+   "n": 34,
+   "SOM por recorte": {
+    "IoU": 0.6326755344439786,
+    "F1": 0.7746900013678836,
+    "precisao": 0.886850289761204,
+    "sensibilidade": 0.6892126626254033,
+    "acuracia": 0.9922126904154028,
+    "IoU_min_semente": 0.5964237634623055
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.6571624083052247,
+    "F1": 0.7930996268120682,
+    "precisao": 0.935032628447345,
+    "sensibilidade": 0.688643252153568,
+    "acuracia": 0.9929993008626723,
+    "IoU_min_semente": 0.6482552975510723
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.6882850919070093,
+    "F1": 0.8153576987171296,
+    "precisao": 0.8828289159482754,
+    "sensibilidade": 0.7575463504555283,
+    "acuracia": 0.9933148258173157,
+    "IoU_min_semente": 0.6836513786015738
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.5889155045576105,
+    "F1": 0.7406812242505115,
+    "precisao": 0.8504768190550087,
+    "sensibilidade": 0.6563574568400156,
+    "acuracia": 0.9910629758536627,
+    "IoU_min_semente": 0.5615772351910772
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.3173364968513808,
+    "F1": 0.4803561343321734,
+    "precisao": 0.8267216664488144,
+    "sensibilidade": 0.3411544188025098,
+    "acuracia": 0.985610369597245,
+    "IoU_min_semente": 0.2759440144978743
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.6320260984260667,
+    "F1": 0.7745180943684318,
+    "precisao": 0.8731892715563898,
+    "sensibilidade": 0.6964333191534617,
+    "acuracia": 0.9921010823136304,
+    "IoU_min_semente": 0.6251821250069162
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.6626584126357452,
+    "F1": 0.7971014971018798,
+    "precisao": 0.9331644864316345,
+    "sensibilidade": 0.6958639086816265,
+    "acuracia": 0.9930966179463842,
+    "IoU_min_semente": 0.6588555127984225
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.6607104128008815,
+    "F1": 0.7954882679788179,
+    "precisao": 0.811411240326046,
+    "sensibilidade": 0.7813884753092984,
+    "acuracia": 0.9921763368286746,
+    "IoU_min_semente": 0.6431234836601661
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.649885798244915,
+    "F1": 0.7875065084799392,
+    "precisao": 0.9052685442832775,
+    "sensibilidade": 0.697523396788259,
+    "acuracia": 0.9926813149170034,
+    "IoU_min_semente": 0.6294826426097142
+   },
+   "NDWI": {
+    "IoU": 0.6052746735985475,
+    "F1": 0.7541072983375511,
+    "precisao": 0.9720876077789665,
+    "sensibilidade": 0.6159802722535361,
+    "acuracia": 0.9921719761252784,
+    "IoU_min_semente": 0.6052746735985475
+   },
+   "MNDWI": {
+    "IoU": 0.6835485872201229,
+    "F1": 0.8120330977186695,
+    "precisao": 0.9227567654448402,
+    "sensibilidade": 0.7250345634372009,
+    "acuracia": 0.9934590744316374,
+    "IoU_min_semente": 0.6835485872201229
+   }
+  },
+  "India": {
+   "n": 66,
+   "SOM por recorte": {
+    "IoU": 0.6200179855299158,
+    "F1": 0.7654228376239797,
+    "precisao": 0.780152611219763,
+    "sensibilidade": 0.7513215716153177,
+    "acuracia": 0.9488128614908754,
+    "IoU_min_semente": 0.6102592883961521
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.6337725858219008,
+    "F1": 0.7757873693813656,
+    "precisao": 0.8091432565936478,
+    "sensibilidade": 0.7451434263342426,
+    "acuracia": 0.9521460152203854,
+    "IoU_min_semente": 0.6201031992896672
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.5815558178777755,
+    "F1": 0.7352708489809215,
+    "precisao": 0.6866847998831792,
+    "sensibilidade": 0.7950613537739635,
+    "acuracia": 0.9361642316908868,
+    "IoU_min_semente": 0.5664781799974046
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.6491654659629938,
+    "F1": 0.7872648266616791,
+    "precisao": 0.8206507374456078,
+    "sensibilidade": 0.7568732608368213,
+    "acuracia": 0.9545393888900496,
+    "IoU_min_semente": 0.647681228922029
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.6081024081856673,
+    "F1": 0.7557929606177248,
+    "precisao": 0.7335071420780649,
+    "sensibilidade": 0.7918461763422134,
+    "acuracia": 0.9424803727842295,
+    "IoU_min_semente": 0.5764127251434465
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.5646732470421987,
+    "F1": 0.7216384637942759,
+    "precisao": 0.6892756196643299,
+    "sensibilidade": 0.7573462362612293,
+    "acuracia": 0.9350538646527581,
+    "IoU_min_semente": 0.5431065822907607
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.6424067981872249,
+    "F1": 0.7821734908612638,
+    "precisao": 0.85342625135082,
+    "sensibilidade": 0.7229340308126667,
+    "acuracia": 0.9551884795510052,
+    "IoU_min_semente": 0.6227326433988352
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.5317897821517569,
+    "F1": 0.6921816681651585,
+    "precisao": 0.6141941327773796,
+    "sensibilidade": 0.8008272122485462,
+    "acuracia": 0.9194979254536615,
+    "IoU_min_semente": 0.48049362075732766
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.6408444228735196,
+    "F1": 0.7811065675021774,
+    "precisao": 0.8284116422323705,
+    "sensibilidade": 0.740124081837282,
+    "acuracia": 0.9538781047178259,
+    "IoU_min_semente": 0.6346315439138759
+   },
+   "NDWI": {
+    "IoU": 0.5928061767502787,
+    "F1": 0.7443544423713261,
+    "precisao": 0.9289870576926494,
+    "sensibilidade": 0.620944169769812,
+    "acuracia": 0.9526007916496685,
+    "IoU_min_semente": 0.5928061767502787
+   },
+   "MNDWI": {
+    "IoU": 0.6852199667302327,
+    "F1": 0.8132113080285164,
+    "precisao": 0.8096486381335679,
+    "sensibilidade": 0.8168054698915191,
+    "acuracia": 0.9583009771547603,
+    "IoU_min_semente": 0.6852199667302327
+   }
+  },
+  "Mekong": {
+   "n": 28,
+   "SOM por recorte": {
+    "IoU": 0.9023557131083502,
+    "F1": 0.948671726674728,
+    "precisao": 0.9497733264229421,
+    "sensibilidade": 0.9475922763854463,
+    "acuracia": 0.976765752755507,
+    "IoU_min_semente": 0.9012418454766957
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.9112483297120657,
+    "F1": 0.9535590350951173,
+    "precisao": 0.9581262072572105,
+    "sensibilidade": 0.9491093362709998,
+    "acuracia": 0.9790501700915176,
+    "IoU_min_semente": 0.9083402106038657
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.8799691761742418,
+    "F1": 0.9361364942472283,
+    "precisao": 0.9188510839845629,
+    "sensibilidade": 0.9543060681171394,
+    "acuracia": 0.9705144193651493,
+    "IoU_min_semente": 0.870031041995219
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.9176678013187839,
+    "F1": 0.9570590461017292,
+    "precisao": 0.9576458728577081,
+    "sensibilidade": 0.9564887542458459,
+    "acuracia": 0.9805476166940528,
+    "IoU_min_semente": 0.9108911444984843
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.8741393326205694,
+    "F1": 0.9327068708959761,
+    "precisao": 0.890856783698613,
+    "sensibilidade": 0.9791224945683772,
+    "acuracia": 0.967890129633001,
+    "IoU_min_semente": 0.8443187556812444
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.9040260774914506,
+    "F1": 0.9495744092580276,
+    "precisao": 0.9574059145446143,
+    "sensibilidade": 0.9419169497230637,
+    "acuracia": 0.9773403795143757,
+    "IoU_min_semente": 0.8924831998400756
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.91615030802562,
+    "F1": 0.9562402121998561,
+    "precisao": 0.9593081007928652,
+    "sensibilidade": 0.9532066464702101,
+    "acuracia": 0.9802317078812566,
+    "IoU_min_semente": 0.9152244935008096
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.8801384106710785,
+    "F1": 0.9362314148588199,
+    "precisao": 0.9466710788720353,
+    "sensibilidade": 0.9264124361210563,
+    "acuracia": 0.9713990749834944,
+    "IoU_min_semente": 0.8703715070939301
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.902573189152398,
+    "F1": 0.9487886592083652,
+    "precisao": 0.9494624440250914,
+    "sensibilidade": 0.9482317084366105,
+    "acuracia": 0.9767996456939826,
+    "IoU_min_semente": 0.8988778197163025
+   },
+   "NDWI": {
+    "IoU": 0.8907522079867961,
+    "F1": 0.9422199315427339,
+    "precisao": 0.9957219767395263,
+    "sensibilidade": 0.8941742403378315,
+    "acuracia": 0.9751500969027401,
+    "IoU_min_semente": 0.890752207986796
+   },
+   "MNDWI": {
+    "IoU": 0.9179616908554175,
+    "F1": 0.9572263046046592,
+    "precisao": 0.9534876434132816,
+    "sensibilidade": 0.9609944000734417,
+    "acuracia": 0.980539240534135,
+    "IoU_min_semente": 0.9179616908554175
+   }
+  },
+  "Nigeria": {
+   "n": 16,
+   "SOM por recorte": {
+    "IoU": 0.8746968658860421,
+    "F1": 0.933159159749659,
+    "precisao": 0.915758062796252,
+    "sensibilidade": 0.9512597297137995,
+    "acuracia": 0.9716634890033807,
+    "IoU_min_semente": 0.8713935259655371
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.8838672334086611,
+    "F1": 0.9383480703398464,
+    "precisao": 0.9176697437508361,
+    "sensibilidade": 0.9601302767211224,
+    "acuracia": 0.9737539396643083,
+    "IoU_min_semente": 0.8787885231022334
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.877742755307089,
+    "F1": 0.9348912398402237,
+    "precisao": 0.915080220088082,
+    "sensibilidade": 0.9560583984984857,
+    "acuracia": 0.9723063149904062,
+    "IoU_min_semente": 0.8769175570084516
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.8837116454192696,
+    "F1": 0.938260704783899,
+    "precisao": 0.9191060248827055,
+    "sensibilidade": 0.958483794080554,
+    "acuracia": 0.9737567759592399,
+    "IoU_min_semente": 0.8775625633496451
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.8819451658427028,
+    "F1": 0.937197818085449,
+    "precisao": 0.9411633984852802,
+    "sensibilidade": 0.9334821013210344,
+    "acuracia": 0.9739505556808252,
+    "IoU_min_semente": 0.8601124943065591
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.8612470982406387,
+    "F1": 0.9254340783515853,
+    "precisao": 0.8969860729004776,
+    "sensibilidade": 0.9557875569753627,
+    "acuracia": 0.9679658720786416,
+    "IoU_min_semente": 0.8545450754134938
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.8796221795893874,
+    "F1": 0.935956029166579,
+    "precisao": 0.9224804093832152,
+    "sensibilidade": 0.9498621679694826,
+    "acuracia": 0.9729687924494588,
+    "IoU_min_semente": 0.8782490533855467
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.8595254832196487,
+    "F1": 0.9244363662157085,
+    "precisao": 0.8873064629133126,
+    "sensibilidade": 0.9653766134190284,
+    "acuracia": 0.967156008579387,
+    "IoU_min_semente": 0.8482597130451438
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.8783682859738985,
+    "F1": 0.9352390658306943,
+    "precisao": 0.9218874447849504,
+    "sensibilidade": 0.9489877785198315,
+    "acuracia": 0.9726705762966376,
+    "IoU_min_semente": 0.8718444427655578
+   },
+   "NDWI": {
+    "IoU": 0.790316310455971,
+    "F1": 0.8828789704258321,
+    "precisao": 0.9907279445458711,
+    "sensibilidade": 0.7962053933510355,
+    "acuracia": 0.9560719705787074,
+    "IoU_min_semente": 0.790316310455971
+   },
+   "MNDWI": {
+    "IoU": 0.8870917787485255,
+    "F1": 0.9401681346275842,
+    "precisao": 0.9186643238645079,
+    "sensibilidade": 0.9627027840657502,
+    "acuracia": 0.9745198405921212,
+    "IoU_min_semente": 0.8870917787485255
+   }
+  },
+  "Pakistan": {
+   "n": 20,
+   "SOM por recorte": {
+    "IoU": 0.2934425838346367,
+    "F1": 0.4536811824219778,
+    "precisao": 0.38632652348790386,
+    "sensibilidade": 0.5534798104413895,
+    "acuracia": 0.993466385896861,
+    "IoU_min_semente": 0.28437810945273634
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.3297806458303168,
+    "F1": 0.4912715899839179,
+    "precisao": 0.6772616235136072,
+    "sensibilidade": 0.4050052872752908,
+    "acuracia": 0.9960793336514063,
+    "IoU_min_semente": 0.26774273652843306
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.3399744164341311,
+    "F1": 0.5018955088259446,
+    "precisao": 0.7189548009913601,
+    "sensibilidade": 0.4034386871891278,
+    "acuracia": 0.996267860369204,
+    "IoU_min_semente": 0.2804626842021867
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.38070900103084204,
+    "F1": 0.5490121171415422,
+    "precisao": 0.5458619499853793,
+    "sensibilidade": 0.5769004817295266,
+    "acuracia": 0.9952148299769545,
+    "IoU_min_semente": 0.31398576853122306
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.09188615986710234,
+    "F1": 0.1682518451823818,
+    "precisao": 0.3740269290887787,
+    "sensibilidade": 0.10899620099479106,
+    "acuracia": 0.9947197199425553,
+    "IoU_min_semente": 0.08578176665092112
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.28043292580243556,
+    "F1": 0.4271764845071539,
+    "precisao": 0.5356343268812744,
+    "sensibilidade": 0.3720871029647907,
+    "acuracia": 0.9954361980681421,
+    "IoU_min_semente": 0.13501849568434032
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.3514044378403182,
+    "F1": 0.5199077315853766,
+    "precisao": 0.459343285463083,
+    "sensibilidade": 0.6007128030392043,
+    "acuracia": 0.994562215396706,
+    "IoU_min_semente": 0.3349026389956444
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.06245601424695758,
+    "F1": 0.11751921886263213,
+    "precisao": 0.06609611119672688,
+    "sensibilidade": 0.5492499902087494,
+    "acuracia": 0.9592285360321092,
+    "IoU_min_semente": 0.05693847780409791
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.33432738859647454,
+    "F1": 0.49654567665789634,
+    "precisao": 0.40979484877461675,
+    "sensibilidade": 0.6610464888575569,
+    "acuracia": 0.9930934496013698,
+    "IoU_min_semente": 0.2614550905107806
+   },
+   "NDWI": {
+    "IoU": 0.38723520461904576,
+    "F1": 0.5582834162940465,
+    "precisao": 0.5354696013378648,
+    "sensibilidade": 0.5831277170720245,
+    "acuracia": 0.9954882846778333,
+    "IoU_min_semente": 0.38723520461904576
+   },
+   "MNDWI": {
+    "IoU": 0.2870037481832785,
+    "F1": 0.4460029717682021,
+    "precisao": 0.3364720652856246,
+    "sensibilidade": 0.6612618963694042,
+    "acuracia": 0.9919678426463521,
+    "IoU_min_semente": 0.2870037481832785
+   }
+  },
+  "Paraguay": {
+   "n": 49,
+   "SOM por recorte": {
+    "IoU": 0.5176166900392257,
+    "F1": 0.6821421217156867,
+    "precisao": 0.8845319589255222,
+    "sensibilidade": 0.5551758989710235,
+    "acuracia": 0.9663533810201542,
+    "IoU_min_semente": 0.5149970697589517
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.5236553817183025,
+    "F1": 0.6873144492641646,
+    "precisao": 0.8168371961568807,
+    "sensibilidade": 0.5933783601752683,
+    "acuracia": 0.964899648577172,
+    "IoU_min_semente": 0.513262323182233
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.5977697160300252,
+    "F1": 0.747776337600451,
+    "precisao": 0.6521801870162207,
+    "sensibilidade": 0.8813416591807827,
+    "acuracia": 0.9610320306291505,
+    "IoU_min_semente": 0.5555725284125627
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.5058032940879208,
+    "F1": 0.6718036010010598,
+    "precisao": 0.8904123645621822,
+    "sensibilidade": 0.5395173170591501,
+    "acuracia": 0.965718774973472,
+    "IoU_min_semente": 0.5038352846184901
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.501752447210317,
+    "F1": 0.6681378934622818,
+    "precisao": 0.926571281481423,
+    "sensibilidade": 0.522884926732714,
+    "acuracia": 0.9662485107458553,
+    "IoU_min_semente": 0.485514623112243
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.5738881118607192,
+    "F1": 0.7271285445135153,
+    "precisao": 0.8954655616215854,
+    "sensibilidade": 0.616180920733711,
+    "acuracia": 0.9703281569153911,
+    "IoU_min_semente": 0.48613887220189445
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.533656168074719,
+    "F1": 0.6951362409210194,
+    "precisao": 0.928651504418479,
+    "sensibilidade": 0.5574461166493783,
+    "acuracia": 0.9683763534410018,
+    "IoU_min_semente": 0.4823113975135065
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.6106738986762744,
+    "F1": 0.7548962168610956,
+    "precisao": 0.7260668964200324,
+    "sensibilidade": 0.826717870971672,
+    "acuracia": 0.9627115731280455,
+    "IoU_min_semente": 0.49495126249077404
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.5533989664645035,
+    "F1": 0.7123085167498499,
+    "precisao": 0.8895230182140129,
+    "sensibilidade": 0.5954503842467828,
+    "acuracia": 0.9687942443265363,
+    "IoU_min_semente": 0.5267064613477558
+   },
+   "NDWI": {
+    "IoU": 0.46771399565647603,
+    "F1": 0.6373366978043674,
+    "precisao": 0.9968448124279333,
+    "sensibilidade": 0.4684074242810334,
+    "acuracia": 0.9653326325242645,
+    "IoU_min_semente": 0.4677139956564761
+   },
+   "MNDWI": {
+    "IoU": 0.5373846440574029,
+    "F1": 0.6990893868162482,
+    "precisao": 0.8910483261592078,
+    "sensibilidade": 0.5751784385947301,
+    "acuracia": 0.9677989671156783,
+    "IoU_min_semente": 0.5373846440574029
+   }
+  },
+  "Somalia": {
+   "n": 25,
+   "SOM por recorte": {
+    "IoU": 0.647487490915892,
+    "F1": 0.786005743964583,
+    "precisao": 0.7924065688958567,
+    "sensibilidade": 0.7799060806028472,
+    "acuracia": 0.9848628115092343,
+    "IoU_min_semente": 0.6370552069401197
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.6685221351688005,
+    "F1": 0.8013169170675813,
+    "precisao": 0.8511356160724848,
+    "sensibilidade": 0.7585029688870805,
+    "acuracia": 0.98657941469286,
+    "IoU_min_semente": 0.6601882535810278
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.6532003598009289,
+    "F1": 0.7902031619866595,
+    "precisao": 0.7715536131326628,
+    "sensibilidade": 0.8109088057911311,
+    "acuracia": 0.9846419845087176,
+    "IoU_min_semente": 0.6442476916326922
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.4192094889039222,
+    "F1": 0.5867414148251392,
+    "precisao": 0.7195789866815865,
+    "sensibilidade": 0.5046196815386507,
+    "acuracia": 0.9752203850443233,
+    "IoU_min_semente": 0.32726404226024897
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.2361666960337908,
+    "F1": 0.3813460488705224,
+    "precisao": 0.24480701854147946,
+    "sensibilidade": 0.8681525935909337,
+    "acuracia": 0.8984121005037092,
+    "IoU_min_semente": 0.1988824940551021
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.548037269482373,
+    "F1": 0.7074320485359943,
+    "precisao": 0.6878911307344832,
+    "sensibilidade": 0.7364874314994468,
+    "acuracia": 0.9784443988134118,
+    "IoU_min_semente": 0.5036838614215011
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.6174113616207609,
+    "F1": 0.7625258286915764,
+    "precisao": 0.798068597649182,
+    "sensibilidade": 0.7329400246665565,
+    "acuracia": 0.9838480498701857,
+    "IoU_min_semente": 0.5552999797846243
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.39292331566955147,
+    "F1": 0.5558467221812232,
+    "precisao": 0.48015871622743894,
+    "sensibilidade": 0.7573035469830088,
+    "acuracia": 0.9520865091852097,
+    "IoU_min_semente": 0.3069965796004857
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.5184445512975657,
+    "F1": 0.680067301226107,
+    "precisao": 0.8051774739175607,
+    "sensibilidade": 0.5894141480925801,
+    "acuracia": 0.9803320428212489,
+    "IoU_min_semente": 0.4225602000790911
+   },
+   "NDWI": {
+    "IoU": 0.3989344993529094,
+    "F1": 0.5703404977680375,
+    "precisao": 0.9713044542339696,
+    "sensibilidade": 0.4036923546389655,
+    "acuracia": 0.9783160426471862,
+    "IoU_min_semente": 0.3989344993529094
+   },
+   "MNDWI": {
+    "IoU": 0.6679431129289747,
+    "F1": 0.8009183379834098,
+    "precisao": 0.7883135274921494,
+    "sensibilidade": 0.8139327899909725,
+    "acuracia": 0.9855745498506187,
+    "IoU_min_semente": 0.6679431129289747
+   }
+  },
+  "Spain": {
+   "n": 29,
+   "SOM por recorte": {
+    "IoU": 0.7825018298286697,
+    "F1": 0.8779684158029935,
+    "precisao": 0.8963581945812624,
+    "sensibilidade": 0.8603332734056405,
+    "acuracia": 0.973304817679406,
+    "IoU_min_semente": 0.774572906606707
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.8128834000375026,
+    "F1": 0.8967801206005451,
+    "precisao": 0.940276950240209,
+    "sensibilidade": 0.8573050390808182,
+    "acuracia": 0.9779667500439387,
+    "IoU_min_semente": 0.8086269217228025
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.8074421277995588,
+    "F1": 0.8932844439265226,
+    "precisao": 0.9028236449328669,
+    "sensibilidade": 0.8841254056119979,
+    "acuracia": 0.9764419325694322,
+    "IoU_min_semente": 0.7753666662121688
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.7985064959008047,
+    "F1": 0.8879407410123782,
+    "precisao": 0.9231138108970788,
+    "sensibilidade": 0.855551630221829,
+    "acuracia": 0.9759068079463035,
+    "IoU_min_semente": 0.7863624499071075
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.767901704793096,
+    "F1": 0.868697855521852,
+    "precisao": 0.9792579602098758,
+    "sensibilidade": 0.7807044563154358,
+    "acuracia": 0.973663766121863,
+    "IoU_min_semente": 0.7620133140275369
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.7926184303134393,
+    "F1": 0.8839924759899375,
+    "precisao": 0.9249580096315356,
+    "sensibilidade": 0.8470335163432877,
+    "acuracia": 0.9752580529612919,
+    "IoU_min_semente": 0.749997063583978
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.7969109585676936,
+    "F1": 0.8866090068727016,
+    "precisao": 0.9057567877891467,
+    "sensibilidade": 0.8688111561057728,
+    "acuracia": 0.975102132831133,
+    "IoU_min_semente": 0.7515778168647499
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.7726322432722013,
+    "F1": 0.8715061228393862,
+    "precisao": 0.8712641196152772,
+    "sensibilidade": 0.8787646010890078,
+    "acuracia": 0.9710975631035619,
+    "IoU_min_semente": 0.7502546374705972
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.784646150497572,
+    "F1": 0.8791700402866658,
+    "precisao": 0.8682550871677909,
+    "sensibilidade": 0.8917844162015984,
+    "acuracia": 0.9725551566875678,
+    "IoU_min_semente": 0.7670698359165483
+   },
+   "NDWI": {
+    "IoU": 0.7021383341451535,
+    "F1": 0.8250073687433646,
+    "precisao": 0.9571757971955185,
+    "sensibilidade": 0.7249105170586483,
+    "acuracia": 0.9656717484091867,
+    "IoU_min_semente": 0.7021383341451535
+   },
+   "MNDWI": {
+    "IoU": 0.8076968121506617,
+    "F1": 0.8936197781858394,
+    "precisao": 0.9030409074453964,
+    "sensibilidade": 0.8843931943932825,
+    "acuracia": 0.9764950754640799,
+    "IoU_min_semente": 0.8076968121506616
+   }
+  },
+  "Sri-Lanka": {
+   "n": 35,
+   "SOM por recorte": {
+    "IoU": 0.7854538528213828,
+    "F1": 0.8798325417834731,
+    "precisao": 0.9611728878706938,
+    "sensibilidade": 0.8111959588201408,
+    "acuracia": 0.9767301856863333,
+    "IoU_min_semente": 0.7808684873113595
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7923777177373958,
+    "F1": 0.8841419570627657,
+    "precisao": 0.9609160367272702,
+    "sensibilidade": 0.818769724630617,
+    "acuracia": 0.9774695845932846,
+    "IoU_min_semente": 0.7826620150424141
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.8129249819315393,
+    "F1": 0.8967900927414344,
+    "precisao": 0.9133360051277388,
+    "sensibilidade": 0.881247507495975,
+    "acuracia": 0.9786814749136429,
+    "IoU_min_semente": 0.8024742273527311
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.741773783403778,
+    "F1": 0.8517330218614445,
+    "precisao": 0.9635946215854577,
+    "sensibilidade": 0.7631601750784062,
+    "acuracia": 0.9720989632179551,
+    "IoU_min_semente": 0.7351814182317045
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.6906896506500125,
+    "F1": 0.8170336812221323,
+    "precisao": 0.9920807262995196,
+    "sensibilidade": 0.6945782806276433,
+    "acuracia": 0.9673358381893227,
+    "IoU_min_semente": 0.6816599147891925
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.7358429313841203,
+    "F1": 0.847366696163882,
+    "precisao": 0.8732882946370267,
+    "sensibilidade": 0.8234859115056447,
+    "acuracia": 0.9687599825315716,
+    "IoU_min_semente": 0.7094584899886611
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.7934823229987682,
+    "F1": 0.8848425132500902,
+    "precisao": 0.9769801881795198,
+    "sensibilidade": 0.8086411729662398,
+    "acuracia": 0.9778975569536227,
+    "IoU_min_semente": 0.7874518020574156
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.7975023617872615,
+    "F1": 0.8872891296986377,
+    "precisao": 0.9282448764276804,
+    "sensibilidade": 0.8503616284851976,
+    "acuracia": 0.977284010979505,
+    "IoU_min_semente": 0.7863882525034149
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.794332441740301,
+    "F1": 0.8853625039566734,
+    "precisao": 0.964766651802595,
+    "sensibilidade": 0.8181473986874043,
+    "acuracia": 0.9777558302120876,
+    "IoU_min_semente": 0.7875352961992041
+   },
+   "NDWI": {
+    "IoU": 0.7514435475447555,
+    "F1": 0.8580848050719756,
+    "precisao": 0.9947050896571064,
+    "sensibilidade": 0.7544613975747013,
+    "acuracia": 0.9737917730651352,
+    "IoU_min_semente": 0.7514435475447555
+   },
+   "MNDWI": {
+    "IoU": 0.8172665585420581,
+    "F1": 0.899445989032812,
+    "precisao": 0.9597739851780377,
+    "sensibilidade": 0.846253489505635,
+    "acuracia": 0.9801286802287938,
+    "IoU_min_semente": 0.8172665585420581
+   }
+  },
+  "USA": {
+   "n": 68,
+   "SOM por recorte": {
+    "IoU": 0.6400313896199777,
+    "F1": 0.7805068866745332,
+    "precisao": 0.9087814401558778,
+    "sensibilidade": 0.6840238849949859,
+    "acuracia": 0.9851882695188876,
+    "IoU_min_semente": 0.636129200787306
+   },
+   "3 imagens | fixa | classe local": {
+    "IoU": 0.7167229285684938,
+    "F1": 0.8349777820995398,
+    "precisao": 0.9487792484826231,
+    "sensibilidade": 0.745560278425268,
+    "acuracia": 0.9886529898090423,
+    "IoU_min_semente": 0.7090773144222616
+   },
+   "3 imagens | fixa | classe fixa": {
+    "IoU": 0.7438242012420168,
+    "F1": 0.8530425507539401,
+    "precisao": 0.936857769426387,
+    "sensibilidade": 0.7833090020406024,
+    "acuracia": 0.989617267358828,
+    "IoU_min_semente": 0.7291842000824618
+   },
+   "Evento | fixa | classe local": {
+    "IoU": 0.6647328677857951,
+    "F1": 0.7981681702748276,
+    "precisao": 0.8963175906541325,
+    "sensibilidade": 0.7199836536729499,
+    "acuracia": 0.9860183067811262,
+    "IoU_min_semente": 0.6204813716382
+   },
+   "Evento | fixa | classe fixa": {
+    "IoU": 0.5338547437016463,
+    "F1": 0.6933993966266199,
+    "precisao": 0.8352932027382626,
+    "sensibilidade": 0.605588400560292,
+    "acuracia": 0.9799048666162085,
+    "IoU_min_semente": 0.4387579358943544
+   },
+   "Todos os eventos | fixa | classe fixa": {
+    "IoU": 0.6544502752807684,
+    "F1": 0.7911358063776444,
+    "precisao": 0.9133128049824396,
+    "sensibilidade": 0.6987135333069857,
+    "acuracia": 0.9857989344666823,
+    "IoU_min_semente": 0.6523164447760498
+   },
+   "Todos os eventos | fixa | classe local": {
+    "IoU": 0.6968008219308067,
+    "F1": 0.8213041930773115,
+    "precisao": 0.9514611676140223,
+    "sensibilidade": 0.7226490728567626,
+    "acuracia": 0.9878939235069691,
+    "IoU_min_semente": 0.6909379360676816
+   },
+   "Outros eventos | fixa | classe fixa": {
+    "IoU": 0.6902047014757593,
+    "F1": 0.81646610086876,
+    "precisao": 0.9385312502255184,
+    "sensibilidade": 0.7255021521767769,
+    "acuracia": 0.9875012023449568,
+    "IoU_min_semente": 0.6571361122675382
+   },
+   "Outros eventos | fixa | classe local": {
+    "IoU": 0.6984622957857706,
+    "F1": 0.8224471042818848,
+    "precisao": 0.9524536351188978,
+    "sensibilidade": 0.7239191394519141,
+    "acuracia": 0.9879694698995141,
+    "IoU_min_semente": 0.6904254803065324
+   },
+   "NDWI": {
+    "IoU": 0.3106916929581525,
+    "F1": 0.4740881393044309,
+    "precisao": 0.9773544792285914,
+    "sensibilidade": 0.31294451658695144,
+    "acuracia": 0.9732671978391703,
+    "IoU_min_semente": 0.3106916929581525
+   },
+   "MNDWI": {
+    "IoU": 0.7114372401255382,
+    "F1": 0.8313915619521666,
+    "precisao": 0.9366064082894181,
+    "sensibilidade": 0.7474282764572563,
+    "acuracia": 0.9883274301974314,
+    "IoU_min_semente": 0.7114372401255382
+   }
+  }
+ },
+ "falhas_recortes_com_agua": {
+  "SOM por recorte": 72,
+  "3 imagens | fixa | classe local": 23,
+  "3 imagens | fixa | classe fixa": 4,
+  "Evento | fixa | classe local": 29,
+  "Evento | fixa | classe fixa": 35,
+  "Todos os eventos | fixa | classe fixa": 6,
+  "Todos os eventos | fixa | classe local": 26,
+  "Outros eventos | fixa | classe fixa": 5,
+  "Outros eventos | fixa | classe local": 31,
+  "NDWI": 47,
+  "MNDWI": 17
+ },
+ "recortes_com_agua": 246
+}
