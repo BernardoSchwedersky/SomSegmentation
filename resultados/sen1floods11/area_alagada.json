@@ -1,0 +1,784 @@
+{
+ "recortes": 384,
+ "sementes": 3,
+ "unidades": 36,
+ "referencia": "LabelHand água e não JRCWaterHand",
+ "alagamento": {
+  "Todos": {
+   "n": 384,
+   "SOM por recorte": {
+    "IoU": 0.3826278234088875,
+    "F1": 0.553470951353559,
+    "precisao": 0.7927314914360121,
+    "sensibilidade": 0.42516764423220543,
+    "acuracia": 0.9578529309421625
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.38132210600105587,
+    "F1": 0.552017062740438,
+    "precisao": 0.8515614785068683,
+    "sensibilidade": 0.4084063135323837,
+    "acuracia": 0.959267224650843
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.38286699703971544,
+    "F1": 0.5537249828514167,
+    "precisao": 0.8163072828955706,
+    "sensibilidade": 0.4189777995175405,
+    "acuracia": 0.9585094575818428
+   },
+   "NDWI": {
+    "IoU": 0.3122392191418539,
+    "F1": 0.4758876500369261,
+    "precisao": 0.9140719127139578,
+    "sensibilidade": 0.3216813074493297,
+    "acuracia": 0.9564677311230289
+   },
+   "MNDWI": {
+    "IoU": 0.4181846565009429,
+    "F1": 0.5897464121953216,
+    "precisao": 0.8130051212325643,
+    "sensibilidade": 0.4626880137450044,
+    "acuracia": 0.9604505136041706
+   }
+  },
+  "Sem alagamento (<0,1%)": {
+   "n": 55,
+   "SOM por recorte": {
+    "IoU": 0.0,
+    "F1": 0.0,
+    "precisao": 0.0,
+    "sensibilidade": 0.0,
+    "acuracia": 0.9998581927903976
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.030776275222076377,
+    "F1": 0.05865812700148403,
+    "precisao": 0.3239795918367347,
+    "sensibilidade": 0.03246753246753247,
+    "acuracia": 0.9998302852296842
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.006871123143602415,
+    "F1": 0.013594237315233302,
+    "precisao": 0.015016785822198406,
+    "sensibilidade": 0.017316017316017316,
+    "acuracia": 0.9994668122521307
+   },
+   "NDWI": {
+    "IoU": 0.0757864632983794,
+    "F1": 0.14089499335400973,
+    "precisao": 0.2217573221757322,
+    "sensibilidade": 0.10324675324675325,
+    "acuracia": 0.999821606284979
+   },
+   "MNDWI": {
+    "IoU": 0.013885132089081237,
+    "F1": 0.027389951089373053,
+    "precisao": 0.01586810922205049,
+    "sensibilidade": 0.1,
+    "acuracia": 0.998993763764216
+   }
+  },
+  "0,1-1%": {
+   "n": 101,
+   "SOM por recorte": {
+    "IoU": 0.016213605036712757,
+    "F1": 0.03189472887007702,
+    "precisao": 0.12697512745763093,
+    "sensibilidade": 0.01830969049642656,
+    "acuracia": 0.9943980722930309
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.10108292151112279,
+    "F1": 0.18341234605919798,
+    "precisao": 0.564051339332476,
+    "sensibilidade": 0.11036633984351041,
+    "acuracia": 0.9950249305422617
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.095203904200237,
+    "F1": 0.17380938082134248,
+    "precisao": 0.44510436603350323,
+    "sensibilidade": 0.1098493809636464,
+    "acuracia": 0.9947107994735448
+   },
+   "NDWI": {
+    "IoU": 0.10631229235880399,
+    "F1": 0.1921921921921922,
+    "precisao": 0.6166405619630737,
+    "sensibilidade": 0.11383609774903837,
+    "acuracia": 0.9951581816993685
+   },
+   "MNDWI": {
+    "IoU": 0.14968791561407088,
+    "F1": 0.26039747583868383,
+    "precisao": 0.4319012425891334,
+    "sensibilidade": 0.18638558122825924,
+    "acuracia": 0.9946428956178384
+   }
+  },
+  "1-5%": {
+   "n": 119,
+   "SOM por recorte": {
+    "IoU": 0.14451975435961992,
+    "F1": 0.2524185063620439,
+    "precisao": 0.6419273219749243,
+    "sensibilidade": 0.1573217958214789,
+    "acuracia": 0.9775421365149395
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.1606150213350672,
+    "F1": 0.27671784555233375,
+    "precisao": 0.7411402117362652,
+    "sensibilidade": 0.17015261200817608,
+    "acuracia": 0.9785396933829866
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.15280960462852303,
+    "F1": 0.26509117925201303,
+    "precisao": 0.7275785481342094,
+    "sensibilidade": 0.16210078337440767,
+    "acuracia": 0.9783133629039272
+   },
+   "NDWI": {
+    "IoU": 0.15264979204087814,
+    "F1": 0.2648676000202922,
+    "precisao": 0.7658993455201986,
+    "sensibilidade": 0.16012072238412553,
+    "acuracia": 0.978551787281482
+   },
+   "MNDWI": {
+    "IoU": 0.23894542566700186,
+    "F1": 0.38572389181446404,
+    "precisao": 0.6738284620573884,
+    "sensibilidade": 0.2701973298272047,
+    "acuracia": 0.9792329419578263
+   }
+  },
+  "5-20%": {
+   "n": 77,
+   "SOM por recorte": {
+    "IoU": 0.3828377014447335,
+    "F1": 0.5536765852563365,
+    "precisao": 0.6883217848300881,
+    "sensibilidade": 0.46310707973218995,
+    "acuracia": 0.9240106145314478
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.38035900408985973,
+    "F1": 0.550769915672123,
+    "precisao": 0.782463004770602,
+    "sensibilidade": 0.42511343171130656,
+    "acuracia": 0.9294000242327737
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.3785238117466165,
+    "F1": 0.5490461645368159,
+    "precisao": 0.7444127540605668,
+    "sensibilidade": 0.43507299661352367,
+    "acuracia": 0.9273018592367349
+   },
+   "NDWI": {
+    "IoU": 0.21946699910969183,
+    "F1": 0.35993921815009383,
+    "precisao": 0.8938157916297013,
+    "sensibilidade": 0.22534221312080072,
+    "acuracia": 0.9184361356301775
+   },
+   "MNDWI": {
+    "IoU": 0.43319629237543006,
+    "F1": 0.604517740772878,
+    "precisao": 0.7419769981524345,
+    "sensibilidade": 0.5100293009380431,
+    "acuracia": 0.9320833474477628
+   }
+  },
+  "20-100%": {
+   "n": 32,
+   "SOM por recorte": {
+    "IoU": 0.4594774763336196,
+    "F1": 0.6296246068159997,
+    "precisao": 0.9021449888911817,
+    "sensibilidade": 0.48360599945623267,
+    "acuracia": 0.7529269107368272
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.44953669337118773,
+    "F1": 0.6202127062389842,
+    "precisao": 0.9167861349411158,
+    "sensibilidade": 0.4686259339878643,
+    "acuracia": 0.7507330918104628
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.4560945144526676,
+    "F1": 0.6264344835346263,
+    "precisao": 0.885699263216765,
+    "sensibilidade": 0.4846109639733134,
+    "acuracia": 0.7489843026710904
+   },
+   "NDWI": {
+    "IoU": 0.4214291879086572,
+    "F1": 0.5929654343579425,
+    "precisao": 0.94331053675085,
+    "sensibilidade": 0.43237978116735426,
+    "acuracia": 0.7421921557283772
+   },
+   "MNDWI": {
+    "IoU": 0.4698904446315313,
+    "F1": 0.6393543768485717,
+    "precisao": 0.9160551353676095,
+    "sensibilidade": 0.491034136350746,
+    "acuracia": 0.7594089071711737
+   }
+  }
+ },
+ "alagamento_por_evento": {
+  "Bolivia": {
+   "n": 14,
+   "SOM por recorte": {
+    "IoU": 0.7102418472428688,
+    "F1": 0.8305378224973309,
+    "precisao": 0.9319017207024153,
+    "sensibilidade": 0.74924100560884,
+    "acuracia": 0.9600807598048885
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.755421066303807,
+    "F1": 0.8606471879374199,
+    "precisao": 0.9281207911619949,
+    "sensibilidade": 0.8024019347924819,
+    "acuracia": 0.9660712683801024
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.755421066303807,
+    "F1": 0.8606471879374199,
+    "precisao": 0.9281207911619949,
+    "sensibilidade": 0.8024019347924819,
+    "acuracia": 0.9660712683801024
+   },
+   "NDWI": {
+    "IoU": 0.6421075566742438,
+    "F1": 0.7820529831489267,
+    "precisao": 0.9539983862473487,
+    "sensibilidade": 0.6626239168808854,
+    "acuracia": 0.9517628330158519
+   },
+   "MNDWI": {
+    "IoU": 0.7289858404705792,
+    "F1": 0.8432525280509766,
+    "precisao": 0.9377102648258525,
+    "sensibilidade": 0.7660831862327254,
+    "acuracia": 0.9628020712707177
+   }
+  },
+  "Ghana": {
+   "n": 34,
+   "SOM por recorte": {
+    "IoU": 0.4466176177167949,
+    "F1": 0.6170393936025699,
+    "precisao": 0.8623494692569548,
+    "sensibilidade": 0.48159377906260153,
+    "acuracia": 0.9885155910905391
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.4543176269776248,
+    "F1": 0.6247682753645333,
+    "precisao": 0.9164575155125148,
+    "sensibilidade": 0.47403946351137854,
+    "acuracia": 0.9890276931002576
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.4589925929236717,
+    "F1": 0.6288994561038266,
+    "precisao": 0.8817204112354399,
+    "sensibilidade": 0.48938115566909807,
+    "acuracia": 0.9888931157489136
+   },
+   "NDWI": {
+    "IoU": 0.49253839849842707,
+    "F1": 0.6600009741711795,
+    "precisao": 0.9667522831050228,
+    "sensibilidade": 0.5010252445460351,
+    "acuracia": 0.9900546171624074
+   },
+   "MNDWI": {
+    "IoU": 0.4876287477054864,
+    "F1": 0.6555785486904624,
+    "precisao": 0.9037184908691441,
+    "sensibilidade": 0.5143500621869642,
+    "acuracia": 0.9895875469709281
+   }
+  },
+  "India": {
+   "n": 66,
+   "SOM por recorte": {
+    "IoU": 0.26424795449765265,
+    "F1": 0.41796328257105203,
+    "precisao": 0.6172092476388252,
+    "sensibilidade": 0.3160102722510118,
+    "acuracia": 0.9219359435022575
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.23233354958268468,
+    "F1": 0.37693067538535535,
+    "precisao": 0.7339965557801486,
+    "sensibilidade": 0.25383962981112357,
+    "acuracia": 0.9254753361798707
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.25966872517333633,
+    "F1": 0.4122580658194977,
+    "precisao": 0.6941586413175478,
+    "sensibilidade": 0.2933494529334945,
+    "acuracia": 0.925776313090272
+   },
+   "NDWI": {
+    "IoU": 0.22405984084386155,
+    "F1": 0.3660929529219677,
+    "precisao": 0.7886710120518822,
+    "sensibilidade": 0.23837120420189387,
+    "acuracia": 0.9267687769382826
+   },
+   "MNDWI": {
+    "IoU": 0.3243136320205105,
+    "F1": 0.4897837252127412,
+    "precisao": 0.6778009559536748,
+    "sensibilidade": 0.3834244674706083,
+    "acuracia": 0.9291339760217899
+   }
+  },
+  "Mekong": {
+   "n": 28,
+   "SOM por recorte": {
+    "IoU": 0.6297265965580864,
+    "F1": 0.772796258008794,
+    "precisao": 0.9121483985991303,
+    "sensibilidade": 0.6704261793147723,
+    "acuracia": 0.9344676428942372
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.6347221999857473,
+    "F1": 0.7765451627896791,
+    "precisao": 0.9262781280461035,
+    "sensibilidade": 0.668514223383855,
+    "acuracia": 0.9360436922689819
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.6204311635471099,
+    "F1": 0.765756536771263,
+    "precisao": 0.9081995382465746,
+    "sensibilidade": 0.6620432702654816,
+    "acuracia": 0.9326586697082666
+   },
+   "NDWI": {
+    "IoU": 0.6480094208872659,
+    "F1": 0.7864147045207865,
+    "precisao": 0.9864144059247446,
+    "sensibilidade": 0.6538448833156318,
+    "acuracia": 0.9409568925090172
+   },
+   "MNDWI": {
+    "IoU": 0.6472934586010013,
+    "F1": 0.7858872445844943,
+    "precisao": 0.9204030571933803,
+    "sensibilidade": 0.6856764470052864,
+    "acuracia": 0.9378878897036137
+   }
+  },
+  "Nigeria": {
+   "n": 16,
+   "SOM por recorte": {
+    "IoU": 0.006240451263464324,
+    "F1": 0.01240319990603573,
+    "precisao": 0.4204073753241924,
+    "sensibilidade": 0.006300360911537496,
+    "acuracia": 0.809336049693508
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.006670237651919413,
+    "F1": 0.013251344751186852,
+    "precisao": 0.7142173400208188,
+    "sensibilidade": 0.006688403444836929,
+    "acuracia": 0.8107197564351987
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.009625572881190274,
+    "F1": 0.01906291101258591,
+    "precisao": 0.6316181265181365,
+    "sensibilidade": 0.009695733077907534,
+    "acuracia": 0.8105378283745782
+   },
+   "NDWI": {
+    "IoU": 0.05587932096499823,
+    "F1": 0.10584414308621656,
+    "precisao": 0.9643899752134398,
+    "sensibilidade": 0.055994857370382865,
+    "acuracia": 0.8202081759442886
+   },
+   "MNDWI": {
+    "IoU": 0.02055849555849556,
+    "F1": 0.04028871573352594,
+    "precisao": 0.5772598620201663,
+    "sensibilidade": 0.020872743903121556,
+    "acuracia": 0.811021619252932
+   }
+  },
+  "Pakistan": {
+   "n": 20,
+   "SOM por recorte": {
+    "IoU": 0.23419090528549505,
+    "F1": 0.3793464562573014,
+    "precisao": 0.3190259298515994,
+    "sensibilidade": 0.4749842384941007,
+    "acuracia": 0.9933512974688301
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.2736667575001069,
+    "F1": 0.4293820595893994,
+    "precisao": 0.3882129665374758,
+    "sensibilidade": 0.482887507880753,
+    "acuracia": 0.9945134799475649
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.2522981106965803,
+    "F1": 0.3993625023868883,
+    "precisao": 0.33980381052139813,
+    "sensibilidade": 0.5196118166261371,
+    "acuracia": 0.9929485837181663
+   },
+   "NDWI": {
+    "IoU": 0.2776211453744493,
+    "F1": 0.4345907178815254,
+    "precisao": 0.44386533314551346,
+    "sensibilidade": 0.4256957579032694,
+    "acuracia": 0.9952898002258299
+   },
+   "MNDWI": {
+    "IoU": 0.2055424035649631,
+    "F1": 0.3409957260020792,
+    "precisao": 0.2591201151644956,
+    "sensibilidade": 0.49851391515806537,
+    "acuracia": 0.9918064124552871
+   }
+  },
+  "Paraguay": {
+   "n": 49,
+   "SOM por recorte": {
+    "IoU": 0.09595581251513043,
+    "F1": 0.17490605375210364,
+    "precisao": 0.5964389607488404,
+    "sensibilidade": 0.10261156121788532,
+    "acuracia": 0.9599264429462046
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.08016507509032322,
+    "F1": 0.14526875164006456,
+    "precisao": 0.7389558648196655,
+    "sensibilidade": 0.08252293929815638,
+    "acuracia": 0.9609580718376721
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.0943035668040061,
+    "F1": 0.17228349255482925,
+    "precisao": 0.6864991730574687,
+    "sensibilidade": 0.09865210177660978,
+    "acuracia": 0.96073371250117
+   },
+   "NDWI": {
+    "IoU": 0.037320937628534265,
+    "F1": 0.07195639512271934,
+    "precisao": 0.5990081809280141,
+    "sensibilidade": 0.038277241551919715,
+    "acuracia": 0.9590588290434584
+   },
+   "MNDWI": {
+    "IoU": 0.12542407078058915,
+    "F1": 0.22289210625039424,
+    "precisao": 0.6275283209331888,
+    "sensibilidade": 0.13551241527698724,
+    "acuracia": 0.9608180216176722
+   }
+  },
+  "Somalia": {
+   "n": 25,
+   "SOM por recorte": {
+    "IoU": 0.6448814458365231,
+    "F1": 0.7840532736438974,
+    "precisao": 0.7931371364603189,
+    "sensibilidade": 0.7753351388235493,
+    "acuracia": 0.9847784998662044
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.605855015927832,
+    "F1": 0.7535395979547713,
+    "precisao": 0.7968909122612177,
+    "sensibilidade": 0.7175552136708667,
+    "acuracia": 0.9833968768126814
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.5066380695131524,
+    "F1": 0.6695865040157395,
+    "precisao": 0.8030547570395292,
+    "sensibilidade": 0.5750994926826788,
+    "acuracia": 0.9798853270997112
+   },
+   "NDWI": {
+    "IoU": 0.39765016335762754,
+    "F1": 0.5690267475837267,
+    "precisao": 0.9714206777996071,
+    "sensibilidade": 0.4023573090566949,
+    "acuracia": 0.9782716203836542
+   },
+   "MNDWI": {
+    "IoU": 0.6550567608937555,
+    "F1": 0.7915822301345303,
+    "precisao": 0.7860985028964065,
+    "sensibilidade": 0.7971430024539409,
+    "acuracia": 0.9850351366505885
+   }
+  },
+  "Spain": {
+   "n": 29,
+   "SOM por recorte": {
+    "IoU": 0.5747311168972927,
+    "F1": 0.7298963979249882,
+    "precisao": 0.7816453920735341,
+    "sensibilidade": 0.6845920191423333,
+    "acuracia": 0.9712160586600254
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.5980912970844928,
+    "F1": 0.7476119552541308,
+    "precisao": 0.8028031444839376,
+    "sensibilidade": 0.701576228858253,
+    "acuracia": 0.9729026906350478
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.5908571755219911,
+    "F1": 0.7422570575506736,
+    "precisao": 0.7424813604110247,
+    "sensibilidade": 0.7456946629877289,
+    "acuracia": 0.9704212074954497
+   },
+   "NDWI": {
+    "IoU": 0.4320934440439369,
+    "F1": 0.6034430865402107,
+    "precisao": 0.9128653127392263,
+    "sensibilidade": 0.4506814021792025,
+    "acuracia": 0.9663467941572195
+   },
+   "MNDWI": {
+    "IoU": 0.6291774644095177,
+    "F1": 0.7723866529636267,
+    "precisao": 0.8090841959767052,
+    "sensibilidade": 0.7388736423212878,
+    "acuracia": 0.9752588014527658
+   }
+  },
+  "Sri-Lanka": {
+   "n": 35,
+   "SOM por recorte": {
+    "IoU": 0.3407161512926544,
+    "F1": 0.5075368142592525,
+    "precisao": 0.7748840821466151,
+    "sensibilidade": 0.3779948804305133,
+    "acuracia": 0.9748742944298856
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.3091090575974256,
+    "F1": 0.47170162244284625,
+    "precisao": 0.847772413548829,
+    "sensibilidade": 0.3276780299439135,
+    "acuracia": 0.9748619366439583
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.34565868357115415,
+    "F1": 0.5134263823768539,
+    "precisao": 0.8088995100873815,
+    "sensibilidade": 0.37723642569175136,
+    "acuracia": 0.9754928559070786
+   },
+   "NDWI": {
+    "IoU": 0.16765831509316798,
+    "F1": 0.2871701642955207,
+    "precisao": 0.8725618281418323,
+    "sensibilidade": 0.17186674672577798,
+    "acuracia": 0.9706835055202074
+   },
+   "MNDWI": {
+    "IoU": 0.3997893244201357,
+    "F1": 0.5712135639922085,
+    "precisao": 0.7957903225806452,
+    "sensibilidade": 0.4454928375687914,
+    "acuracia": 0.977019637090607
+   }
+  },
+  "USA": {
+   "n": 68,
+   "SOM por recorte": {
+    "IoU": 0.48962271498271864,
+    "F1": 0.6573722897094512,
+    "precisao": 0.8547376215082171,
+    "sensibilidade": 0.53411076935612,
+    "acuracia": 0.9830244419597708
+   },
+   "SOM pré-treinado (todos os eventos)": {
+    "IoU": 0.5035194090803893,
+    "F1": 0.6696314818979627,
+    "precisao": 0.896434659682113,
+    "sensibilidade": 0.5350586302188364,
+    "acuracia": 0.9839236696971764
+   },
+   "SOM pré-treinado (outros eventos)": {
+    "IoU": 0.489919194536103,
+    "F1": 0.6576161205740597,
+    "precisao": 0.8923856494924611,
+    "sensibilidade": 0.5209642922616259,
+    "acuracia": 0.9834656916896444
+   },
+   "NDWI": {
+    "IoU": 0.14414764643408212,
+    "F1": 0.2519738547439068,
+    "precisao": 0.898793012969488,
+    "sensibilidade": 0.14652598130079644,
+    "acuracia": 0.973473092296243
+   },
+   "MNDWI": {
+    "IoU": 0.5308923876536831,
+    "F1": 0.6935724443275252,
+    "precisao": 0.8873514021540337,
+    "sensibilidade": 0.5692583464037643,
+    "acuracia": 0.9846624467515942
+   }
+  }
+ },
+ "permanente": {
+  "n": 384,
+  "SOM por recorte": {
+   "IoU": 0.5009232210432853,
+   "F1": 0.6674810403670177,
+   "precisao": 0.5224546286422244,
+   "sensibilidade": 0.9239768292612,
+   "acuracia": 0.9769633596195838
+  },
+  "SOM pré-treinado (todos os eventos)": {
+   "IoU": 0.49978578989581185,
+   "F1": 0.6664668875764788,
+   "precisao": 0.517923035464366,
+   "sensibilidade": 0.9345637941697055,
+   "acuracia": 0.9765910047264089
+  },
+  "SOM pré-treinado (outros eventos)": {
+   "IoU": 0.4986056484322148,
+   "F1": 0.6653691704996283,
+   "precisao": 0.5166508777987205,
+   "sensibilidade": 0.9346980456474411,
+   "acuracia": 0.9764594819118454
+  },
+  "NDWI": {
+   "IoU": 0.5642031601789368,
+   "F1": 0.7213937096436946,
+   "precisao": 0.6021125983863727,
+   "sensibilidade": 0.8996104283833796,
+   "acuracia": 0.9826125747671425
+  },
+  "MNDWI": {
+   "IoU": 0.50216759998796,
+   "F1": 0.6685906419390019,
+   "precisao": 0.5219378176631526,
+   "sensibilidade": 0.9298606304875897,
+   "acuracia": 0.9769333480819989
+  }
+ },
+ "falhas_recortes_com_alagamento": {
+  "SOM por recorte": 106,
+  "SOM pré-treinado (todos os eventos)": 73,
+  "SOM pré-treinado (outros eventos)": 81,
+  "NDWI": 77,
+  "MNDWI": 42
+ },
+ "recortes_com_alagamento": 228,
+ "falso_alarme_pct_sem_alagamento": {
+  "SOM por recorte": 1.670554883157215e-05,
+  "SOM pré-treinado (todos os eventos)": 0.0032865042124623823,
+  "SOM pré-treinado (outros eventos)": 0.03602984977410652,
+  "NDWI": 0.0046185614713611396,
+  "MNDWI": 0.09488893871877192
+ },
+ "recortes_sem_alagamento": 55,
+ "diagnostico_mndwi": {
+  "Bolivia": {
+   "ja_agua_na_imagem_anterior_pct": 0.3668006792356585,
+   "nao_agua_na_imagem_do_evento_pct": 23.024880697491795,
+   "alagamento_detectado_pct": 76.60831862327255,
+   "dias_entre_imagens_media": 56.285714285714285
+  },
+  "Todos": {
+   "ja_agua_na_imagem_anterior_pct": 31.092209887670435,
+   "nao_agua_na_imagem_do_evento_pct": 22.63898873782912,
+   "alagamento_detectado_pct": 46.26880137450044,
+   "dias_entre_imagens_media": 39.684895833333336
+  },
+  "Ghana": {
+   "ja_agua_na_imagem_anterior_pct": 20.773807522941947,
+   "nao_agua_na_imagem_do_evento_pct": 27.791186258361627,
+   "alagamento_detectado_pct": 51.43500621869643,
+   "dias_entre_imagens_media": 36.029411764705884
+  },
+  "India": {
+   "ja_agua_na_imagem_anterior_pct": 38.9109849345644,
+   "nao_agua_na_imagem_do_evento_pct": 22.746568318374774,
+   "alagamento_detectado_pct": 38.34244674706083,
+   "dias_entre_imagens_media": 95.22727272727273
+  },
+  "Mekong": {
+   "ja_agua_na_imagem_anterior_pct": 26.15215365318721,
+   "nao_agua_na_imagem_do_evento_pct": 5.280201646284149,
+   "alagamento_detectado_pct": 68.56764470052865,
+   "dias_entre_imagens_media": 33.92857142857143
+  },
+  "Nigeria": {
+   "ja_agua_na_imagem_anterior_pct": 93.8320426121872,
+   "nao_agua_na_imagem_do_evento_pct": 4.080682997500643,
+   "alagamento_detectado_pct": 2.087274390312156,
+   "dias_entre_imagens_media": 51.9375
+  },
+  "Pakistan": {
+   "ja_agua_na_imagem_anterior_pct": 11.496892731694137,
+   "nao_agua_na_imagem_do_evento_pct": 38.65171575249933,
+   "alagamento_detectado_pct": 49.85139151580654,
+   "dias_entre_imagens_media": 18.8
+  },
+  "Paraguay": {
+   "ja_agua_na_imagem_anterior_pct": 24.34451939495961,
+   "nao_agua_na_imagem_do_evento_pct": 62.10423907734167,
+   "alagamento_detectado_pct": 13.551241527698723,
+   "dias_entre_imagens_media": 6.244897959183674
+  },
+  "Somalia": {
+   "ja_agua_na_imagem_anterior_pct": 1.6789787537031622,
+   "nao_agua_na_imagem_do_evento_pct": 18.606721000902745,
+   "alagamento_detectado_pct": 79.7143002453941,
+   "dias_entre_imagens_media": 25.08
+  },
+  "Spain": {
+   "ja_agua_na_imagem_anterior_pct": 4.878874185763301,
+   "nao_agua_na_imagem_do_evento_pct": 21.233761582107913,
+   "alagamento_detectado_pct": 73.88736423212879,
+   "dias_entre_imagens_media": 22.586206896551722
+  },
+  "Sri-Lanka": {
+   "ja_agua_na_imagem_anterior_pct": 10.277964632533193,
+   "nao_agua_na_imagem_do_evento_pct": 45.17275161058767,
+   "alagamento_detectado_pct": 44.54928375687914,
+   "dias_entre_imagens_media": 54.97142857142857
+  },
+  "USA": {
+   "ja_agua_na_imagem_anterior_pct": 11.559489132870267,
+   "nao_agua_na_imagem_do_evento_pct": 31.514676226753306,
+   "alagamento_detectado_pct": 56.92583464037643,
+   "dias_entre_imagens_media": 18.705882352941178
+  }
+ }
+}
