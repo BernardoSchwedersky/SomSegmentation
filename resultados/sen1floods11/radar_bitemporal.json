@@ -1,0 +1,729 @@
+{
+ "recortes": 362,
+ "recortes_sem_par": 22,
+ "limiar_vh_db": -20.0,
+ "delta_vh_db": -3.0,
+ "sementes": 3,
+ "intervalo_radar_dias_mediana": 36.0,
+ "alagamento": {
+  "n": 362,
+  "MNDWI": {
+   "IoU": 0.4323458974183409,
+   "F1": 0.6036892320459755,
+   "precisao": 0.8149572473202192,
+   "sensibilidade": 0.4794083060684339,
+   "acuracia": 0.9615766749599162
+  },
+  "Radar bi-temporal (VH < -20 em cada data)": {
+   "IoU": 0.24116226977664074,
+   "F1": 0.38860715580733896,
+   "precisao": 0.6142871250144907,
+   "sensibilidade": 0.2841972907547713,
+   "acuracia": 0.9454120935110576
+  },
+  "Mudança no radar (só radar)": {
+   "IoU": 0.23327782809536235,
+   "F1": 0.37830539523382123,
+   "precisao": 0.7035547381903872,
+   "sensibilidade": 0.2587067432732358,
+   "acuracia": 0.9480949923071194
+  },
+  "MNDWI + mudança no radar": {
+   "IoU": 0.420265614687161,
+   "F1": 0.5918127008654392,
+   "precisao": 0.7245811200847176,
+   "sensibilidade": 0.500165090216948,
+   "acuracia": 0.9578831841599748
+  },
+  "SOM óptico": {
+   "IoU": 0.3991551619996004,
+   "F1": 0.5704634955906117,
+   "precisao": 0.831863604993762,
+   "sensibilidade": 0.43456880259859654,
+   "acuracia": 0.9600714978012248
+  },
+  "SOM óptico + mudança no radar": {
+   "IoU": 0.4030851274364769,
+   "F1": 0.5744757060378887,
+   "precisao": 0.8120777740257487,
+   "sensibilidade": 0.44475061666051624,
+   "acuracia": 0.9597871775782961
+  },
+  "SOM com radar na entrada": {
+   "IoU": 0.3888925398314323,
+   "F1": 0.559999819156107,
+   "precisao": 0.8195561196297382,
+   "sensibilidade": 0.42536980502874805,
+   "acuracia": 0.9591937697018679
+  },
+  "SOM com radar na entrada + mudança no radar": {
+   "IoU": 0.39554723117009116,
+   "F1": 0.5668669986814304,
+   "precisao": 0.7981170819669886,
+   "sensibilidade": 0.43959713867166234,
+   "acuracia": 0.9589898055324674
+  }
+ },
+ "alagamento_por_evento": {
+  "Bolivia": {
+   "n": 14,
+   "MNDWI": {
+    "IoU": 0.658790194479028,
+    "F1": 0.7943020119984885,
+    "precisao": 0.9122318923289104,
+    "sensibilidade": 0.7033726611846025,
+    "acuracia": 0.963519794956627
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.6340557888570792,
+    "F1": 0.7760515805896223,
+    "precisao": 0.8637385362344902,
+    "sensibilidade": 0.7045277449281739,
+    "acuracia": 0.9592823298347012
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.6250483329799309,
+    "F1": 0.7692673753693825,
+    "precisao": 0.8705592133835971,
+    "sensibilidade": 0.6890899590220291,
+    "acuracia": 0.9586062264849832
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.6945459439986381,
+    "F1": 0.819742830176337,
+    "precisao": 0.8359284917904688,
+    "sensibilidade": 0.8041720524738043,
+    "acuracia": 0.964584669207371
+   },
+   "SOM óptico": {
+    "IoU": 0.6464720118824349,
+    "F1": 0.7851257405609345,
+    "precisao": 0.8410003825000012,
+    "sensibilidade": 0.7385706297039869,
+    "acuracia": 0.9594965286782416
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.6238667605177789,
+    "F1": 0.7683043196242592,
+    "precisao": 0.7689810384765935,
+    "sensibilidade": 0.768428627742178,
+    "acuracia": 0.953644004276021
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.6626438219543556,
+    "F1": 0.7969435842793088,
+    "precisao": 0.9092436321242007,
+    "sensibilidade": 0.7094460181696506,
+    "acuracia": 0.963822121324367
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.7006316678122814,
+    "F1": 0.8238933531765952,
+    "precisao": 0.8880355764208057,
+    "sensibilidade": 0.7685661377116508,
+    "acuracia": 0.9670878886924891
+   }
+  },
+  "Ghana": {
+   "n": 34,
+   "MNDWI": {
+    "IoU": 0.4876287477054864,
+    "F1": 0.6555785486904624,
+    "precisao": 0.9037184908691441,
+    "sensibilidade": 0.5143500621869642,
+    "acuracia": 0.9890990324338669
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.2795659651895582,
+    "F1": 0.4369699926304973,
+    "precisao": 0.9580801529323411,
+    "sensibilidade": 0.2830280009412081,
+    "acuracia": 0.9852887314270031
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.26395202566440595,
+    "F1": 0.4176614623101024,
+    "precisao": 0.963508260447036,
+    "sensibilidade": 0.26661736528958957,
+    "acuracia": 0.9850038300990049
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.4932584412448692,
+    "F1": 0.6606471158919545,
+    "precisao": 0.8998806032434187,
+    "sensibilidade": 0.5218998957948167,
+    "acuracia": 0.9891854113705327
+   },
+   "SOM óptico": {
+    "IoU": 0.43729425639099934,
+    "F1": 0.6074472612120245,
+    "precisao": 0.910518325966093,
+    "sensibilidade": 0.45865071094826715,
+    "acuracia": 0.9881288853288653
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.43729425639099934,
+    "F1": 0.6074472612120245,
+    "precisao": 0.910518325966093,
+    "sensibilidade": 0.45865071094826715,
+    "acuracia": 0.9881288853288653
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.4537577945819666,
+    "F1": 0.6238102498255663,
+    "precisao": 0.9105534461040158,
+    "sensibilidade": 0.47541093818279606,
+    "acuracia": 0.9884665361174019
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.4538380290101463,
+    "F1": 0.623888039289394,
+    "precisao": 0.9104568550150053,
+    "sensibilidade": 0.4755297096821181,
+    "acuracia": 0.9884674401355774
+   }
+  },
+  "India": {
+   "n": 66,
+   "MNDWI": {
+    "IoU": 0.3248604172788716,
+    "F1": 0.4904070089830321,
+    "precisao": 0.6776033223034045,
+    "sensibilidade": 0.38425249604561895,
+    "acuracia": 0.9280723434941188
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.13931303060986058,
+    "F1": 0.24455619635156456,
+    "precisao": 0.6583627797408717,
+    "sensibilidade": 0.1501690896695783,
+    "acuracia": 0.9164365280107732
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.11000725457026007,
+    "F1": 0.19820997406516852,
+    "precisao": 0.6724629515394965,
+    "sensibilidade": 0.11623529490783185,
+    "acuracia": 0.9152995724714441
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.3214289431124451,
+    "F1": 0.4864869121987947,
+    "precisao": 0.649294898208024,
+    "sensibilidade": 0.3889574538823458,
+    "acuracia": 0.9260403426762066
+   },
+   "SOM óptico": {
+    "IoU": 0.2556881958103813,
+    "F1": 0.4064500607070991,
+    "precisao": 0.7158463615500789,
+    "sensibilidade": 0.28684290948413377,
+    "acuracia": 0.924978327139503
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.25541695678086523,
+    "F1": 0.40610485674089475,
+    "precisao": 0.7136363046990586,
+    "sensibilidade": 0.2868443087697145,
+    "acuracia": 0.9248688789419249
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.24918583840030295,
+    "F1": 0.39859783886098094,
+    "precisao": 0.636736365294594,
+    "sensibilidade": 0.29025912530098635,
+    "acuracia": 0.9210608529961987
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.24913085283996006,
+    "F1": 0.39852596119151795,
+    "precisao": 0.6355063998554693,
+    "sensibilidade": 0.29045110728266577,
+    "acuracia": 0.9209843753749521
+   }
+  },
+  "Mekong": {
+   "n": 28,
+   "MNDWI": {
+    "IoU": 0.7224021382354295,
+    "F1": 0.8388309816841237,
+    "precisao": 0.9241201153358539,
+    "sensibilidade": 0.7679547064966062,
+    "acuracia": 0.9492402332673608
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.575769109499572,
+    "F1": 0.7307785208232989,
+    "precisao": 0.9445924426101704,
+    "sensibilidade": 0.5958944021779667,
+    "acuracia": 0.9244785793712221
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.5704399810039947,
+    "F1": 0.7264715467054117,
+    "precisao": 0.932629736671916,
+    "sensibilidade": 0.5949562262251062,
+    "acuracia": 0.9229370149660044
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.72188364566477,
+    "F1": 0.8384813311657553,
+    "precisao": 0.9152224088152812,
+    "sensibilidade": 0.7736140635488924,
+    "acuracia": 0.9487338624367262
+   },
+   "SOM óptico": {
+    "IoU": 0.7047465256412516,
+    "F1": 0.8267136560236379,
+    "precisao": 0.9155553011197806,
+    "sensibilidade": 0.7536365486934686,
+    "acuracia": 0.9456765265981334
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.7072529976030709,
+    "F1": 0.8283897848765459,
+    "precisao": 0.9151969556240379,
+    "sensibilidade": 0.7567354429278237,
+    "acuracia": 0.946108458644745
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.7062670813964825,
+    "F1": 0.827846970116087,
+    "precisao": 0.9231750169659702,
+    "sensibilidade": 0.7505256116207951,
+    "acuracia": 0.9463128646055409
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.7061180636264149,
+    "F1": 0.8277445792820876,
+    "precisao": 0.9229177023303134,
+    "sensibilidade": 0.7505256116207951,
+    "acuracia": 0.9462744424324591
+   }
+  },
+  "Nigeria": {
+   "n": 16,
+   "MNDWI": {
+    "IoU": 0.020452543449245263,
+    "F1": 0.04008524174992665,
+    "precisao": 0.5761274857954546,
+    "sensibilidade": 0.02076500459169144,
+    "acuracia": 0.8103174222952675
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.030247898831381917,
+    "F1": 0.058719651582288764,
+    "precisao": 0.89994781536126,
+    "sensibilidade": 0.030349960482655567,
+    "acuracia": 0.8144158417291785
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.009927323234987141,
+    "F1": 0.019659480452886565,
+    "precisao": 0.9112382629107981,
+    "sensibilidade": 0.009936932238153597,
+    "acuracia": 0.8109814205595955
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.020638545866935483,
+    "F1": 0.04044241901407907,
+    "precisao": 0.5711608038010548,
+    "sensibilidade": 0.020963391260107322,
+    "acuracia": 0.8102670731621727
+   },
+   "SOM óptico": {
+    "IoU": 0.007175627096588341,
+    "F1": 0.014247916028761113,
+    "precisao": 0.6242974509243971,
+    "sensibilidade": 0.007206449059956504,
+    "acuracia": 0.8098237973600982
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.007175627096588341,
+    "F1": 0.014247916028761113,
+    "precisao": 0.6242974509243971,
+    "sensibilidade": 0.007206449059956504,
+    "acuracia": 0.8098237973600982
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.00882598234824244,
+    "F1": 0.017494722089585506,
+    "precisao": 0.7289881853423203,
+    "sensibilidade": 0.008855938214285333,
+    "acuracia": 0.8103272886910456
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.008841923761588757,
+    "F1": 0.017526030695964454,
+    "precisao": 0.7292487274602774,
+    "sensibilidade": 0.008871937139157583,
+    "acuracia": 0.8103301367228166
+   }
+  },
+  "Pakistan": {
+   "n": 20,
+   "MNDWI": {
+    "IoU": 0.2055424035649631,
+    "F1": 0.3409957260020792,
+    "precisao": 0.2591201151644956,
+    "sensibilidade": 0.49851391515806537,
+    "acuracia": 0.9916445220871676
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.011699440596284071,
+    "F1": 0.02312829310133562,
+    "precisao": 0.013042877379677296,
+    "sensibilidade": 0.10199945960551203,
+    "acuracia": 0.9626365875320159
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.05303726391015824,
+    "F1": 0.10073197925250861,
+    "precisao": 0.0785514477961745,
+    "sensibilidade": 0.14036746825182383,
+    "acuracia": 0.9891321668178122
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.1237147761169158,
+    "F1": 0.22018892826954162,
+    "precisao": 0.14106291208269206,
+    "sensibilidade": 0.5014860848419346,
+    "acuracia": 0.9845969217862826
+   },
+   "SOM óptico": {
+    "IoU": 0.2713010705535965,
+    "F1": 0.4260268142569081,
+    "precisao": 0.39795943279690027,
+    "sensibilidade": 0.46084391605872294,
+    "acuracia": 0.9945730157949044
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.2713010705535965,
+    "F1": 0.4260268142569081,
+    "precisao": 0.39795943279690027,
+    "sensibilidade": 0.46084391605872294,
+    "acuracia": 0.9945730157949044
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.336377317087387,
+    "F1": 0.5027488869745492,
+    "precisao": 0.6876532493617455,
+    "sensibilidade": 0.4049356029901829,
+    "acuracia": 0.9965217973743637
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.3363563264109848,
+    "F1": 0.5027239257265607,
+    "precisao": 0.6875731134803217,
+    "sensibilidade": 0.4049356029901829,
+    "acuracia": 0.9965214068174061
+   }
+  },
+  "Paraguay": {
+   "n": 27,
+   "MNDWI": {
+    "IoU": 0.01466279977034169,
+    "F1": 0.028901817970778985,
+    "precisao": 0.5489619695021128,
+    "sensibilidade": 0.014841600190735424,
+    "acuracia": 0.9657062370369156
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.19404769128086888,
+    "F1": 0.32502502655101095,
+    "precisao": 0.332691827563249,
+    "sensibilidade": 0.3177036249664723,
+    "acuracia": 0.9546278382152412
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.12950311524864971,
+    "F1": 0.22930988591410975,
+    "precisao": 0.2985350465614619,
+    "sensibilidade": 0.1861458529946455,
+    "acuracia": 0.9569763938646183
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.13275657044377423,
+    "F1": 0.23439558667360433,
+    "precisao": 0.30252523269057063,
+    "sensibilidade": 0.19131160406504874,
+    "acuracia": 0.9570272897691717
+   },
+   "SOM óptico": {
+    "IoU": 0.007198376973667781,
+    "F1": 0.014122662822902745,
+    "precisao": 0.3539371201381018,
+    "sensibilidade": 0.007402587511465651,
+    "acuracia": 0.9655057276679702
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.14565673253478975,
+    "F1": 0.24881539603291095,
+    "precisao": 0.577052072142215,
+    "sensibilidade": 0.19077681637410634,
+    "acuracia": 0.963969684714104
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.0004978008704650132,
+    "F1": 0.0009949642579308502,
+    "precisao": 0.5590037261010323,
+    "sensibilidade": 0.0004983625231382601,
+    "acuracia": 0.9656075194770769
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.17898904710325195,
+    "F1": 0.3033627963013981,
+    "precisao": 0.5290909068348881,
+    "sensibilidade": 0.22550986956478547,
+    "acuracia": 0.9641404763401221
+   }
+  },
+  "Somalia": {
+   "n": 25,
+   "MNDWI": {
+    "IoU": 0.6563410447408621,
+    "F1": 0.7925192059024873,
+    "precisao": 0.7864920458191014,
+    "sensibilidade": 0.7986394557823129,
+    "acuracia": 0.9846468645161895
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.13351007063845646,
+    "F1": 0.23556927123418692,
+    "precisao": 0.2837547140941289,
+    "sensibilidade": 0.20137331928076393,
+    "acuracia": 0.9520156472245055
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.13781640827225417,
+    "F1": 0.24224718024856917,
+    "precisao": 0.48411179173047475,
+    "sensibilidade": 0.161540672607071,
+    "acuracia": 0.9628952993833277
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.5822660325961494,
+    "F1": 0.7359900555291317,
+    "precisao": 0.6774878054021531,
+    "sensibilidade": 0.8055507649069017,
+    "acuracia": 0.97878126601337
+   },
+   "SOM óptico": {
+    "IoU": 0.6070455755245175,
+    "F1": 0.7553426931846924,
+    "precisao": 0.8007191107037439,
+    "sensibilidade": 0.7164063747564754,
+    "acuracia": 0.9829207917889594
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.6070455755245175,
+    "F1": 0.7553426931846924,
+    "precisao": 0.8007191107037439,
+    "sensibilidade": 0.7164063747564754,
+    "acuracia": 0.9829207917889594
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.5372797892004532,
+    "F1": 0.6985846641810566,
+    "precisao": 0.7675706539531575,
+    "sensibilidade": 0.6410547943747139,
+    "acuracia": 0.979681434829224
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.5375606177648719,
+    "F1": 0.6988222728824486,
+    "precisao": 0.7675218843784424,
+    "sensibilidade": 0.6414870173421482,
+    "acuracia": 0.9796907374856795
+   }
+  },
+  "Spain": {
+   "n": 29,
+   "MNDWI": {
+    "IoU": 0.6291774644095177,
+    "F1": 0.7723866529636267,
+    "precisao": 0.8090841959767052,
+    "sensibilidade": 0.7388736423212878,
+    "acuracia": 0.9752588014527658
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.35080361198271515,
+    "F1": 0.5193998725955494,
+    "precisao": 0.6914563330075317,
+    "sensibilidade": 0.4159085238879818,
+    "acuracia": 0.9562712100847625
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.3631100536428942,
+    "F1": 0.5327670391286268,
+    "precisao": 0.8293216401743534,
+    "sensibilidade": 0.39243676928663357,
+    "acuracia": 0.960893098155441
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.6157949364496526,
+    "F1": 0.7622191684827581,
+    "precisao": 0.7668037448595678,
+    "sensibilidade": 0.7576890869433116,
+    "acuracia": 0.9731418804416792
+   },
+   "SOM óptico": {
+    "IoU": 0.5964667887348184,
+    "F1": 0.7472092505483894,
+    "precisao": 0.8168122845072986,
+    "sensibilidade": 0.6923558293625014,
+    "acuracia": 0.9733738660178742
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.5964681605744407,
+    "F1": 0.7472103275984295,
+    "precisao": 0.816812677236272,
+    "sensibilidade": 0.6923574761564817,
+    "acuracia": 0.9733739595793084
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.6043354393363929,
+    "F1": 0.7533616066295682,
+    "precisao": 0.836292507333086,
+    "sensibilidade": 0.6858534633312502,
+    "acuracia": 0.9744874809889014
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.6043433656248693,
+    "F1": 0.7533677507353654,
+    "precisao": 0.8362924932103354,
+    "sensibilidade": 0.6858641674921221,
+    "acuracia": 0.9744879487960726
+   }
+  },
+  "Sri-Lanka": {
+   "n": 35,
+   "MNDWI": {
+    "IoU": 0.3997893244201357,
+    "F1": 0.5712135639922085,
+    "precisao": 0.7957903225806452,
+    "sensibilidade": 0.4454928375687914,
+    "acuracia": 0.9770193982543697
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.0809457962365461,
+    "F1": 0.14976846483583073,
+    "precisao": 0.1672831391073776,
+    "sensibilidade": 0.13557378455370808,
+    "acuracia": 0.9471103499187402
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.07494917917730386,
+    "F1": 0.1394469257321822,
+    "precisao": 0.16451236727428958,
+    "sensibilidade": 0.12100964772486152,
+    "acuracia": 0.9486823386737621
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.3169410948922267,
+    "F1": 0.48132918947018494,
+    "precisao": 0.47580168497199066,
+    "sensibilidade": 0.4869866322352293,
+    "acuracia": 0.9639384166347248
+   },
+   "SOM óptico": {
+    "IoU": 0.3165837265089434,
+    "F1": 0.48041900307816104,
+    "precisao": 0.8151520186738997,
+    "sensibilidade": 0.34063195532340423,
+    "acuracia": 0.9747013327364306
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.31646548834892924,
+    "F1": 0.480287809401508,
+    "precisao": 0.8141979400622085,
+    "sensibilidade": 0.3406695770862396,
+    "acuracia": 0.9746862860708259
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.27645380098123806,
+    "F1": 0.4322440133445879,
+    "precisao": 0.7740802974997321,
+    "sensibilidade": 0.30070924547297323,
+    "acuracia": 0.9729760334538566
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.27888358232612515,
+    "F1": 0.4359481528252697,
+    "precisao": 0.6625174519277356,
+    "sensibilidade": 0.3265433575767973,
+    "acuracia": 0.9710491812416374
+   }
+  },
+  "USA": {
+   "n": 68,
+   "MNDWI": {
+    "IoU": 0.5309115647809786,
+    "F1": 0.6935888094318942,
+    "precisao": 0.8873403609961538,
+    "sensibilidade": 0.5692849399701685,
+    "acuracia": 0.9846451171936718
+   },
+   "Radar bi-temporal (VH < -20 em cada data)": {
+    "IoU": 0.14515654430503905,
+    "F1": 0.25351388860660995,
+    "precisao": 0.44080229399945475,
+    "sensibilidade": 0.1779193733749562,
+    "acuracia": 0.9680141805325712
+   },
+   "Mudança no radar (só radar)": {
+    "IoU": 0.13967016995449866,
+    "F1": 0.24510630116795104,
+    "precisao": 0.5733581183384052,
+    "sensibilidade": 0.15586971937174482,
+    "acuracia": 0.9706905719313934
+   },
+   "MNDWI + mudança no radar": {
+    "IoU": 0.4924125403798718,
+    "F1": 0.6598879693875199,
+    "precisao": 0.7596002802071835,
+    "sensibilidade": 0.5833163527292585,
+    "acuracia": 0.981644331680945
+   },
+   "SOM óptico": {
+    "IoU": 0.5143938158410956,
+    "F1": 0.6793249123935491,
+    "precisao": 0.8848336128215163,
+    "sensibilidade": 0.5513860248270016,
+    "acuracia": 0.9841114479253
+   },
+   "SOM óptico + mudança no radar": {
+    "IoU": 0.5144514956777244,
+    "F1": 0.6793752600466689,
+    "precisao": 0.8848432479572418,
+    "sensibilidade": 0.5514485134499968,
+    "acuracia": 0.9841133140467607
+   },
+   "SOM com radar na entrada": {
+    "IoU": 0.48113442901699616,
+    "F1": 0.6495138248606395,
+    "precisao": 0.8627997212732565,
+    "sensibilidade": 0.521311337338039,
+    "acuracia": 0.9828467566767545
+   },
+   "SOM com radar na entrada + mudança no radar": {
+    "IoU": 0.48125041401819013,
+    "F1": 0.6496236015113289,
+    "precisao": 0.8620223359674762,
+    "sensibilidade": 0.5217446823540279,
+    "acuracia": 0.9828407021493488
+   }
+  }
+ },
+ "falhas_recortes_com_alagamento": {
+  "MNDWI": 37,
+  "Radar bi-temporal (VH < -20 em cada data)": 80,
+  "Mudança no radar (só radar)": 108,
+  "MNDWI + mudança no radar": 32,
+  "SOM óptico": 61,
+  "SOM óptico + mudança no radar": 57,
+  "SOM com radar na entrada": 66,
+  "SOM com radar na entrada + mudança no radar": 58
+ },
+ "recortes_com_alagamento": 209
+}
