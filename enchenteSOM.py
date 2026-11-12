@@ -187,6 +187,56 @@ def classificar_unidades(result, nuvens, refl_antes, refl_depois, som_size, limi
         tabela.append((u, m.sum(), wa, wd, classe_unidade[u]))
     return classe_unidade, tabela
 
+# ---------------------------------------------------------------------------
+# Variação com limiar na posição da unidade (sem índice de água na decisão)
+#
+# Um único SOM 1D é treinado com pixels das duas datas, cada pixel descrito só
+# pela sua data (bandas + índice, janela 3x3). Cada pixel cai numa unidade na
+# imagem anterior e numa unidade na imagem do evento. Como o SOM 1D ordena as
+# unidades, a água fica num dos extremos do grid: o limiar é a posição k da
+# unidade, e as unidades acima (ou abaixo) de k são água. A água nas duas datas
+# dá as três classes como em classe_por_agua.
+
+# Entradas de cada data na mesma escala (normalização conjunta das duas datas)
+def montar_entradas_por_data(refl_antes, refl_depois, indice=INDICE_AGUA, normalizacao="fixa"):
+    img = np.concatenate([np.concatenate([r, indice_agua(r, indice)[:, :, None]], axis=2)
+                          for r in (refl_antes, refl_depois)], axis=0)
+    if normalizacao == "fixa":
+        escala = np.array([REFL_MAX_FIXA] * len(BANDAS) + [None], dtype=object)
+        saida = np.empty(img.shape)
+        for i, e in enumerate(escala):
+            saida[:, :, i] = img[:, :, i] / e if e is not None else (img[:, :, i] + 1) / 2
+        saida = np.clip(saida, 0, 1) * 255
+    else:
+        saida = sentinelUtils.normalizar_0_255(img)
+    h = refl_antes.shape[0]
+    return saida[:h], saida[h:]
+
+# Treina o SOM 1D com uma porcentagem dos pixels válidos de cada data (lista de
+# (entrada, inválidos)), juntos
+def treinar_som_por_data(entradas, porcentagem=0.02, patch_size=1, som_size=SOM_SIZE, epochs=3, seed=0):
+    rng = np.random.RandomState(seed)
+    amostras = []
+    for entrada, invalidos in entradas:
+        validos = np.flatnonzero(~invalidos.ravel())
+        n = max(int(round(len(validos) * porcentagem)), som_size)
+        amostras.append(extrair_janelas(entrada, patch_size, rng.choice(validos, min(n, len(validos)), replace=False)))
+    treino = np.concatenate(amostras)
+    rng.shuffle(treino)
+    somSeg.rand.seed(seed)
+    SOM = somSeg.create_map(som_size, 1, treino.shape[1])
+    return somSeg.train_SOM(SOM, treino, epochs=epochs)
+
+# Água pela posição da unidade: unidades >= limiar (agua_acima) ou < limiar
+def agua_por_posicao(result, limiar, agua_acima=True):
+    return result >= limiar if agua_acima else result < limiar
+
+# Classes (0 não alagamento, 1 permanente, 2 alagamento) pela posição das unidades
+# de cada pixel antes e no evento
+def classes_por_posicao(result_antes, result_depois, limiar, agua_acima=True):
+    return classe_por_agua(agua_por_posicao(result_antes, limiar, agua_acima),
+                           agua_por_posicao(result_depois, limiar, agua_acima))
+
 def imprimir_tabela(tabela, indice=INDICE_AGUA):
     print("Unidade | pixels | %6s antes -> depois | classe" % indice)
     for u, n, wa, wd, c in tabela:
